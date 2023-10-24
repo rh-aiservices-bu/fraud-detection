@@ -1,0 +1,450 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: train-upload-stock-kfp
+  annotations:
+    tekton.dev/output_artifacts: '{"get-data": [{"key": "artifacts/$PIPELINERUN/get-data/output.tgz",
+      "name": "get-data-output", "path": "/tmp/outputs/output/data"}], "train-model":
+      [{"key": "artifacts/$PIPELINERUN/train-model/output.tgz", "name": "train-model-output",
+      "path": "/tmp/outputs/output/data"}]}'
+    tekton.dev/input_artifacts: '{"train-model": [{"name": "get-data-output", "parent_task":
+      "get-data"}], "upload": [{"name": "train-model-output", "parent_task": "train-model"}]}'
+    tekton.dev/artifact_bucket: mlpipeline
+    tekton.dev/artifact_endpoint: minio-service.kubeflow:9000
+    tekton.dev/artifact_endpoint_scheme: http://
+    tekton.dev/artifact_items: '{"get-data": [["output", "$(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output"]],
+      "train-model": [["output", "$(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output"]],
+      "upload": []}'
+    sidecar.istio.io/inject: "false"
+    tekton.dev/template: ''
+    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
+    pipelines.kubeflow.org/pipeline_spec: '{"name": "train_upload_stock_kfp"}'
+  labels:
+    pipelines.kubeflow.org/pipelinename: ''
+    pipelines.kubeflow.org/generation: ''
+spec:
+  pipelineSpec:
+    tasks:
+    - name: get-data
+      taskSpec:
+        steps:
+        - name: main
+          args:
+          - --output
+          - $(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output
+          command:
+          - sh
+          - -c
+          - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
+            'pandas-datareader' 'yfinance' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3
+            -m pip install --quiet --no-warn-script-location 'pandas-datareader' 'yfinance'
+            --user) && "$0" "$@"
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def _make_parent_dirs_and_return_path(file_path: str):
+                import os
+                os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                return file_path
+
+            def get_data(output_path):
+                import os
+
+                import yfinance as yf
+                from pandas_datareader import data as pdr
+
+                ticker = os.getenv("TICKER", "IBM")
+                start_date = os.getenv("START_DATE", "2023-01-01")
+                end_date = os.getenv("END_DATE", "2023-06-01")
+
+                print(f"Ticker: {ticker}")
+
+                yf.pdr_override()
+                df = pdr.get_data_yahoo(ticker, start=start_date, end=end_date)
+
+                print(f"Count: \n{df.count()}")
+
+                df.to_csv(output_path)
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='Get data', description='')
+            _parser.add_argument("--output", dest="output_path", type=_make_parent_dirs_and_return_path, required=True, default=argparse.SUPPRESS)
+            _parsed_args = vars(_parser.parse_args())
+
+            _outputs = get_data(**_parsed_args)
+          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370
+          env:
+          - name: ORIG_PR_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
+        - image: busybox
+          name: output-taskrun-name
+          command:
+          - sh
+          - -ec
+          - echo -n "$(context.taskRun.name)" > "$(results.taskrun-name.path)"
+        - image: busybox
+          name: copy-results-artifacts
+          command:
+          - sh
+          - -ec
+          - |
+            set -exo pipefail
+            TOTAL_SIZE=0
+            copy_artifact() {
+            if [ -d "$1" ]; then
+              tar -czvf "$1".tar.gz "$1"
+              SUFFIX=".tar.gz"
+            fi
+            ARTIFACT_SIZE=`wc -c "$1"${SUFFIX} | awk '{print $1}'`
+            TOTAL_SIZE=$( expr $TOTAL_SIZE + $ARTIFACT_SIZE)
+            touch "$2"
+            if [[ $TOTAL_SIZE -lt 3072 ]]; then
+              if [ -d "$1" ]; then
+                tar -tzf "$1".tar.gz > "$2"
+              elif ! awk "/[^[:print:]]/{f=1} END{exit !f}" "$1"; then
+                cp "$1" "$2"
+              fi
+            fi
+            }
+            copy_artifact $(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output $(results.output.path)
+          onError: continue
+          env:
+          - name: ORIG_PR_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
+        results:
+        - name: output
+          type: string
+          description: /tmp/outputs/output/data
+        - name: taskrun-name
+          type: string
+        metadata:
+          labels:
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Get data", "outputs":
+              [{"name": "output"}], "version": "Get data@sha256=d234e66c1da585009fcfe03a7527934e4aa33c20599203d644f24c0f315b813c"}'
+        workspaces:
+        - name: get-data
+      workspaces:
+      - name: get-data
+        workspace: train-upload-stock-kfp
+    - name: train-model
+      params:
+      - name: get-data-trname
+        value: $(tasks.get-data.results.taskrun-name)
+      taskSpec:
+        steps:
+        - name: main
+          args:
+          - --input
+          - $(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(params.get-data-trname)/output
+          - --output
+          - $(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output
+          command:
+          - sh
+          - -c
+          - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
+            'flatbuffers<3.0,>=1.12' 'numpy==1.23.*' 'pandas==2.0.*' 'pandas-datareader==0.10.*'
+            'scikit-learn==1.3.*' 'tensorflow==2.11.*' 'tf2onnx==1.14.*' 'yfinance==0.2.23'
+            || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
+            'flatbuffers<3.0,>=1.12' 'numpy==1.23.*' 'pandas==2.0.*' 'pandas-datareader==0.10.*'
+            'scikit-learn==1.3.*' 'tensorflow==2.11.*' 'tf2onnx==1.14.*' 'yfinance==0.2.23'
+            --user) && "$0" "$@"
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def _make_parent_dirs_and_return_path(file_path: str):
+                import os
+                os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                return file_path
+
+            def train_model(input_path, output_path):
+                import numpy as np
+                import pandas as pd
+
+                from sklearn.preprocessing import MinMaxScaler
+
+                import tensorflow as tf
+                import os
+                import tf2onnx
+                import onnx
+
+                ticker = "IBM"
+                start_date = "1980-12-01"
+                end_date = "2018-12-31"
+
+                stock_data = pd.read_csv(input_path)
+
+                stock_data_len = stock_data["Close"].count()
+                print(f"Read in {stock_data_len} stock values")
+
+                close_prices = stock_data.iloc[:, 1:2].values
+                # print(close_prices)
+
+                # Some of the weekdays might be public holidays in which case no price will be available.
+                # For this reason, we will fill the missing prices with the latest available prices
+
+                all_business_days = pd.date_range(start=start_date, end=end_date, freq="B")
+                print(all_business_days)
+
+                close_prices = stock_data.reindex(all_business_days)
+                close_prices = stock_data.fillna(method="ffill")
+
+                # The dataset is now complete and free of missing values. Let's have a look to the data frame summary:
+                # Feature scaling
+
+                training_set = close_prices.iloc[:, 1:2].values
+
+                sc = MinMaxScaler(feature_range=(0, 1))
+                training_set_scaled = sc.fit_transform(training_set)
+                # print(training_set_scaled.shape)
+
+                # LSTMs expect the data in a specific format, usually a 3D tensor. I start by creating data with 60 days and converting it into an array using NumPy.
+                # Next, I convert the data into a 3D dimension array with feature_set samples, 60 days and one feature at each step.
+                features = []
+                labels = []
+                for i in range(60, stock_data_len):
+                    features.append(training_set_scaled[i - 60 : i, 0])
+                    labels.append(training_set_scaled[i, 0])
+
+                features = np.array(features)
+                labels = np.array(labels)
+
+                features = np.reshape(features, (features.shape[0], features.shape[1], 1))
+
+                #
+                # Feature tensor with three dimension: features[0] contains the ..., features[1] contains the last 60 days of values and features [2] contains the  ...
+                #
+                # Create the LSTM network
+                # Let's create a sequenced LSTM network with 50 units. Also the net includes some dropout layers with 0.2 which means that 20% of the neurons will be dropped.
+
+                model = tf.keras.models.Sequential(
+                    [
+                        tf.keras.layers.LSTM(
+                            units=50, return_sequences=True, input_shape=(features.shape[1], 1)
+                        ),
+                        tf.keras.layers.Dropout(0.2),
+                        tf.keras.layers.LSTM(units=50, return_sequences=True),
+                        tf.keras.layers.Dropout(0.2),
+                        tf.keras.layers.LSTM(units=50, return_sequences=True),
+                        tf.keras.layers.Dropout(0.2),
+                        tf.keras.layers.LSTM(units=50),
+                        tf.keras.layers.Dropout(0.2),
+                        tf.keras.layers.Dense(units=1),
+                    ]
+                )
+
+                print(model.summary())
+
+                # The model will be compiled and optimize by the adam optimizer and set the loss function as mean_squarred_error
+
+                model.compile(optimizer="adam", loss="mean_squared_error")
+
+                #
+                # For testing purposes, train for 2 epochs. This should be increased to improve model accuracy.
+                #
+                from time import time
+
+                model_epochs = int(os.getenv("MODEL_EPOCHS", "2"))
+
+                start = time()
+                history = model.fit(features, labels, epochs=model_epochs, batch_size=32, verbose=1)
+                end = time()
+
+                print("Total training time {} seconds".format(end - start))
+
+                #
+                # Save the model
+                #
+                print("Saving the model to ../scratch/stocks/1")
+
+                #
+                # Tensorflow "save_model" format.
+                #
+                tf.keras.models.save_model(model, "../scratch/stocks/1")
+
+                #
+                # onnx format
+                #
+                # input_signature = [tf.TensorSpec([3, 3], tf.float32, name='x')]
+                # onnx_model, _ = tf2onnx.convert.from_keras(model, input_signature, opset=13)
+                onnx_model, _ = tf2onnx.convert.from_keras(model)
+
+                onnx.save(onnx_model, output_path)
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='Train model', description='')
+            _parser.add_argument("--input", dest="input_path", type=str, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("--output", dest="output_path", type=_make_parent_dirs_and_return_path, required=True, default=argparse.SUPPRESS)
+            _parsed_args = vars(_parser.parse_args())
+
+            _outputs = train_model(**_parsed_args)
+          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370
+          env:
+          - name: ORIG_PR_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
+        - image: busybox
+          name: output-taskrun-name
+          command:
+          - sh
+          - -ec
+          - echo -n "$(context.taskRun.name)" > "$(results.taskrun-name.path)"
+        - image: busybox
+          name: copy-results-artifacts
+          command:
+          - sh
+          - -ec
+          - |
+            set -exo pipefail
+            TOTAL_SIZE=0
+            copy_artifact() {
+            if [ -d "$1" ]; then
+              tar -czvf "$1".tar.gz "$1"
+              SUFFIX=".tar.gz"
+            fi
+            ARTIFACT_SIZE=`wc -c "$1"${SUFFIX} | awk '{print $1}'`
+            TOTAL_SIZE=$( expr $TOTAL_SIZE + $ARTIFACT_SIZE)
+            touch "$2"
+            if [[ $TOTAL_SIZE -lt 3072 ]]; then
+              if [ -d "$1" ]; then
+                tar -tzf "$1".tar.gz > "$2"
+              elif ! awk "/[^[:print:]]/{f=1} END{exit !f}" "$1"; then
+                cp "$1" "$2"
+              fi
+            fi
+            }
+            copy_artifact $(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output $(results.output.path)
+          onError: continue
+          env:
+          - name: ORIG_PR_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
+        params:
+        - name: get-data-trname
+        results:
+        - name: output
+          type: string
+          description: /tmp/outputs/output/data
+        - name: taskrun-name
+          type: string
+        metadata:
+          labels:
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Train model",
+              "outputs": [{"name": "output"}], "version": "Train model@sha256=e16fd33414a6a236ab2c47cca4ec3e06e2a4e020a30e0b2b6d0647dd3f2034b9"}'
+        workspaces:
+        - name: train-model
+      workspaces:
+      - name: train-model
+        workspace: train-upload-stock-kfp
+      runAfter:
+      - get-data
+    - name: upload
+      params:
+      - name: train-model-trname
+        value: $(tasks.train-model.results.taskrun-name)
+      taskSpec:
+        steps:
+        - name: main
+          args:
+          - --input
+          - $(workspaces.upload.path)/artifacts/$ORIG_PR_NAME/$(params.train-model-trname)/output
+          command:
+          - sh
+          - -c
+          - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
+            'boto3' 'botocore' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install
+            --quiet --no-warn-script-location 'boto3' 'botocore' --user) && "$0" "$@"
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def upload(input_path):
+                import os
+                import boto3
+                import botocore
+
+                aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
+                aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
+                endpoint_url = os.environ.get('AWS_S3_ENDPOINT')
+                region_name = os.environ.get('AWS_DEFAULT_REGION')
+                bucket_name = os.environ.get('AWS_S3_BUCKET')
+
+                s3_key = os.environ.get("S3_KEY")
+
+                session = boto3.session.Session(aws_access_key_id=aws_access_key_id,
+                                                aws_secret_access_key=aws_secret_access_key)
+
+                s3_resource = session.resource(
+                    's3',
+                    config=botocore.client.Config(signature_version='s3v4'),
+                    endpoint_url=endpoint_url,
+                    region_name=region_name)
+
+                bucket = s3_resource.Bucket(bucket_name)
+
+                print(f"Uploading {s3_key}")
+                bucket.upload_file(input_path, s3_key)
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='Upload', description='')
+            _parser.add_argument("--input", dest="input_path", type=str, required=True, default=argparse.SUPPRESS)
+            _parsed_args = vars(_parser.parse_args())
+
+            _outputs = upload(**_parsed_args)
+          env:
+          - name: S3_KEY
+            value: models/stocks.onnx
+          - name: ORIG_PR_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
+          envFrom:
+          - secretRef:
+              name: aws-connection-my-storage
+          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370
+        params:
+        - name: train-model-trname
+        metadata:
+          labels:
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Upload", "outputs":
+              [], "version": "Upload@sha256=5cd0882f79e362869baa1808727d69d3bda0864cc76bc785af08d1ab6e3a32a9"}'
+        workspaces:
+        - name: upload
+      workspaces:
+      - name: upload
+        workspace: train-upload-stock-kfp
+      runAfter:
+      - train-model
+    workspaces:
+    - name: train-upload-stock-kfp
+  workspaces:
+  - name: train-upload-stock-kfp
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
