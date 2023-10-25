@@ -11,28 +11,19 @@ from upload import upload
 
 get_data_component = create_component_from_func(
     get_data,
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370",
-    packages_to_install=["pandas-datareader", "yfinance"]
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e",
+    packages_to_install=[]
 )
 
 train_model_component = create_component_from_func(
     train_model,
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370",
-    packages_to_install=[
-        "flatbuffers<3.0,>=1.12",
-        "numpy==1.23.*",
-        "pandas==2.0.*",
-        "pandas-datareader==0.10.*",
-        "scikit-learn==1.3.*",
-        "tensorflow==2.11.*",
-        "tf2onnx==1.14.*",
-        "yfinance==0.2.23"
-    ]
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e",
+    packages_to_install=["tf2onnx", "seaborn"]
 )
 
 upload_model_component = create_component_from_func(
     upload,
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370",
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e",
     packages_to_install=["boto3", "botocore"]
 )
 
@@ -47,7 +38,7 @@ def sdk_pipeline():
 
     upload_model_task.add_env_variable(V1EnvVar(
         name="S3_KEY",
-        value="models/stocks.onnx"))
+        value="models/fraud/model.onnx"))
 
     upload_model_task.container.add_env_from(
         V1EnvFromSource(
@@ -56,7 +47,6 @@ def sdk_pipeline():
             )
         )
     )
-
 
 from kfp_tekton.compiler import TektonCompiler
 

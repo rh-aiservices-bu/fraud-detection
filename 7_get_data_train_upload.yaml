@@ -34,12 +34,6 @@ spec:
           - $(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output
           command:
           - sh
-          - -c
-          - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
-            'pandas-datareader' 'yfinance' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3
-            -m pip install --quiet --no-warn-script-location 'pandas-datareader' 'yfinance'
-            --user) && "$0" "$@"
-          - sh
           - -ec
           - |
             program_path=$(mktemp)
@@ -52,23 +46,11 @@ spec:
                 return file_path
 
             def get_data(output_path):
-                import os
-
-                import yfinance as yf
-                from pandas_datareader import data as pdr
-
-                ticker = os.getenv("TICKER", "IBM")
-                start_date = os.getenv("START_DATE", "2023-01-01")
-                end_date = os.getenv("END_DATE", "2023-06-01")
-
-                print(f"Ticker: {ticker}")
-
-                yf.pdr_override()
-                df = pdr.get_data_yahoo(ticker, start=start_date, end=end_date)
-
-                print(f"Count: \n{df.count()}")
-
-                df.to_csv(output_path)
+                import urllib.request
+                print("starting download...")
+                url = "https://github.com/cfchase/rhods-fd-notebooks/raw/main/data/card_transdata.csv"
+                urllib.request.urlretrieve(url, output_path)
+                print("done")
 
             import argparse
             _parser = argparse.ArgumentParser(prog='Get data', description='')
@@ -76,7 +58,7 @@ spec:
             _parsed_args = vars(_parser.parse_args())
 
             _outputs = get_data(**_parsed_args)
-          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370
+          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e
           env:
           - name: ORIG_PR_NAME
             valueFrom:
@@ -130,7 +112,7 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             pipelines.kubeflow.org/component_spec_digest: '{"name": "Get data", "outputs":
-              [{"name": "output"}], "version": "Get data@sha256=d234e66c1da585009fcfe03a7527934e4aa33c20599203d644f24c0f315b813c"}'
+              [{"name": "output"}], "version": "Get data@sha256=598d21aff52bbbbb914708419be521b5e8958efd29e842e49761e58da2fa3e73"}'
         workspaces:
         - name: get-data
       workspaces:
@@ -152,12 +134,9 @@ spec:
           - sh
           - -c
           - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
-            'flatbuffers<3.0,>=1.12' 'numpy==1.23.*' 'pandas==2.0.*' 'pandas-datareader==0.10.*'
-            'scikit-learn==1.3.*' 'tensorflow==2.11.*' 'tf2onnx==1.14.*' 'yfinance==0.2.23'
-            || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
-            'flatbuffers<3.0,>=1.12' 'numpy==1.23.*' 'pandas==2.0.*' 'pandas-datareader==0.10.*'
-            'scikit-learn==1.3.*' 'tensorflow==2.11.*' 'tf2onnx==1.14.*' 'yfinance==0.2.23'
-            --user) && "$0" "$@"
+            'tf2onnx' 'seaborn' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip
+            install --quiet --no-warn-script-location 'tf2onnx' 'seaborn' --user)
+            && "$0" "$@"
           - sh
           - -ec
           - |
@@ -173,116 +152,87 @@ spec:
             def train_model(input_path, output_path):
                 import numpy as np
                 import pandas as pd
-
-                from sklearn.preprocessing import MinMaxScaler
-
-                import tensorflow as tf
-                import os
+                from keras.models import Sequential
+                from keras.layers import Dense, Dropout, BatchNormalization, Activation
+                from sklearn.model_selection import train_test_split
+                from sklearn.preprocessing import StandardScaler
+                from sklearn.utils import class_weight
                 import tf2onnx
                 import onnx
+                import pickle
+                from pathlib import Path
 
-                ticker = "IBM"
-                start_date = "1980-12-01"
-                end_date = "2018-12-31"
+                # Load the CSV data which we will use to train the model.
+                # It contains the following fields:
+                #   distancefromhome - The distance from home where the transaction happened.
+                #   distancefromlast_transaction - The distance from last transaction happened.
+                #   ratiotomedianpurchaseprice - Ratio of purchased price compared to median purchase price.
+                #   repeat_retailer - If it's from a retailer that already has been purchased from before.
+                #   used_chip - If the (credit card) chip was used.
+                #   usedpinnumber - If the PIN number was used.
+                #   online_order - If it was an online order.
+                #   fraud - If the transaction is fraudulent.
+                Data = pd.read_csv(input_path)
 
-                stock_data = pd.read_csv(input_path)
+                # Set the input (X) and output (Y) data.
+                # The only output data we have is if it's fraudulent or not, and all other fields go as inputs to the model.
 
-                stock_data_len = stock_data["Close"].count()
-                print(f"Read in {stock_data_len} stock values")
+                X = Data.drop(columns = ['repeat_retailer','distance_from_home', 'fraud'])
+                y = Data['fraud']
 
-                close_prices = stock_data.iloc[:, 1:2].values
-                # print(close_prices)
+                # Split the data into training and testing sets so we have something to test the trained model with.
 
-                # Some of the weekdays might be public holidays in which case no price will be available.
-                # For this reason, we will fill the missing prices with the latest available prices
+                # X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, stratify = y)
+                X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, shuffle = False)
 
-                all_business_days = pd.date_range(start=start_date, end=end_date, freq="B")
-                print(all_business_days)
+                X_train, X_val, y_train, y_val = train_test_split(X_train,y_train, test_size = 0.2, stratify = y_train)
 
-                close_prices = stock_data.reindex(all_business_days)
-                close_prices = stock_data.fillna(method="ffill")
+                # Scale the data to remove mean and have unit variance. This means that the data will be between -1 and 1, which makes it a lot easier for the model to learn than random potentially large values.
+                # It is important to only fit the scaler to the training data, otherwise you are leaking information about the global distribution of variables (which is influenced by the test set) into the training set.
 
-                # The dataset is now complete and free of missing values. Let's have a look to the data frame summary:
-                # Feature scaling
+                scaler = StandardScaler()
 
-                training_set = close_prices.iloc[:, 1:2].values
+                X_train = scaler.fit_transform(X_train.values)
 
-                sc = MinMaxScaler(feature_range=(0, 1))
-                training_set_scaled = sc.fit_transform(training_set)
-                # print(training_set_scaled.shape)
+                Path("artifact").mkdir(parents=True, exist_ok=True)
+                with open("artifact/test_data.pkl", "wb") as handle:
+                    pickle.dump((X_test, y_test), handle)
+                with open("artifact/scaler.pkl", "wb") as handle:
+                    pickle.dump(scaler, handle)
 
-                # LSTMs expect the data in a specific format, usually a 3D tensor. I start by creating data with 60 days and converting it into an array using NumPy.
-                # Next, I convert the data into a 3D dimension array with feature_set samples, 60 days and one feature at each step.
-                features = []
-                labels = []
-                for i in range(60, stock_data_len):
-                    features.append(training_set_scaled[i - 60 : i, 0])
-                    labels.append(training_set_scaled[i, 0])
+                # Since the dataset is unbalanced (it has many more non-fraud transactions than fraudulent ones), we set a class weight to weight the few fraudulent transactions higher than the many non-fraud transactions.
 
-                features = np.array(features)
-                labels = np.array(labels)
+                class_weights = class_weight.compute_class_weight('balanced',classes = np.unique(y_train),y = y_train)
+                class_weights = {i : class_weights[i] for i in range(len(class_weights))}
 
-                features = np.reshape(features, (features.shape[0], features.shape[1], 1))
+                # Build the model, the model we build here is a simple fully connected deep neural network, containing 3 hidden layers and one output layer.
 
-                #
-                # Feature tensor with three dimension: features[0] contains the ..., features[1] contains the last 60 days of values and features [2] contains the  ...
-                #
-                # Create the LSTM network
-                # Let's create a sequenced LSTM network with 50 units. Also the net includes some dropout layers with 0.2 which means that 20% of the neurons will be dropped.
+                model = Sequential()
+                model.add(Dense(32, activation = 'relu', input_dim = len(X.columns)))
+                model.add(Dropout(0.2))
+                model.add(Dense(32))
+                model.add(BatchNormalization())
+                model.add(Activation('relu'))
+                model.add(Dropout(0.2))
+                model.add(Dense(32))
+                model.add(BatchNormalization())
+                model.add(Activation('relu'))
+                model.add(Dropout(0.2))
+                model.add(Dense(1, activation = 'sigmoid'))
+                model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+                model.summary()
 
-                model = tf.keras.models.Sequential(
-                    [
-                        tf.keras.layers.LSTM(
-                            units=50, return_sequences=True, input_shape=(features.shape[1], 1)
-                        ),
-                        tf.keras.layers.Dropout(0.2),
-                        tf.keras.layers.LSTM(units=50, return_sequences=True),
-                        tf.keras.layers.Dropout(0.2),
-                        tf.keras.layers.LSTM(units=50, return_sequences=True),
-                        tf.keras.layers.Dropout(0.2),
-                        tf.keras.layers.LSTM(units=50),
-                        tf.keras.layers.Dropout(0.2),
-                        tf.keras.layers.Dense(units=1),
-                    ]
-                )
+                # Train the model and get performance
 
-                print(model.summary())
+                epochs = 2
+                history = model.fit(X_train, y_train, epochs=epochs, \
+                                    validation_data=(scaler.transform(X_val.values),y_val), \
+                                    verbose = True, class_weight = class_weights)
 
-                # The model will be compiled and optimize by the adam optimizer and set the loss function as mean_squarred_error
+                # Save the model as ONNX for easy use of ModelMesh
 
-                model.compile(optimizer="adam", loss="mean_squared_error")
-
-                #
-                # For testing purposes, train for 2 epochs. This should be increased to improve model accuracy.
-                #
-                from time import time
-
-                model_epochs = int(os.getenv("MODEL_EPOCHS", "2"))
-
-                start = time()
-                history = model.fit(features, labels, epochs=model_epochs, batch_size=32, verbose=1)
-                end = time()
-
-                print("Total training time {} seconds".format(end - start))
-
-                #
-                # Save the model
-                #
-                print("Saving the model to ../scratch/stocks/1")
-
-                #
-                # Tensorflow "save_model" format.
-                #
-                tf.keras.models.save_model(model, "../scratch/stocks/1")
-
-                #
-                # onnx format
-                #
-                # input_signature = [tf.TensorSpec([3, 3], tf.float32, name='x')]
-                # onnx_model, _ = tf2onnx.convert.from_keras(model, input_signature, opset=13)
-                onnx_model, _ = tf2onnx.convert.from_keras(model)
-
-                onnx.save(onnx_model, output_path)
+                model_proto, _ = tf2onnx.convert.from_keras(model)
+                onnx.save(model_proto, output_path)
 
             import argparse
             _parser = argparse.ArgumentParser(prog='Train model', description='')
@@ -291,7 +241,7 @@ spec:
             _parsed_args = vars(_parser.parse_args())
 
             _outputs = train_model(**_parsed_args)
-          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370
+          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e
           env:
           - name: ORIG_PR_NAME
             valueFrom:
@@ -347,7 +297,7 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             pipelines.kubeflow.org/component_spec_digest: '{"name": "Train model",
-              "outputs": [{"name": "output"}], "version": "Train model@sha256=e16fd33414a6a236ab2c47cca4ec3e06e2a4e020a30e0b2b6d0647dd3f2034b9"}'
+              "outputs": [{"name": "output"}], "version": "Train model@sha256=eaddeda6a61a76fc58aef31f1b7e762a9f8354045a1cde36986495e6568341ba"}'
         workspaces:
         - name: train-model
       workspaces:
@@ -413,7 +363,7 @@ spec:
             _outputs = upload(**_parsed_args)
           env:
           - name: S3_KEY
-            value: models/stocks.onnx
+            value: models/fraud/model.onnx
           - name: ORIG_PR_NAME
             valueFrom:
               fieldRef:
@@ -421,7 +371,7 @@ spec:
           envFrom:
           - secretRef:
               name: aws-connection-my-storage
-          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230509-869b370
+          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e
         params:
         - name: train-model-trname
         metadata:
@@ -429,7 +379,7 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             pipelines.kubeflow.org/component_spec_digest: '{"name": "Upload", "outputs":
-              [], "version": "Upload@sha256=5cd0882f79e362869baa1808727d69d3bda0864cc76bc785af08d1ab6e3a32a9"}'
+              [], "version": "Upload@sha256=a995d4105a1a6f1ff4ce0660962beddbaa31eb11be8196f0a3682a8fced50a67"}'
         workspaces:
         - name: upload
       workspaces:
