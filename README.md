@@ -1,1 +1,1 @@
-# rhods-fd-notebooks
+# fraud-detection-notebooks
