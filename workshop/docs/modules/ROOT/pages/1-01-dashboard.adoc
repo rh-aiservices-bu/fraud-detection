@@ -1,0 +1,31 @@
+= 1.1 Navigating The Dashboard
+
+include::_attributes.adoc[]
+
+xref:index.adoc[Back to the introduction]
+
+== The OpenShift Data Science Dashboard
+
+include::_attributes.adoc[]
+
+NOTE: We're going to refer to _Red Hat OpenShift Data Science_ as _RHODS_ throughout this workshop.
+
+After logging into the OpenShift Web Console, you should see the OpenShift Data Science Dashboard as a tile in the top right-hand corner. You'll be prompted to log in to the OpenShift Data Science Dashboard using the Developer Sandbox authentication.
+
+image::projects/ocp-console-ds-tile.png[Data Science Dashboard link]
+
+If you are prompted to log in using OpenShift, please go ahead and do so.  RHODS will use the same credentials as OpenShift for the dashboard, notebooks, and all other components.
+ 
+image::projects/login-with-openshift.png[OpenShift Login, 300]
+
+At the OpenShift Data Science Dashboard, you can see the status of any installed and enabled applications as well as *Explore* other available application integrations.
+
+image::projects/dashboard-enabled.png[Dashboard Enabled]
+
+== Navigating to the OCP console
+
+You can navigate back to the OpenShift console in a similar fashion.  Simply click on the application switcher to access the OCP console.
+
+image::projects/ds-console-ocp-tile.png[OCP Console Link]
+
+For now, let's stay in the RHODS Dashboard.  Now that you are logged into to *Red Hat OpenShift Data Science*,  we can move on to creating a project.

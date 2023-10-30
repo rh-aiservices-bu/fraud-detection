@@ -1,0 +1,7 @@
+name: fraud-detection-workshop
+title: Fraud Detection Workshop
+version: master
+nav:
+  - modules/ROOT/nav.adoc
+
+start_page: ROOT:index.adoc

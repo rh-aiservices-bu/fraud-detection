@@ -1,0 +1,49 @@
+= 2.3 Working with Notebooks
+
+include::_attributes.adoc[]
+
+This section provides a small introduction on how to use Jupyter Notebooks. If you're already at ease with Jupyter, you can xref:2-04-experiment-train.adoc[head to the next section].
+
+== What's a notebook?
+
+* A notebook is an environment where you have _cells_ that can display formatted text, or code.
+
+This is an empty cell:
+
+image::workbenches/cell.png[Jupyter Cell]
+
+And a cell where we have entered some code:
+
+image::workbenches/cell_code.png[Jupyter Cell Code]
+
+* Code cells contain Python code that can be run interactively. Thats means you can modify the code, then run it. The code will not run on your computer or in the browser, but directly in the environment you are connected to, *Red Hat OpenShift Data Science* in our case.
+* To run a code cell, just select it (click in the cell, or on the left side of it), and click the Run/Play button from the toolbar (you can also press CTRL+Enter to run a cell, or Shift+Enter to run the cell and automatically select the following one).
+
+The Run button on the toolbar:
+
+image::workbenches/run_button.png[Jupyter Run]
+
+Our cell after pressing Run:
+
+image::workbenches/cell_run.png[Jupyter Run Cell]
+
+As you can see, you have the result of the code that was run in that cell, as well as information on when this particular cell has been run.
+
+* When you save a notebook, the code as well as the results are saved! So you can always reopen it to look at the results without having to run all the program again, while still having access to the code.
+
+Notebooks are so named because they are just like a physical *Notebook*: it's exactly like if you were taking notes about your experiments (which you will do), along with the code itself, including any parameters you set. You see the output of the experiment inline (this is the result from a cell once it's run), along with all the notes you want to take (to do that, switch the cell type from the menu from `Code` to `Markup`).
+
+== Time to play
+
+Now that we have covered the basics, just give it a try!
+
+image::workbenches/jupyter-notebook-0.png[Notebook 0]
+
+* In your Jupyter environment (the file explorer-like interface), there is file called `0_sandbox.ipynb`. Double-click on it to launch the notebook (it will open another tab in the content section of the environment). Please feel free to experiment, run the cells, add some more and create functions. You can do what you want - it's your environment, and there is no risk of breaking anything or impacting other users. This environment isolation is also a great advantage brought by *RHODS*.
+* You can also create a new notebook by selecting *File\->New\->Notebook* from the menu on the top left, then select a Python 3 kernel. This instructs Jupyter that we want to create a new notebook where the code cells will be run using a Python 3 kernel. We could have different kernels, with different languages or versions that we can run into notebooks, but that's a story for another time...
+* You can also create a notebook by simply clicking on the icon in the launcher:
+
+image::workbenches/new_notebook.png[alt text]
+
+* If you want to learn more about notebooks, head to https://jupyter.org/[the Jupyter site] .
+

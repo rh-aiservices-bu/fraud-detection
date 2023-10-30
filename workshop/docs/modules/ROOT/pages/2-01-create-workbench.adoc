@@ -1,0 +1,51 @@
+= 2.1 Starting a Jupyter environment
+
+include::_attributes.adoc[]
+
+NOTE: This section assumes you created a `My Storage` data connection xref:1-03-data-connections.adoc[as described in section 1.3].
+
+
+== Create a Workbench
+
+In section 1, we created a data science project.  From the project detail page
+
+* Click the *Create workbench* button.
+
+image::workbenches/ds-project-create-workbench.png[Create workbench button]
+
+* Fill out the name and description.
+
+image::workbenches/create-workbench-form-name-desc.png[Workbench Name and Description, 600]
+
+Red Hat ships several notebook images that are built and supported.  The *Notebook image* section will allow you to choose one of these or any custom images an administrator has set up for you.  Today, we'll be using the *Tensorflow* image which has the necessary libraries for this workshop.
+
+* Choose the latest *Tensorflow* image.
+
+image::workbenches/create-workbench-form-image.png[Workbench image, 600]
+
+* Choose a small deployment and no GPUs.  We won't need them for this workshop
+
+image::workbenches/create-workbench-form-size.png[Workbench size,600]
+
+* Leave the environment variables and storage options as the defaults.
+
+image::workbenches/create-workbench-form-env-storage.png[Workbench Env Storage, 600]
+
+* Under *Data connections*, choose to *Use existing data connection* and choose `My Storage` from the dropdown.  This will allow us to access the object storage we configured previously.
+
+image::workbenches/create-workbench-form-data-connection.png[Data Connection, 600]
+
+* Click the *Create workbench* button.
+
+image::workbenches/create-workbench-form-button.png[Create workbench button]
+
+You will be returned to your project while the workbench starts.  You'll see the status of the workbench change from `Starting` to `Running` next to the listed workbench.
+
+image::workbenches/ds-project-workbench-list.png[Workbench list]
+
+
+NOTE: *Editing a Workbench Configuration* if you have made a mistake you can simply stop the workbench and edit it to make changes.
+
+image::workbenches/ds-project-workbench-list-stop.png[Workbench List Stop]
+
+image::workbenches/ds-project-workbench-list-edit.png[Workbench List Edit]

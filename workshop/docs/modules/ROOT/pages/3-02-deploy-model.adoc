@@ -1,0 +1,56 @@
+= 2.2 Deploy the Model
+
+include::_attributes.adoc[]
+
+Now that the model is accessible in storage and saved in a portable `onnx` format, we can very easily use a RHODS model server to deploy it as an API.
+
+We'll complete this workflow in the *RHODS Dashboard*.
+
+== Create a Model Server
+
+RHODS multi-model servers can host several models at once.  We'll create a new model server and deploy our model to it.
+
+* In the *Models and model servers* list, click *Add server*.
+
+image::model-serving/ds-project-model-list-add.png[Add Server]
+
+In the form:
+
+* Fill out the *Model server name*.  We named ours `Model Server`.
+
+* Select `OpenVINO Model Server`.
+
+* Leave other fields (replicas, size, route, auth) as the defaults.
+
+image::model-serving/create-model-server-form.png[Add Server Form]
+
+== Deploy a Model
+
+* In the *Models and model servers* list, next to your new model server, click *Deploy model*.
+
+image::model-serving/ds-project-workbench-list-deploy.png[Deploy model button]
+
+In the form:
+
+* Fill out the *Model Name* with the value `fraud`.
+
+* Select the server you created (`Model Server`).
+
+* Select the *Existing data connection* `My Storage`
+
+* Enter the path to your uploaded model, `models/fraud/model.onnx`
+
+image::model-serving/deploy-model-form.png[Deploy Model Form]
+
+* Wait for the model to deploy and wait until the *Status* shows a green checkmark.
+
+image::model-serving/ds-project-model-list-status.png[Model Status]
+
+* Take note of the API Endpoint name and URL.  We'll use this in the next section.
+
+image::model-serving/ds-project-model-list-name.png[Model Name]
+
+image::model-serving/ds-project-model-list-url.png[Model URL]
+
+
+

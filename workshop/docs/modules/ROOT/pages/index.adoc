@@ -1,0 +1,30 @@
+= Fraud Detection Workshop with Red Hat OpenShift Data Science
+:page-layout: home
+:!sectids:
+
+[.text-center.strong]
+== Introduction
+
+Welcome!
+
+In this workshop, you'll learn an easy way to incorporate data science and AI/ML into an OpenShift development workflow.
+As an example, you'll use an fraud detection model in several different ways.
+
+You will:
+
+* use Jupyter Notebooks to explore a pre-trained fraud detection model
+* deploy the model using OpenShift Data Science model serving
+* integrate the model into a real-time fraud detection app
+* refine and train the model using automated pipelines
+
+And all of this without having to install anything on your own computer, thanks to https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science[Red Hat OpenShift Data Science].
+
+
+=== Environment
+
+https://developers.redhat.com/products/red-hat-openshift-data-science/download[Set up your Red Hat OpenShift Data Science environment]
+
+If you haven't already got an instance of Red Hat OpenShift Data Science, find out more on the https://developers.redhat.com/products/red-hat-openshift-data-science/download[developer page].  There, you can spin up your own account on the *free OpenShift Data Science Sandbox* or learn about installing on *your own OpenShift cluster*.
+
+
+If you're ready,  xref:1-01-dashboard.adoc[let's start!]

@@ -1,0 +1,40 @@
+= 2.2 The Jupyter Environment
+
+include::_attributes.adoc[]
+
+== Access your Workbench 
+
+* Click the *Open* link next to your workbench.  If prompted, log in and allow the notebook to authorize your user.
+
+image::workbenches/ds-project-workbench-open.png[Open Workbench]
+
+== Using Jupyter
+
+You are now inside your Jupyter environment. As you can see, it's a web-based environment, but everything you'll do here is in fact happening on the *Red Hat OpenShift Data Science*, powered underneath by the *OpenShift* cluster. This means that without having to install and maintain anything on your own computer, and without disposing of lots of local resources like CPU, GPU and RAM, you can still conduct your Data Science work in this powerful and stable managed environment.
+
+In the "file-browser" like window you're in right now, you'll find the files and folders that are saved inside your own personal space inside *RHODS*.
+
+It's pretty empty right now though... So the first thing we will do is to bring the content of the workshop inside this environment.
+
+* On the toolbar, click on the Git icon:
+
+image::workbenches/jupyter-git-icon.png[Git Icon]
+
+* Enter the git *https* URL, `https://github.com/cfchase/fraud-detection-notebooks.git`, then click *CLONE*:
+
+[.lines_space]
+[.console-input]
+[source,text]
+----
+https://github.com/cfchase/fraud-detection-notebooks.git
+----
+
+image::workbenches/jupyter-git-modal.png[Git Modal]
+
+* Double-click and navigate to the newly-created folder, `fraud-detection-notebooks`:
+
+image::workbenches/jupyter-file-browser.png[Jupyter File Browser]
+
+You should now see the notebooks we've cloned from git in the file browser.
+
+image::workbenches/jupyter-file-browser-2.png[Jupyter File Browser - fraud-detection-notebooks]

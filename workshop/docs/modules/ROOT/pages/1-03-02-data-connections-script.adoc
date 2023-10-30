@@ -1,0 +1,95 @@
+= 1.3.2 Scripted Data Connection Installation
+
+include::_attributes.adoc[]
+
+xref:index.adoc[Back to the introduction]
+
+
+NOTE: This script will install two data connections and two Minio buckets as s3 compatible storage into your data science project for convenience.  These are *not* meant for production usage.  It is based on the instructions for installing Minio in this https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide]. It will create a random user and password for security.  If you wish to connect to your own storage, please refer to these instructions: xref:1-03-01-data-connections-manual.adoc[Manually Adding Data Connections] 
+
+== Finding the OpenShift Project Name
+
+We're going to want to update the project we created in the previous section.  To do that, we need to navigate to the project in the OpenShift Console.  First, we must take note of the project resource name when we created it.
+
+image::projects/ds-project-new-form-resource.png[New Project Form Resource Name]
+
+You can also find the resource name on your list of projects by hovering over the *?* icon next to the project name.
+
+image::projects/ds-project-list-resource-hover.png[Project List Resource Name]
+
+
+== Navigate to the OpenShift Project
+
+NOTE: This section details how to start an OpenShift job to install the s3 compatible storage and associated data connection secrets.  If you are knowledgeable in OpenShift and can access the cluster from the command line, you can simply execute `oc apply -n <your-project-name/> -f https://github.com/cfchase/fraud-detection-notebooks/raw/main/setup/setup-s3.yaml`.
+
+Now that we have the resource name, we can navigate to the project in the OpenShift Console.  Click on the *OpenShift Console* link in the application switcher top right corner of the OpenShift Web Console.
+
+image::projects/ds-project-ocp-link.png[OpenShift Console Link]
+
+* Click the *+* icon in the navbar to create new resources.
+
+image::projects/ocp-console-add-icon.png[Add Resources Icon]
+ 
+* Select your project from the list of projects and verify the correct project is now listed.
+
+image::projects/ocp-console-select-project.png[Select Project]
+
+image::projects/ocp-console-project-selected.png[Project Selected]
+
+[.lines_space]
+[.console-input]
+[source, yaml]
+----
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: demo-setup
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: demo-setup-edit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: demo-setup
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-s3-storage
+spec:
+  selector: {}
+  template:
+    spec:
+      containers:
+        - args:
+            - -ec
+            - |-
+              echo -n 'Setting up Minio instance and data connections'
+              oc apply -f https://github.com/cfchase/fraud-detection-notebooks/raw/main/setup/setup-s3-no-sa.yaml
+          command:
+            - /bin/bash
+          image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+          imagePullPolicy: IfNotPresent
+          name: create-s3-storage
+      restartPolicy: Never
+      serviceAccount: demo-setup
+      serviceAccountName: demo-setup
+----
+
+
+== Data Connections
+
+We will be using S3 compatible object storage, such as Ceph, Minio, or AWS S3, to store the data and models used in this workshop. To access the data and models, we will use a Data Connection, which is a resource that contains the configuration parameters required to connect to an object storage bucket.
+
+We will need 2 buckets.  
+
+1. *My Storage* - Personal use for models and data.  We can reuse that bucket and connection for notebooks and model servers.  
+2. *Pipelines Artifacts* - This is used as storage for your pipeline artifacts and required when creating a pipeline server.  We'll keep it separate from the first bucket for clarity.
+
+You can choose to use your own object storage and learn how to configure it manually 

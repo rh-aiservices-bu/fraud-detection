@@ -1,0 +1,37 @@
+= 1.3.1 Creating a Data Connection
+
+include::_attributes.adoc[]
+
+xref:index.adoc[Back to the introduction]
+
+NOTE: If you do not have your own s3 compatible storage, or wish to use a disposable local Minio instance, skip this page and use an automated script to *install object storage locally* for the purposes of this workshop: xref:1-03-02-data-connections-script.adoc[Scripted Local Installation]
+
+== Data Connections
+
+Let's create a data connection to your S3 compatible storage bucket.  For this you will need all the credential info including the endpoint URL, access key, secret key, region, and bucket name.  If you don't have this information, please contact your storage administrator.
+
+* Click *Add data connection* to open the form.
+
+image::projects/ds-project-add-dc.png[Add Data Connection]
+
+* Fill out the form and name your connection `My Storage`.  This will be used to save your personal work, including data and models.
+
+image::projects/ds-project-my-storage-form.png[Add My Storage Form]
+
+* Click *Add data connection* to save and close.
+
+Repeat for the pipeline artifacts connection. 
+
+NOTE: If you do not intend to complete the pipelines section of the workshop you can skip this step to add the pipeline artifacts connection.
+
+* Click *Add data connection* to open the form.
+
+* Fill out the form and name your connection `Pipeline Artifacts`.  This will be where pipeline servers save artifacts.  While necessary to run pipelines, we will not be exploring artifacts in this demo.
+
+image::projects/ds-project-pipeline-artifacts-form.png[Add Pipeline Artifacts Form]
+
+* Click *Add data connection* to save and close.
+
+Now you should see your data connections listed in the project.
+
+image::projects/ds-project-dc-list.png[]

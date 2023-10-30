@@ -1,0 +1,42 @@
+= 1.2 Setting up your Data Science Project
+
+include::_attributes.adoc[]
+
+xref:index.adoc[Back to the introduction]
+
+== The OpenShift Data Science Dashboard
+
+You should be logged into *Red Hat OpenShift Data Science*, and be able to see the dashboard, that looks like this:
+
+image::projects/dashboard-enabled.png[Dashboard Enabled]
+
+You could start a Jupyter notebook from here, but it would be a one-off notebook run in isolation.  To do data science as part of a workflow, we need to create a data science project. Projects allow you and your team to organize and collaborate on resources within separated namespaces.  From a project you can create multiple workbenches, each with their own Jupyter notebook environment, and each with their own data connections and cluster storage.  In addition, they can share models and data with pipelines and model servers.
+
+* Navigate to *Data Science Projects* in the left menu. Here you can see the list of existing projects that you have access to.
+
+image::projects/dashboard-click-projects.png[Data Science Projects List]
+
+From here, you can select an existing project, or create a new one.  If you already have an active project you'd like to use, select it now and skip ahead to the xref:1-03-data-connections.adoc[next section].  Otherwise, let's create a new project.
+
+
+* Click *Create data science project*.
+
+image::projects/create-project-button.png[Create proejct button]
+
+* Enter a user friendly display name and description.  It will automatically generate a resource name, but you can change it if you'd like.
+
+image::projects/ds-project-new-form.png[New DS Project Form]
+
+* You can now see its initial state. There are five types of Project resources:
+
+image::projects/ds-project-new.png[New DS Project]
+
+** *Workbenches* are instances of your development and experimentation environment. They typically contain IDEs such as JupyterLab, RStudio and Visual Studio Code.
+
+** A *Cluster storage* is a volume that persists the files and data you're working on within a workbench. A workbench has access to one or more cluster storage instances.
+
+** *Data connections* contain configuration parameters that are required to connect to a data source such as an S3 object bucket.
+
+** *Pipelines* contain the Data Science Pipelines that have been executed within the Project.
+
+** *Models and model servers* allow you to quickly serve a trained model for real-time inference. You can have multiple model servers per Project, and one model server can host multiple models.

@@ -1,0 +1,9 @@
+= 2.4 Training a Model
+
+include::_attributes.adoc[]
+
+Now that you know how the environment works, the real work can begin!
+
+Still in you environment, just open the file `1_experiment_train.ipynb`, and follow the instructions directly in the notebook, where you'll do some simple data exploration, experimentation, and train a model.
+
+image::workbenches/jupyter-notebook-1.png[Jupyter Notebook 1]

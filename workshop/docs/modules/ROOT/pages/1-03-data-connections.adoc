@@ -1,0 +1,22 @@
+= 1.3 Object Storage with Data Connections
+
+include::_attributes.adoc[]
+
+xref:index.adoc[Back to the introduction]
+
+== Data Connections
+
+We will be using S3 compatible object storage, such as Ceph, Minio, or AWS S3, to store the data and models used in this workshop. To access the data and models, we will use a Data Connection, which is a resource that contains the configuration parameters required to connect to an object storage bucket.
+
+We will need 2 buckets.  
+
+1. *My Storage* - Personal use for models and data.  We can reuse that bucket and connection for notebooks and model servers.  
+2. *Pipelines Artifacts* - This is used as storage for your pipeline artifacts and required when creating a pipeline server.  We'll keep it separate from the first bucket for clarity.
+
+You can choose to:
+
+* Create connections to your own S3 compatible object storage.  Click here for instructions on how to do that: xref:1-03-01-data-connections-manual.adoc[Manually Adding Data Connections]
+
+OR
+
+* Use an automated script to install object storage locally for the purposes of this workshop: xref:1-03-02-data-connections-script.adoc[Scripted installation of local Minio instance]

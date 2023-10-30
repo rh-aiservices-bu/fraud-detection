@@ -1,0 +1,23 @@
+= 3.4 Fraud Detection
+
+include::_attributes.adoc[]
+
+
+== Using the Model as an API
+Now that you've used a pretrained model for inference, let's deploy that model using the RHODS model serving capabilities.
+
+In order to do so, we need to move the model from your workbench to our S3 compatible object storage.  We'll be using the data connection you created earlier in the section xref:1-03-data-connections.adoc[Storage Data Connections].  We'll simply upload the model from a notebook.
+
+NOTE: you must have created the data connection `My Storage` *AND* added that data connection to your workbench before you can use it in a notebook.  If you missed it, you can edit your workbench and add the data connection now.  This will *restart* your workbench with the data connection attached. You *ONLY* need to do this if you missed it the first time.
+
+image::model-serving/ds-project-workbench-list-edit.png[Workbench Form Edit]
+
+image::model-serving/create-workbench-form-data-connection.png[Workbench Form Data Connection, 600]
+
+If your data connection has been set up, you can continue with the next step.
+
+* In your Jupyter environment, open the file `2_save_model.ipynb`, and follow the instructions in the notebook.
+
+image::model-serving/jupyter-notebook-2.png[Jupyter Notebook 2]
+
+At the end of the notebook, you will have uploaded the file `models/fraud/model.onnx` to object storage, ready for your model server to use.
