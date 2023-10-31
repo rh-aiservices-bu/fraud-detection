@@ -1,0 +1,39 @@
+{
+  "name": "rhods-fd-workshop",
+  "description": "Red Hat OpenShift Data Science Fraud Detection",
+  "homepage": "https://rh-aiservices-bu.github.io/fraud-detection-notebooks",
+  "author": {
+    "email": "cchase@redhat.com",
+    "name": "Chris Chase",
+    "url": "https://github.com/rh-aiservices-bu/fraud-detection-notebooks"
+  },
+  "dependencies": {
+    "@antora/cli": "^3.1.4",
+    "@antora/site-generator-default": "^3.1.4",
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/register": "^7.22.15",
+    "browser-sync": "^2.29.3",
+    "fs-extra": "^11.1.1",
+    "gulp": "^4.0.2",
+    "yaml-js": "^0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "gulp",
+    "clean": "gulp clean",
+    "workshop": "gulp workshopSite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redhat-scholars/rhods-fd-workshop.git"
+  },
+  "license": "Apache-2.0",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}

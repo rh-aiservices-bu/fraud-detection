@@ -3,7 +3,7 @@ site:
   start_page: fraud-detection-workshop::index.adoc
 content:
   sources:
-    - url: ./../
+    - url: ./..
       start_path: workshop/docs
 asciidoc:
   attributes:
