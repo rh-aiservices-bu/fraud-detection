@@ -1,0 +1,111 @@
+[id='running-a-script-to-install-storage_{context}']
+= Running a script to install local object storage buckets and create data connections
+
+include::_attributes.adoc[]
+
+xref:index.adoc[Back to the introduction]
+
+For convenience, the provided script installs two data connections (and associated secrets) and two Minio buckets as s3-compatible storage The script creates a random user and password for security. This script is based on the instructions for installing Minio in this https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide]. 
+
+IMPORTANT: The storage buckets that this script creates are *not* meant for production usage. 
+
+NOTE: If you want to connect to your own storage, see xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
+
+.Prerequisite
+
+You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
+
+In the {productname-short} dashboard, select *Data Science Projects* and then hover your cursor over the *?* icon next to the project name. A text box appears with information about the project, including it's resource name:
+
+image::projects/ds-project-list-resource-hover.png[Project list resource name]
+
+.Procedure
+
+. You can run the script from the command line or from the OpenShift console.
++
+If you want to run the script from the OpenShift console, skip to the next step.
++
+If you are knowledgeable in OpenShift and can access the cluster from the command line, run the following command:
++
+----
+oc apply -n <your-project-name/> -f https://github.com/cfchase/fraud-detection-notebooks/raw/main/setup/setup-s3.yaml
+----
+
+. In the {productname-short} dashboard, click the application launcher icon and then select the *OpenShift Console* option.
++
+image::projects/ds-project-ocp-link.png[OpenShift Console Link]
+
+. In the OpenShift console, click *+* in the top navigation bar.
++
+image::projects/ocp-console-add-icon.png[Add resources Icon]
+ 
+. Select your project from the list of projects.
++
+image::projects/ocp-console-select-project.png[Select a project]
+
+. Verify that you selected the correct project.
++
+image::projects/ocp-console-project-selected.png[Selected project]
+
+. Copy the following code and paste it into the *Import YAML* editor.
++
+[.lines_space]
+[.console-input]
+[source, yaml]
+----
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: demo-setup
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: demo-setup-edit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: demo-setup
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-s3-storage
+spec:
+  selector: {}
+  template:
+    spec:
+      containers:
+        - args:
+            - -ec
+            - |-
+              echo -n 'Setting up Minio instance and data connections'
+              oc apply -f https://github.com/cfchase/fraud-detection-notebooks/raw/main/setup/setup-s3-no-sa.yaml
+          command:
+            - /bin/bash
+          image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+          imagePullPolicy: IfNotPresent
+          name: create-s3-storage
+      restartPolicy: Never
+      serviceAccount: demo-setup
+      serviceAccountName: demo-setup
+----
+
+. Click *Create*.
+
+.Verification 
+
+You should see a "Resources successfully created" message and the following resources listed:
+
+* `demo-setup`
+* `demo-setup-edit`
+* `create s3-storage`
+
+
+.Next step
+
+xref:creating-a-workbench.adoc[Creating a workbench]

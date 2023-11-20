@@ -1,0 +1,60 @@
+[id='importing-files-into-jupyter_{context}']
+= Importing the {deliverable} files into the Jupyter environment
+
+include::_attributes.adoc[]
+
+The Jupyter environment is a web-based environment, but everything you do inside it happens on *{productname-long}* and powered by the *OpenShift* cluster. This means that, without having to install and maintain anything on your own computer, and without disposing of lots of local resources like CPU, GPU and RAM, you can conduct your Data Science work in this powerful and stable managed environment.
+
+.Prerequisite
+
+*You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench and selecting a Notebook image].
+
+.Procedure 
+
+. Click the *Open* link next to your workbench. If prompted, log in and allow the Notebook to authorize your user.
++
+image::workbenches/ds-project-workbench-open.png[Open workbench]
++
+Your Jupyter environment window opens.
++
+This file-browser window shows the files and folders that are saved inside your own personal space in {productname-short}.
+
+. Bring the content of this {deliverable} inside your Jupyter environment:
+
+.. On the toolbar, click the *Git Clone* icon:
++
+image::workbenches/jupyter-git-icon.png[Git Clone icon, 200]
+
+.. Enter the following {deliverable} Git *https* URL: 
++
+[.lines_space]
+[.console-input]
+[source,text]
+----
+https://github.com/cfchase/fraud-detection-notebooks.git
+----
++
+image::workbenches/jupyter-git-modal.png[Git Modal]
+
+.. Check the *Include submodules* option.
+
+.. Click *CLONE*.
+
+.Verification
+
+. Double-click the newly-created folder, `fraud-detection-notebooks`:
++
+image::workbenches/jupyter-file-browser.png[Jupyter file browser]
+
+In the file browser, you should see the notebooks that you cloned from Git.
+
+image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection-notebooks]
+
+
+.Next step
+
+xref:running-code-in-a-notebook.adoc[Running code in a notebook]
+
+or 
+
+xref:training-a-data-model.adoc[Training a data model]

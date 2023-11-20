@@ -1,6 +1,17 @@
-= Fraud Detection Workshop with Red Hat OpenShift Data Science
+= Fraud Detection Workshop with {productname-long}
 :page-layout: home
 :!sectids:
 
 [.text-center.strong]
 == Conclusion
+
+Congratulations!
+
+In this {deliverable}, you learned how to incorporate data science and artificial intelligence (AI) and machine learning (ML) into an OpenShift development workflow.
+
+You used an example fraud detection model and completed the following tasks:
+
+* Explored a pre-trained fraud detection model by using Jupyter Notebooks.
+* Deployed the model by using {productname-short} model serving.
+* Integrated the model into a real-time fraud detection application.
+* Refined and trained the model by using automated pipelines.
