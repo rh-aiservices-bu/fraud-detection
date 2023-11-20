@@ -7,7 +7,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 .Prerequisite
 
-* You created a `My Storage` data connection as described in xref:storing-data-with-data-connection.adoc[Storing data with data connections].
+* You created a `My Storage` data connection as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
 
 .Procedure
 

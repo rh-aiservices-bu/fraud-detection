@@ -9,6 +9,9 @@ asciidoc:
   attributes:
     release-version: master
     page-pagination: true
+    deliverable: workshop
+    productname-long: Red Hat OpenShift Data Science
+    productname-short: RHODS
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js

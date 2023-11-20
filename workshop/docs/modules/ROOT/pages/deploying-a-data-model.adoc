@@ -1,5 +1,5 @@
 [id='deploying-a-data-model_{context}']
-Deploying a data model
+= Deploying a data model
 
 include::_attributes.adoc[]
 

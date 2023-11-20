@@ -3,8 +3,6 @@
 
 include::_attributes.adoc[]
 
-xref:index.adoc[Back to the introduction]
-
 NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections].
 
 .Prerequisite
@@ -45,7 +43,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 
 . Click *Add data connection*.
 
-. Fill out the form and name your connection *Pipeline Artifacts*.  
+. Fill out the form and name your connection *Pipeline Artifacts*.
 +
 image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form]
 

@@ -3,14 +3,12 @@
 
 include::_attributes.adoc[]
 
-xref:index.adoc[Back to the introduction]
-
 For this {deliverable}, you need two S3-compatible object storage buckets, such as Ceph, Minio, or AWS S3:
 
-* *My Storage* - Use this bucket for storing your models and data. You can reuse this bucket and its connection for your notebooks and model servers.  
+* *My Storage* - Use this bucket for storing your models and data. You can reuse this bucket and its connection for your notebooks and model servers.
 *  *Pipelines Artifacts* - Use this bucket as storage for your pipeline artifacts. A pipeline artifacts bucket is required when you create a pipeline server. For this {deliverable}, create this bucket to separate it from the first storage bucket for clarity.
 
-You can use your own storage buckets or run a provided script that creates local Minio storage buckets for you. 
+You can use your own storage buckets or run a provided script that creates local Minio storage buckets for you.
 
 Also, you must create a data connection to each storage bucket. A data connection is a resource that contains the configuration parameters needed to connect to an object storage bucket.
 

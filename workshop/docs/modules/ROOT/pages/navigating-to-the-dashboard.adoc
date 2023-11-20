@@ -3,8 +3,6 @@
 
 include::_attributes.adoc[]
 
-xref:index.adoc[Back to the introduction]
-
 .Procedure
 
 . After you log in to the OpenShift console, access the {productname-short} dashboard by clicking the application launcher icon on the header.
