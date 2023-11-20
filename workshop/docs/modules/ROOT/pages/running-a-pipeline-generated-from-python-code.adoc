@@ -19,7 +19,7 @@ The generated `7_get_data_train_upload.yaml` file is located in the `fraud-detec
 +
 image::pipelines/wb-download.png[Download Pipeline YAML]
 
-. Upload the `7_get_data_train_upload.yaml` file to {productname-short}.  
+. Upload the `7_get_data_train_upload.yaml` file to {productname-short}.
 
 .. In the Data Science dashboard, navigate to your data science project page and then click *Import pipeline*.
 +
@@ -47,7 +47,7 @@ A new run starts immediately and opens the run details page.
 +
 image::pipelines/pipeline-run-in-progress.png[]
 
-There you have it.  A pipeline created in Python running in {prodname-short}.
+There you have it.  A pipeline created in Python running in {productname-short}.
 
 
 

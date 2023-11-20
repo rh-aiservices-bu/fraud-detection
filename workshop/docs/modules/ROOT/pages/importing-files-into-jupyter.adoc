@@ -42,13 +42,13 @@ image::workbenches/jupyter-git-modal.png[Git Modal]
 
 .Verification
 
-. Double-click the newly-created folder, `fraud-detection-notebooks`:
+. Double-click the newly-created folder, `fraud-detection`:
 +
 image::workbenches/jupyter-file-browser.png[Jupyter file browser]
 
 In the file browser, you should see the notebooks that you cloned from Git.
 
-image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection-notebooks]
+image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection]
 
 
 .Next step
