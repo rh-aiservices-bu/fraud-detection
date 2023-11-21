@@ -1,0 +1,34 @@
+[id='preparing-a-data-model-for-deployment_{context}']
+= Preparing a data model for deployment
+include::_attributes.adoc[]
+
+After you train a model, you can deploy it by using the {productname-short} model serving capabilities.
+
+To prepare it for deployment, you must move the model from your workbench to your S3-compatible object storage. You use the data connection that you created in the xref:storing-data-with-data-connections.adoc[Storing data with data connections] section and upload the model from a notebook. You also convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
+
+.Prerequisites
+
+* You created the data connection `My Storage`.
++
+image::model-serving/create-workbench-form-data-connection.png[Workbench data connection form, 600]
+
+* You added the `My Storage` data connection to your workbench.
++
+image::model-serving/ds-project-workbench-list-edit.png[Workbench edit form]
+
+
+.Procedure
+
+. In your Jupyter environment, open the `2_save_model.ipynb` file.
+
+. Follow the instructions in the notebook to make the data model accessible in storage and save it in the portable ONNX format.
+
+image::model-serving/jupyter-notebook-2.png[Jupyter Notebook 2]
+
+.Verification
+
+When you have completed the notebook isntructions, the `models/fraud/model.onnx` file is in your object storage and it is ready for your model server to use.
+
+.Next step
+
+xref:deploying-a-data-model.adoc[Deploying a data model]

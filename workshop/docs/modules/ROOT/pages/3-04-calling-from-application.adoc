@@ -1,2 +1,0 @@
-= 3.4 Calling the API from an Application
-

@@ -1,23 +1,23 @@
 * 1. Projects
-** xref:1-01-dashboard.adoc[1. The Dashboard]
-** xref:1-02-project-setup.adoc[2. Data Science Projects]
-** xref:1-03-data-connections.adoc[3. Storage Data Connections]
-*** xref:1-03-01-data-connections-manual.adoc[1. Manual]
-*** xref:1-03-02-data-connections-script.adoc[2. Scripted Local]
-** xref:1-04-enable-pipelines.adoc[4. Enable Pipelines]
+** xref:navigating-to-the-dashboard.adoc[1. The Dashboard]
+** xref:setting-up-your-data-science-project.adoc[2. Data Science Projects]
+** xref:storing-data-with-data-connections.adoc[3. Storage Data Connections]
+*** xref:creating-data-connections-to-storage.adoc[1. Manual]
+*** xref:running-a-script-to-install-storage.adoc[2. Scripted Local]
+** xref:enabling-data-science-pipelines.adoc[4. Enable Pipelines]
 
 * 2. Workbenches
-** xref:2-01-create-workbench.adoc[1. Create a Workbench]
-** xref:2-02-jupyter-env.adoc[2. Jupyter]
-** xref:2-03-notebooks.adoc[3. Notebooks]
-** xref:2-04-experiment-train.adoc[4. Training a Model]
+** xref:creating-a-workbench.adoc[1. Create a Workbench]
+** xref:importing-files-into-jupyter.adoc[2. Jupyter]
+** xref:running-code-in-a-notebook.adoc[3. Notebooks]
+** xref:training-a-data-model.adoc[4. Training a Model]
 
 * 3. Model Serving
-** xref:3-01-save-model.adoc[1. Saving the Model]
-** xref:3-02-deploy-model.adoc[2. Deploy the Model]
-** xref:3-03-model-api.adoc[3. Using the API]
-// ** xref:3-04-calling-from-application.adoc[4. Calling from an Application]
+** xref:preparing-a-data-model-for-deployment.adoc[1. Saving the Model]
+** xref:deploying-a-data-model.adoc[2. Deploy the Model]
+** xref:testing-the-model-api.adoc[3. Using the API]
 
 * 4. Data Science Pipelines
-** xref:4-01-gui-pipelines.adoc[1. Workbench Pipeline Editor]
-** xref:4-02-sdk-pipelines.adoc[2. Python Pipelines]
+// ** xref:enabling-data-science-pipelines.adoc[1. Enable Pipelines]
+** xref:automating-workflows-with-pipelines.adoc[1. Workbench Pipeline Editor]
+** xref:running-a-pipeline-generated-from-python-code.adoc[2. Python Pipelines]

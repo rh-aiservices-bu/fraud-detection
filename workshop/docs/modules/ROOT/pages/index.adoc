@@ -1,4 +1,4 @@
-= Fraud Detection Workshop with Red Hat OpenShift Data Science
+= Fraud Detection {deliverable} with {productname-long}
 :page-layout: home
 :!sectids:
 
@@ -7,24 +7,31 @@
 
 Welcome!
 
-In this workshop, you'll learn an easy way to incorporate data science and AI/ML into an OpenShift development workflow.
-As an example, you'll use an fraud detection model in several different ways.
+In this {deliverable}, you'll learn how to incorporate data science and artificial intelligence and machine learning (AI/ML) into an OpenShift development workflow.
 
-You will:
+You'll use an example fraud detection model to complete the following tasks:
 
-* use Jupyter Notebooks to explore a pre-trained fraud detection model
-* deploy the model using OpenShift Data Science model serving
-* integrate the model into a real-time fraud detection app
-* refine and train the model using automated pipelines
+* Explore a pre-trained fraud detection model by using Jupyter Notebooks.
+* Deploy the model by using {productname-short} model serving.
+* Integrate the model into a real-time fraud detection application.
+* Refine and train the model by using automated pipelines.
 
-And all of this without having to install anything on your own computer, thanks to https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science[Red Hat OpenShift Data Science].
+And you'll do all of this without having to install anything on your own computer, thanks to https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science[{productname-long}].
 
+== About the example fraud detection model
 
-=== Environment
+The example fraud detection model mentors credit card transactions for potential fraudulent activity. It analyzes the following credit card transaction details:
 
-https://developers.redhat.com/products/red-hat-openshift-data-science/download[Set up your Red Hat OpenShift Data Science environment]
+* The geographical distance from the previous credit card transaction.
+* The price of the current transaction, compared to the median price of all the user’s transactions.
+* Whether the user completed the transaction by using the hardware chip in the credit card,  entered a PIN number, or for an online purchase.
 
-If you haven't already got an instance of Red Hat OpenShift Data Science, find out more on the https://developers.redhat.com/products/red-hat-openshift-data-science/download[developer page].  There, you can spin up your own account on the *free OpenShift Data Science Sandbox* or learn about installing on *your own OpenShift cluster*.
+Based on this data, the model outputs the likelihood of the transaction being fraudulent.
 
+== Before you begin
 
-If you're ready,  xref:1-01-dashboard.adoc[let's start!]
+https://developers.redhat.com/products/red-hat-openshift-data-science/download[Set up your {productname-long} environment]
+
+If you don't already have an instance of {productname-long}, find out more on the https://developers.redhat.com/products/red-hat-openshift-data-science/download[developer page]. There, you can spin up your own account on the *free {productname-short} Sandbox* or learn about installing on *your own OpenShift cluster*.
+
+If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}!]
