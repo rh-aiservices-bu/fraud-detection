@@ -1,8 +1,6 @@
 [id='creating-data-connections-to-storage_{context}']
 == Creating data connections to your own S3-compatible object storage
 
-include::_attributes.adoc[]
-
 NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections].
 
 .Prerequisite

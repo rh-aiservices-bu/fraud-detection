@@ -1,8 +1,6 @@
 [id='importing-files-into-jupyter_{context}']
 = Importing the {deliverable} files into the Jupyter environment
 
-include::_attributes.adoc[]
-
 The Jupyter environment is a web-based environment, but everything you do inside it happens on *{productname-long}* and powered by the *OpenShift* cluster. This means that, without having to install and maintain anything on your own computer, and without disposing of lots of local resources like CPU, GPU and RAM, you can conduct your Data Science work in this powerful and stable managed environment.
 
 .Prerequisite

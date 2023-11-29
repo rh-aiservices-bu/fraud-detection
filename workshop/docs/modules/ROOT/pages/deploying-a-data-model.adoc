@@ -1,8 +1,6 @@
 [id='deploying-a-data-model_{context}']
 = Deploying a data model
 
-include::_attributes.adoc[]
-
 Now that the data model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
 
 {productname-short} multi-model servers can host several models at once. You create a new model server and deploy your model to it.

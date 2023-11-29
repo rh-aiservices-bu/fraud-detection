@@ -1,8 +1,6 @@
 [id='testing-the-model-api_{context}']
 = Testing the model API
 
-include::_attributes.adoc[]
-
 Now that you've deployed the model, you can test its API endpoints.
 
 When you created the model server, you did *not* create a route for external access to the API and you did not protect it with an authentication token. By default, if you do not specify external access, the model server provides an internal endpoint with no authentication. 

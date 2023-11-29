@@ -1,6 +1,5 @@
 [id='preparing-a-data-model-for-deployment_{context}']
 = Preparing a data model for deployment
-include::_attributes.adoc[]
 
 After you train a model, you can deploy it by using the {productname-short} model serving capabilities.
 
