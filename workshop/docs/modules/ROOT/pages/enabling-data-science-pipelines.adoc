@@ -1,4 +1,4 @@
-[id='enabling-data-science-pipelines_{context}']
+[id='enabling-data-science-pipelines']
 = Enabling data science pipelines
 
 include::_attributes.adoc[]

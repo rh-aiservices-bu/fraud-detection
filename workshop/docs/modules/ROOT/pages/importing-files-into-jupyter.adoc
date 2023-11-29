@@ -1,4 +1,4 @@
-[id='importing-files-into-jupyter_{context}']
+[id='importing-files-into-jupyter']
 = Importing the {deliverable} files into the Jupyter environment
 
 include::_attributes.adoc[]
@@ -7,7 +7,7 @@ The Jupyter environment is a web-based environment, but everything you do inside
 
 .Prerequisite
 
-*You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench and selecting a Notebook image].
+You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench and selecting a Notebook image].
 
 .Procedure
 
@@ -42,7 +42,7 @@ image::workbenches/jupyter-git-modal.png[Git Modal]
 
 .Verification
 
-. Double-click the newly-created folder, `fraud-detection`:
+Double-click the newly-created folder, `fraud-detection`:
 +
 image::workbenches/jupyter-file-browser.png[Jupyter file browser]
 

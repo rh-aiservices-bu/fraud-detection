@@ -1,4 +1,4 @@
-[id='automating-workflows-with-pipelines_{context}']
+[id='automating-workflows-with-pipelines']
 = Automating workflows with data science pipelines
 
 include::_attributes.adoc[]

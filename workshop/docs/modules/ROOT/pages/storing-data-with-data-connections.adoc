@@ -1,4 +1,4 @@
-[id='storing-data-with-data-connections_{context}']
+[id='storing-data-with-data-connections']
 = Storing data with data connections
 
 include::_attributes.adoc[]

@@ -1,4 +1,4 @@
-[id='running-a-pipeline-generated-from-python-code_{context}']
+[id='running-a-pipeline-generated-from-python-code']
 = Running a data science pipeline generated from Python code
 
 include::_attributes.adoc[]
@@ -47,7 +47,7 @@ A new run starts immediately and opens the run details page.
 +
 image::pipelines/pipeline-run-in-progress.png[]
 
-There you have it.  A pipeline created in Python running in {productname-short}.
+There you have it:  a pipeline created in Python that is running in {productname-short}.
 
 
 

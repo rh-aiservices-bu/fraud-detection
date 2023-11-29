@@ -1,4 +1,4 @@
-[id='running-a-script-to-install-storage_{context}']
+[id='running-a-script-to-install-storage']
 = Running a script to install local object storage buckets and create data connections
 
 include::_attributes.adoc[]

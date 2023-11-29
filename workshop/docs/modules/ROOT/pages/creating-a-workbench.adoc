@@ -1,4 +1,4 @@
-[id='creating-a-workbench_{context}']
+[id='creating-a-workbench']
 = Creating a workbench and selecting a Notebook image
 
 include::_attributes.adoc[]

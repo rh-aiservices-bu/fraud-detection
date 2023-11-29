@@ -2,6 +2,7 @@
 :page-layout: home
 :!sectids:
 
+[id='introduction']
 [.text-center.strong]
 == Introduction
 

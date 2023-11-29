@@ -1,4 +1,4 @@
-[id='deploying-a-data-model_{context}']
+[id='deploying-a-data-model']
 = Deploying a data model
 
 include::_attributes.adoc[]
