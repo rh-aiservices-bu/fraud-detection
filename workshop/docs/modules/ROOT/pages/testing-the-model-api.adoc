@@ -15,13 +15,13 @@ You can communicate directly with this internal service in the same way that an 
 
 . Take note of the model's resource name (API endpoint name) and the internal service's grpcURL and restURL. You need this information when you test the model API.
 +
-image::model-serving/ds-project-model-list-name.png[Model name]
+image:images/model-serving/ds-project-model-list-name.png[Model name]
 +
-image::model-serving/ds-project-model-list-url.png[Model URL]
+image:images/model-serving/ds-project-model-list-url.png[Model URL]
 
 . Return to the Jupyter environment and try out your new endpoint. You'll try REST API calls in `4_rest_requests.ipynb` and gRPC requests in `5_grpc_requests.ipynb`.
 
-image::model-serving/wb-notebook-requests.png[Request Notebooks]
+image:images/model-serving/wb-notebook-requests.png[Request Notebooks]
 
 .Next step
 

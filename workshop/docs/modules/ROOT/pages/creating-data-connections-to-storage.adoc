@@ -29,11 +29,11 @@ Create data connections to your two storage buckets.
 
 . Click *Add data connection*.
 +
-image::projects/ds-project-add-dc.png[Add data connection]
+image:images/projects/ds-project-add-dc.png[Add data connection]
 
 . Fill out the *Add data connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models.
 +
-image::projects/ds-project-my-storage-form.png[Add my storage form]
+image:images/projects/ds-project-my-storage-form.png[Add my storage form]
 
 . Click *Add data connection*.
 
@@ -45,7 +45,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 
 . Fill out the form and name your connection *Pipeline Artifacts*.
 +
-image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form]
+image:images/projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form]
 
 . Click *Add data connection*.
 
@@ -54,7 +54,7 @@ image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts fo
 
 Check to see that your data connections are listed in the project.
 
-image::projects/ds-project-dc-list.png[List of project data connections]
+image:images/projects/ds-project-dc-list.png[List of project data connections]
 
 
 .Next step

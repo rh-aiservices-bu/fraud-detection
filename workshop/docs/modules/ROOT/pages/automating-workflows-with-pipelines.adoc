@@ -13,11 +13,11 @@ Note: Your completed pipeline should look like the one in the `6 Train Save.pipe
 
 . Open you workbench's JupyterLab environment. If the launcher is not visible, click *+* to open it.
 +
-image::pipelines/wb-pipeline-launcher.png[Pipeline buttons]
+image:images/pipelines/wb-pipeline-launcher.png[Pipeline buttons]
 
 . Click *Pipeline Editor*.
 +
-image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 100]
+image:images/pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 100]
 +
 You've created a blank pipeline! 
 
@@ -25,15 +25,15 @@ You've created a blank pipeline!
 
 .. In the pipeline editor, click *Open Panel* 
 +
-image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel]
+image:images/pipelines/wb-pipeline-panel-button-loc.png[Open Panel]
 
 .. Select the *Pipeline Properties* tab.
 +
-image::pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab]
+image:images/pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab]
 
 .. In the *Pipeline Properties* panel, scroll down to *Generic Node Defaults* and *Runtime Image*. Set the value to `Tensorflow with Cuda and Python 3.9 (UBI 9)`
 +
-image::pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
+image:images/pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
 
 . Save the pipeline.
 
@@ -43,11 +43,11 @@ Add some steps, or *nodes* in your pipeline. Your two nodes will use the  `1_exp
 
 . From the file-browser panel, drag the `1_experiment_train.ipynb` and `2_save_model.ipynb` notebooks onto the pipeline canvas.
 +
-image::pipelines/wb-pipeline-drag-drop.png[ Drag and Drop Notebooks]
+image:images/pipelines/wb-pipeline-drag-drop.png[ Drag and Drop Notebooks]
 
 . Click the output port of `1_experiment_train.ipynb` and drag a connecting line to the input port of `2_save_model.ipynb`.
 +
-image::pipelines/wb-pipeline-connect-nodes.png[Connect Nodes, 400]
+image:images/pipelines/wb-pipeline-connect-nodes.png[Connect Nodes, 400]
 
 . Save the pipeline.
 
@@ -59,19 +59,19 @@ Note: If you don't set this file dependency, the file won't be included in the n
 
 . Click the `1_experiment_train.ipynb` node.
 +
-image::pipelines/wb-pipeline-node-1.png[Select Node 1, 200]
+image:images/pipelines/wb-pipeline-node-1.png[Select Node 1, 200]
 
 . In the Properties panel, click the *Node Properties* tab.
 
 . Scroll down to the *File Dependencies* section and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 400]
+image:images/pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 400]
 
 . Set the value to `data/card_transdata.csv` which contains the data to train your model.
 
 . Select the *Include Subdirectories* option and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
+image:images/pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
 
 . Save the pipeline.
 
@@ -85,7 +85,7 @@ In node 1, the notebook creates the `models/fraud/model.onnx` file. In node 2, t
 
 . Set the value to `models/fraud/model.onnx` and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency value, 400]
+image:images/pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency value, 400]
 
 . Repeat 1-3 for node 2.
  
@@ -103,7 +103,7 @@ The secret is named `aws-connection-my-storage`.
 ====
 If you called your data connection something other than `My Storage`, you can obtain the secret name in the Data Science dashboard by hovering over the resource informantion icon *?* in the *Data Connections* tab. 
 
-image::pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
+image:images/pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
 ====
 
 The `aws-connection-my-storage` secret includes the following fields:
@@ -126,20 +126,20 @@ Since you don't want to save the value in your pipelines, remove all of these en
 
 .. Click *Remove* for each of the pre-filled environment variables.
 +
-image::pipelines/wb-pipeline-node-remove-env-var.png[Remove Env Var]
+image:images/pipelines/wb-pipeline-node-remove-env-var.png[Remove Env Var]
 
 . Add the S3 bucket and keys by using the Kubernetes secret.
 
 .. Under *Kubernetes Secrets*, click *Add*.
 +
-image::pipelines/wb-pipeline-add-kube-secret.png[Add Kube Secret]
+image:images/pipelines/wb-pipeline-add-kube-secret.png[Add Kube Secret]
 
 .. Enter the following values and then click *Add*.
 ** *Environment Variable*: `AWS_ACCESS_KEY_ID`
 ** *Secret Name*: `aws-connection-my-storage`
 ** *Secret Key*: `AWS_ACCESS_KEY_ID`
 +
-image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
+image:images/pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 .. Repeat Steps 3a and 3b for each set of these Kubernetes secrets:
 
@@ -167,7 +167,7 @@ Upload the pipeline on the cluster itself and run it. You can do so directly fro
 
 . Click the play button in the toolbar of the pipeline editor.
 +
-image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button]
+image:images/pipelines/wb-pipeline-run-button.png[Pipeline Run Button]
 
 . Enter a name for your pipeline.
 . Verify the *Runtime Configuration:* is set to `Data Science Pipeline`.  
@@ -175,15 +175,15 @@ image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button]
 +
 NOTE: If `Data Science Pipeline` is not available as a runtime configuration, you may have created your notebook before the pipeline server was available.  You can restart your notebook after the pipeline server has been created in your data science project.
 +
-image::pipelines/wb-pipeline-run.png[Pipeline Run]
+image:images/pipelines/wb-pipeline-run.png[Pipeline Run]
 
 . Return to your data science project and expand the newly created pipeline.
 +
-image::pipelines/dsp-pipeline-complete.png[]
+image:images/pipelines/dsp-pipeline-complete.png[]
 
 . Click the pipeline or the pipeline run and then view the pipeline run in progress.
 +
-image::pipelines/pipeline-run-complete.png[]
+image:images/pipelines/pipeline-run-complete.png[]
 
 The result should be a `models/fraud/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-data-model-for-deployment.adoc[Preparing a data model for deployment] section.
 

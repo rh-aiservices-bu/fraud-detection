@@ -15,7 +15,7 @@ You must know the OpenShift resource name for your data science project so that 
 
 In the {productname-short} dashboard, select *Data Science Projects* and then hover your cursor over the *?* icon next to the project name. A text box appears with information about the project, including it's resource name:
 
-image::projects/ds-project-list-resource-hover.png[Project list resource name]
+image:images/projects/ds-project-list-resource-hover.png[Project list resource name]
 
 .Procedure
 
@@ -31,19 +31,19 @@ oc apply -n <your-project-name/> -f https://github.com/rh-aiservices-bu/fraud-de
 
 . In the {productname-short} dashboard, click the application launcher icon and then select the *OpenShift Console* option.
 +
-image::projects/ds-project-ocp-link.png[OpenShift Console Link]
+image:images/projects/ds-project-ocp-link.png[OpenShift Console Link]
 
 . In the OpenShift console, click *+* in the top navigation bar.
 +
-image::projects/ocp-console-add-icon.png[Add resources Icon]
+image:images/projects/ocp-console-add-icon.png[Add resources Icon]
 
 . Select your project from the list of projects.
 +
-image::projects/ocp-console-select-project.png[Select a project]
+image:images/projects/ocp-console-select-project.png[Select a project]
 
 . Verify that you selected the correct project.
 +
-image::projects/ocp-console-project-selected.png[Selected project]
+image:images/projects/ocp-console-project-selected.png[Selected project]
 
 . Copy the following code and paste it into the *Import YAML* editor.
 +

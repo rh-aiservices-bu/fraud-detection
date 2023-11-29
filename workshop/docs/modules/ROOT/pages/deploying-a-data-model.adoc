@@ -12,7 +12,7 @@ Now that the data model is accessible in storage and saved in the portable ONNX 
 . In the {productname-short} dashboard, navigate to *Models and model servers*.
 . Click *Add server*.
 +
-image::model-serving/ds-project-model-list-add.png[Add Server]
+image:images/model-serving/ds-project-model-list-add.png[Add Server]
 
 . In the form:
 
@@ -20,13 +20,13 @@ image::model-serving/ds-project-model-list-add.png[Add Server]
 .. Select `OpenVINO Model Server`.
 .. Leave the other fields with their default settings.
 +
-image::model-serving/create-model-server-form.png[Add Server Form]
+image:images/model-serving/create-model-server-form.png[Add Server Form]
 
 . Click *Add*.
 
 . In the *Models and model servers* list, next to the new model server, click *Deploy model*.
 +
-image::model-serving/ds-project-workbench-list-deploy.png[Deploy model button]
+image:images/model-serving/ds-project-workbench-list-deploy.png[Deploy model button]
 
 . In the form:
 
@@ -35,11 +35,11 @@ image::model-serving/ds-project-workbench-list-deploy.png[Deploy model button]
 .. Select the *Existing data connection*: `My Storage`
 .. Enter the path to your uploaded model: `models/fraud/model.onnx`
 +
-image::model-serving/deploy-model-form.png[Deploy model form]
+image:images/model-serving/deploy-model-form.png[Deploy model form]
 
 . Wait for the model to deploy and for the *Status* to show a green checkmark.
 +
-image::model-serving/ds-project-model-list-status.png[Model status]
+image:images/model-serving/ds-project-model-list-status.png[Model status]
 
 .Next step
 

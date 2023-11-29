@@ -14,13 +14,13 @@ In this section, you prepare your {deliverable} environment so that you can use 
 
 . Click *Create pipeline server*.
 +
-image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
+image:images/projects/ds-project-create-pipeline-server.png[Create pipeline server button]
 
 . In the *Configure pipeline server* form, select *Existing data connection*.
 
 . For *Name*, select *Pipeline Artifacts*.
 +
-image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts data connection]
+image:images/projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts data connection]
 
 . Leave the database configuration as the default.
 
@@ -30,7 +30,7 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 
 Check the *Pipelines* page. Pipelines are enabled when the *Pipeline server actions* option appears and the *Create pipeline server* button no longer appears.
 
-image::projects/ds-project-create-pipeline-server-complete.png[Create pipeline server complete]
+image:images/projects/ds-project-create-pipeline-server-complete.png[Create pipeline server complete]
 
 .Next step
 
