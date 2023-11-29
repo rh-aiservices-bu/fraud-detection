@@ -13,4 +13,4 @@ image::workbenches/jupyter-notebook-1.png[Jupyter Notebook 1]
 
 .Next step
 
-xref:preparing-a-data-model-for-deployment.adoc[Preparing a data model for deployment]
+xref:preparing-a-data-model-for-deployment[Preparing a data model for deployment]

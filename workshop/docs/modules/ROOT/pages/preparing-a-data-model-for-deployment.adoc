@@ -4,7 +4,7 @@ include::_attributes.adoc[]
 
 After you train a model, you can deploy it by using the {productname-short} model serving capabilities.
 
-To prepare it for deployment, you must move the model from your workbench to your S3-compatible object storage. You use the data connection that you created in the xref:storing-data-with-data-connections.adoc[Storing data with data connections] section and upload the model from a notebook. You also convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
+To prepare it for deployment, you must move the model from your workbench to your S3-compatible object storage. You use the data connection that you created in the xref:storing-data-with-data-connections[Storing data with data connections] section and upload the model from a notebook. You also convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
 
 .Prerequisites
 
@@ -31,4 +31,4 @@ When you have completed the notebook isntructions, the `models/fraud/model.onnx`
 
 .Next step
 
-xref:deploying-a-data-model.adoc[Deploying a data model]
+xref:deploying-a-data-model[Deploying a data model]

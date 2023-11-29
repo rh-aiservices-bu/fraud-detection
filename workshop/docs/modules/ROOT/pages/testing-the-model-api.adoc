@@ -25,7 +25,7 @@ image::model-serving/wb-notebook-requests.png[Request Notebooks]
 
 .Next step
 
-xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
+xref:automating-workflows-with-pipelines[Automating workflows with data science pipelines]
 
-xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
+xref:running-a-pipeline-generated-from-python-code[Running a data science pipeline generated from Python code]
 

@@ -3,7 +3,7 @@
 
 include::_attributes.adoc[]
 
-NOTE: If you're already at ease with Jupyter, you can xref:training-a-data-model.adoc[skip to the next section].
+NOTE: If you're already at ease with Jupyter, you can xref:training-a-data-model[skip to the next section].
 
 A notebook is an environment where you have _cells_ that can display formatted text or code.
 
@@ -40,7 +40,7 @@ Now that you know the basics, give it a try!
 .Prerequisite
 
 * You have imported the {deliverable} files into your Jupyter environment as described in 
-xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the Jupyter environment].
+xref:importing-files-into-jupyter[Importing the {deliverable} files into the Jupyter environment].
 
 .Procedure
 
@@ -65,4 +65,4 @@ You can use different kernels, with different languages or versions, to run in y
 
 .Next step
 
-xref:training-a-data-model.adoc[Running code in a notebook]
+xref:training-a-data-model[Running code in a notebook]

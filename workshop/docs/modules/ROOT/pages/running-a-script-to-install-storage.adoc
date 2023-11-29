@@ -7,7 +7,7 @@ For convenience, the provided script installs two data connections (and associat
 
 IMPORTANT: The storage buckets that this script creates are *not* meant for production usage.
 
-NOTE: If you want to connect to your own storage, see xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
+NOTE: If you want to connect to your own storage, see xref:creating-data-connections-to-storage[Creating data connections to your own S3-compatible object storage].
 
 .Prerequisite
 
@@ -106,4 +106,4 @@ You should see a "Resources successfully created" message and the following reso
 
 .Next step
 
-xref:creating-a-workbench.adoc[Creating a workbench]
+xref:creating-a-workbench[Creating a workbench]

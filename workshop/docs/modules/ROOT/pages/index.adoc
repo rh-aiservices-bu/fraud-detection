@@ -34,4 +34,4 @@ https://developers.redhat.com/products/red-hat-openshift-data-science/download[S
 
 If you don't already have an instance of {productname-long}, find out more on the https://developers.redhat.com/products/red-hat-openshift-data-science/download[developer page]. There, you can spin up your own account on the *free {productname-short} Sandbox* or learn about installing on *your own OpenShift cluster*.
 
-If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}!]
+If you're ready, xref:navigating-to-the-dashboard[start the {deliverable}!]

@@ -7,7 +7,7 @@ The Jupyter environment is a web-based environment, but everything you do inside
 
 .Prerequisite
 
-*You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench and selecting a Notebook image].
+*You created a workbench, as described in xref:creating-a-workbench[Creating a workbench and selecting a Notebook image].
 
 .Procedure
 
@@ -53,8 +53,8 @@ image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detec
 
 .Next step
 
-xref:running-code-in-a-notebook.adoc[Running code in a notebook]
+xref:running-code-in-a-notebook[Running code in a notebook]
 
 or
 
-xref:training-a-data-model.adoc[Training a data model]
+xref:training-a-data-model[Training a data model]

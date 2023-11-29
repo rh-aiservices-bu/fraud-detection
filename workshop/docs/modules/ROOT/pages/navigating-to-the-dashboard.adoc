@@ -27,5 +27,5 @@ For now, stay in the {productname-short} dashboard.
 
 .Next step
 
-xref:setting-up-your-data-science-project.adoc[Setting up your data science project]
+xref:setting-up-your-data-science-project[Setting up your data science project]
 

@@ -59,4 +59,4 @@ image::projects/ds-project-dc-list.png[List of project data connections]
 
 .Next step
 
-xref:creating-a-workbench.adoc[Creating a workbench]
+xref:creating-a-workbench[Creating a workbench]

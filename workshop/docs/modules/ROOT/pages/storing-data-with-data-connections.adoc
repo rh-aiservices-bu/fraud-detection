@@ -14,6 +14,6 @@ Also, you must create a data connection to each storage bucket. A data connectio
 
 You have two options for this {deliverable}, depending on whether you want to use your own storage buckets or use a script to create local Minio storage buckets:
 
-* If you want to use your own S3-compatible object storage buckets, create data connections to them as described in xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
+* If you want to use your own S3-compatible object storage buckets, create data connections to them as described in xref:creating-data-connections-to-storage[Creating data connections to your own S3-compatible object storage].
 
-* If you want to run a script that installs local Minio storage buckets and creates data connections to them, for the purposes of this {deliverable}, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections].
+* If you want to run a script that installs local Minio storage buckets and creates data connections to them, for the purposes of this {deliverable}, follow the steps in xref:running-a-script-to-install-storage[Running a script to install local object storage buckets and create data connections].
