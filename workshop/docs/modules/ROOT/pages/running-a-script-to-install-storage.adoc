@@ -1,8 +1,6 @@
 [id='running-a-script-to-install-storage']
 = Running a script to install local object storage buckets and create data connections
 
-include::_attributes.adoc[]
-
 For convenience, the provided script installs two data connections (and associated secrets) and two Minio buckets as s3-compatible storage The script creates a random user and password for security. This script is based on the instructions for installing Minio in this https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide].
 
 IMPORTANT: The storage buckets that this script creates are *not* meant for production usage.

@@ -1,8 +1,6 @@
 [id='automating-workflows-with-pipelines']
 = Automating workflows with data science pipelines
 
-include::_attributes.adoc[]
-
 In previous sections of this {deliverable}, you used a notebook to train and save your data model. Optionally, you can automate these tasks by using {productname-long} pipelines. Pipelines offer a way to automate the execution of multiple notebooks and Python code. By using pipelines, you can execute long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
 
 In this section, you create a simple pipeline by using the GUI pipeline editor. The pipeline uses the notebook that you used in previous sections, to train a model and then save it to S3 storage.

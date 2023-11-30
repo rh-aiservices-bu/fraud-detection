@@ -1,8 +1,6 @@
 [id='enabling-data-science-pipelines']
 = Enabling data science pipelines
 
-include::_attributes.adoc[]
-
 NOTE: If you do not intend to complete the pipelines section of the workshop you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench]
 
 
