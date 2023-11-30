@@ -57,4 +57,4 @@ xref:running-code-in-a-notebook.adoc[Running code in a notebook]
 
 or
 
-xref:training-a-data-model.adoc[Training a data model]
+xref:training-a-model.adoc[Training a model]

@@ -1,5 +1,5 @@
-[id='preparing-a-data-model-for-deployment_{context}']
-= Preparing a data model for deployment
+[id='preparing-a-model-for-deployment_{context}']
+= Preparing a model for deployment
 include::_attributes.adoc[]
 
 After you train a model, you can deploy it by using the {productname-short} model serving capabilities.
@@ -21,7 +21,7 @@ image::model-serving/ds-project-workbench-list-edit.png[Workbench edit form]
 
 . In your Jupyter environment, open the `2_save_model.ipynb` file.
 
-. Follow the instructions in the notebook to make the data model accessible in storage and save it in the portable ONNX format.
+. Follow the instructions in the notebook to make the model accessible in storage and save it in the portable ONNX format.
 
 image::model-serving/jupyter-notebook-2.png[Jupyter Notebook 2]
 
@@ -31,4 +31,4 @@ When you have completed the notebook isntructions, the `models/fraud/model.onnx`
 
 .Next step
 
-xref:deploying-a-data-model.adoc[Deploying a data model]
+xref:deploying-a-model.adoc[Deploying a model]
