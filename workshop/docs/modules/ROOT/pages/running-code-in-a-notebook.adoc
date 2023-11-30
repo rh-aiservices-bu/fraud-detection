@@ -1,4 +1,4 @@
-[id='running-code-in-a-notebook_{context}']
+[id='running-code-in-a-notebook']
 = Running code in a notebook
 
 include::_attributes.adoc[]
@@ -65,4 +65,4 @@ You can use different kernels, with different languages or versions, to run in y
 
 .Next step
 
-xref:training-a-data-model.adoc[Running code in a notebook]
+xref:training-a-data-model.adoc[Training a model]

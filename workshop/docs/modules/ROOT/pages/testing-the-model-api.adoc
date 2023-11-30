@@ -1,4 +1,4 @@
-[id='testing-the-model-api_{context}']
+[id='testing-the-model-api']
 = Testing the model API
 
 include::_attributes.adoc[]

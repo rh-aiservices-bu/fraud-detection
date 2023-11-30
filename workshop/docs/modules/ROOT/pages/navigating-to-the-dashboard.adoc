@@ -1,4 +1,4 @@
-[id='navigating-to-the-dashboard_{context}']
+[id='navigating-to-the-dashboard']
 = Navigating to the {productname-short} dashboard
 
 include::_attributes.adoc[]

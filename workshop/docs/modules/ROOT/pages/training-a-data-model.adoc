@@ -1,4 +1,4 @@
-[id='training-a-data-model_{context}']
+[id='training-a-data-model']
 = Training a data model 
 
 include::_attributes.adoc[]

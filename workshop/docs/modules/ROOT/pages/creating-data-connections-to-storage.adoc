@@ -1,4 +1,4 @@
-[id='creating-data-connections-to-storage_{context}']
+[id='creating-data-connections-to-storage']
 == Creating data connections to your own S3-compatible object storage
 
 include::_attributes.adoc[]

@@ -1,4 +1,4 @@
-[id='setting-up-your-data-science-project_{context}']
+[id='setting-up-your-data-science-project']
 = Setting up your data science project
 
 include::_attributes.adoc[]
@@ -23,7 +23,9 @@ If you already have an active project that you'd like to use, select it now and 
 +
 image::projects/ds-project-new-form.png[New data science project form]
 
-. You can now see its initial state. There are five types of project components:
+.Verification
+
+You can now see its initial state. There are five types of project components:
 +
 image::projects/ds-project-new.png[New data science project]
 
