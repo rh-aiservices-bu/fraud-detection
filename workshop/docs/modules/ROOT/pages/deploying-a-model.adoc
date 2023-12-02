@@ -1,7 +1,7 @@
-[id='deploying-a-data-model']
-= Deploying a data model
+[id='deploying-a-model']
+= Deploying a  model
 
-Now that the data model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
+Now that the model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
 
 {productname-short} multi-model servers can host several models at once. You create a new model server and deploy your model to it.
 
@@ -16,7 +16,7 @@ image::model-serving/ds-project-model-list-add.png[Add Server]
 
 .. Fill out the *Model server name*, for example `Model Server`.
 .. Select `OpenVINO Model Server`.
-.. Leave the other fields with their default settings.
+.. Leave the other fields with the default settings.
 +
 image::model-serving/create-model-server-form.png[Add Server Form]
 
@@ -30,13 +30,15 @@ image::model-serving/ds-project-workbench-list-deploy.png[Deploy model button]
 
 .. Fill out the *Model Name* with the value `fraud`.
 .. Select the server that you created (for example, `Model Server`).
-.. Select the *Existing data connection*: `My Storage`
+.. Select *Existing data connection*: `My Storage`.
 .. Enter the path to your uploaded model: `models/fraud/model.onnx`
 +
 image::model-serving/deploy-model-form.png[Deploy model form]
 
-. Wait for the model to deploy and for the *Status* to show a green checkmark.
-+
+.Verification
+
+Wait for the model to deploy and for the *Status* to show a green checkmark.
+
 image::model-serving/ds-project-model-list-status.png[Model status]
 
 .Next step

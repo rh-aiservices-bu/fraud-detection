@@ -1,7 +1,7 @@
 [id='running-code-in-a-notebook']
 = Running code in a notebook
 
-NOTE: If you're already at ease with Jupyter, you can xref:training-a-data-model.adoc[skip to the next section].
+NOTE: If you're already at ease with Jupyter, you can xref:training-a-model.adoc[skip to the next section].
 
 A notebook is an environment where you have _cells_ that can display formatted text or code.
 
@@ -31,7 +31,7 @@ When you save a notebook, the code and the results are saved. You can reopen the
 
 Notebooks are so named because they are like a physical _notebook_: you can take notes about your experiments (which you will do), along with the code itself, including any parameters that you set. You can see the output of the experiment inline (this is the result from a cell after it's run), along with all the notes that you want to take (to do that, from the menu switch the cell type from `Code` to `Markup`).
 
-== Try It
+== Try it
 
 Now that you know the basics, give it a try!
 
@@ -42,8 +42,7 @@ xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into th
 
 .Procedure
 
-. In your Jupyter environment, locate the `0_sandbox.ipynb` file. 
-. Double-click it to launch the notebook. It opens in a new tab in the content section of the environment. 
+. In your Jupyter environment, locate the `0_sandbox.ipynb` file and double-click it to launch the notebook. The notebook opens in a new tab in the content section of the environment. 
 +
 image::workbenches/jupyter-notebook-0.png[Notebook 0]
 
@@ -57,10 +56,10 @@ image::workbenches/new_notebook.png[alt text]
 
 You can use different kernels, with different languages or versions, to run in your notebook.
 
-.Additonal resource
+.Additional resource
 
-* If you want to learn more about notebooks, go to https://jupyter.org/[the Jupyter site].
+To learn more about notebooks, go to https://jupyter.org/[the Jupyter site].
 
 .Next step
 
-xref:training-a-data-model.adoc[Training a model]
+xref:training-a-model.adoc[Training a model]

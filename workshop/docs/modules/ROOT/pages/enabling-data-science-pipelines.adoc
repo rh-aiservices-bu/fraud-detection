@@ -1,7 +1,7 @@
 [id='enabling-data-science-pipelines']
 = Enabling data science pipelines
 
-NOTE: If you do not intend to complete the pipelines section of the workshop you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench]
+NOTE: If you do not intend to complete the pipelines section of the workshop you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
 
 
 In this section, you prepare your {deliverable} environment so that you can use data science pipelines.

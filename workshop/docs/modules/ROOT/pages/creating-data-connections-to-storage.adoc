@@ -21,7 +21,7 @@ Create data connections to your two storage buckets.
 
 *Create a data connection for saving your data and models*
 
-. In the {productname-short} dashboard, navigate to the page for your Data science project.
+. In the {productname-short} dashboard, navigate to the page for your data science project.
 
 . Under *Components*, click *Data connections*.
 
