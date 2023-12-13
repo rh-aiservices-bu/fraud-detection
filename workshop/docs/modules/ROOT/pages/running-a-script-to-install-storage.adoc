@@ -45,6 +45,8 @@ image::projects/ocp-console-project-selected.png[Selected project]
 
 . Copy the following code and paste it into the *Import YAML* editor.
 +
+*Note:* This code gets and applies the `setup-s3-no-sa.yaml` file.
++
 [.lines_space]
 [.console-input]
 [source, yaml]

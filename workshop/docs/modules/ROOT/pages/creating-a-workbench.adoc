@@ -25,7 +25,7 @@ Red Hat provides several supported notebook images. In the *Notebook image* sect
 +
 image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 
-. Choose a small deployment and no GPUs. This {deliverable} does not require any GPUs.
+. Choose a small deployment.
 +
 image::workbenches/create-workbench-form-size.png[Workbench size,600]
 
