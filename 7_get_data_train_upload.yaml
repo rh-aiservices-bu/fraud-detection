@@ -112,7 +112,7 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             pipelines.kubeflow.org/component_spec_digest: '{"name": "Get data", "outputs":
-              [{"name": "output"}], "version": "Get data@sha256=598d21aff52bbbbb914708419be521b5e8958efd29e842e49761e58da2fa3e73"}'
+              [{"name": "output"}], "version": "Get data@sha256=a840b31ffc61f2af6a40651f5ee87a07d2c5945073e00ebc9470ccdd8c5bfdfd"}'
         workspaces:
         - name: get-data
       workspaces:
