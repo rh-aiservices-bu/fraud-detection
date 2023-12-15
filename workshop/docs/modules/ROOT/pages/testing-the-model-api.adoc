@@ -5,7 +5,7 @@ Now that you've deployed the model, you can test its API endpoints.
 
 When you created the model server, you did *not* create a route for external access to the API and you did not protect it with an authentication token. By default, if you do not specify external access, the model server provides an internal endpoint with no authentication. 
 
-You can communicate directly with this internal service in the same way that an application in your project would. One of the easiest way to test it, is from a notebook in the same project.
+You can communicate directly with this internal service in the same way that an application in your project would. An easy way to test it is from a notebook in the same project.
 
 .Procedure
 

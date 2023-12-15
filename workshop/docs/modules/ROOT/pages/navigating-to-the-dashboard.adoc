@@ -17,7 +17,7 @@ The {productname-short} dashboard shows the status of any installed and enabled 
 +
 image::projects/dashboard-explore.png[Dashboard enabled]
 +
-Note: You can navigate back to the OpenShift console in a similar fashion. Click on the application launcher to access the OpenShift console.
+Note: You can navigate back to the OpenShift console in a similar fashion. Click the application launcher to access the OpenShift console.
 +
 image::projects/ds-console-ocp-tile.png[OCP console link]
 

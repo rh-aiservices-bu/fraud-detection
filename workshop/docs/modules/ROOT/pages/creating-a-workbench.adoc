@@ -9,7 +9,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 .Procedure
 
-. Navigate to the project detail page for the data science project that you created in Section 1.
+. Navigate to the project detail page for the data science project that you created in xref:setting-up-your-data-science-project.adoc[Setting up your data science project].
 
 . Click the *Create workbench* button.
 +
@@ -21,7 +21,7 @@ image::workbenches/create-workbench-form-name-desc.png[Workbench name and descri
 +
 Red Hat provides several supported notebook images. In the *Notebook image* section, you can choose one of these images or any custom images that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
 
-. Choose the latest *Tensorflow* image.
+. Select the latest *Tensorflow* image.
 +
 image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 
@@ -33,7 +33,7 @@ image::workbenches/create-workbench-form-size.png[Workbench size,600]
 +
 image::workbenches/create-workbench-form-env-storage.png[Workbench storage, 600]
 
-. Under *Data connections*, choose  *Use existing data connection* and select `My Storage` (the object storage that you configured previously) from the dropdown list.
+. Under *Data connections*, select *Use existing data connection* and select `My Storage` (the object storage that you configured previously) from the list.
 +
 image::workbenches/create-workbench-form-data-connection.png[Data connection, 600]
 
@@ -47,7 +47,7 @@ In the project details page, the status of the workbench changes from `Starting`
 
 image::workbenches/ds-project-workbench-list.png[Workbench list]
 
-NOTE: If you made a mistake, you can edit ithe workbench to make changes.
+NOTE: If you made a mistake, you can edit the workbench to make changes.
 
 image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit]
 
