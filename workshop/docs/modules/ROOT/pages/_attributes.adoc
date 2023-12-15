@@ -2,7 +2,5 @@
 :source-highlighter: highlightjs
 :deliverable: workshop
 //:deliverable: tutorial
-:productname-long: Red Hat OpenShift Data Science
-:productname-short: OpenShift Data Science
-//:productname-long: Red Hat OpenShift AI
-//:productname-short: OpenShift AI
+:productname-long: Red Hat OpenShift AI
+:productname-short: OpenShift AI
