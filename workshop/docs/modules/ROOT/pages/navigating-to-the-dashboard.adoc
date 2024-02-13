@@ -5,7 +5,7 @@
 
 . After you log in to the OpenShift console, access the {productname-short} dashboard by clicking the application launcher icon on the header.
 +
-image::projects/ocp-console-ds-tile.png[{prodname-short} dashboard link]
+image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
 . When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
 +

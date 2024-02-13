@@ -99,7 +99,7 @@ The secret is named `aws-connection-my-storage`.
 
 [NOTE] 
 ====
-If you named your data connection something other than `My Storage`, you can obtain the secret name in the {prodname-short} dashboard by hovering over the resource information icon *?* in the *Data Connections* tab. 
+If you named your data connection something other than `My Storage`, you can obtain the secret name in the {productname-short} dashboard by hovering over the resource information icon *?* in the *Data Connections* tab. 
 
 image::pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
 ====

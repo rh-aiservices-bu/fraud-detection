@@ -7,7 +7,9 @@ In this section, you prepare your {deliverable} environment so that you can use 
 
 .Procedure
 
-. In the {prodname-short} dashboard, navigate to *Data Science Pipelines* -> *Pipelines*.
+. In the {productname-short} dashboard, click *Data Science Projects* and then select *Fraud Detection*.
+
+. Navigate to the *Pipelines* section.
 
 . Click *Configure pipeline server*.
 +
