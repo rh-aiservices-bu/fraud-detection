@@ -9,7 +9,7 @@ You can communicate directly with this internal service in the same way that an 
 
 .Procedure
 
-. In the Data Science dashboard, navigate to the project details page and scroll down to the *Models and model servers* section.
+. In the {prodname-short} dashboard, navigate to the project details page and scroll down to the *Models and model servers* section.
 
 . Take note of the model's resource name (API endpoint name) and the internal service's grpcURL and restURL. You need this information when you test the model API.
 +

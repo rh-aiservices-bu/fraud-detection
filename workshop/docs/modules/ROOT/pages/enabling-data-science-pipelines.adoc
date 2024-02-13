@@ -3,20 +3,17 @@
 
 NOTE: If you do not intend to complete the pipelines section of the workshop you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
 
-
 In this section, you prepare your {deliverable} environment so that you can use data science pipelines.
 
 .Procedure
 
-. In the Data Science dashboard, navigate to *Data Science Pipelines* -> *Pipelines*.
+. In the {prodname-short} dashboard, navigate to *Data Science Pipelines* -> *Pipelines*.
 
-. Click *Create pipeline server*.
+. Click *Configure pipeline server*.
 +
 image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
 
-. In the *Configure pipeline server* form, select *Existing data connection*.
-
-. For *Name*, select *Pipeline Artifacts*.
+. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts* to populate the *Configure pipeline server* form with credentials for the data connection.
 +
 image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts data connection]
 
