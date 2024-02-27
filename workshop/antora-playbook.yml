@@ -10,8 +10,8 @@ asciidoc:
     release-version: master
     page-pagination: true
     deliverable: workshop
-    productname-long: Red Hat OpenShift Data Science
-    productname-short: RHODS
+    productname-long: Red Hat OpenShift AI
+    productname-short: OpenShift AI
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
