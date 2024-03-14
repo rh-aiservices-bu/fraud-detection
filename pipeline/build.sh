@@ -1,4 +1,4 @@
 #!/bin/bash
 
-pip install kfp-tekton~=1.5.9
+pip install kfp kfp-kubernetes
 python 7_get_data_train_upload.py
