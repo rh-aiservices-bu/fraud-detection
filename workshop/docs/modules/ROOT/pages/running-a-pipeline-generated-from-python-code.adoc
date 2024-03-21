@@ -9,7 +9,9 @@ This {deliverable} does not delve into the details of how to use the SDK. Instea
 +
 * `7_get_data_train_upload.py` is the main pipeline code.
 * `get_data.py`, `train_model.py`, and `upload.py` are the three components of the pipeline.
-* `build.sh` is a script that builds the pipeline and creates the YAML file. The generated `7_get_data_train_upload.yaml` file is located in the `fraud-detection-notebooks` directory.
+* `build.sh` is a script that builds the pipeline and creates the YAML file. 
++
+For your convenience, the output of the `build.sh` script is provided in the `7_get_data_train_upload.yaml` file. The `7_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
 
 . Right-click the `7_get_data_train_upload.yaml` file and then click *Download*.
 +
