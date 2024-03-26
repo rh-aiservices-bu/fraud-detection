@@ -32,7 +32,7 @@ image::model-serving/ds-project-workbench-list-deploy.png[Create model server fo
 .. For *Model Name*, type `fraud`.
 .. For *Model framework*, select `onnx-1`.
 .. For *Existing data connection*, select `My Storage`.
-.. Type the path to your uploaded model: `models/fraud/1/model.onnx`
+.. Type the path to your uploaded model: `/models/fraud/1/model.onnx`
 .. Leave the other fields with the default settings.
 +
 image::model-serving/deploy-model-form-mm.png[Deploy model from for multi-model serving]

@@ -18,7 +18,7 @@ For convenience, run a provided script that completes the following tasks for yo
 
 This script is based on a https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio].
 
-IMPORTANT: The storage buckets that this script creates are *not* meant for production usage.
+IMPORTANT: The Minio-based Object Storage that this script creates is *not* meant for production usage.
 
 .Prerequisite
 
