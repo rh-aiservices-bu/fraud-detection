@@ -178,8 +178,6 @@ image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button]
 . Click *OK*.
 +
 NOTE: If `Data Science Pipeline` is not available as a runtime configuration, you may have created your notebook before the pipeline server was available.  You can restart your notebook after the pipeline server has been created in your data science project.
-+
-image::pipelines/wb-pipeline-run.png[Pipeline Run]
 
 . Return to your data science project and expand the newly created pipeline.
 +

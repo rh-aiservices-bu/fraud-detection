@@ -22,8 +22,6 @@ image::model-serving/ds-project-dc-list.png[Data storage in workbench]
 
 . Follow the instructions in the notebook to make the model accessible in storage and save it in the portable ONNX format.
 
-image::model-serving/jupyter-notebook-2.png[Jupyter Notebook 2]
-
 .Verification
 
 When you have completed the notebook instructions, the `models/fraud/1/model.onnx` file is in your object storage and it is ready for your model server to use.

@@ -22,7 +22,7 @@ image::model-serving/ds-project-model-list-add.png[Models and model servers]
 +
 image::model-serving/create-model-server-form.png[Create model server form]
 
-. Click *Add.
+. Click *Add*.
 
 . In the *Models and model servers* list, next to the new model server, click *Deploy model*.
 +

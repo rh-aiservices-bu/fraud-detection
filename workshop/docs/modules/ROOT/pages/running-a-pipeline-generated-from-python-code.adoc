@@ -14,8 +14,6 @@ This {deliverable} does not delve into the details of how to use the SDK. Instea
 For your convenience, the output of the `build.sh` script is provided in the `5_get_data_train_upload.yaml` file. The `5_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
 
 . Right-click the `5_get_data_train_upload.yaml` file and then click *Download*.
-+
-image::pipelines/wb-download.png[Download Pipeline YAML]
 
 . Upload the `5_get_data_train_upload.yaml` file to {productname-short}.
 

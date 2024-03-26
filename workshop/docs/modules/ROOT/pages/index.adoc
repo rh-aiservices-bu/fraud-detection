@@ -31,8 +31,8 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 == Before you begin
 
-https://developers.redhat.com/products/red-hat-openshift-data-science/download[Set up your {productname-long} environment]
+https://developers.redhat.com/products/red-hat-openshift-ai/download[Set up your {productname-long} environment]
 
-If you don't already have an instance of {productname-long}, find out more on the https://developers.redhat.com/products/red-hat-openshift-data-science/download[developer page]. There, you can spin up your own account on the *free {productname-short} Sandbox* or learn about installing on *your own OpenShift cluster*.
+If you don't already have an instance of {productname-long}, find out more on the https://developers.redhat.com/products/red-hat-openshift-ai/download[developer page]. There, you can spin up your own account on the *free {productname-short} Sandbox* or learn about installing on *your own OpenShift cluster*.
 
 If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}!]
