@@ -3,23 +3,16 @@
 
 Now that you've deployed the model, you can test its API endpoints.
 
-When you created the model server, you did *not* create a route for external access to the API and you did not protect it with an authentication token. By default, if you do not specify external access, the model server provides an internal endpoint with no authentication. 
-
-You can communicate directly with this internal service in the same way that an application in your project would. An easy way to test it is from a notebook in the same project.
 
 .Procedure
 
 . In the {productname-short} dashboard, navigate to the project details page and scroll down to the *Models and model servers* section.
 
-. Take note of the model's resource name (API endpoint name) and the internal service's grpcURL and restURL. You need this information when you test the model API.
+. Take note of the model's Inference endpoint. You need this information when you test the model API.
 +
-image::model-serving/ds-project-model-list-name.png[Model name]
-+
-image::model-serving/ds-project-model-list-url.png[Model URL]
+image::model-serving/ds-project-model-inference-endpoint.png[Model inference endpoint]
 
-. Return to the Jupyter environment and try out your new endpoint. You'll try REST API calls in `4_rest_requests.ipynb` and gRPC requests in `5_grpc_requests.ipynb`.
-
-image::model-serving/wb-notebook-requests.png[Request Notebooks]
+. Return to the Jupyter environment and try out your new endpoint. Return to the Jupyter environment and try out your new endpoint. You will try REST API calls in `3_rest_requests.ipynb`.
 
 .Next step
 

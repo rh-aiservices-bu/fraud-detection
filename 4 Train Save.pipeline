@@ -19,7 +19,7 @@
               ],
               "include_subdirectories": true,
               "outputs": [
-                "models/fraud/model.onnx"
+                "models/fraud/1/model.onnx"
               ],
               "env_vars": [],
               "kubernetes_pod_annotations": [],
@@ -165,7 +165,7 @@
         "version": 8,
         "runtime_type": "KUBEFLOW_PIPELINES",
         "properties": {
-          "name": "6 Train Save",
+          "name": "4 Train Save",
           "runtime": "Data Science Pipelines",
           "pipeline_defaults": {
             "kubernetes_shared_mem_size": {},
