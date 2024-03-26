@@ -7,17 +7,17 @@ This {deliverable} does not delve into the details of how to use the SDK. Instea
 
 . Optionally, view the provided Python code in your Jupyter environment by navigating to the `fraud-detection-notebooks` project's `pipeline` directory. It contains the following files:
 +
-* `7_get_data_train_upload.py` is the main pipeline code.
+* `6_get_data_train_upload.py` is the main pipeline code.
 * `get_data.py`, `train_model.py`, and `upload.py` are the three components of the pipeline.
 * `build.sh` is a script that builds the pipeline and creates the YAML file. 
 +
-For your convenience, the output of the `build.sh` script is provided in the `7_get_data_train_upload.yaml` file. The `7_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
+For your convenience, the output of the `build.sh` script is provided in the `5_get_data_train_upload.yaml` file. The `5_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
 
-. Right-click the `7_get_data_train_upload.yaml` file and then click *Download*.
+. Right-click the `5_get_data_train_upload.yaml` file and then click *Download*.
 +
 image::pipelines/wb-download.png[Download Pipeline YAML]
 
-. Upload the `7_get_data_train_upload.yaml` file to {productname-short}.
+. Upload the `5_get_data_train_upload.yaml` file to {productname-short}.
 
 .. In the {productname-short} dashboard, navigate to your data science project page and then click *Import pipeline*.
 +
@@ -25,7 +25,7 @@ image::pipelines/dsp-pipeline-import.png[]
 
 .. Enter values for *Pipeline name* and *Pipeline description*.
 
-.. Click *Upload* and then select `7_get_data_train_upload.yaml` from your local files to upload the pipeline.
+.. Click *Upload* and then select `5_get_data_train_upload.yaml` from your local files to upload the pipeline.
 +
 image::pipelines/dsp-pipline-import-upload.png[]
 
@@ -33,9 +33,17 @@ image::pipelines/dsp-pipline-import-upload.png[]
 +
 The pipeline shows in the list of pipelines.
 
-. Expand the pipeline item and then click *Create run*.
+. Expand the pipeline item and then click *View runs*.
++
+image::pipelines/dsp-pipline-view-runs.png[]
 
-. On the *Create run* page, enter a *Name*. You can leave the other fields with their default values.
+. Click *Create run*.
+
+. On the *Create run* page, provide the following values:
+.. For *Name*, type any name, for example `Run 1`.
+.. For *Pipeline*, select the pipeline that you uploaded.
++
+ You can leave the other fields with their default values.
 +
 image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 

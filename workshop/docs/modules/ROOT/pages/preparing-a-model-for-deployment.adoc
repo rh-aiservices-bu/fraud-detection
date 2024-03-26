@@ -13,7 +13,7 @@ image::model-serving/create-workbench-form-data-connection.png[Workbench data co
 
 * You added the `My Storage` data connection to your workbench.
 +
-image::model-serving/ds-project-workbench-list-edit.png[Workbench edit form]
+image::model-serving/ds-project-dc-list.png[Data storage in workbench]
 
 
 .Procedure
@@ -26,7 +26,7 @@ image::model-serving/jupyter-notebook-2.png[Jupyter Notebook 2]
 
 .Verification
 
-When you have completed the notebook instructions, the `models/fraud/model.onnx` file is in your object storage and it is ready for your model server to use.
+When you have completed the notebook instructions, the `models/fraud/1/model.onnx` file is in your object storage and it is ready for your model server to use.
 
 .Next step
 

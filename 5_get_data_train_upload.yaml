@@ -363,7 +363,7 @@ spec:
             _outputs = upload(**_parsed_args)
           env:
           - name: S3_KEY
-            value: models/fraud/model.onnx
+            value: models/fraud/1/model.onnx
           - name: ORIG_PR_NAME
             valueFrom:
               fieldRef:

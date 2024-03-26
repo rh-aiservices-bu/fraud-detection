@@ -2,8 +2,6 @@
 ** xref:navigating-to-the-dashboard.adoc[1. The Dashboard]
 ** xref:setting-up-your-data-science-project.adoc[2. Data Science Projects]
 ** xref:storing-data-with-data-connections.adoc[3. Storage Data Connections]
-*** xref:creating-data-connections-to-storage.adoc[1. Manual]
-*** xref:running-a-script-to-install-storage.adoc[2. Scripted Local]
 ** xref:enabling-data-science-pipelines.adoc[4. Enable Pipelines]
 
 * 2. Workbenches
