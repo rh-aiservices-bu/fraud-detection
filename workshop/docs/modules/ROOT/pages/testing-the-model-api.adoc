@@ -12,7 +12,7 @@ Now that you've deployed the model, you can test its API endpoints.
 +
 image::model-serving/ds-project-model-inference-endpoint.png[Model inference endpoint]
 
-. Return to the Jupyter environment and try out your new endpoint. Return to the Jupyter environment and try out your new endpoint. You will try REST API calls in `3_rest_requests.ipynb`.
+. Return to the Jupyter environment and try out your new endpoint. You will try REST API calls in `3_rest_requests.ipynb`.
 
 .Next step
 

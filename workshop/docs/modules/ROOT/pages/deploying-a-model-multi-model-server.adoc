@@ -9,7 +9,7 @@
 
 .Procedure
 
-. In the {productname-short} dashboard, navigate to the project's Models and model servers section.
+. In the {productname-short} dashboard, navigate to the *Models and model servers* section of your project.
 +
 image::model-serving/ds-project-model-list-add.png[Models and model servers]
 
@@ -41,7 +41,7 @@ image::model-serving/deploy-model-form-mm.png[Deploy model from for multi-model 
 
 .Verification
 
-Wait for the model to deploy and for the Status to show a green checkmark.
+Wait for the model to deploy and for the *Status* to show a green checkmark.
 
 image::model-serving/ds-project-model-list-status-mm.png[Deployed model status]
 

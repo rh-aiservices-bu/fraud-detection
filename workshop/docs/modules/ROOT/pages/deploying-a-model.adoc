@@ -6,7 +6,7 @@ Now that the model is accessible in storage and saved in the portable ONNX forma
 {productname-short} offers two options for model serving: 		
 
 * *Single-model serving* - Each model in the project is deployed on its own model server. This platform works well for large models or models that need dedicated resources.
-* *Multi-model serving* - All models in the project are deployed on the same model server. This platform works well for sharing resources amongst deployed models.
+* *Multi-model serving* - All models in the project are deployed on the same model server. This platform is suitable for sharing resources amongst deployed models.
 
 *Note:* For each project, you can specify only one model serving platform. If you want to change to the other model serving platform, you must create a new project.
 
