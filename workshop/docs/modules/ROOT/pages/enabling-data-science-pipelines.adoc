@@ -5,6 +5,8 @@ NOTE: If you do not intend to complete the pipelines section of the workshop you
 
 In this section, you prepare your {deliverable} environment so that you can use data science pipelines.
 
+In this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that can be executed in OpenShift AI.
+
 .Prerequisite
 
 * You have installed local object storage buckets and created data connections, as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
