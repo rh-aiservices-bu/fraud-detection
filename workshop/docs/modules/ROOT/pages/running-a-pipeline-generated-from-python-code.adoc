@@ -41,7 +41,7 @@ image::pipelines/dsp-pipline-view-runs.png[]
 .. For *Name*, type any name, for example `Run 1`.
 .. For *Pipeline*, select the pipeline that you uploaded.
 +
- You can leave the other fields with their default values.
+You can leave the other fields with their default values.
 +
 image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 

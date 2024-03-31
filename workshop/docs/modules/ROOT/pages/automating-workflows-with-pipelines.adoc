@@ -183,7 +183,7 @@ NOTE: If `Data Science Pipeline` is not available as a runtime configuration, yo
 +
 image::pipelines/dsp-pipeline-complete.png[]
 
-. Click the pipeline or the pipeline run and then view the pipeline run in progress.
+. Click *View runs* and then view the pipeline run in progress.
 +
 image::pipelines/pipeline-run-complete.png[]
 
