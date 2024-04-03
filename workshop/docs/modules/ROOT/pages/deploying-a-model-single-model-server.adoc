@@ -20,7 +20,7 @@ image::model-serving/ds-project-model-list-add.png[Models and model servers]
 .. For *Serving runtime*, select `OpenVINO Model Server`.
 .. For *Model framework*, select `onnx-1`.
 .. For *Existing data connection*, select `My Storage`.
-.. Type the path to your uploaded model: `/models/fraud/1/model.onnx`
+.. Type the path that leads to the version folder that contains your model file: `models/fraud`
 .. Leave the other fields with the default settings.
 +
 image::model-serving/deploy-model-form-sm.png[Deploy model from for single-model serving]

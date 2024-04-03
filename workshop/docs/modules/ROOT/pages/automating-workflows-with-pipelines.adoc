@@ -5,9 +5,9 @@ In previous sections of this {deliverable}, you used a notebook to train and sav
 
 In this section, you create a simple pipeline by using the GUI pipeline editor. The pipeline uses the notebook that you used in previous sections to train a model and then save it to S3 storage.
 
-Your completed pipeline should look like the one in the `4 Train Save.pipeline` file.
+Your completed pipeline should look like the one in the `6 Train Save.pipeline` file.
 
-Note: You can run and use `4 Train Save.pipeline`. To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline.
+Note: You can run and use `6 Train Save.pipeline`. To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline.
 
 == Create a pipeline
 
@@ -165,7 +165,7 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 == Run the Pipeline 
 
-Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline for this or `4 Train Save.pipeline`.
+Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline for this or `6 Train Save.pipeline`.
 
 .Procedure
 
