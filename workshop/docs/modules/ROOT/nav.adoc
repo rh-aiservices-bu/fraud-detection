@@ -2,6 +2,8 @@
 ** xref:navigating-to-the-dashboard.adoc[1. The Dashboard]
 ** xref:setting-up-your-data-science-project.adoc[2. Data Science Projects]
 ** xref:storing-data-with-data-connections.adoc[3. Storage Data Connections]
+*** xref:creating-data-connections-to-storage.adoc[1. Manual]
+*** xref:running-a-script-to-install-storage.adoc[2. Scripted Local]
 ** xref:enabling-data-science-pipelines.adoc[4. Enable Pipelines]
 
 * 2. Workbenches
@@ -13,6 +15,8 @@
 * 3. Model Serving
 ** xref:preparing-a-model-for-deployment.adoc[1. Saving the Model]
 ** xref:deploying-a-model.adoc[2. Deploy the Model]
+*** xref:deploying-a-model-multi-model-server.adoc[1. Deploying on a multi-model server]
+*** xref:deploying-a-model-single-model-server.adoc[2. Deploying on a single-model server]
 ** xref:testing-the-model-api.adoc[3. Using the API]
 
 * 4. Data Science Pipelines

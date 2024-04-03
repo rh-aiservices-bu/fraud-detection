@@ -6,121 +6,12 @@ For this {deliverable}, you need two S3-compatible object storage buckets, such 
 * *My Storage* - Use this bucket for storing your models and data. You can reuse this bucket and its connection for your notebooks and model servers.
 *  *Pipelines Artifacts* - Use this bucket as storage for your pipeline artifacts. A pipeline artifacts bucket is required when you create a pipeline server. For this {deliverable}, create this bucket to separate it from the first storage bucket for clarity.
 
+You can use your own storage buckets or run a provided script that creates local Minio storage buckets for you.
+
 Also, you must create a data connection to each storage bucket. A data connection is a resource that contains the configuration parameters needed to connect to an object storage bucket.
 
-For convenience, run a script (provided in the following procedure) that automatically completes these tasks:
+You have two options for this {deliverable}, depending on whether you want to use your own storage buckets or use a script to create local Minio storage buckets:
 
-* Creates a Minio instance in your project.
-* Creates two storage buckets in that Minio instance.
-* Generates a random user id and password for your Minio instance.
-* Creates two data connections in your project, one for each bucket and both using the same credentials.
-* Installs required network policies for service mesh functionality.
+* If you want to use your own S3-compatible object storage buckets, create data connections to them as described in xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
 
-The script is based on a https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio].
-
-IMPORTANT: The Minio-based Object Storage that the script creates is *not* meant for production usage.
-
-.Prerequisite
-
-You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
-
-In the {productname-short} dashboard, select *Data Science Projects* and then hover your cursor over the *?* icon next to the project name. A text box appears with information about the project, including its resource name:
-
-image::projects/ds-project-list-resource-hover.png[Project list resource name]
-
-
-[NOTE]
-====
-The following procedure describes how to run the script from the OpenShift console. If you are knowledgeable in OpenShift and can access the cluster from the command line, instead of following the steps in this procedure, you can use the following command to run the script:
-
-----
-oc apply -n <your-project-name/> -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3.yaml
-----
-====
-
-.Procedure
-
-. In the {productname-short} dashboard, click the application launcher icon and then select the *OpenShift Console* option.
-+
-image::projects/ds-project-ocp-link.png[OpenShift Console Link]
-
-. In the OpenShift console, click *+* in the top navigation bar.
-+
-image::projects/ocp-console-add-icon.png[Add resources Icon]
-
-. Select your project from the list of projects.
-+
-image::projects/ocp-console-select-project.png[Select a project]
-
-. Verify that you selected the correct project.
-+
-image::projects/ocp-console-project-selected.png[Selected project]
-
-. Copy the following code and paste it into the *Import YAML* editor.
-+
-*Note:* This code gets and applies the `setup-s3-no-sa.yaml` file.
-+
-[.lines_space]
-[.console-input]
-[source, yaml]
-----
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: demo-setup
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: demo-setup-edit
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: edit
-subjects:
-  - kind: ServiceAccount
-    name: demo-setup
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: create-s3-storage
-spec:
-  selector: {}
-  template:
-    spec:
-      containers:
-        - args:
-            - -ec
-            - |-
-              echo -n 'Setting up Minio instance and data connections'
-              oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
-          command:
-            - /bin/bash
-          image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
-          imagePullPolicy: IfNotPresent
-          name: create-s3-storage
-      restartPolicy: Never
-      serviceAccount: demo-setup
-      serviceAccountName: demo-setup
-----
-
-. Click *Create*.
-
-.Verification
-
-. Verify that a "Resources successfully created" message appears with the following resources listed:
-
-* `demo-setup`
-* `demo-setup-edit`
-* `create-s3-storage`
-
-. Verify that your data connections are listed in the project.
-+
-image::projects/ds-project-dc-list.png[List of project data connections]
-
-.Next step
-
-xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines]
-
+* If you want to run a script that installs local Minio storage buckets and creates data connections to them, for the purposes of this {deliverable}, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections].
