@@ -14,7 +14,7 @@ image::model-serving/ds-project-model-inference-endpoint.png[Model inference end
 
 . Return to the Jupyter environment and try out your new endpoint.
 +
-If you deployed your model with multi-model serving, follow the directions in `3_rest_requests_multi_model.ipynb` to try a REST API call and ``4_grpc_requests_multi_model.ipynb` to try a gRPC API call.
+If you deployed your model with multi-model serving, follow the directions in `3_rest_requests_multi_model.ipynb` to try a REST API call and `4_grpc_requests_multi_model.ipynb` to try a gRPC API call.
 +
 If you deployed your model with single-model serving, follow the directions in `5_rest_requests_single_model.ipynb` to try a REST API call.
 

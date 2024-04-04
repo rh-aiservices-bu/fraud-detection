@@ -147,7 +147,7 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 * *Environment Variable*: `AWS_SECRET_ACCESS_KEY`
 ** *Secret Name*: `aws-connection-my-storage`
-** *Secret Key*: `AWS_SECRET_ACCESS_KEY``
+** *Secret Key*: `AWS_SECRET_ACCESS_KEY`
 
 * *Environment Variable*: `AWS_S3_ENDPOINT`
 ** *Secret Name*: `aws-connection-my-storage`
