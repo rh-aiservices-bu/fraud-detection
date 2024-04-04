@@ -5,7 +5,9 @@ In previous sections of this {deliverable}, you used a notebook to train and sav
 
 In this section, you create a simple pipeline by using the GUI pipeline editor. The pipeline uses the notebook that you used in previous sections to train a model and then save it to S3 storage.
 
-Note: Your completed pipeline should look like the one in the `6 Train Save.pipeline` file.
+Your completed pipeline should look like the one in the `6 Train Save.pipeline` file.
+
+Note: You can run and use `6 Train Save.pipeline`. To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline.
 
 == Create a pipeline
 
@@ -75,13 +77,13 @@ image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value,
 
 == Create and store the ONNX-formatted output file
 
-In node 1, the notebook creates the `models/fraud/model.onnx` file. In node 2, the notebook uploads that file to the S3 storage bucket. You must set `models/fraud/model.onnx` file as the output file for both nodes.
+In node 1, the notebook creates the `models/fraud/1/model.onnx` file. In node 2, the notebook uploads that file to the S3 storage bucket. You must set `models/fraud/1/model.onnx` file as the output file for both nodes.
 
 . Select node 1 and then select the *Node Properties* tab.
 
 . Scroll down to the *Output Files* section, and then click *Add*.
 
-. Set the value to `models/fraud/model.onnx` and then click *Add*.
+. Set the value to `models/fraud/1/model.onnx` and then click *Add*.
 +
 image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency value, 400]
 
@@ -145,7 +147,7 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 * *Environment Variable*: `AWS_SECRET_ACCESS_KEY`
 ** *Secret Name*: `aws-connection-my-storage`
-** *Secret Key*: `AWS_SECRET_ACCESS_KEY``
+** *Secret Key*: `AWS_SECRET_ACCESS_KEY`
 
 * *Environment Variable*: `AWS_S3_ENDPOINT`
 ** *Secret Name*: `aws-connection-my-storage`
@@ -163,7 +165,7 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 == Run the Pipeline 
 
-Upload the pipeline on the cluster itself and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline for this or `6 Train Save.pipeline`.
+Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline for this or `6 Train Save.pipeline`.
 
 .Procedure
 
@@ -176,18 +178,16 @@ image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button]
 . Click *OK*.
 +
 NOTE: If `Data Science Pipeline` is not available as a runtime configuration, you may have created your notebook before the pipeline server was available.  You can restart your notebook after the pipeline server has been created in your data science project.
-+
-image::pipelines/wb-pipeline-run.png[Pipeline Run]
 
 . Return to your data science project and expand the newly created pipeline.
 +
 image::pipelines/dsp-pipeline-complete.png[]
 
-. Click the pipeline or the pipeline run and then view the pipeline run in progress.
+. Click *View runs* and then view the pipeline run in progress.
 +
 image::pipelines/pipeline-run-complete.png[]
 
-The result should be a `models/fraud/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment] section.
+The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment] section.
 
 
 .Next step

@@ -5,6 +5,12 @@ NOTE: If you do not intend to complete the pipelines section of the workshop you
 
 In this section, you prepare your {deliverable} environment so that you can use data science pipelines.
 
+In this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that can be executed in OpenShift AI.
+
+.Prerequisite
+
+* You have installed local object storage buckets and created data connections, as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
+
 .Procedure
 
 . In the {productname-short} dashboard, click *Data Science Projects* and then select *Fraud Detection*.
@@ -21,19 +27,35 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 
 . Leave the database configuration as the default.
 
-. Click *Configure*.
+. Click *Configure pipeline server*.
+
+. Wait until the spinner disappears and *No pipelines yet* is displayed.
+
+[IMPORTANT]
+====
+You must wait until the pipeline configuration is complete before you continue and create your workbench. If you create your workbench before the pipeline server is ready, your workbench will not be able to submit pipelines to it.
+====
 
 .Verification
 
-Check the *Pipelines* page. Pipelines are enabled when the *Pipeline server actions* option appears and the *Create pipeline server* button no longer appears.
+Check the *Pipelines* page. Pipelines are enabled when the *Configure pipeline server* button no longer appears.
 
 image::projects/ds-project-create-pipeline-server-complete.png[Create pipeline server complete]
 
+[NOTE]
+====
+If you have waited more than 5 minutes and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again. 
+
+image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server]
+====
+
 .Next step
 
-xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
+xref:creating-a-workbench.adoc[Creating a workbench and selecting a notebook image]
 
-xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
+//xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
+
+//xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
 
 
 

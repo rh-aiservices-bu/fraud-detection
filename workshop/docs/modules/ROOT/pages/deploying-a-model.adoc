@@ -3,44 +3,15 @@
 
 Now that the model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
 
-{productname-short} multi-model servers can host several models at once. You create a new model server and deploy your model to it.
+{productname-short} offers two options for model serving: 		
 
-.Procedure
+* *Single-model serving* - Each model in the project is deployed on its own model server. This platform works well for large models or models that need dedicated resources.
+* *Multi-model serving* - All models in the project are deployed on the same model server. This platform is suitable for sharing resources amongst deployed models.
 
-. In the {productname-short} dashboard, navigate to *Models and model servers*.
-. Click *Add server*.
-+
-image::model-serving/ds-project-model-list-add.png[Add Server]
+*Note:* For each project, you can specify only one model serving platform. If you want to change to the other model serving platform, you must create a new project.
 
-. In the form:
+For this {deliverable}, since you are only deploying only one model, you can select either serving type. The steps for deploying the fraud detection model depend on the type of model serving platform you select:
 
-.. Fill out the *Model server name*, for example `Model Server`.
-.. Select `OpenVINO Model Server`.
-.. Leave the other fields with the default settings.
-+
-image::model-serving/create-model-server-form.png[Add Server Form]
+* xref:deploying-a-model-single-model-server.adoc[Deploying a model on a single-model server]	
 
-. Click *Add*.
-
-. In the *Models and model servers* list, next to the new model server, click *Deploy model*.
-+
-image::model-serving/ds-project-workbench-list-deploy.png[Deploy model button]
-
-. In the form:
-
-.. Fill out the *Model Name* with the value `fraud`.
-.. Select the server that you created (for example, `Model Server`).
-.. Select *Existing data connection*: `My Storage`.
-.. Enter the path to your uploaded model: `models/fraud/model.onnx`
-+
-image::model-serving/deploy-model-form.png[Deploy model form]
-
-.Verification
-
-Wait for the model to deploy and for the *Status* to show a green checkmark.
-
-image::model-serving/ds-project-model-list-status.png[Model status]
-
-.Next step
-
-xref:testing-the-model-api.adoc[Testing the model API]
+* xref:deploying-a-model-multi-model-server.adoc[Deploying a model on a multi-model server]	

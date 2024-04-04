@@ -1,7 +1,7 @@
 [id='creating-a-workbench']
-= Creating a workbench and selecting a Notebook image
+= Creating a workbench and selecting a notebook image
 
-A workbench is an instance of your development and experimentation environment. Within the workbench you can select a notebook image for your data science work.
+A workbench is an instance of your development and experimentation environment. Within a workbench you can select a notebook image for your data science work.
 
 .Prerequisite
 

@@ -14,8 +14,6 @@ This {deliverable} does not delve into the details of how to use the SDK. Instea
 For your convenience, the output of the `build.sh` script is provided in the `7_get_data_train_upload.yaml` file. The `7_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
 
 . Right-click the `7_get_data_train_upload.yaml` file and then click *Download*.
-+
-image::pipelines/wb-download.png[Download Pipeline YAML]
 
 . Upload the `7_get_data_train_upload.yaml` file to {productname-short}.
 
@@ -33,9 +31,17 @@ image::pipelines/dsp-pipline-import-upload.png[]
 +
 The pipeline shows in the list of pipelines.
 
-. Expand the pipeline item and then click *Create run*.
+. Expand the pipeline item and then click *View runs*.
++
+image::pipelines/dsp-pipline-view-runs.png[]
 
-. On the *Create run* page, enter a *Name*. You can leave the other fields with their default values.
+. Click *Create run*.
+
+. On the *Create run* page, provide the following values:
+.. For *Name*, type any name, for example `Run 1`.
+.. For *Pipeline*, select the pipeline that you uploaded.
++
+You can leave the other fields with their default values.
 +
 image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 

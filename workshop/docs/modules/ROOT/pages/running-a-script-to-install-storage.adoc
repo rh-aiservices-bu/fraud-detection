@@ -1,9 +1,17 @@
 [id='running-a-script-to-install-storage']
 = Running a script to install local object storage buckets and create data connections
 
-For convenience, the provided script installs two data connections (and associated secrets) and two Minio buckets as s3-compatible storage The script creates a random user and password for security. This script is based on the instructions for installing Minio in this https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide].
+For convenience, run a script (provided in the following procedure) that automatically completes these tasks:
 
-IMPORTANT: The storage buckets that this script creates are *not* meant for production usage.
+* Creates a Minio instance in your project.
+* Creates two storage buckets in that Minio instance.
+* Generates a random user id and password for your Minio instance.
+* Creates two data connections in your project, one for each bucket and both using the same credentials.
+* Installs required network policies for service mesh functionality.
+
+The script is based on a https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio].
+
+IMPORTANT: The Minio-based Object Storage that the script creates is *not* meant for production usage.
 
 NOTE: If you want to connect to your own storage, see xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
 
