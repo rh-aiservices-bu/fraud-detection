@@ -19,7 +19,7 @@ NOTE: If you want to connect to your own storage, see xref:creating-data-connect
 
 You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
 
-In the {productname-short} dashboard, select *Data Science Projects* and then hover your cursor over the *?* icon next to the project name. A text box appears with information about the project, including it's resource name:
+In the {productname-short} dashboard, select *Data Science Projects* and then click the *?* icon next to the project name. A text box appears with information about the project, including its resource name:
 
 image::projects/ds-project-list-resource-hover.png[Project list resource name]
 
