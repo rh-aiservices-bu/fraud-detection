@@ -10,11 +10,11 @@
 
 .Procedure
 
-. In the {productname-short} dashboard, navigate to the *Models and model servers* section of your project.
+. In the {productname-short} dashboard, navigate to the project details page and click the *Models* tab.
 +
-image::model-serving/ds-project-model-list-add.png[Models and model servers]
+image::model-serving/ds-project-model-list-add.png[Models]
 
-. Under *Single-model serving platform*, click *Deploy model*.
+. In the *Single-model serving platform* tile, click *Deploy model*.
 . In the form, provide the following values:
 .. For *Model Name*, type `fraud`.
 .. For *Serving runtime*, select `OpenVINO Model Server`.
