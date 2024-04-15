@@ -11,7 +11,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 . Navigate to the project detail page for the data science project that you created in xref:setting-up-your-data-science-project.adoc[Setting up your data science project].
 
-. Click the *Create workbench* button.
+. Click the *Workbenches* tab, and then click the *Create workbench* button.
 +
 image::workbenches/ds-project-create-workbench.png[Create workbench button]
 
@@ -43,7 +43,7 @@ image::workbenches/create-workbench-form-button.png[Create workbench button]
 
 .Verification
 
-In the project details page, the status of the workbench changes from `Starting` to `Running`.
+In the *Workbenches* tab for the project, the status of the workbench changes from `Starting` to `Running`.
 
 image::workbenches/ds-project-workbench-list.png[Workbench list]
 
