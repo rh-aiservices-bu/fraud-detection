@@ -23,9 +23,7 @@ Create data connections to your two storage buckets.
 
 . In the {productname-short} dashboard, navigate to the page for your data science project.
 
-. Under *Components*, click *Data connections*.
-
-. Click *Add data connection*.
+. Click the *Data connections* tab, and then click *Add data connection*.
 +
 image::projects/ds-project-add-dc.png[Add data connection]
 
@@ -49,8 +47,7 @@ image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts fo
 
 
 .Verification
-
-Check to see that your data connections are listed in the project.
+In the *Data connections* tab for the project, check to see that your data connections are listed.
 
 image::projects/ds-project-dc-list.png[List of project data connections]
 

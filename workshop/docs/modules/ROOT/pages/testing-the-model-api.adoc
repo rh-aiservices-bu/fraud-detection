@@ -6,7 +6,7 @@ Now that you've deployed the model, you can test its API endpoints.
 
 .Procedure
 
-. In the {productname-short} dashboard, navigate to the project details page and scroll down to the *Models and model servers* section.
+. In the {productname-short} dashboard, navigate to the project details page and click the *Models* tab.
 
 . Take note of the model's Inference endpoint. You need this information when you test the model API.
 +
@@ -24,4 +24,3 @@ If you deployed your model with single-model serving, follow the directions in `
 xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
 
 xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
-

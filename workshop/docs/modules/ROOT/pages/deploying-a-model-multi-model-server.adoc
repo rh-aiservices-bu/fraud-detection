@@ -9,9 +9,9 @@
 
 .Procedure
 
-. In the {productname-short} dashboard, navigate to the *Models and model servers* section of your project.
+. In the {productname-short} dashboard, navigate to the project details page and click the *Models* tab.
 +
-image::model-serving/ds-project-model-list-add.png[Models and model servers]
+image::model-serving/ds-project-model-list-add.png[Models]
 
 . In the *Multi-model serving platform* tile, click *Add model server*.
 

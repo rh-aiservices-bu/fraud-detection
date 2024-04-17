@@ -15,7 +15,7 @@ In this {deliverable}, you implement an example pipeline by using the JupyterLab
 
 . In the {productname-short} dashboard, click *Data Science Projects* and then select *Fraud Detection*.
 
-. Navigate to the *Pipelines* section.
+. Click the *Pipelines* tab.
 
 . Click *Configure pipeline server*.
 +
@@ -38,13 +38,13 @@ You must wait until the pipeline configuration is complete before you continue a
 
 .Verification
 
-Check the *Pipelines* page. Pipelines are enabled when the *Configure pipeline server* button no longer appears.
+Check the *Pipelines* tab for the project. Pipelines are enabled when the *Configure pipeline server* button no longer appears.
 
 image::projects/ds-project-create-pipeline-server-complete.png[Create pipeline server complete]
 
 [NOTE]
 ====
-If you have waited more than 5 minutes and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again. 
+If you have waited more than 5 minutes and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
 
 image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server]
 ====
@@ -56,6 +56,3 @@ xref:creating-a-workbench.adoc[Creating a workbench and selecting a notebook ima
 //xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
 
 //xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
-
-
-
