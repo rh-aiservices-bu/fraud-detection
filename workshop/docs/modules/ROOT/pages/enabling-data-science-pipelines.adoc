@@ -38,15 +38,18 @@ You must wait until the pipeline configuration is complete before you continue a
 
 .Verification
 
-Check the *Pipelines* tab for the project. Pipelines are enabled when the *Configure pipeline server* button no longer appears.
-
-image::projects/ds-project-create-pipeline-server-complete.png[Create pipeline server complete]
+. Navigate to the *Pipelines* tab for the project.
+. Next to *Import pipeline*, click the action menu (&#8942;) and then select *View pipeline server configuration*.
++
+image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 300]
++
+An information box opens and displays the object storage connection information for the pipeline server.
 
 [NOTE]
 ====
 If you have waited more than 5 minutes and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
 
-image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server]
+image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 300]
 ====
 
 .Next step

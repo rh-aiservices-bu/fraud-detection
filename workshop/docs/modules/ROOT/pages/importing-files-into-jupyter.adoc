@@ -21,7 +21,7 @@ This file-browser window shows the files and folders that are saved inside your 
 
 .. On the toolbar, click the *Git Clone* icon:
 +
-image::workbenches/jupyter-git-icon.png[Git Clone icon, 200]
+image::workbenches/jupyter-git-icon.png[Git Clone icon, 300]
 
 .. Enter the following {deliverable} Git *https* URL:
 +
@@ -32,7 +32,7 @@ image::workbenches/jupyter-git-icon.png[Git Clone icon, 200]
 https://github.com/rh-aiservices-bu/fraud-detection.git
 ----
 +
-image::workbenches/jupyter-git-modal.png[Git Modal]
+image::workbenches/jupyter-git-modal.png[Git Modal, 300]
 
 .. Check the *Include submodules* option.
 
@@ -42,11 +42,11 @@ image::workbenches/jupyter-git-modal.png[Git Modal]
 
 Double-click the newly-created folder, `fraud-detection`:
 
-image::workbenches/jupyter-file-browser.png[Jupyter file browser]
+image::workbenches/jupyter-file-browser.png[Jupyter file browser, 300]
 
 In the file browser, you should see the notebooks that you cloned from Git.
 
-image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection]
+image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection, 300]
 
 
 .Next step

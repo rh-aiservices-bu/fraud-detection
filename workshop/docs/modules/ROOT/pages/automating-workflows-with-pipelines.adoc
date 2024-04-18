@@ -171,7 +171,8 @@ Upload the pipeline on your cluster and run it. You can do so directly from the 
 
 . Click the play button in the toolbar of the pipeline editor.
 +
-image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button]
+image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
+
 
 . Enter a name for your pipeline.
 . Verify the *Runtime Configuration:* is set to `Data Science Pipeline`.  
