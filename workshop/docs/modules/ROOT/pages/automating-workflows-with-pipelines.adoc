@@ -88,6 +88,8 @@ In node 1, the notebook creates the `models/fraud/1/model.onnx` file. In node 2,
 image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency value, 400]
 
 . Repeat steps 1-3 for node 2.
+
+. Save the pipeline.
  
 == Configure the data connection to the S3 storage bucket
 
