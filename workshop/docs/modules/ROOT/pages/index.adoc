@@ -30,8 +30,11 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 == Before you begin
 
-https://developers.redhat.com/products/red-hat-openshift-ai/download[Set up your {productname-long} environment]
+If you don't already have an instance of {productname-long}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the Red Hat Developer website] for information on setting up your environment. There, you can create an account and access the *free {productname-short} Sandbox* or you can learn how to install {productname-short} on *your own OpenShift cluster*.
 
-If you don't already have an instance of {productname-long}, find out more on the https://developers.redhat.com/products/red-hat-openshift-ai/download[developer page]. There, you can create an account and access the *free {productname-short} Sandbox* or you can learn how to install {productname-short} on *your own OpenShift cluster*.
+[IMPORTANT]
+====
+If your cluster uses self-signed certificates, before you begin the {deliverable}, your {productname-short} administrator must add self-signed certificates for {productname-short} as described in https://access.redhat.com/documentation/en-us/red_hat_openshift_ai_self-managed/{version}/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
+====
 
 If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}!]

@@ -143,7 +143,7 @@ image::pipelines/wb-pipeline-add-kube-secret.png[Add Kube Secret]
 +
 image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
-.. Repeat Steps 3a and 3b for each set of these Kubernetes secrets:
+.. Repeat Steps 2a and 2b for each set of these Kubernetes secrets:
 
 * *Environment Variable*: `AWS_SECRET_ACCESS_KEY`
 ** *Secret Name*: `aws-connection-my-storage`

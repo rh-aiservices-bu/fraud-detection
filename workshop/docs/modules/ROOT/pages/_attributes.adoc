@@ -4,3 +4,4 @@
 //:deliverable: tutorial
 :productname-long: Red Hat OpenShift AI
 :productname-short: OpenShift AI
+:version: 2.9
