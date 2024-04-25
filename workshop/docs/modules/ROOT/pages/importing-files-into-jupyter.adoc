@@ -36,7 +36,7 @@ image::workbenches/jupyter-git-modal.png[Git Modal, 300]
 
 .. Check the *Include submodules* option.
 
-.. Click *CLONE*.
+.. Click *Clone*.
 
 .Verification
 

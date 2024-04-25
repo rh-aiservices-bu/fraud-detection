@@ -23,7 +23,7 @@ You've created a blank pipeline!
 
 . Set the default runtime image for when you run your notebook or Python code.
 
-.. In the pipeline editor, click *Open Panel* 
+.. In the pipeline editor, click *Open Panel*.
 +
 image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel]
 
@@ -124,7 +124,7 @@ You must set the secret name and key for each of these fields.
 
 .. Select node 2, and then select the *Node Properties* tab.
 +
-Under *Additional Properties*, note that some environment variables have been pre-filled. The pipeline editor inferred that you'd need them from the notebook code.  
+Under *Additional Properties*, note that some environment variables have been pre-filled. The pipeline editor inferred that you need them from the notebook code.  
 +
 Since you don't want to save the value in your pipelines, remove all of these environment variables.
 

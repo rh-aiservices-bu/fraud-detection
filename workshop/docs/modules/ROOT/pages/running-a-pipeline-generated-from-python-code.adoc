@@ -31,7 +31,7 @@ image::pipelines/dsp-pipline-import-upload.png[]
 +
 The pipeline shows in the list of pipelines.
 
-. Expand the pipeline item, click the action menu (&#8942;) and select *View runs*.
+. Expand the pipeline item, click the action menu (&#8942;), and then select *View runs*.
 +
 image::pipelines/dsp-pipline-view-runs.png[]
 
