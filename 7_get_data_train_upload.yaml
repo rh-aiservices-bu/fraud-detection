@@ -1,400 +1,255 @@
-apiVersion: tekton.dev/v1beta1
-kind: PipelineRun
-metadata:
-  name: train-upload-stock-kfp
-  annotations:
-    tekton.dev/output_artifacts: '{"get-data": [{"key": "artifacts/$PIPELINERUN/get-data/output.tgz",
-      "name": "get-data-output", "path": "/tmp/outputs/output/data"}], "train-model":
-      [{"key": "artifacts/$PIPELINERUN/train-model/output.tgz", "name": "train-model-output",
-      "path": "/tmp/outputs/output/data"}]}'
-    tekton.dev/input_artifacts: '{"train-model": [{"name": "get-data-output", "parent_task":
-      "get-data"}], "upload": [{"name": "train-model-output", "parent_task": "train-model"}]}'
-    tekton.dev/artifact_bucket: mlpipeline
-    tekton.dev/artifact_endpoint: minio-service.kubeflow:9000
-    tekton.dev/artifact_endpoint_scheme: http://
-    tekton.dev/artifact_items: '{"get-data": [["output", "$(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output"]],
-      "train-model": [["output", "$(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output"]],
-      "upload": []}'
-    sidecar.istio.io/inject: "false"
-    tekton.dev/template: ''
-    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
-    pipelines.kubeflow.org/pipeline_spec: '{"name": "train_upload_stock_kfp"}'
-  labels:
-    pipelines.kubeflow.org/pipelinename: ''
-    pipelines.kubeflow.org/generation: ''
-spec:
-  pipelineSpec:
+# PIPELINE DEFINITION
+# Name: 7-get-data-train-upload
+components:
+  comp-get-data:
+    executorLabel: exec-get-data
+    outputDefinitions:
+      artifacts:
+        data_output_path:
+          artifactType:
+            schemaTitle: system.Artifact
+            schemaVersion: 0.0.1
+  comp-train-model:
+    executorLabel: exec-train-model
+    inputDefinitions:
+      artifacts:
+        data_input_path:
+          artifactType:
+            schemaTitle: system.Artifact
+            schemaVersion: 0.0.1
+    outputDefinitions:
+      artifacts:
+        model_output_path:
+          artifactType:
+            schemaTitle: system.Artifact
+            schemaVersion: 0.0.1
+  comp-upload-model:
+    executorLabel: exec-upload-model
+    inputDefinitions:
+      artifacts:
+        input_model_path:
+          artifactType:
+            schemaTitle: system.Artifact
+            schemaVersion: 0.0.1
+deploymentSpec:
+  executors:
+    exec-get-data:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - get_data
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.5.0'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef get_data(data_output_path: OutputPath()):\n    import urllib.request\n\
+          \    print(\"starting download...\")\n    url = \"https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/card_transdata.csv\"\
+          \n    urllib.request.urlretrieve(url, data_output_path)\n    print(\"done\"\
+          )\n\n"
+        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023b-20240301
+    exec-train-model:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - train_model
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.5.0'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
+          \  python3 -m pip install --quiet --no-warn-script-location 'tf2onnx' 'seaborn'\
+          \ && \"$0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef train_model(data_input_path: InputPath(), model_output_path:\
+          \ OutputPath()):\n    import numpy as np\n    import pandas as pd\n    from\
+          \ keras.models import Sequential\n    from keras.layers import Dense, Dropout,\
+          \ BatchNormalization, Activation\n    from sklearn.model_selection import\
+          \ train_test_split\n    from sklearn.preprocessing import StandardScaler\n\
+          \    from sklearn.utils import class_weight\n    import tf2onnx\n    import\
+          \ onnx\n    import pickle\n    from pathlib import Path\n\n    # Load the\
+          \ CSV data which we will use to train the model.\n    # It contains the\
+          \ following fields:\n    #   distancefromhome - The distance from home where\
+          \ the transaction happened.\n    #   distancefromlast_transaction - The\
+          \ distance from last transaction happened.\n    #   ratiotomedianpurchaseprice\
+          \ - Ratio of purchased price compared to median purchase price.\n    # \
+          \  repeat_retailer - If it's from a retailer that already has been purchased\
+          \ from before.\n    #   used_chip - If the (credit card) chip was used.\n\
+          \    #   usedpinnumber - If the PIN number was used.\n    #   online_order\
+          \ - If it was an online order.\n    #   fraud - If the transaction is fraudulent.\n\
+          \    Data = pd.read_csv(data_input_path)\n\n    # Set the input (X) and\
+          \ output (Y) data.\n    # The only output data we have is if it's fraudulent\
+          \ or not, and all other fields go as inputs to the model.\n\n    X = Data.drop(columns\
+          \ = ['repeat_retailer','distance_from_home', 'fraud'])\n    y = Data['fraud']\n\
+          \n    # Split the data into training and testing sets so we have something\
+          \ to test the trained model with.\n\n    # X_train, X_test, y_train, y_test\
+          \ = train_test_split(X,y, test_size = 0.2, stratify = y)\n    X_train, X_test,\
+          \ y_train, y_test = train_test_split(X,y, test_size = 0.2, shuffle = False)\n\
+          \n    X_train, X_val, y_train, y_val = train_test_split(X_train,y_train,\
+          \ test_size = 0.2, stratify = y_train)\n\n    # Scale the data to remove\
+          \ mean and have unit variance. This means that the data will be between\
+          \ -1 and 1, which makes it a lot easier for the model to learn than random\
+          \ potentially large values.\n    # It is important to only fit the scaler\
+          \ to the training data, otherwise you are leaking information about the\
+          \ global distribution of variables (which is influenced by the test set)\
+          \ into the training set.\n\n    scaler = StandardScaler()\n\n    X_train\
+          \ = scaler.fit_transform(X_train.values)\n\n    Path(\"artifact\").mkdir(parents=True,\
+          \ exist_ok=True)\n    with open(\"artifact/test_data.pkl\", \"wb\") as handle:\n\
+          \        pickle.dump((X_test, y_test), handle)\n    with open(\"artifact/scaler.pkl\"\
+          , \"wb\") as handle:\n        pickle.dump(scaler, handle)\n\n    # Since\
+          \ the dataset is unbalanced (it has many more non-fraud transactions than\
+          \ fraudulent ones), we set a class weight to weight the few fraudulent transactions\
+          \ higher than the many non-fraud transactions.\n\n    class_weights = class_weight.compute_class_weight('balanced',classes\
+          \ = np.unique(y_train),y = y_train)\n    class_weights = {i : class_weights[i]\
+          \ for i in range(len(class_weights))}\n\n\n    # Build the model, the model\
+          \ we build here is a simple fully connected deep neural network, containing\
+          \ 3 hidden layers and one output layer.\n\n    model = Sequential()\n  \
+          \  model.add(Dense(32, activation = 'relu', input_dim = len(X.columns)))\n\
+          \    model.add(Dropout(0.2))\n    model.add(Dense(32))\n    model.add(BatchNormalization())\n\
+          \    model.add(Activation('relu'))\n    model.add(Dropout(0.2))\n    model.add(Dense(32))\n\
+          \    model.add(BatchNormalization())\n    model.add(Activation('relu'))\n\
+          \    model.add(Dropout(0.2))\n    model.add(Dense(1, activation = 'sigmoid'))\n\
+          \    model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])\n\
+          \    model.summary()\n\n\n    # Train the model and get performance\n\n\
+          \    epochs = 2\n    history = model.fit(X_train, y_train, epochs=epochs,\
+          \ \\\n                        validation_data=(scaler.transform(X_val.values),y_val),\
+          \ \\\n                        verbose = True, class_weight = class_weights)\n\
+          \n    # Save the model as ONNX for easy use of ModelMesh\n\n    model_proto,\
+          \ _ = tf2onnx.convert.from_keras(model)\n    print(model_output_path)\n\
+          \    onnx.save(model_proto, model_output_path)\n\n"
+        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023b-20240301
+    exec-upload-model:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - upload_model
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.5.0'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
+          \  python3 -m pip install --quiet --no-warn-script-location 'boto3' 'botocore'\
+          \ && \"$0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef upload_model(input_model_path: InputPath()):\n    import os\n\
+          \    import boto3\n    import botocore\n\n    aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')\n\
+          \    aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')\n \
+          \   endpoint_url = os.environ.get('AWS_S3_ENDPOINT')\n    region_name =\
+          \ os.environ.get('AWS_DEFAULT_REGION')\n    bucket_name = os.environ.get('AWS_S3_BUCKET')\n\
+          \n    s3_key = os.environ.get(\"S3_KEY\")\n\n    session = boto3.session.Session(aws_access_key_id=aws_access_key_id,\n\
+          \                                    aws_secret_access_key=aws_secret_access_key)\n\
+          \n    s3_resource = session.resource(\n        's3',\n        config=botocore.client.Config(signature_version='s3v4'),\n\
+          \        endpoint_url=endpoint_url,\n        region_name=region_name)\n\n\
+          \    bucket = s3_resource.Bucket(bucket_name)\n\n    print(f\"Uploading\
+          \ {s3_key}\")\n    bucket.upload_file(input_model_path, s3_key)\n\n"
+        env:
+        - name: S3_KEY
+          value: models/fraud/1/model.onnx
+        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023b-20240301
+pipelineInfo:
+  name: 7-get-data-train-upload
+root:
+  dag:
     tasks:
-    - name: get-data
-      taskSpec:
-        steps:
-        - name: main
-          args:
-          - --output
-          - $(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output
-          command:
-          - sh
-          - -ec
-          - |
-            program_path=$(mktemp)
-            printf "%s" "$0" > "$program_path"
-            python3 -u "$program_path" "$@"
-          - |
-            def _make_parent_dirs_and_return_path(file_path: str):
-                import os
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                return file_path
-
-            def get_data(output_path):
-                import urllib.request
-                print("starting download...")
-                url = "https://github.com/cfchase/fraud-detection-notebooks/raw/main/data/card_transdata.csv"
-                urllib.request.urlretrieve(url, output_path)
-                print("done")
-
-            import argparse
-            _parser = argparse.ArgumentParser(prog='Get data', description='')
-            _parser.add_argument("--output", dest="output_path", type=_make_parent_dirs_and_return_path, required=True, default=argparse.SUPPRESS)
-            _parsed_args = vars(_parser.parse_args())
-
-            _outputs = get_data(**_parsed_args)
-          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e
-          env:
-          - name: ORIG_PR_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
-        - image: busybox
-          name: output-taskrun-name
-          command:
-          - sh
-          - -ec
-          - echo -n "$(context.taskRun.name)" > "$(results.taskrun-name.path)"
-        - image: busybox
-          name: copy-results-artifacts
-          command:
-          - sh
-          - -ec
-          - |
-            set -exo pipefail
-            TOTAL_SIZE=0
-            copy_artifact() {
-            if [ -d "$1" ]; then
-              tar -czvf "$1".tar.gz "$1"
-              SUFFIX=".tar.gz"
-            fi
-            ARTIFACT_SIZE=`wc -c "$1"${SUFFIX} | awk '{print $1}'`
-            TOTAL_SIZE=$( expr $TOTAL_SIZE + $ARTIFACT_SIZE)
-            touch "$2"
-            if [[ $TOTAL_SIZE -lt 3072 ]]; then
-              if [ -d "$1" ]; then
-                tar -tzf "$1".tar.gz > "$2"
-              elif ! awk "/[^[:print:]]/{f=1} END{exit !f}" "$1"; then
-                cp "$1" "$2"
-              fi
-            fi
-            }
-            copy_artifact $(workspaces.get-data.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output $(results.output.path)
-          onError: continue
-          env:
-          - name: ORIG_PR_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
-        results:
-        - name: output
-          type: string
-          description: /tmp/outputs/output/data
-        - name: taskrun-name
-          type: string
-        metadata:
-          labels:
-            pipelines.kubeflow.org/cache_enabled: "true"
-          annotations:
-            pipelines.kubeflow.org/component_spec_digest: '{"name": "Get data", "outputs":
-              [{"name": "output"}], "version": "Get data@sha256=a840b31ffc61f2af6a40651f5ee87a07d2c5945073e00ebc9470ccdd8c5bfdfd"}'
-        workspaces:
-        - name: get-data
-      workspaces:
-      - name: get-data
-        workspace: train-upload-stock-kfp
-    - name: train-model
-      params:
-      - name: get-data-trname
-        value: $(tasks.get-data.results.taskrun-name)
-      taskSpec:
-        steps:
-        - name: main
-          args:
-          - --input
-          - $(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(params.get-data-trname)/output
-          - --output
-          - $(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output
-          command:
-          - sh
-          - -c
-          - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
-            'tf2onnx' 'seaborn' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip
-            install --quiet --no-warn-script-location 'tf2onnx' 'seaborn' --user)
-            && "$0" "$@"
-          - sh
-          - -ec
-          - |
-            program_path=$(mktemp)
-            printf "%s" "$0" > "$program_path"
-            python3 -u "$program_path" "$@"
-          - |
-            def _make_parent_dirs_and_return_path(file_path: str):
-                import os
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                return file_path
-
-            def train_model(input_path, output_path):
-                import numpy as np
-                import pandas as pd
-                from keras.models import Sequential
-                from keras.layers import Dense, Dropout, BatchNormalization, Activation
-                from sklearn.model_selection import train_test_split
-                from sklearn.preprocessing import StandardScaler
-                from sklearn.utils import class_weight
-                import tf2onnx
-                import onnx
-                import pickle
-                from pathlib import Path
-
-                # Load the CSV data which we will use to train the model.
-                # It contains the following fields:
-                #   distancefromhome - The distance from home where the transaction happened.
-                #   distancefromlast_transaction - The distance from last transaction happened.
-                #   ratiotomedianpurchaseprice - Ratio of purchased price compared to median purchase price.
-                #   repeat_retailer - If it's from a retailer that already has been purchased from before.
-                #   used_chip - If the (credit card) chip was used.
-                #   usedpinnumber - If the PIN number was used.
-                #   online_order - If it was an online order.
-                #   fraud - If the transaction is fraudulent.
-                Data = pd.read_csv(input_path)
-
-                # Set the input (X) and output (Y) data.
-                # The only output data we have is if it's fraudulent or not, and all other fields go as inputs to the model.
-
-                X = Data.drop(columns = ['repeat_retailer','distance_from_home', 'fraud'])
-                y = Data['fraud']
-
-                # Split the data into training and testing sets so we have something to test the trained model with.
-
-                # X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, stratify = y)
-                X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, shuffle = False)
-
-                X_train, X_val, y_train, y_val = train_test_split(X_train,y_train, test_size = 0.2, stratify = y_train)
-
-                # Scale the data to remove mean and have unit variance. This means that the data will be between -1 and 1, which makes it a lot easier for the model to learn than random potentially large values.
-                # It is important to only fit the scaler to the training data, otherwise you are leaking information about the global distribution of variables (which is influenced by the test set) into the training set.
-
-                scaler = StandardScaler()
-
-                X_train = scaler.fit_transform(X_train.values)
-
-                Path("artifact").mkdir(parents=True, exist_ok=True)
-                with open("artifact/test_data.pkl", "wb") as handle:
-                    pickle.dump((X_test, y_test), handle)
-                with open("artifact/scaler.pkl", "wb") as handle:
-                    pickle.dump(scaler, handle)
-
-                # Since the dataset is unbalanced (it has many more non-fraud transactions than fraudulent ones), we set a class weight to weight the few fraudulent transactions higher than the many non-fraud transactions.
-
-                class_weights = class_weight.compute_class_weight('balanced',classes = np.unique(y_train),y = y_train)
-                class_weights = {i : class_weights[i] for i in range(len(class_weights))}
-
-                # Build the model, the model we build here is a simple fully connected deep neural network, containing 3 hidden layers and one output layer.
-
-                model = Sequential()
-                model.add(Dense(32, activation = 'relu', input_dim = len(X.columns)))
-                model.add(Dropout(0.2))
-                model.add(Dense(32))
-                model.add(BatchNormalization())
-                model.add(Activation('relu'))
-                model.add(Dropout(0.2))
-                model.add(Dense(32))
-                model.add(BatchNormalization())
-                model.add(Activation('relu'))
-                model.add(Dropout(0.2))
-                model.add(Dense(1, activation = 'sigmoid'))
-                model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
-                model.summary()
-
-                # Train the model and get performance
-
-                epochs = 2
-                history = model.fit(X_train, y_train, epochs=epochs, \
-                                    validation_data=(scaler.transform(X_val.values),y_val), \
-                                    verbose = True, class_weight = class_weights)
-
-                # Save the model as ONNX for easy use of ModelMesh
-
-                model_proto, _ = tf2onnx.convert.from_keras(model)
-                onnx.save(model_proto, output_path)
-
-            import argparse
-            _parser = argparse.ArgumentParser(prog='Train model', description='')
-            _parser.add_argument("--input", dest="input_path", type=str, required=True, default=argparse.SUPPRESS)
-            _parser.add_argument("--output", dest="output_path", type=_make_parent_dirs_and_return_path, required=True, default=argparse.SUPPRESS)
-            _parsed_args = vars(_parser.parse_args())
-
-            _outputs = train_model(**_parsed_args)
-          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e
-          env:
-          - name: ORIG_PR_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
-        - image: busybox
-          name: output-taskrun-name
-          command:
-          - sh
-          - -ec
-          - echo -n "$(context.taskRun.name)" > "$(results.taskrun-name.path)"
-        - image: busybox
-          name: copy-results-artifacts
-          command:
-          - sh
-          - -ec
-          - |
-            set -exo pipefail
-            TOTAL_SIZE=0
-            copy_artifact() {
-            if [ -d "$1" ]; then
-              tar -czvf "$1".tar.gz "$1"
-              SUFFIX=".tar.gz"
-            fi
-            ARTIFACT_SIZE=`wc -c "$1"${SUFFIX} | awk '{print $1}'`
-            TOTAL_SIZE=$( expr $TOTAL_SIZE + $ARTIFACT_SIZE)
-            touch "$2"
-            if [[ $TOTAL_SIZE -lt 3072 ]]; then
-              if [ -d "$1" ]; then
-                tar -tzf "$1".tar.gz > "$2"
-              elif ! awk "/[^[:print:]]/{f=1} END{exit !f}" "$1"; then
-                cp "$1" "$2"
-              fi
-            fi
-            }
-            copy_artifact $(workspaces.train-model.path)/artifacts/$ORIG_PR_NAME/$(context.taskRun.name)/output $(results.output.path)
-          onError: continue
-          env:
-          - name: ORIG_PR_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
-        params:
-        - name: get-data-trname
-        results:
-        - name: output
-          type: string
-          description: /tmp/outputs/output/data
-        - name: taskrun-name
-          type: string
-        metadata:
-          labels:
-            pipelines.kubeflow.org/cache_enabled: "true"
-          annotations:
-            pipelines.kubeflow.org/component_spec_digest: '{"name": "Train model",
-              "outputs": [{"name": "output"}], "version": "Train model@sha256=eaddeda6a61a76fc58aef31f1b7e762a9f8354045a1cde36986495e6568341ba"}'
-        workspaces:
-        - name: train-model
-      workspaces:
-      - name: train-model
-        workspace: train-upload-stock-kfp
-      runAfter:
-      - get-data
-    - name: upload
-      params:
-      - name: train-model-trname
-        value: $(tasks.train-model.results.taskrun-name)
-      taskSpec:
-        steps:
-        - name: main
-          args:
-          - --input
-          - $(workspaces.upload.path)/artifacts/$ORIG_PR_NAME/$(params.train-model-trname)/output
-          command:
-          - sh
-          - -c
-          - (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet --no-warn-script-location
-            'boto3' 'botocore' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install
-            --quiet --no-warn-script-location 'boto3' 'botocore' --user) && "$0" "$@"
-          - sh
-          - -ec
-          - |
-            program_path=$(mktemp)
-            printf "%s" "$0" > "$program_path"
-            python3 -u "$program_path" "$@"
-          - |
-            def upload(input_path):
-                import os
-                import boto3
-                import botocore
-
-                aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
-                aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
-                endpoint_url = os.environ.get('AWS_S3_ENDPOINT')
-                region_name = os.environ.get('AWS_DEFAULT_REGION')
-                bucket_name = os.environ.get('AWS_S3_BUCKET')
-
-                s3_key = os.environ.get("S3_KEY")
-
-                session = boto3.session.Session(aws_access_key_id=aws_access_key_id,
-                                                aws_secret_access_key=aws_secret_access_key)
-
-                s3_resource = session.resource(
-                    's3',
-                    config=botocore.client.Config(signature_version='s3v4'),
-                    endpoint_url=endpoint_url,
-                    region_name=region_name)
-
-                bucket = s3_resource.Bucket(bucket_name)
-
-                print(f"Uploading {s3_key}")
-                bucket.upload_file(input_path, s3_key)
-
-            import argparse
-            _parser = argparse.ArgumentParser(prog='Upload', description='')
-            _parser.add_argument("--input", dest="input_path", type=str, required=True, default=argparse.SUPPRESS)
-            _parsed_args = vars(_parser.parse_args())
-
-            _outputs = upload(**_parsed_args)
-          env:
-          - name: S3_KEY
-            value: models/fraud/1/model.onnx
-          - name: ORIG_PR_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['custom.tekton.dev/originalPipelineRun']
-          envFrom:
-          - secretRef:
-              name: aws-connection-my-storage
-          image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023a-20230817-b7e647e
-        params:
-        - name: train-model-trname
-        metadata:
-          labels:
-            pipelines.kubeflow.org/cache_enabled: "true"
-          annotations:
-            pipelines.kubeflow.org/component_spec_digest: '{"name": "Upload", "outputs":
-              [], "version": "Upload@sha256=a995d4105a1a6f1ff4ce0660962beddbaa31eb11be8196f0a3682a8fced50a67"}'
-        workspaces:
-        - name: upload
-      workspaces:
-      - name: upload
-        workspace: train-upload-stock-kfp
-      runAfter:
-      - train-model
-    workspaces:
-    - name: train-upload-stock-kfp
-  workspaces:
-  - name: train-upload-stock-kfp
-    volumeClaimTemplate:
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 2Gi
+      get-data:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-get-data
+        taskInfo:
+          name: get-data
+      train-model:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-train-model
+        dependentTasks:
+        - get-data
+        inputs:
+          artifacts:
+            data_input_path:
+              taskOutputArtifact:
+                outputArtifactKey: data_output_path
+                producerTask: get-data
+        taskInfo:
+          name: train-model
+      upload-model:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-upload-model
+        dependentTasks:
+        - train-model
+        inputs:
+          artifacts:
+            input_model_path:
+              taskOutputArtifact:
+                outputArtifactKey: model_output_path
+                producerTask: train-model
+        taskInfo:
+          name: upload-model
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.5.0
+---
+platforms:
+  kubernetes:
+    deploymentSpec:
+      executors:
+        exec-upload-model:
+          secretAsEnv:
+          - keyToEnv:
+            - envVar: AWS_ACCESS_KEY_ID
+              secretKey: AWS_ACCESS_KEY_ID
+            - envVar: AWS_SECRET_ACCESS_KEY
+              secretKey: AWS_SECRET_ACCESS_KEY
+            - envVar: AWS_DEFAULT_REGION
+              secretKey: AWS_DEFAULT_REGION
+            - envVar: AWS_S3_BUCKET
+              secretKey: AWS_S3_BUCKET
+            - envVar: AWS_S3_ENDPOINT
+              secretKey: AWS_S3_ENDPOINT
+            secretName: aws-connection-my-storage
