@@ -1,7 +1,7 @@
 [id='running-a-pipeline-generated-from-python-code']
 = Running a data science pipeline generated from Python code
 
-In the previous section, you created a simple pipeline by using the GUI pipeline editor. It's often desirable to create pipelines by using code that can be version-controlled and shared with others. The https://github.com/kubeflow/kfp-tekton[kfp-tekton] SDK provides a Python API for creating pipelines. The SDK is available as a Python package that you can install by using the `pip install kfp-tekton~=1.5.9` command. With this package, you can use Python code to create a pipeline and then compile it to Tekton YAML. Then you can import the YAML code into {productname-short}.
+In the previous section, you created a simple pipeline by using the GUI pipeline editor. It's often desirable to create pipelines by using code that can be version-controlled and shared with others. The https://github.com/kubeflow/pipelines[kfp] SDK provides a Python API for creating pipelines. The SDK is available as a Python package that you can install by using the `pip install kfp` command. With this package, you can use Python code to create a pipeline and then compile it to YAML format. Then you can import the YAML code into {productname-short}.
 
 This {deliverable} does not delve into the details of how to use the SDK. Instead, it provides the files for you to view and upload.
 
@@ -31,7 +31,7 @@ image::pipelines/dsp-pipline-import-upload.png[]
 +
 The pipeline shows in the list of pipelines.
 
-. Expand the pipeline item and then click *View runs*.
+. Expand the pipeline item, click the action menu (&#8942;), and then select *View runs*.
 +
 image::pipelines/dsp-pipline-view-runs.png[]
 
@@ -47,8 +47,6 @@ image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 
 . Click *Create* to create the run.
 +
-A new run starts immediately and opens the run details page.
+A new run starts immediately. The *Details* page shows a pipeline created in Python that is running in {productname-short}.
 +
 image::pipelines/pipeline-run-in-progress.png[]
-
-There you have it:  a pipeline created in Python that is running in {productname-short}.

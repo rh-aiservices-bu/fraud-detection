@@ -21,7 +21,7 @@ You can run a code cell from the notebook interface or from the keyboard:
 +
 image::workbenches/run_button.png[Jupyter Run]
 
-* *From the keyboard:* Press `CTRL`+`ENTER` to run a cell or press `SHIFT`+`ENTER` to run the cell and automatically select the next one.
+* *From the keyboard:* Press `CTRL` + `ENTER` to run a cell or press `SHIFT` + `ENTER` to run the cell and automatically select the next one.
 
 After you run a cell, you can see the result of its code as well as information about when the cell was run, as shown in this example:
 

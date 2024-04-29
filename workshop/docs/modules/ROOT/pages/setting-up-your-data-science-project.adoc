@@ -13,11 +13,11 @@ Note that you can start a Jupyter notebook from here, but it would be a one-off 
 +
 image::projects/dashboard-click-projects.png[Data Science Projects List]
 +
-If you already have an active project that you'd like to use, select it now and skip ahead to the next section, xref:storing-data-with-data-connections.adoc[Storing data with data connections]. Otherwise, continue to the next step.
+If you already have an active project that want to use, select it now and skip ahead to the next section, xref:storing-data-with-data-connections.adoc[Storing data with data connections]. Otherwise, continue to the next step.
 
 . Click *Create data science project*.
 
-. Enter a display name and description. Based on the display name, a resource name is automatically generated, but you can change it if you'd like.
+. Enter a display name and description. Based on the display name, a resource name is automatically generated, but you can change if you prefer.
 +
 image::projects/ds-project-new-form.png[New data science project form]
 

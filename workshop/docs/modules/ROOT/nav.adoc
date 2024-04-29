@@ -15,8 +15,8 @@
 * 3. Model Serving
 ** xref:preparing-a-model-for-deployment.adoc[1. Saving the Model]
 ** xref:deploying-a-model.adoc[2. Deploy the Model]
-*** xref:deploying-a-model-multi-model-server.adoc[1. Deploying on a multi-model server]
-*** xref:deploying-a-model-single-model-server.adoc[2. Deploying on a single-model server]
+*** xref:deploying-a-model-single-model-server.adoc[1. Deploying on a single-model server]
+*** xref:deploying-a-model-multi-model-server.adoc[2. Deploying on a multi-model server]
 ** xref:testing-the-model-api.adoc[3. Using the API]
 
 * 4. Data Science Pipelines

@@ -49,7 +49,7 @@ image::workbenches/ds-project-workbench-list.png[Workbench list]
 
 NOTE: If you made a mistake, you can edit the workbench to make changes.
 
-image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit]
+image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit, 300]
 
 
 .Next step
