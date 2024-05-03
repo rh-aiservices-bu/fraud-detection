@@ -112,6 +112,9 @@ You should see a "Resources successfully created" message and the following reso
 * `create s3-storage`
 
 
-.Next step
+.Next steps
 
+* Configure a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+
+* Create a workbench and select a notebook image
 xref:creating-a-workbench.adoc[Creating a workbench]

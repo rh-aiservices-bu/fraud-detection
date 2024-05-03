@@ -55,6 +55,9 @@ Check to see that your data connections are listed in the project.
 image::projects/ds-project-dc-list.png[List of project data connections]
 
 
-.Next step
+.Next steps
 
+* Configure a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+
+* Create a workbench and select a notebook image
 xref:creating-a-workbench.adoc[Creating a workbench]
