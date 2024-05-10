@@ -3,9 +3,11 @@
 
 A workbench is an instance of your development and experimentation environment. Within a workbench you can select a notebook image for your data science work.
 
-.Prerequisite
+.Prerequisites
 
 * You created a `My Storage` data connection as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
+
+* You configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
 .Procedure
 
