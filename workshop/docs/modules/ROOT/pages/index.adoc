@@ -30,7 +30,7 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 == Before you begin
 
-If you don't already have an instance of {productname-long}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the Red Hat Developer website] for information on setting up your environment. There, you can create an account and access the *free {productname-short} Sandbox* or you can learn how to install {productname-short} on *your own OpenShift cluster*.
+If you don't already have an instance of {productname-long}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the *free {org-name} Developer Sandbox* or you can learn how to install {productname-short} on *your own OpenShift cluster*.
 
 [IMPORTANT]
 ====

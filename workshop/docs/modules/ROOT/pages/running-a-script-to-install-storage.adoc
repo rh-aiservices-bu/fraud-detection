@@ -109,8 +109,7 @@ You should see a "Resources successfully created" message and the following reso
 
 * `demo-setup`
 * `demo-setup-edit`
-* `create s3-storage`
-
+* `create-s3-storage`
 
 .Next steps
 

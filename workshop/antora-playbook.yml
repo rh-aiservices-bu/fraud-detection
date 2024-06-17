@@ -12,6 +12,7 @@ asciidoc:
     deliverable: workshop
     productname-long: Red Hat OpenShift AI
     productname-short: OpenShift AI
+    org-name: Red Hat
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js

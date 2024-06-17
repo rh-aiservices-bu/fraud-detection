@@ -3,6 +3,8 @@
 
 {productname-short} single-model servers host only one model. You create a new model server and deploy your model to it.
 
+*Note:* Depending on how model serving has been configured on your cluster, you might see only one model serving platform option.
+
 
 .Prerequiste
 
@@ -13,6 +15,8 @@
 . In the {productname-short} dashboard, navigate to the project details page and click the *Models* tab.
 +
 image::model-serving/ds-project-model-list-add.png[Models]
++
+*Note:* Depending on how model serving has been configured on your cluster, you might see only one model serving platform option.
 
 . In the *Single-model serving platform* tile, click *Deploy model*.
 . In the form, provide the following values:

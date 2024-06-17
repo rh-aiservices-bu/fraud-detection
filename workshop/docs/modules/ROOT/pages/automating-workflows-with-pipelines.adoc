@@ -7,7 +7,7 @@ In this section, you create a simple pipeline by using the GUI pipeline editor. 
 
 Your completed pipeline should look like the one in the `6 Train Save.pipeline` file.
 
-Note: You can run and use `6 Train Save.pipeline`. To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline.
+To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline. Alternately, you can skip the following procedure and instead run the `6 Train Save.pipeline` file.
 
 == Create a pipeline
 
