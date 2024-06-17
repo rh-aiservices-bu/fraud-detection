@@ -15,7 +15,7 @@ The {productname-short} dashboard shows the status of any installed and enabled 
 
 ** *If you are using your own OpenShift cluster*:
 +
-After you log in to the OpenShift console, click the application launcher icon on the header.
+.. After you log in to the OpenShift console, click the application launcher icon on the header.
 +
 image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
