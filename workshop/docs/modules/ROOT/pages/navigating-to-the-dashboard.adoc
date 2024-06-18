@@ -22,15 +22,11 @@ image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 .. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
 +
 image::projects/login-with-openshift.png[OpenShift login, 300]
-+
-The {productname-short} dashboard shows the status of any installed and enabled applications.
 
-. Optionally, click *Explore* to view other available application integrations.
-+
-image::projects/dashboard-explore.png[Dashboard enabled]
-+
-Note: You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
-+
+The {productname-short} dashboard shows the *Home* page.
+
+*Note:* You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
+
 image::projects/ds-console-ocp-tile.png[OCP console link]
 
 For now, stay in the {productname-short} dashboard.
