@@ -22,7 +22,7 @@ image::workbenches/ds-project-create-workbench.png[Create workbench button]
 +
 image::workbenches/create-workbench-form-name-desc.png[Workbench name and description, 600]
 +
-Red Hat provides several supported notebook images. In the *Notebook image* section, you can choose one of these images or any custom images that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
+{org-name} provides several supported notebook images. In the *Notebook image* section, you can choose one of these images or any custom images that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
 
 . Select the latest *Tensorflow* image.
 +

@@ -30,11 +30,17 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 . Click *Configure pipeline server*.
 
 . Wait until the spinner disappears and *No pipelines yet* is displayed.
-
++
 [IMPORTANT]
 ====
 You must wait until the pipeline configuration is complete before you continue and create your workbench. If you create your workbench before the pipeline server is ready, your workbench will not be able to submit pipelines to it.
 ====
++
+If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
++
+image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 300]
++
+You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in link:{rhoaidocshome}{default-format-url}/installing_and_uninstalling_{url-productname-short}/working-with-certificates_certs[Working with certificates].
 
 .Verification
 
@@ -44,16 +50,6 @@ You must wait until the pipeline configuration is complete before you continue a
 image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 300]
 +
 An information box opens and displays the object storage connection information for the pipeline server.
-
-
-[NOTE]
-====
-If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
-
-image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 300]
-
-You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in https://access.redhat.com/documentation/en-us/red_hat_openshift_ai_self-managed/{version}/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
-====
 
 .Next step
 
