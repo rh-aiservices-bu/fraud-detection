@@ -40,7 +40,7 @@ If you have waited more than 5 minutes, and the pipeline server configuration do
 +
 image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 300]
 +
-You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in link:{rhoaidocshome}{default-format-url}/installing_and_uninstalling_{url-productname-short}/working-with-certificates_certs[Working with certificates].
+You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2-latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
 
 .Verification
 

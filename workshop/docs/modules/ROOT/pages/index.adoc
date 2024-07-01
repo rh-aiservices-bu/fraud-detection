@@ -34,7 +34,7 @@ If you don't already have an instance of {productname-long}, see the https://dev
 
 [IMPORTANT]
 ====
-If your cluster uses self-signed certificates, before you begin the {deliverable}, your {productname-short} administrator must add self-signed certificates for {productname-short} as described in https://access.redhat.com/documentation/en-us/red_hat_openshift_ai_self-managed/{version}/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
+If your cluster uses self-signed certificates, before you begin the {deliverable}, your {productname-short} administrator must add self-signed certificates for {productname-short} as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2-latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
 ====
 
 If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}!]
