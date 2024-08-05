@@ -95,9 +95,9 @@ trainer = TorchTrainer(
         storage_filesystem=fs,
         storage_path=f"{bucket_name}/ray/",
         name="fraud-training",
-    ),      
+    ),
     scaling_config=ScalingConfig(
-        num_workers=3, 
+        num_workers=3,
         use_gpu=use_gpu,
     ),  # num_workers = number of worker nodes with the ray head node included
 )

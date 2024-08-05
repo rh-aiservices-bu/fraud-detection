@@ -1,6 +1,3 @@
-from ray.train.torch import TorchTrainer
-from ray.train import ScalingConfig
-
 import os
 import tempfile
 
@@ -14,15 +11,15 @@ from torchvision.transforms import ToTensor, Normalize, Compose
 
 import ray.train.torch
 
-def train_func(config):
+def train_func():
     # Model, Loss, Optimizer
     model = resnet18(num_classes=10)
     model.conv1 = torch.nn.Conv2d(
         1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
     )
-    # model.to("cuda")  # This is done by `prepare_model`
     # [1] Prepare model.
     model = ray.train.torch.prepare_model(model)
+    # model.to("cuda")  # This is done by `prepare_model`
     criterion = CrossEntropyLoss()
     optimizer = Adam(model.parameters(), lr=0.001)
 
@@ -36,6 +33,9 @@ def train_func(config):
 
     # Training
     for epoch in range(10):
+        if ray.train.get_context().get_world_size() > 1:
+            train_loader.sampler.set_epoch(epoch)
+
         for images, labels in train_loader:
             # This is done by `prepare_data_loader`!
             # images, labels = images.to("cuda"), labels.to("cuda")
@@ -81,7 +81,3 @@ with result.checkpoint.as_directory() as checkpoint_dir:
         1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
     )
     model.load_state_dict(model_state_dict)
-
-scaling_config = ScalingConfig(num_workers=2, use_gpu=True)
-trainer = TorchTrainer(train_func, scaling_config=scaling_config)
-result = trainer.fit()
