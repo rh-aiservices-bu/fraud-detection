@@ -3,6 +3,8 @@ import torch
 import torch.nn as nn
 import ray
 import pandas as pd
+import boto3
+import botocore
 
 from pyarrow import fs
 import pyarrow.csv as pv
@@ -21,8 +23,11 @@ feature_indexes = [
 
 label_indexes = [7]
 
+first_layer_num = len(feature_indexes)
 
-# like scikit learn standard scaler
+device = "cpu"
+
+
 class TorchStandardScaler:
     def __init__(self):
         self.mean = None
@@ -41,21 +46,17 @@ class TorchStandardScaler:
 
 
 class CSVDataset(Dataset):
-    def __init__(self, csv_file, transform=None, target_transform=None):
-        self.device = "cpu"
-        self.feature_indexes = [
-            1,  # distance_from_last_transaction
-            2,  # ratio_to_median_purchase_price
-            4,  # used_chip
-            5,  # used_pin_number
-            6,  # online_order
-        ]
+    def __init__(self, pyarrow_fs, csv_file, transform=None, target_transform=None):
+        self.feature_indexes = feature_indexes
+        self.label_indexes = label_indexes
 
-        self.label_indexes = [7]
+        if pyarrow_fs:
+            with pyarrow_fs.open_input_file(csv_file) as file:
+                training_table = pv.read_csv(file)
+            self.data = training_table.to_pandas()
+        else:
+            self.data = pd.read_csv(csv_file)
 
-        # self.feature_columns = feature_columns
-        # self.label_column = label_column
-        self.data = pd.read_csv(csv_file)
         self.transform = transform
         self.target_transform = target_transform
 
@@ -64,13 +65,9 @@ class CSVDataset(Dataset):
 
     def __getitem__(self, idx):
         features = torch.tensor(self.data.iloc[idx, self.feature_indexes],
-                                dtype=torch.float32).to(self.device)
+                                dtype=torch.float32).to(device)
         label = torch.tensor(self.data.iloc[idx, self.label_indexes],
-                             dtype=torch.float32).to(self.device)
-        # features = torch.tensor(self.data.loc[idx, self.feature_columns],
-        #                         dtype=torch.float32).to(device)
-        # label = torch.tensor(self.data.loc[idx, self.label_column],
-        #                      dtype=torch.float32)
+                             dtype=torch.float32).to(device)
         if self.transform:
             features = self.transform(features)
         if self.target_transform:
@@ -83,11 +80,18 @@ class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
         self.linear_relu_stack = nn.Sequential(
-            nn.Linear(5, 8),
+            nn.Linear(first_layer_num, 32),
             nn.ReLU(),
-            nn.Linear(8, 4),
+            nn.Dropout(p=0.2),
+            nn.Linear(32, 32),
+            nn.BatchNorm1d(32),
             nn.ReLU(),
-            nn.Linear(4, 1),
+            nn.Dropout(p=0.2),
+            nn.Linear(32, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU(),
+            nn.Dropout(p=0.2),
+            nn.Linear(32, 1),
             nn.Sigmoid(),
         )
 
@@ -97,23 +101,28 @@ class NeuralNetwork(nn.Module):
 
 
 def get_datasets(fs):
-    with fs.open_input_file("my-storage/data/card_transdata.csv") as file:
-        # Read the CSV file into a PyArrow Table
+    csv_path = os.environ.get("CSV_FILE_PATH")
+    with fs.open_input_file(csv_path) as file:
         training_table = pv.read_csv(file)
+
     train_df = training_table.to_pandas()
     train_df = train_df.iloc[:, feature_indexes]
-    train_df_tensor = torch.tensor(train_df.values, dtype=torch.float)
+    train_df_tensor = torch.tensor(train_df.values, dtype=torch.float).to(device)
 
-    train_df_tensor = torch.tensor(train_df.values, dtype=torch.float)
+    train_df_tensor = torch.tensor(train_df.values, dtype=torch.float).to(device)
     scaler = TorchStandardScaler()
     scaler.fit(train_df_tensor)
 
-    training_data = CSVDataset('data/train.csv', transform=scaler.transform)
+    training_data = CSVDataset(fs,
+                               csv_path,
+                               transform=scaler.transform)
     return training_data
 
 
 def get_loss_fn(fs):
-    with fs.open_input_file("my-storage/data/card_transdata.csv") as file:
+    path = os.environ.get("CSV_FILE_PATH")
+
+    with fs.open_input_file(path) as file:
         training_table = pv.read_csv(file)
     train_df = training_table.to_pandas()
     labels_df = train_df.iloc[:, label_indexes]
@@ -128,15 +137,16 @@ def get_loss_fn(fs):
 
 
 def get_fs():
-    aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
-    aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    endpoint_url = os.environ.get('AWS_S3_ENDPOINT')
-    region_name = os.environ.get('AWS_DEFAULT_REGION')
+    aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+    aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    endpoint_url = os.environ.get("AWS_S3_ENDPOINT")
+    region_name = os.environ.get("AWS_DEFAULT_REGION")
 
-    return fs.S3FileSystem(access_key=aws_access_key_id,
-                         secret_key=aws_secret_access_key,
-                         region=region_name,
-                         endpoint_override=endpoint_url)
+    return fs.S3FileSystem(
+        access_key=aws_access_key_id,
+        secret_key=aws_secret_access_key,
+        region=region_name,
+        endpoint_override=endpoint_url)
 
 
 def train_func_distributed():
@@ -168,7 +178,7 @@ def train_func_distributed():
 
 
 use_gpu = False
-bucket_name = os.environ.get('AWS_S3_BUCKET')
+bucket_name = os.environ.get("AWS_S3_BUCKET")
 
 trainer = TorchTrainer(
     train_func_distributed,
