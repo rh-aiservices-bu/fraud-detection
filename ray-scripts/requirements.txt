@@ -2,3 +2,7 @@ boto3
 botocore
 torch
 torchvision
+scikit-learn
+onnx
+onnxscript
+onnxruntime

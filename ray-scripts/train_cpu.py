@@ -33,11 +33,12 @@ first_layer_num = len(feature_indexes)
 
 device = "cpu"
 use_gpu = False
-num_epochs = 1
+num_epochs = 2
 batch_size = 64
+learning_rate = 1e-3
 bucket_name = os.environ.get("AWS_S3_BUCKET")
-state_dict_filename = "state_dict.pth"
-full_model_filename = "model.pth"
+state_dict_filename = "model.pth"
+onnx_model_filename = "model.onnx"
 
 
 class TorchStandardScaler:
@@ -233,7 +234,6 @@ def train_func_distributed():
     model = ray.train.torch.prepare_model(model)
 
     loss_fn = nn.BCELoss().to(device)
-    learning_rate = 1e-3
     optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
 
     for epoch in range(num_epochs):
@@ -257,7 +257,7 @@ def train_func_distributed():
             print(metrics)
 
 
-def save_full_model(checkpoint_path):
+def save_onnx_model(checkpoint_path):
     s3_resource = get_s3_resource()
     bucket = s3_resource.Bucket(bucket_name)
 
@@ -266,19 +266,26 @@ def save_full_model(checkpoint_path):
     print(f"Downloading model state_dict from {cp_s3_key} to {state_dict_local}")
     bucket.download_file(cp_s3_key, state_dict_local)
 
+    pytorch_model = NeuralNetwork(scaler)
+    pytorch_model.load_state_dict(torch.load(state_dict_local))
+
+    onnx_model_local = f"/tmp/{onnx_model_filename}"
+    dummy_input = torch.randn(1, 5, device=device)
+    torch.onnx.export(
+        pytorch_model,
+        dummy_input,
+        onnx_model_local,
+        input_names=["inputs"],
+        output_names=["outputs"],
+        dynamic_axes={
+            "inputs": {0: "batch_size"},
+        },
+        verbose=True)
+
     upload_path = os.environ.get("MODEL_OUTPUT")
-    upload_state_dict_s3_key = os.path.join(upload_path, state_dict_filename)
-    bucket.upload_file(state_dict_local, upload_state_dict_s3_key)
-
-
-    full_model = NeuralNetwork(scaler)
-    full_model.load_state_dict(torch.load(state_dict_local))
-    full_model_local = f"/tmp/{full_model_filename}"
-    torch.save(full_model, full_model_local)
-
-    upload_model_s3_key = os.path.join(upload_path, full_model_filename)
-    print(f"Uploading model from {full_model_local} to {upload_model_s3_key}")
-    bucket.upload_file(full_model_local, upload_model_s3_key)
+    onnx_s3_key = os.path.join(upload_path, onnx_model_filename)
+    print(f"Uploading model from {onnx_model_local} to {onnx_s3_key}")
+    bucket.upload_file(onnx_model_local, onnx_s3_key)
 
 
 pyarrow_fs = get_fs()
@@ -298,9 +305,4 @@ trainer = TorchTrainer(
 )
 
 results = trainer.fit()
-print(type(results))
-print(results)
-
-# download_model(pyarrow_fs, results.checkpoint.path, f"/tmp/{model_file_name}")
-# upload_model(f"/tmp/{model_file_name}")
-save_full_model(results.checkpoint.path)
+save_onnx_model(results.checkpoint.path)
