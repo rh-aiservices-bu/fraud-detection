@@ -15,7 +15,9 @@
           "app_data": {
             "component_parameters": {
               "dependencies": [
-                "data/card_transdata.csv"
+                "data/train.csv",
+                "data/validate.csv",
+                "data/test.csv"
               ],
               "include_subdirectories": true,
               "outputs": [
@@ -33,7 +35,7 @@
             "label": "",
             "ui_data": {
               "label": "1_experiment_train.ipynb",
-              "image": "/notebook/fraud-detection-w-modelmesh/tensorflow-workbench/static/elyra/notebook.svg",
+              "image": "/notebook/chase-llm-demo/pytorch/static/elyra/notebook.svg",
               "x_pos": 88,
               "y_pos": 275,
               "description": "Run notebook file"
@@ -115,7 +117,7 @@
             "label": "",
             "ui_data": {
               "label": "2_save_model.ipynb",
-              "image": "/notebook/fraud-detection-w-modelmesh/tensorflow-workbench/static/elyra/notebook.svg",
+              "image": "/notebook/chase-llm-demo/pytorch/static/elyra/notebook.svg",
               "x_pos": 342,
               "y_pos": 277,
               "description": "Run notebook file"
@@ -168,14 +170,14 @@
           "name": "6 Train Save",
           "runtime": "Data Science Pipelines",
           "pipeline_defaults": {
-            "kubernetes_tolerations": [],
-            "mounted_volumes": [],
             "kubernetes_pod_annotations": [],
             "kubernetes_pod_labels": [],
+            "mounted_volumes": [],
+            "kubernetes_tolerations": [],
             "kubernetes_shared_mem_size": {},
             "env_vars": [],
             "kubernetes_secrets": [],
-            "runtime_image": "quay.io/modh/runtime-images@sha256:ba76fd74b7595329a23f710485a7701caa0a7b495e60c89a23d5338ca13cf2e2"
+            "runtime_image": "quay.io/modh/runtime-images@sha256:ef9cc4f0dc1c0dff82c8bcdee295a5c8b8c19d297844fc209316ace315c79982"
           },
           "pipeline_parameters": []
         }
