@@ -67,7 +67,7 @@ image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 +
 image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 400]
 
-. Set the value to `data/card_transdata.csv` which contains the data to train your model.
+. Set the value to `data/*.csv` which contains the data to train your model.
 
 . Select the *Include Subdirectories* option and then click *Add*.
 +
