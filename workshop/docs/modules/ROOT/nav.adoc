@@ -23,3 +23,7 @@
 // ** xref:enabling-data-science-pipelines.adoc[1. Enable Pipelines]
 ** xref:automating-workflows-with-pipelines.adoc[1. Workbench Pipeline Editor]
 ** xref:running-a-pipeline-generated-from-python-code.adoc[2. Python Pipelines]
+
+
+* 5. Distributed Training
+** xref:distributed-jobs-with-ray.adoc[1. Distributed Jobs with Ray]

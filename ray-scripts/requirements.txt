@@ -1,0 +1,8 @@
+boto3
+botocore
+scikit-learn
+tensorflow~= 2.15.1
+keras~=2.15.0
+onnx
+onnxruntime
+tf2onnx
