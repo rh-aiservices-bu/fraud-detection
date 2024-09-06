@@ -13,7 +13,7 @@ Note that it is possible to start a Jupyter notebook by clicking the *Launch Jup
 
 . If you are using your own OpenShift cluster, click *Create data science project*. 
 +
-*Note:* If you are using the {org-name} Developer Sandbox, you are provided with a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
+NOTE: If you are using the {org-name} Developer Sandbox, you are provided with a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
 
 . Enter a display name and description. Based on the display name, a resource name is automatically generated, but you can change if you prefer.
 +

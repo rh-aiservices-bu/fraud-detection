@@ -55,7 +55,7 @@ image::pipelines/wb-pipeline-connect-nodes.png[Connect Nodes, 400]
 
 Set node properties to specify the training file as a dependency.
 
-Note: If you don't set this file dependency, the file is not included in the node when it runs and the training job fails.
+NOTE: If you don't set this file dependency, the file is not included in the node when it runs and the training job fails.
 
 . Click the `1_experiment_train.ipynb` node.
 +

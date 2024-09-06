@@ -29,7 +29,7 @@ image::projects/ds-project-add-dc.png[Add data connection]
 
 .. Fill out the *Add data connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
 +
-*Note:* Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
+NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
 image::projects/ds-project-my-storage-form.png[Add my storage form]
 
@@ -43,7 +43,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 
 .. Fill out the form and name your connection *Pipeline Artifacts*.
 +
-*Note:* Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
+NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
 image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form]
 

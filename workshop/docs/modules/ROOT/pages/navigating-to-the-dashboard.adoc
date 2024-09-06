@@ -23,7 +23,7 @@ image::projects/login-with-openshift.png[OpenShift login, 300]
 
 The {productname-short} dashboard shows the *Home* page.
 
-*Note:* You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
+NOTE: You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
 
 image::projects/ds-console-ocp-tile.png[OCP console link]
 
