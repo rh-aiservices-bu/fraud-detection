@@ -5,9 +5,7 @@
 [.text-center.strong]
 == Conclusion
 
-Congratulations!
-
-In this {deliverable}, you learned how to incorporate data science and artificial intelligence (AI) and machine learning (ML) into an OpenShift development workflow.
+Congratulations. In this {deliverable}, you learned how to incorporate data science,  artificial intelligence, and machine learning into an OpenShift development workflow.
 
 You used an example fraud detection model and completed the following tasks:
 

@@ -3,7 +3,7 @@
 
 {productname-short} multi-model servers can host several models at once. You create a new model server and deploy your model to it.
 
-.Prerequiste
+.Prerequisite
 
 * A user with `admin` privileges has enabled the multi-model serving platform on your OpenShift cluster.
 
@@ -43,7 +43,7 @@ image::model-serving/deploy-model-form-mm.png[Deploy model from for multi-model 
 
 .Verification
 
-Wait for the model to deploy and for the *Status* to show a green checkmark.
+Notice the loading symbol under the *Status* section. It will change to a green checkmark when the deployment is completes successfully. 
 
 image::model-serving/ds-project-model-list-status-mm.png[Deployed model status]
 

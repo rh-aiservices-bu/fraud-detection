@@ -113,6 +113,6 @@ You should see a "Resources successfully created" message and the following reso
 
 .Next steps
 
-* Configure a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines]
+If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
-* Create a workbench and select a notebook image as described in xref:creating-a-workbench.adoc[Creating a workbench]
+Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].

@@ -19,7 +19,7 @@ image::pipelines/wb-pipeline-launcher.png[Pipeline buttons]
 +
 image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 100]
 +
-You've created a blank pipeline! 
+You've created a blank pipeline.
 
 . Set the default runtime image for when you run your notebook or Python code.
 
@@ -35,7 +35,7 @@ image::pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab]
 +
 image::pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
 
-. Save the pipeline.
+. Select *File* -> *Save Python File*.
 
 == Add nodes to your pipeline
 
@@ -103,7 +103,7 @@ The secret is named `aws-connection-my-storage`.
 
 [NOTE] 
 ====
-If you named your data connection something other than `My Storage`, you can obtain the secret name in the {productname-short} dashboard by hovering over the resource information icon *?* in the *Data Connections* tab. 
+If you named your data connection something other than `My Storage`, you can obtain the secret name in the {productname-short} dashboard by hovering over the help (?) icon in the *Data Connections* tab. 
 
 image::pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
 ====
@@ -136,16 +136,17 @@ image::pipelines/wb-pipeline-node-remove-env-var.png[Remove Env Var]
 
 .. Under *Kubernetes Secrets*, click *Add*.
 +
-image::pipelines/wb-pipeline-add-kube-secret.png[Add Kube Secret]
+image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret]
 
 .. Enter the following values and then click *Add*.
-** *Environment Variable*: `AWS_ACCESS_KEY_ID`
++
+* *Environment Variable*: `AWS_ACCESS_KEY_ID`
 ** *Secret Name*: `aws-connection-my-storage`
 ** *Secret Key*: `AWS_ACCESS_KEY_ID`
 +
 image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
-.. Repeat Steps 2a and 2b for each set of these Kubernetes secrets:
+. Repeat Step 2 for each of the following Kubernetes secrets:
 
 * *Environment Variable*: `AWS_SECRET_ACCESS_KEY`
 ** *Secret Name*: `aws-connection-my-storage`
@@ -163,7 +164,7 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 ** *Secret Name*: `aws-connection-my-storage`
 ** *Secret Key*: `AWS_S3_BUCKET`
 
-. *Save* and *Rename* the `.pipeline` file.
+. Select *File* -> *Save Python File As* to save and rename the pipeline. For example, rename it to `My Train Save.pipeline`.
 
 == Run the Pipeline 
 

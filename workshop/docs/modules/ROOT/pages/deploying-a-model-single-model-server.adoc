@@ -6,7 +6,7 @@
 *Note:* Depending on how model serving has been configured on your cluster, you might see only one model serving platform option.
 
 
-.Prerequiste
+.Prerequisite
 
 * A user with `admin` privileges has enabled the single-model serving platform on your OpenShift cluster.
 
@@ -33,7 +33,7 @@ image::model-serving/deploy-model-form-sm.png[Deploy model from for single-model
 
 .Verification
 
-Wait for the model to deploy and for the *Status* to show a green checkmark.
+Notice the loading symbol under the *Status* section. It will change to a green checkmark when the deployment is completes successfully.
 
 image::model-serving/ds-project-model-list-status-sm.png[Deployed model status]
 
