@@ -11,9 +11,9 @@ image::projects/launch-jupyter-link.png[Launch Jupyter link]
 +
 Note that it is possible to start a Jupyter notebook by clicking the *Launch Jupyter* link. However, it would be a one-off Jupyter notebook run in isolation. To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own data connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
-. If you are using the {org-name} Developer Sandbox, you are provided with a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
+. If you are using your own OpenShift cluster, click *Create data science project*. 
 +
-If you are using your own OpenShift cluster, click *Create data science project*.
+NOTE: If you are using the {org-name} Developer Sandbox, you are provided with a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
 
 . Enter a display name and description. Based on the display name, a resource name is automatically generated, but you can change if you prefer.
 +

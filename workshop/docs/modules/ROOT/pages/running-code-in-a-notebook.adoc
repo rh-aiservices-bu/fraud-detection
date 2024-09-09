@@ -33,7 +33,7 @@ Notebooks are so named because they are like a physical _notebook_: you can take
 
 == Try it
 
-Now that you know the basics, give it a try!
+Now that you know the basics, give it a try.
 
 .Prerequisite
 

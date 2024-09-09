@@ -16,7 +16,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 . Click the *Workbenches* tab, and then click the *Create workbench* button.
 +
-image::workbenches/ds-project-create-workbench.png[Create workbench button]
+image::workbenches/ds-project-create-workbench.png[Create workbench button, 300]
 
 . Fill out the name and description.
 +

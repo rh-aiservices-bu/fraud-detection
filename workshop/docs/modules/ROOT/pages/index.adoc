@@ -6,9 +6,7 @@
 [.text-center.strong]
 == Introduction
 
-Welcome!
-
-In this {deliverable}, you learn how to incorporate data science and artificial intelligence and machine learning (AI/ML) into an OpenShift development workflow.
+Welcome. In this {deliverable}, you learn how to incorporate data science and artificial intelligence and machine learning (AI/ML) into an OpenShift development workflow.
 
 You will use an example fraud detection model to complete the following tasks:
 
@@ -16,7 +14,7 @@ You will use an example fraud detection model to complete the following tasks:
 * Deploy the model by using {productname-short} model serving.
 * Refine and train the model by using automated pipelines.
 
-And you do not have to install anything on your own computer, thanks to https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science[{productname-long}].
+And you do not have to install anything on your own computer, thanks to https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}].
 
 == About the example fraud detection model
 
@@ -30,11 +28,13 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 == Before you begin
 
-If you don't already have an instance of {productname-long}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the *free {org-name} Developer Sandbox* or you can learn how to install {productname-short} on *your own OpenShift cluster*.
+You should have access to an OpenShift cluster where {productname-long} is installed. 
+
+If don't have access to a cluster that includes an instance of {productname-short}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the https://console.redhat.com/openshift/sandbox[*free {org-name} Developer Sandbox*] or you can learn how to install {productname-short} on *your own OpenShift cluster*.
 
 [IMPORTANT]
 ====
 If your cluster uses self-signed certificates, before you begin the {deliverable}, your {productname-short} administrator must add self-signed certificates for {productname-short} as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2-latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
 ====
 
-If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}!]
+If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}].
