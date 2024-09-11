@@ -31,7 +31,7 @@ image::projects/ds-project-add-dc.png[Add data connection]
 +
 NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
-image::projects/ds-project-my-storage-form.png[Add my storage form]
+image::projects/ds-project-my-storage-form.png[Add my storage form, 400]
 
 .. Click *Add data connection*.
 
@@ -45,7 +45,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 +
 NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
-image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form]
+image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form, 400]
 
 .. Click *Add data connection*.
 
@@ -54,7 +54,7 @@ image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts fo
 
 In the *Data connections* tab for the project, check to see that your data connections are listed.
 
-image::projects/ds-project-dc-list.png[List of project data connections]
+image::projects/ds-project-dc-list.png[List of project data connections, 400]
 
 
 .Next steps

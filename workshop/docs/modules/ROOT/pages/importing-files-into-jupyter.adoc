@@ -23,7 +23,7 @@ This file-browser window shows the files and folders that are saved inside your 
 
 .. On the toolbar, click the *Git Clone* icon:
 +
-image::workbenches/jupyter-git-icon.png[Git Clone icon, 300]
+image::workbenches/jupyter-git-icon.png[Git Clone icon, 200]
 
 .. Enter the following {deliverable} Git *https* URL:
 +
@@ -34,7 +34,7 @@ image::workbenches/jupyter-git-icon.png[Git Clone icon, 300]
 https://github.com/rh-aiservices-bu/fraud-detection.git
 ----
 +
-image::workbenches/jupyter-git-modal.png[Git Modal, 300]
+image::workbenches/jupyter-git-modal.png[Git Modal, 200]
 
 .. Check the *Include submodules* option.
 
@@ -44,10 +44,10 @@ image::workbenches/jupyter-git-modal.png[Git Modal, 300]
 
 .. In the left navigation bar, click the *Git* icon and then, in the *Filter* field, enter *{git-version}*.
 +
-image::workbenches/jupyter-git-icon-version.png[Git Clone icon, 300]
+image::workbenches/jupyter-git-icon-version.png[Git Clone icon, 200]
 
 // the {git-version} attribute value is defined at the top of this file
-.. Select *{git-version}* as the current branch.
+.. Select * origin/{git-version}* as the current branch.
 
 
 .Verification

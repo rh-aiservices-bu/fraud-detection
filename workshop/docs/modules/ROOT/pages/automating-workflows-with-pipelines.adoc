@@ -17,7 +17,7 @@ image::pipelines/wb-pipeline-launcher.png[Pipeline buttons]
 
 . Click *Pipeline Editor*.
 +
-image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 100]
+image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 75]
 +
 You've created a blank pipeline.
 
@@ -25,7 +25,7 @@ You've created a blank pipeline.
 
 .. In the pipeline editor, click *Open Panel*.
 +
-image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel]
+image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel,400]
 
 .. Select the *Pipeline Properties* tab.
 +
@@ -59,7 +59,7 @@ NOTE: If you don't set this file dependency, the file is not included in the nod
 
 . Click the `1_experiment_train.ipynb` node.
 +
-image::pipelines/wb-pipeline-node-1.png[Select Node 1, 200]
+image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 
 . In the *Properties* panel, click the *Node Properties* tab.
 
@@ -144,7 +144,7 @@ image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret]
 ** *Secret Name*: `aws-connection-my-storage`
 ** *Secret Key*: `AWS_ACCESS_KEY_ID`
 +
-image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
+image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 300]
 
 . Repeat Step 2 for each of the following Kubernetes secrets:
 

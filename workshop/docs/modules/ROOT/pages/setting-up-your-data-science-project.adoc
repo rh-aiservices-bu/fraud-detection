@@ -17,7 +17,7 @@ NOTE: If you are using the {org-name} Developer Sandbox, you are provided with a
 
 . Enter a display name and description. Based on the display name, a resource name is automatically generated, but you can change if you prefer.
 +
-image::projects/ds-project-new-form.png[New data science project form]
+image::projects/ds-project-new-form.png[New data science project form, 300]
 
 .Verification
 
