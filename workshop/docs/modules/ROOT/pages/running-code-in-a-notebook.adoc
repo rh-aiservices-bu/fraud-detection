@@ -19,7 +19,7 @@ You can run a code cell from the notebook interface or from the keyboard:
 
 * *From the user interface:* Select the cell (by clicking inside the cell or to the left side of the cell) and then click *Run* from the toolbar.
 +
-image::workbenches/run_button.png[Jupyter Run]
+image::workbenches/run_button.png[Jupyter Run, 75]
 
 * *From the keyboard:* Press `CTRL` + `ENTER` to run a cell or press `SHIFT` + `ENTER` to run the cell and automatically select the next one.
 
@@ -52,7 +52,7 @@ You can do what you want - it's your environment and there is no risk of breakin
 . Optionally, create a new notebook in which the code cells are run by using a Python 3 kernel:
 .. Create a new notebook by either selecting *File ->New ->Notebook* or by clicking the Python 3 tile in the Notebook section of the launcher window:
 +
-image::workbenches/new_notebook.png[alt text]
+image::workbenches/new_notebook.png[New notebook, 100]
 
 You can use different kernels, with different languages or versions, to run in your notebook.
 
