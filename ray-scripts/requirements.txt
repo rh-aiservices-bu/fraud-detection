@@ -1,0 +1,7 @@
+boto3~=1.35.12
+botocore~=1.35.12
+scikit-learn~=1.5.1
+tensorflow~= 2.15.1
+keras~=2.15.0
+onnx~=1.16.2
+tf2onnx~=1.16.1

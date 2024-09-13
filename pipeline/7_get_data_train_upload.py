@@ -7,19 +7,25 @@ from kfp.dsl import InputPath, OutputPath
 from kfp import kubernetes
 
 
-@dsl.component(base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023b-20240301")
-def get_data(data_output_path: OutputPath()):
+@dsl.component(base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523")
+def get_data(train_data_output_path: OutputPath(), validate_data_output_path: OutputPath()):
     import urllib.request
     print("starting download...")
-    url = "https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/card_transdata.csv"
-    urllib.request.urlretrieve(url, data_output_path)
-    print("done")
+    print("downloading training data")
+    url = "https://raw.githubusercontent.com/cfchase/fraud-detection/main/data/train.csv"
+    urllib.request.urlretrieve(url, train_data_output_path)
+    print("train data downloaded")
+    print("downloading validation data")
+    url = "https://raw.githubusercontent.com/cfchase/fraud-detection/main/data/validate.csv"
+    urllib.request.urlretrieve(url, validate_data_output_path)
+    print("validation data downloaded")
+
 
 @dsl.component(
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023b-20240301",
-    packages_to_install=["tf2onnx", "seaborn"],
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
+    packages_to_install=["onnx", "onnxruntime", "tf2onnx"],
 )
-def train_model(data_input_path: InputPath(), model_output_path: OutputPath()):
+def train_model(train_data_input_path: InputPath(), validate_data_input_path: InputPath(), model_output_path: OutputPath()):
     import numpy as np
     import pandas as pd
     from keras.models import Sequential
@@ -42,22 +48,29 @@ def train_model(data_input_path: InputPath(), model_output_path: OutputPath()):
     #   usedpinnumber - If the PIN number was used.
     #   online_order - If it was an online order.
     #   fraud - If the transaction is fraudulent.
-    Data = pd.read_csv(data_input_path)
 
-    # Set the input (X) and output (Y) data.
-    # The only output data we have is if it's fraudulent or not, and all other fields go as inputs to the model.
 
-    X = Data.drop(columns = ['repeat_retailer','distance_from_home', 'fraud'])
-    y = Data['fraud']
+    feature_indexes = [
+        1,  # distance_from_last_transaction
+        2,  # ratio_to_median_purchase_price
+        4,  # used_chip
+        5,  # used_pin_number
+        6,  # online_order
+    ]
 
-    # Split the data into training and testing sets so we have something to test the trained model with.
+    label_indexes = [
+        7  # fraud
+    ]
 
-    # X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, stratify = y)
-    X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, shuffle = False)
+    X_train = pd.read_csv(train_data_input_path)
+    y_train = X_train.iloc[:, label_indexes]
+    X_train = X_train.iloc[:, feature_indexes]
 
-    X_train, X_val, y_train, y_val = train_test_split(X_train,y_train, test_size = 0.2, stratify = y_train)
+    X_val = pd.read_csv(validate_data_input_path)
+    y_val = X_val.iloc[:, label_indexes]
+    X_val = X_val.iloc[:, feature_indexes]
 
-    # Scale the data to remove mean and have unit variance. This means that the data will be between -1 and 1, which makes it a lot easier for the model to learn than random potentially large values.
+    # Scale the data to remove mean and have unit variance. The data will be between -1 and 1, which makes it a lot easier for the model to learn than random (and potentially large) values.
     # It is important to only fit the scaler to the training data, otherwise you are leaking information about the global distribution of variables (which is influenced by the test set) into the training set.
 
     scaler = StandardScaler()
@@ -65,21 +78,17 @@ def train_model(data_input_path: InputPath(), model_output_path: OutputPath()):
     X_train = scaler.fit_transform(X_train.values)
 
     Path("artifact").mkdir(parents=True, exist_ok=True)
-    with open("artifact/test_data.pkl", "wb") as handle:
-        pickle.dump((X_test, y_test), handle)
     with open("artifact/scaler.pkl", "wb") as handle:
         pickle.dump(scaler, handle)
 
-    # Since the dataset is unbalanced (it has many more non-fraud transactions than fraudulent ones), we set a class weight to weight the few fraudulent transactions higher than the many non-fraud transactions.
-
-    class_weights = class_weight.compute_class_weight('balanced',classes = np.unique(y_train),y = y_train)
-    class_weights = {i : class_weights[i] for i in range(len(class_weights))}
-
+    # Since the dataset is unbalanced (it has many more non-fraud transactions than fraudulent ones), set a class weight to weight the few fraudulent transactions higher than the many non-fraud transactions.
+    class_weights = class_weight.compute_class_weight('balanced', classes=np.unique(y_train), y=y_train.values.ravel())
+    class_weights = {i: class_weights[i] for i in range(len(class_weights))}
 
     # Build the model, the model we build here is a simple fully connected deep neural network, containing 3 hidden layers and one output layer.
 
     model = Sequential()
-    model.add(Dense(32, activation = 'relu', input_dim = len(X.columns)))
+    model.add(Dense(32, activation='relu', input_dim=len(feature_indexes)))
     model.add(Dropout(0.2))
     model.add(Dense(32))
     model.add(BatchNormalization())
@@ -89,27 +98,25 @@ def train_model(data_input_path: InputPath(), model_output_path: OutputPath()):
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     model.add(Dropout(0.2))
-    model.add(Dense(1, activation = 'sigmoid'))
-    model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     model.summary()
-
 
     # Train the model and get performance
 
     epochs = 2
-    history = model.fit(X_train, y_train, epochs=epochs, \
-                        validation_data=(scaler.transform(X_val.values),y_val), \
-                        verbose = True, class_weight = class_weights)
+    history = model.fit(X_train, y_train, epochs=epochs,
+                        validation_data=(scaler.transform(X_val.values), y_val),
+                        verbose=True, class_weight=class_weights)
 
     # Save the model as ONNX for easy use of ModelMesh
-
     model_proto, _ = tf2onnx.convert.from_keras(model)
     print(model_output_path)
     onnx.save(model_proto, model_output_path)
 
 
 @dsl.component(
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2023b-20240301",
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
     packages_to_install=["boto3", "botocore"]
 )
 def upload_model(input_model_path: InputPath()):
@@ -143,9 +150,11 @@ def upload_model(input_model_path: InputPath()):
 @dsl.pipeline(name=os.path.basename(__file__).replace('.py', ''))
 def pipeline():
     get_data_task = get_data()
-    csv_file = get_data_task.outputs["data_output_path"]
-    # csv_file = get_data_task.output
-    train_model_task = train_model(data_input_path=csv_file)
+    train_data_csv_file = get_data_task.outputs["train_data_output_path"]
+    validate_data_csv_file = get_data_task.outputs["validate_data_output_path"]
+
+    train_model_task = train_model(train_data_input_path=train_data_csv_file,
+                                   validate_data_input_path=validate_data_csv_file)
     onnx_file = train_model_task.outputs["model_output_path"]
 
     upload_model_task = upload_model(input_model_path=onnx_file)
@@ -162,6 +171,7 @@ def pipeline():
             'AWS_S3_BUCKET': 'AWS_S3_BUCKET',
             'AWS_S3_ENDPOINT': 'AWS_S3_ENDPOINT',
         })
+
 
 if __name__ == '__main__':
     compiler.Compiler().compile(
