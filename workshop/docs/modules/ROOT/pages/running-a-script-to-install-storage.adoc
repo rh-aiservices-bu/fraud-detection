@@ -15,7 +15,7 @@ IMPORTANT: The Minio-based Object Storage that the script creates is *not* meant
 
 NOTE: If you want to connect to your own storage, see xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
 
-.Prerequisite
+.Prerequisites
 
 You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
 
@@ -37,7 +37,7 @@ oc apply -n <your-project-name/> -f https://github.com/rh-aiservices-bu/fraud-de
 
 . In the {productname-short} dashboard, click the application launcher icon and then select the *OpenShift Console* option.
 +
-image::projects/ds-project-ocp-link.png[OpenShift Console Link]
+image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
 . In the OpenShift console, click *+* in the top navigation bar.
 +

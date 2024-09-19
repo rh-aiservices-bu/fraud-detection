@@ -1,11 +1,11 @@
 [id='creating-data-connections-to-storage']
 = Creating data connections to your own S3-compatible object storage
 
-If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a data connection to one storage bucket for saving your data and models and, if you want to complete the pipelines section of this {deliverable}, create another data connection to a different storage bucket for saving pipeline artifacts.
+If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a data connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another data connection to a different storage bucket for saving pipeline artifacts.
 
 NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections].   The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two data connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
 
-.Prerequisite
+.Prerequisites
 
 To create data connections to your existing S3-compatible storage buckets, you need the following credential information for the storage buckets:
 
@@ -31,7 +31,7 @@ image::projects/ds-project-add-dc.png[Add data connection]
 +
 NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
-image::projects/ds-project-my-storage-form.png[Add my storage form, 400]
+image::projects/ds-project-my-storage-form.png[Add my storage form, 500]
 
 .. Click *Add data connection*.
 
@@ -45,7 +45,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 +
 NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
-image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form, 400]
+image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form, 500]
 
 .. Click *Add data connection*.
 
@@ -54,7 +54,7 @@ image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts fo
 
 In the *Data connections* tab for the project, check to see that your data connections are listed.
 
-image::projects/ds-project-dc-list.png[List of project data connections, 400]
+image::projects/ds-project-dc-list.png[List of project data connections, 500]
 
 
 .Next steps
