@@ -3,7 +3,7 @@
 
 If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a data connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another data connection to a different storage bucket for saving pipeline artifacts.
 
-NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections].   The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two data connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
+NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create data connections]. The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two data connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
 
 .Prerequisites
 
@@ -27,7 +27,7 @@ If you don't have this information, contact your storage administrator.
 +
 image::projects/ds-project-add-dc.png[Add data connection]
 
-.. Fill out the *Add data connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
+.. Complete the *Add data connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
 +
 NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +
@@ -41,7 +41,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 
 .. Click *Add data connection*.
 
-.. Fill out the form and name your connection *Pipeline Artifacts*.
+.. Complete the form and name your connection *Pipeline Artifacts*.
 +
 NOTE: Skip the *Connected workbench* item. You add data connections to a workbench in a later section.
 +

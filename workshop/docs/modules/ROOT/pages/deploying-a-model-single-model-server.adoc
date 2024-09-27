@@ -30,7 +30,7 @@ image::model-serving/deploy-model-form-sm.png[Deploy model form for single-model
 
 .Verification
 
-Notice the loading symbol under the *Status* section. It changes to a green checkmark when the deployment completes successfully. 
+Notice the loading symbol under the *Status* section. The symbol changes to a green checkmark when the deployment completes successfully. 
 
 image::model-serving/ds-project-model-list-status-sm.png[Deployed model status]
 
