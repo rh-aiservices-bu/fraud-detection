@@ -29,7 +29,7 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 
 . Click *Configure pipeline server*.
 
-. Wait until the spinner disappears and *Start by importing a pipeline* is displayed.
+. Wait until the loading spinner disappears and *Start by importing a pipeline* is displayed.
 +
 [IMPORTANT]
 ====

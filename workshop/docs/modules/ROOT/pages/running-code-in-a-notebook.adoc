@@ -19,7 +19,7 @@ You can run a code cell from the notebook interface or from the keyboard:
 
 * *From the user interface:* Select the cell (by clicking inside the cell or to the left side of the cell) and then click *Run* from the toolbar.
 +
-image::workbenches/run_button.png[Jupyter Run, 75]
+image::workbenches/run_button.png[Jupyter Run, 100]
 
 * *From the keyboard:* Press `CTRL` + `ENTER` to run a cell or press `SHIFT` + `ENTER` to run the cell and automatically select the next one.
 
@@ -35,7 +35,7 @@ Notebooks are so named because they are like a physical _notebook_: you can take
 
 Now that you know the basics, give it a try.
 
-.Prerequisite
+.Prerequisites
 
 * You have imported the {deliverable} files into your Jupyter environment as described in 
 xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the Jupyter environment].

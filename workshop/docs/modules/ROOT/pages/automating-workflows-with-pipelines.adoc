@@ -65,13 +65,13 @@ image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 
 . Scroll down to the *File Dependencies* section and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 400]
+image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 500]
 
 . Set the value to `data/*.csv` which contains the data to train your model.
 
 . Select the *Include Subdirectories* option and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
+image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 500]
 
 . Save the pipeline.
 
@@ -168,7 +168,7 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 300]
 
 == Run the Pipeline 
 
-Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline for this or `6 Train Save.pipeline`.
+Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline or the pipeline provided in the `6 Train Save.pipeline` file.
 
 .Procedure
 

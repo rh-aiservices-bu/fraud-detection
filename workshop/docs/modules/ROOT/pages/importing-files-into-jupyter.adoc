@@ -5,7 +5,7 @@
 
 The Jupyter environment is a web-based environment, but everything you do inside it happens on *{productname-long}* and is powered by the *OpenShift* cluster. This means that, without having to install and maintain anything on your own computer, and without disposing of valuable local resources such as CPU, GPU and RAM, you can conduct your Data Science work in this powerful and stable managed environment.
 
-.Prerequisite
+.Prerequisites
 
 You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench and selecting a Notebook image].
 
