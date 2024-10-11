@@ -142,9 +142,11 @@ def main():
         max_transactions=5,
         max_days_back=365,
     )
-    user_purchase_history.to_parquet("raw_transaction_datasource.parquet")
+    user_purchase_history.to_parquet(
+        os.path.join(script_dir, "raw_transaction_datasource.parquet")
+    )
     finaldf = calculate_point_in_time_features(label_dataset, user_purchase_history)
-    finaldf.to_parquet("final_data.parquet")
+    finaldf.to_parquet(os.path.join(script_dir, "final_data.parquet"))
 
 
 if __name__ == "__main__":
