@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import uuid
@@ -110,9 +111,10 @@ def calculate_point_in_time_features(label_dataset, transactions_df) -> pd.DataF
 
 
 def main():
-    train = pd.read_csv("train.csv")
-    test = pd.read_csv("test.csv")
-    valid = pd.read_csv("validate.csv")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    train = pd.read_csv(os.path.join(script_dir, "train.csv"))
+    test = pd.read_csv(os.path.join(script_dir, "test.csv"))
+    valid = pd.read_csv(os.path.join(script_dir, "validate.csv"))
     df = pd.concat([train, test, valid], axis=0).reset_index(drop=True)
 
     df["user_id"] = [f"user_{i}" for i in range(df.shape[0])]
