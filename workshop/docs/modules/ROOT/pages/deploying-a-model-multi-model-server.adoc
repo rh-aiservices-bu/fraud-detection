@@ -31,8 +31,8 @@ image::model-serving/create-model-server-form.png[Create model server form, 400]
 image::model-serving/ds-project-workbench-list-deploy.png[Create model server form]
 
 . In the form, provide the following values:
-.. For *Model Name*, type `fraud`.
-.. For *Model framework*, select `onnx-1`.
+.. For *Model deployment name*, type `fraud`.
+.. For *Model framework (name - version)*, select `onnx-1`.
 .. For *Existing data connection*, select `My Storage`.
 .. Type the path that leads to the version folder that contains your model file: `models/fraud`
 .. Leave the other fields with the default settings.
@@ -50,4 +50,4 @@ image::model-serving/ds-project-model-list-status-mm.png[Deployed model status]
 
 .Next step
 
-xref:testing-the-model-api.adoc[Testing the model API]
+xref:testing-the-model-api[Testing the model API]
