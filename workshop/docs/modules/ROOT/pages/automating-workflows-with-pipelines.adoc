@@ -95,7 +95,7 @@ image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency val
 
 In node 2, the notebook uploads the model to the S3 storage bucket.
 
-You must set the S3 storage bucket keys by using the secret created by the `My Storage` data connection that you set up in the xref:storing-data-with-data-connections[Storing data with data connections] section of this {deliverable}.
+You must set the S3 storage bucket keys by using the secret created by the `My Storage` data connection that you set up in the xref:storing-data-with-data-connections.adoc[Storing data with data connections] section of this {deliverable}.
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 
@@ -195,9 +195,9 @@ image::pipelines/dsp-view-run.png[Set File Dependency Value, 800]
 +
 image::pipelines/pipeline-run-complete.png[Set File Dependency Value, 800]
 
-The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment[Preparing a model for deployment] section.
+The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment] section.
 
 
 .Next step
 
-(optional) xref:running-a-pipeline-generated-from-python-code[Automating workflows with data science pipelines]
+(optional) xref:running-a-pipeline-generated-from-python-code.adoc[Automating workflows with data science pipelines]

@@ -5,14 +5,14 @@ A workbench is an instance of your development and experimentation environment. 
 
 .Prerequisites
 
-* You created a `My Storage` data connection as described in xref:storing-data-with-data-connections[Storing data with data connections].
+* You created a `My Storage` data connection as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
 
-* You configured a pipeline server as described in xref:enabling-data-science-pipelines[Enabling data science pipelines].
+* You configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
 
 .Procedure
 
-. Navigate to the project detail page for the data science project that you created in xref:setting-up-your-data-science-project[Setting up your data science project].
+. Navigate to the project detail page for the data science project that you created in xref:setting-up-your-data-science-project.adoc[Setting up your data science project].
 
 . Click the *Workbenches* tab, and then click the *Create workbench* button.
 +
@@ -57,4 +57,4 @@ image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit, 250]
 
 .Next step
 
-xref:importing-files-into-jupyter[Importing the {deliverable} files into the Jupyter environment]
+xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the Jupyter environment]

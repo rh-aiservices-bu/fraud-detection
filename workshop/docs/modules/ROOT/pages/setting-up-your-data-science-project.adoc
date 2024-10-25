@@ -39,4 +39,4 @@ image::projects/ds-project-new.png[New data science project]
 
 .Next step
 
-xref:storing-data-with-data-connections[Storing data with data connections]
+xref:storing-data-with-data-connections.adoc[Storing data with data connections]

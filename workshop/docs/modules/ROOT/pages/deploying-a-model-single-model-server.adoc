@@ -37,4 +37,4 @@ image::model-serving/ds-project-model-list-status-sm.png[Deployed model status]
 
 .Next step
 
-xref:testing-the-model-api[Testing the model API]
+xref:testing-the-model-api.adoc[Testing the model API]
