@@ -15,9 +15,9 @@ Note that it is possible to start a Jupyter notebook by clicking the *Launch sta
 +
 NOTE: If you are using the {org-name} Developer Sandbox, you are provided with a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
 
-. Enter a display name and description. Based on the display name, a resource name is automatically generated, but you can change if you prefer.
+. Enter a display name and description.
 +
-image::projects/ds-project-new-form.png[New data science project form, 300]
+image::projects/ds-project-new-form.png[New data science project form, 600]
 
 .Verification
 
