@@ -36,8 +36,6 @@ https://github.com/rh-aiservices-bu/fraud-detection.git
 +
 image::workbenches/jupyter-git-modal.png[Git Modal, 200]
 
-.. Check the *Include submodules* option.
-
 .. Check the *Include submodules* option, and then click *Clone*.
 
 .. In the file browser, double-click the newly-created *fraud-detection* folder.
