@@ -181,7 +181,7 @@ image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
 . Verify the *Runtime Configuration:* is set to `Data Science Pipeline`.  
 . Click *OK*.
 +
-NOTE: If `Data Science Pipeline` is not available as a runtime configuration, you may have created your notebook before the pipeline server was available.  You can restart your notebook after the pipeline server has been created in your data science project.
+NOTE: If `Data Science Pipeline` is not available as a runtime configuration, you may have created your notebook before the pipeline server was available. Also verify that you did the prerequisite step of xref:enabling-data-science-pipelines.adoc[setting up a pipeline server].  You can restart your notebook after the pipeline server has been created in your data science project. 
 
 . Return to your data science project and expand the newly created pipeline.
 +
