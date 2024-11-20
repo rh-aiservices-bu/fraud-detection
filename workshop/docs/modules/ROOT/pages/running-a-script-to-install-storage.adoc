@@ -1,19 +1,19 @@
 [id='running-a-script-to-install-storage']
-= Running a script to install local object storage buckets and create data connections
+= Running a script to install local object storage buckets and create connections
 
 For convenience, run a script (provided in the following procedure) that automatically completes these tasks:
 
 * Creates a Minio instance in your project.
 * Creates two storage buckets in that Minio instance.
 * Generates a random user id and password for your Minio instance.
-* Creates two data connections in your project, one for each bucket and both using the same credentials.
+* Creates two connections in your project, one for each bucket and both using the same credentials.
 * Installs required network policies for service mesh functionality.
 
 The script is based on a https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio].
 
 IMPORTANT: The Minio-based Object Storage that the script creates is *not* meant for production usage.
 
-NOTE: If you want to connect to your own storage, see xref:creating-data-connections-to-storage.adoc[Creating data connections to your own S3-compatible object storage].
+NOTE: If you want to connect to your own storage, see xref:creating-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
 
 .Prerequisites
 
@@ -89,7 +89,7 @@ spec:
         - args:
             - -ec
             - |-
-              echo -n 'Setting up Minio instance and data connections'
+              echo -n 'Setting up Minio instance and connections'
               oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash

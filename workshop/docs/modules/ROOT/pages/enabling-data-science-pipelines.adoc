@@ -9,7 +9,7 @@ In this {deliverable}, you implement an example pipeline by using the JupyterLab
 
 .Prerequisite
 
-* You have installed local object storage buckets and created data connections, as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
+* You have installed local object storage buckets and created connections, as described in xref:storing-data-with-connections.adoc[Storing data with connections].
 
 .Procedure
 
@@ -21,9 +21,9 @@ In this {deliverable}, you implement an example pipeline by using the JupyterLab
 +
 image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
 
-. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts* to populate the *Configure pipeline server* form with credentials for the data connection.
+. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts* to populate the *Configure pipeline server* form with credentials for the connection.
 +
-image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts data connection]
+image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
 
 . Leave the database configuration as the default.
 

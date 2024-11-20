@@ -1,0 +1,17 @@
+[id='storing-data-with-data-connections']
+= Storing data with connections
+
+Add connections to workbenches if you want to connect your project to data inputs and object storage buckets. A connection is a resource that contains the configuration parameters needed to connect to an object storage bucket.
+
+For this {deliverable}, you need two S3-compatible object storage buckets, such as Ceph, Minio, or AWS S3. You can use your own storage buckets or run a provided script that creates the following local Minio storage buckets for you:
+
+* *My Storage* - Use this bucket for storing your models and data. You can reuse this bucket and its connection for your notebooks and model servers.
+*  *Pipelines Artifacts* - Use this bucket as storage for your pipeline artifacts. A pipeline artifacts bucket is required when you create a pipeline server. For this {deliverable}, create this bucket to separate it from the first storage bucket for clarity.
+
+Also, you must create a connection to each storage bucket. You have two options for this {deliverable}, depending on whether you want to use your own storage buckets or use a script to create local Minio storage buckets:
+
+* If you want to use your own S3-compatible object storage buckets, create connections to them as described in xref:creating-data-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
+
+* If you want to run a script that installs local Minio storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
+
+NOTE: While it is possible for you to use one storage bucket for both purposes (storing models and data as well as storing pipeline artifacts), this tutorial follows best practice and uses separate storage buckets for each purpose.

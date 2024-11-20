@@ -91,11 +91,11 @@ image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency val
 
 . Save the pipeline.
  
-== Configure the data connection to the S3 storage bucket
+== Configure the connection to the S3 storage bucket
 
 In node 2, the notebook uploads the model to the S3 storage bucket.
 
-You must set the S3 storage bucket keys by using the secret created by the `My Storage` data connection that you set up in the xref:storing-data-with-data-connections.adoc[Storing data with data connections] section of this {deliverable}.
+You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in the xref:storing-data-with-connections.adoc[Storing data with connections] section of this {deliverable}.
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 
@@ -103,7 +103,7 @@ The secret is named `aws-connection-my-storage`.
 
 [NOTE] 
 ====
-If you named your data connection something other than `My Storage`, you can obtain the secret name in the {productname-short} dashboard by hovering over the help (?) icon in the *Data Connections* tab. 
+If you named your connection something other than `My Storage`, you can obtain the secret name in the {productname-short} dashboard by hovering over the help (?) icon in the *Connections* tab. 
 
 image::pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
 ====

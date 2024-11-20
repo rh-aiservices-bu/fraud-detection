@@ -1,0 +1,64 @@
+[id='creating-data-connections-to-storage']
+= Creating connections to your own S3-compatible object storage
+
+If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another connection to a different storage bucket for saving pipeline artifacts.
+
+NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections]. The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
+
+.Prerequisites
+
+To create connections to your existing S3-compatible storage buckets, you need the following credential information for the storage buckets:
+
+* Endpoint URL
+* Access key
+* Secret key
+* Region
+* Bucket name
+
+If you don't have this information, contact your storage administrator.
+
+.Procedure
+
+. Create a connection for saving your data and models:
+
+.. In the {productname-short} dashboard, navigate to the page for your data science project.
+
+.. Click the *Connections* tab, and then click *Add connection*.
++
+image::projects/ds-project-add-dc.png[Add connection]
+
+.. Complete the *Add connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
++
+NOTE: Skip the *Connected workbench* item. You add connections to a workbench in a later section.
++
+image::projects/ds-project-my-storage-form.png[Add my storage form, 500]
+
+.. Click *Add connection*.
+
+. Create a connection for saving pipeline artifacts:
++
+NOTE: If you do not intend to complete the pipelines section of the {deliverable}, you can skip this step.
+
+.. Click *Add connection*.
+
+.. Complete the form and name your connection *Pipeline Artifacts*.
++
+NOTE: Skip the *Connected workbench* item. You add connections to a workbench in a later section.
++
+image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form, 500]
+
+.. Click *Add connection*.
+
+
+.Verification
+
+In the *Connections* tab for the project, check to see that your connections are listed.
+
+image::projects/ds-project-dc-list.png[List of project connections, 500]
+
+
+.Next steps
+
+If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+
+Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].
