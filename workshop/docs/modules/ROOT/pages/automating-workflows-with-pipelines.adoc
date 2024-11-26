@@ -200,4 +200,4 @@ The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which 
 
 .Next step
 
-(optional) xref:running-a-pipeline-generated-from-python-code.adoc[Automating workflows with data science pipelines]
+(optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]

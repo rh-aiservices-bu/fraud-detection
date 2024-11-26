@@ -38,6 +38,7 @@ image::pipelines/dsp-pipline-view-runs.png[]
 . Click *Create run*.
 
 . On the *Create run* page, provide the following values:
+.. For *Experiment*, leave the default `Default` value. 
 .. For *Name*, type any name, for example `Run 1`.
 .. For *Pipeline*, select the pipeline that you uploaded.
 +
@@ -47,6 +48,6 @@ image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 
 . Click *Create* to create the run.
 +
-A new run starts immediately. The *Details* page shows a pipeline created in Python that is running in {productname-short}.
+A new run starts immediately. The run details page shows a pipeline created in Python that is running in {productname-short}.
 +
 image::pipelines/pipeline-run-in-progress.png[]
