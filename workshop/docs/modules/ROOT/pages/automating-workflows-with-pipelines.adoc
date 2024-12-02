@@ -65,7 +65,7 @@ image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 
 . Scroll down to the *File Dependencies* section and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 500]
+image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 400]
 
 . Set the value to `data/*.csv` which contains the data to train your model.
 

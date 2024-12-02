@@ -27,6 +27,8 @@ If you don't have this information, contact your storage administrator.
 +
 image::projects/ds-project-add-dc.png[Add connection]
 
+.. In the *Add connection* modal, for the *Connection type* select *S3 compatible object storage - v1*.
+
 .. Complete the *Add connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
 +
 NOTE: Skip the *Connected workbench* item. You add connections to a workbench in a later section.

@@ -105,11 +105,19 @@ spec:
 
 .Verification
 
-You should see a "Resources successfully created" message and the following resources listed:
-
+. In the OpenShift console, you should see a "Resources successfully created" message and the following resources listed:
++
 * `demo-setup`
 * `demo-setup-edit`
 * `create-s3-storage`
+
+.  In the {productname-short} dashboard:
+
+.. Select *Data Science Projects* and then click your project's name, *Fraud detection*.
+.. Click *Connections*. You should see two connections listed: `My Storage`` and `Pipeline Artifacts`.
++ 
+image::projects/ds-project-connections.png[Connections for Fraud Detection]
+
 
 .Next steps
 
