@@ -40,7 +40,7 @@ image::workbenches/create-workbench-form-accelerator.png[Workbench accelerator, 
 +
 image::workbenches/create-workbench-form-env-storage.png[Workbench storage, 600]
 
-. Under *Connections*, select *Use existing connection* and select `My Storage` (the object storage that you configured previously) from the list.
+. Under *Connections*, select *Use existing connection* and then select `My Storage` (the object storage that you configured previously) from the list.
 +
 image::workbenches/create-workbench-form-data-connection.png[Connection form, 600]
 
