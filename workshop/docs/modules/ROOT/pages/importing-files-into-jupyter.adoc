@@ -45,7 +45,7 @@ image::workbenches/jupyter-file-browser.png[Jupyter file browser, 300]
 .. In the left navigation bar, click the *Git* icon, and then click *Current Branch* to expand the branches and tags selector panel.
 ... On the *Branches* tab, in the *Filter* field, enter *{git-version}*.
 +
-image::workbenches/jupyter-git-icon-version.png[Git Clone icon, 150]
+image::workbenches/jupyter-git-icon-version.png[Git Clone icon, 200]
 +
 // the {git-version} attribute value is defined at the top of this file
 .. Select *origin/{git-version}*. 
