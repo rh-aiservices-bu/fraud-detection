@@ -1,4 +1,4 @@
-[id='storing-data-with-data-connections']
+[id='storing-data-with-connections']
 = Storing data with connections
 
 Add connections to workbenches if you want to connect your project to data inputs and object storage buckets. A connection is a resource that contains the configuration parameters needed to connect to a data source or sink, such as an AWS S3 object storage bucket.
@@ -10,7 +10,7 @@ For this {deliverable}, you need two S3-compatible object storage buckets, such 
 
 Also, you must create a connection to each storage bucket. You have two options for this {deliverable}, depending on whether you want to use your own storage buckets or use a script to create local Minio storage buckets:
 
-* If you want to use your own S3-compatible object storage buckets, create connections to them as described in xref:creating-data-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
+* If you want to use your own S3-compatible object storage buckets, create connections to them as described in xref:creating-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
 
 * If you want to run a script that installs local Minio storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
 
