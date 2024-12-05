@@ -13,6 +13,3 @@ image::distributed/jupyter-notebook.png[Jupyter Notebook]
 
 For more information about TensorFlow training on Ray, see the https://docs.ray.io/en/latest/train/distributed-tensorflow-keras.html[Ray TensorFlow guide].
 
-.Next step
-
-xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment]

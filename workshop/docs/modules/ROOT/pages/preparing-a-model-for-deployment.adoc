@@ -5,20 +5,16 @@ After you train a model, you can deploy it by using the {productname-short} mode
 
 To prepare a model for deployment, you must complete the following tasks:
 
-* Move the model from your workbench to your S3-compatible object storage. Use the data connection that you created in the xref:storing-data-with-data-connections.adoc[Storing data with data connections] section and upload the model from a notebook. 
+* Move the model from your workbench to your S3-compatible object storage. Use the connection that you created in the xref:storing-data-with-connections.adoc[Storing data with connections] section and upload the model from a notebook. 
 
 * Convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
 
 .Prerequisites
 
-* You created the data connection `My Storage`.
+* You created the `My Storage` connection and have added it
+to your workbench.
 +
-image::model-serving/create-workbench-form-data-connection.png[Workbench data connection form, 600]
-
-* You added the `My Storage` data connection to your workbench.
-+
-image::model-serving/ds-project-dc-list.png[Data storage in workbench]
-
+image::projects/ds-project-dc-list.png[Data storage in workbench]
 
 .Procedure
 

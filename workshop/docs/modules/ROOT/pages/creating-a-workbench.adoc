@@ -5,7 +5,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 .Prerequisites
 
-* You created a `My Storage` data connection as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
+* You created a `My Storage` connection as described in xref:storing-data-with-connections.adoc[Storing data with connections].
 
 * You configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
@@ -40,13 +40,13 @@ image::workbenches/create-workbench-form-accelerator.png[Workbench accelerator, 
 +
 image::workbenches/create-workbench-form-env-storage.png[Workbench storage, 600]
 
-. Under *Data connections*, select *Use a data connection*.
+. Under *Connections*, select *Use a connection*.
 +
-image::workbenches/create-workbench-form-use-data-connection.png[Use data connection, 600]
+image::workbenches/create-workbench-form-use-data-connection.png[Use connection, 600]
 
-. Select *Use existing data connection*, and then select `My Storage` (the object storage that you configured previously) from the list.
+. Select *Use existing connection*, and then select `My Storage` (the object storage that you configured previously) from the list.
 +
-image::workbenches/create-workbench-form-data-connection.png[Data connection, 600]
+image::workbenches/create-workbench-form-data-connection.png[Connection form, 600]
 
 . Click the *Create workbench* button.
 +

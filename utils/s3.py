@@ -9,8 +9,8 @@ region_name = os.environ.get('AWS_DEFAULT_REGION')
 bucket_name = os.environ.get('AWS_S3_BUCKET')
 
 if not all([aws_access_key_id, aws_secret_access_key, endpoint_url, region_name, bucket_name]):
-    raise ValueError("One or data connection variables are empty.  "
-                     "Please check your data connection to an S3 bucket.")
+    raise ValueError("One or more connection variables are empty.  "
+                     "Please check your connection to an S3 bucket.")
 
 session = boto3.session.Session(aws_access_key_id=aws_access_key_id,
                                 aws_secret_access_key=aws_secret_access_key)

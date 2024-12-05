@@ -9,21 +9,19 @@ In this {deliverable}, you implement an example pipeline by using the JupyterLab
 
 .Prerequisite
 
-* You have installed local object storage buckets and created data connections, as described in xref:storing-data-with-data-connections.adoc[Storing data with data connections].
+* You have installed local object storage buckets and created connections, as described in xref:storing-data-with-connections.adoc[Storing data with connections].
 
 .Procedure
 
-. In the {productname-short} dashboard, click *Data Science Projects* and then select *Fraud Detection*.
-
-. Click the *Pipelines* tab.
+. In the {productname-short} dashboard, on the *Fraud Detection* page, click the *Pipelines* tab.
 
 . Click *Configure pipeline server*.
 +
 image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
 
-. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts* to populate the *Configure pipeline server* form with credentials for the data connection.
+. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts* to populate the *Configure pipeline server* form with credentials for the connection.
 +
-image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts data connection]
+image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
 
 . Leave the database configuration as the default.
 
@@ -38,7 +36,7 @@ You must wait until the pipeline configuration is complete before you continue a
 +
 If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
 +
-image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 250]
+image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 150]
 +
 You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2-latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
 
@@ -47,7 +45,7 @@ You can also ask your {productname-short} administrator to verify that self-sign
 . Navigate to the *Pipelines* tab for the project.
 . Next to *Import pipeline*, click the action menu (&#8942;) and then select *View pipeline server configuration*.
 +
-image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 250]
+image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 150]
 +
 An information box opens and displays the object storage connection information for the pipeline server.
 
