@@ -113,8 +113,8 @@ spec:
 
 .  In the {productname-short} dashboard:
 
-.. Select *Data Science Projects* and then click your project's name, *Fraud detection*.
-.. Click *Connections*. You should see two connections listed: `My Storage`` and `Pipeline Artifacts`.
+.. Select *Data Science Projects* and then click the name of your project, *Fraud detection*.
+.. Click *Connections*. You should see two connections listed: `My Storage` and `Pipeline Artifacts`.
 + 
 image::projects/ds-project-connections.png[Connections for Fraud Detection]
 
