@@ -9,7 +9,7 @@ Before you begin, make sure that you are logged in to *{productname-long}*.
 +
 image::projects/launch-jupyter-link.png[Launch Jupyter link]
 +
-Note that it is possible to start a Jupyter notebook by clicking the *Launch standalone notebook server* link, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation. To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own data connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
+Note that it is possible to start a Jupyter notebook by clicking the *Launch standalone notebook server* link, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation. To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
 . If you are using your own OpenShift cluster, click *Create project*. 
 +
@@ -33,10 +33,10 @@ image::projects/ds-project-new.png[New data science project]
 
 ** *Cluster storage* is a persistent volume that retains the files and data you're working on within a workbench. A workbench has access to one or more cluster storage instances.
 
-** *Data connections* contain configuration parameters that are required to connect to a data source, such as an S3 object bucket.
+** *Connections* contain configuration parameters that are required to connect to a data source, such as an S3 object bucket.
 
 ** *Permissions* define which users and groups can access the project.
 
 .Next step
 
-xref:storing-data-with-data-connections.adoc[Storing data with data connections]
+xref:storing-data-with-connections.adoc[Storing data with connections]

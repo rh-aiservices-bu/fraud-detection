@@ -8,7 +8,7 @@ Now that the model is accessible in storage and saved in the portable ONNX forma
 * *Single-model serving* - Each model in the project is deployed on its own model server. This platform works well for large models or models that need dedicated resources.
 * *Multi-model serving* - All models in the project are deployed on the same model server. This platform is suitable for sharing resources amongst deployed models.  Multi-model serving is the only option offered in the {org-name} Developer Sandbox environment.
 
-NOTE: For each project, you can specify only one model serving platform. If you want to change to the other model serving platform, you must create a new project.
+//NOTE: For each project, you can specify only one model serving platform. If you want to change to the other model serving platform, you must create a new project.
 
 For this {deliverable}, since you are only deploying only one model, you can select either serving type. The steps for deploying the fraud detection model depend on the type of model serving platform you select:
 
