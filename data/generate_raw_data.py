@@ -144,6 +144,7 @@ def main():
                 "fraud",
                 "created",
                 "updated",
+                "set",
                 "distance_from_home",
                 "distance_from_last_transaction",
                 "ratio_to_median_purchase_price",
