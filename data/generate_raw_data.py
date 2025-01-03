@@ -35,6 +35,8 @@ def generate_random_transactions(
         ("San Jose", "CA"),
     ]
     transactions_list = []
+    total_users = users_df.shape[0]
+    batch = total_users // 10
 
     for i, row in users_df.iterrows():
         num_transactions = np.random.randint(1, max_transactions)
@@ -58,6 +60,13 @@ def generate_random_transactions(
                     "city": city,
                     "state": state,
                 }
+            )
+        if (i % batch) == 0:
+            formatted_i = f"{i:,}"
+            percent_complete = i / total_users * 100
+            print(
+                f"{formatted_i:>{len(f'{total_users:,}')}} of {total_users:,} "
+                f"({percent_complete:.0f}%) complete"
             )
 
     return pd.DataFrame(transactions_list)
@@ -111,10 +120,15 @@ def calculate_point_in_time_features(label_dataset, transactions_df) -> pd.DataF
 
 
 def main():
+    print("loading data...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     train = pd.read_csv(os.path.join(script_dir, "train.csv"))
     test = pd.read_csv(os.path.join(script_dir, "test.csv"))
     valid = pd.read_csv(os.path.join(script_dir, "validate.csv"))
+    train["set"] = "train"
+    test["set"] = "test"
+    valid["set"] = "valid"
+
     df = pd.concat([train, test, valid], axis=0).reset_index(drop=True)
 
     df["user_id"] = [f"user_{i}" for i in range(df.shape[0])]
@@ -137,16 +151,24 @@ def main():
         ]
     )
 
+    print("generating transaction level data...")
     user_purchase_history = generate_random_transactions(
-        users_df=df[df["repeat_retailer"] == 1],
+        users_df=df[df["repeat_retailer"] == 1].reset_index(drop=True),
         max_transactions=5,
         max_days_back=365,
     )
     user_purchase_history.to_parquet(
         os.path.join(script_dir, "raw_transaction_datasource.parquet")
     )
+    print("calculating point in time features...")
     finaldf = calculate_point_in_time_features(label_dataset, user_purchase_history)
+    print("merging final dataset...")
+    finaldf = finaldf.merge(
+        df[["user_id", "created", "used_chip", "used_pin_number", "online_order"]],
+        on=["user_id", "created"],
+    )
     finaldf.to_parquet(os.path.join(script_dir, "final_data.parquet"))
+    print("...data processing complete.")
 
 
 if __name__ == "__main__":
