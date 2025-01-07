@@ -46,7 +46,7 @@ def generate_random_transactions(
             date_of_transaction = datetime.now() - timedelta(days=random_days)
             city, state = random.choice(cities_and_states)
             if j == (num_transactions - 1):
-                date_of_transaction == row["created"]
+                date_of_transaction = row["created"]
 
             transactions_list.append(
                 {
