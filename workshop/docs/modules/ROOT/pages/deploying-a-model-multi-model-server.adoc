@@ -28,7 +28,7 @@ image::model-serving/create-model-server-form.png[Create model server form, 400]
 
 . In the *Models and model servers* list, next to the new model server, click *Deploy model*.
 +
-image::model-serving/ds-project-workbench-list-deploy.png[Create model server form]
+image::model-serving/ds-project-workbench-list-deploy.png[Create model server form, 500]
 
 . In the form, provide the following values:
 .. For *Model deployment name*, type `fraud`.
@@ -37,7 +37,7 @@ image::model-serving/ds-project-workbench-list-deploy.png[Create model server fo
 .. Type the path that leads to the version folder that contains your model file: `models/fraud`
 .. Leave the other fields with the default settings.
 +
-image::model-serving/deploy-model-form-mm.png[Deploy model from for multi-model serving, 400]
+image::model-serving/deploy-model-form-mm.png[Deploy model from for multi-model serving, 500]
 
 . Click *Deploy*.
 
@@ -45,7 +45,7 @@ image::model-serving/deploy-model-form-mm.png[Deploy model from for multi-model 
 
 Notice the loading symbol under the *Status* section. The symbol changes to a green checkmark when the deployment completes successfully. 
 
-image::model-serving/ds-project-model-list-status-mm.png[Deployed model status]
+image::model-serving/ds-project-model-list-status.png[Deployed model status, 350]
 
 
 .Next step

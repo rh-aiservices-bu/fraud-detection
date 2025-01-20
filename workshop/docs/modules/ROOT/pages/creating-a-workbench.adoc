@@ -32,25 +32,17 @@ image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 +
 image::workbenches/create-workbench-form-size.png[Workbench size, 600]
 
-. Leave the *Accelerator* field with the default `None` selection.
-+ 
-image::workbenches/create-workbench-form-accelerator.png[Workbench accelerator, 600]
-
 . Leave the default environment variables and storage options.
 +
 image::workbenches/create-workbench-form-env-storage.png[Workbench storage, 600]
 
-. Under *Connections*, select *Use a connection*.
-+
-image::workbenches/create-workbench-form-use-data-connection.png[Use connection, 600]
+. For *Connections*, click *Attach existing connection*.
 
-. Select *Use existing connection*, and then select `My Storage` (the object storage that you configured previously) from the list.
+. Select `My Storage` (the object storage that you configured previously) and then click *Attach*.
 +
 image::workbenches/create-workbench-form-data-connection.png[Connection form, 600]
 
-. Click the *Create workbench* button.
-+
-image::workbenches/create-workbench-form-button.png[Create workbench button, 150]
+. Click *Create workbench*.
 
 .Verification
 
@@ -60,7 +52,7 @@ image::workbenches/ds-project-workbench-list.png[Workbench list]
 
 NOTE: If you made a mistake, you can edit the workbench to make changes.
 
-image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit, 250]
+image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit, 350]
 
 
 .Next step

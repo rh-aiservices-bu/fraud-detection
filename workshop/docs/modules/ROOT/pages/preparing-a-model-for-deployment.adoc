@@ -14,7 +14,7 @@ To prepare a model for deployment, you must complete the following tasks:
 * You created the `My Storage` connection and have added it
 to your workbench.
 +
-image::projects/ds-project-dc-list.png[Data storage in workbench]
+image::projects/ds-project-connections.png[Data storage in workbench]
 
 .Procedure
 

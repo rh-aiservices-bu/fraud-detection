@@ -36,7 +36,7 @@ You must wait until the pipeline configuration is complete before you continue a
 +
 If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
 +
-image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 150]
+image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 250]
 +
 You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2-latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates].
 
@@ -45,7 +45,7 @@ You can also ask your {productname-short} administrator to verify that self-sign
 . Navigate to the *Pipelines* tab for the project.
 . Next to *Import pipeline*, click the action menu (&#8942;) and then select *View pipeline server configuration*.
 +
-image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 150]
+image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 250]
 +
 An information box opens and displays the object storage connection information for the pipeline server.
 
