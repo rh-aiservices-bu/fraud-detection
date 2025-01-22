@@ -1,4 +1,4 @@
-[id='creating-data-connections-to-storage']
+[id='creating-connections-to-storage']
 = Creating connections to your own S3-compatible object storage
 
 If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another connection to a different storage bucket for saving pipeline artifacts.
@@ -23,7 +23,7 @@ If you don't have this information, contact your storage administrator.
 
 .. In the {productname-short} dashboard, navigate to the page for your data science project.
 
-.. Click the *Connections* tab, and then click *Add connection*.
+.. Click the *Connections* tab, and then click *Create connection*.
 +
 image::projects/ds-project-add-dc.png[Add connection]
 
@@ -31,11 +31,9 @@ image::projects/ds-project-add-dc.png[Add connection]
 
 .. Complete the *Add connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
 +
-NOTE: Skip the *Connected workbench* item. You add connections to a workbench in a later section.
-+
 image::projects/ds-project-my-storage-form.png[Add my storage form, 500]
 
-.. Click *Add connection*.
+.. Click *Create*.
 
 . Create a connection for saving pipeline artifacts:
 +
@@ -45,18 +43,16 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 
 .. Complete the form and name your connection *Pipeline Artifacts*.
 +
-NOTE: Skip the *Connected workbench* item. You add connections to a workbench in a later section.
-+
 image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form, 500]
 
-.. Click *Add connection*.
+.. Click *Create*.
 
 
 .Verification
 
 In the *Connections* tab for the project, check to see that your connections are listed.
 
-image::projects/ds-project-dc-list.png[List of project connections, 500]
+image::projects/ds-project-connections.png[List of project connections, 500]
 
 
 .Next steps

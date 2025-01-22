@@ -65,31 +65,33 @@ image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 
 . Scroll down to the *File Dependencies* section and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 200]
+image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 500]
 
 . Set the value to `data/*.csv` which contains the data to train your model.
 
-. Select the *Include Subdirectories* option and then click *Add*.
+. Select the *Include Subdirectories* option.
 +
-image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 500]
+image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
 
-. Save the pipeline.
+. *Save* the pipeline.
 
 == Create and store the ONNX-formatted output file
 
 In node 1, the notebook creates the `models/fraud/1/model.onnx` file. In node 2, the notebook uploads that file to the S3 storage bucket. You must set `models/fraud/1/model.onnx` file as the output file for both nodes.
 
-. Select node 1 and then select the *Node Properties* tab.
+. Select node 1.
+
+. Select the *Node Properties* tab.
 
 . Scroll down to the *Output Files* section, and then click *Add*.
 
-. Set the value to `models/fraud/1/model.onnx` and then click *Add*.
+. Set the value to `models/fraud/1/model.onnx`.
 +
 image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency value, 400]
 
-. Repeat steps 1-3 for node 2.
+. Repeat steps 2-4 for node 2.
 
-. Save the pipeline.
+. *Save* the pipeline.
  
 == Configure the connection to the S3 storage bucket
 
@@ -144,7 +146,7 @@ image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret]
 ** *Secret Name*: `aws-connection-my-storage`
 ** *Secret Key*: `AWS_ACCESS_KEY_ID`
 +
-image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 300]
+image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 . Repeat Step 2 for each of the following Kubernetes secrets:
 
@@ -185,15 +187,15 @@ NOTE: If `Data Science Pipeline` is not available as a runtime configuration, yo
 
 . Return to your data science project and expand the newly created pipeline.
 +
-image::pipelines/dsp-pipeline-complete.png[Set File Dependency Value, 800]
+image::pipelines/dsp-pipeline-complete.png[New pipeline expanded, 800]
 
-. Click the action menu (&#8942;) and then select *View runs* from the list.
+. Click *View runs*.
 +
-image::pipelines/dsp-view-run.png[Set File Dependency Value, 800]
+image::pipelines/dsp-view-run.png[View runs for selected pipeline, 500]
 
-. Click on your run and then view the pipeline run in progress.
+. Click your run and then view the pipeline run in progress.
 +
-image::pipelines/pipeline-run-complete.png[Set File Dependency Value, 800]
+image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment] section.
 
