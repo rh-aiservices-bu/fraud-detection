@@ -65,13 +65,13 @@ image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 
 . Scroll down to the *File Dependencies* section and then click *Add*.
 +
-image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 400]
+image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 500]
 
 . Set the value to `data/*.csv` which contains the data to train your model.
 
 . Select the *Include Subdirectories* option.
 +
-image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 400]
+image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
 
 . *Save* the pipeline.
 
@@ -187,15 +187,15 @@ NOTE: If `Data Science Pipeline` is not available as a runtime configuration, yo
 
 . Return to your data science project and expand the newly created pipeline.
 +
-image::pipelines/dsp-pipeline-complete.png[Set File Dependency Value, 800]
+image::pipelines/dsp-pipeline-complete.png[New pipeline expanded, 800]
 
 . Click *View runs*.
 +
-image::pipelines/dsp-view-run.png[Set File Dependency Value, 800]
+image::pipelines/dsp-view-run.png[View runs for selected pipeline, 500]
 
-. Click on your run and then view the pipeline run in progress.
+. Click your run and then view the pipeline run in progress.
 +
-image::pipelines/pipeline-run-complete.png[Set File Dependency Value, 800]
+image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment] section.
 

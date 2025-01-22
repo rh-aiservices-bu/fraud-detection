@@ -33,7 +33,7 @@ image::projects/ds-project-add-dc.png[Add connection]
 +
 image::projects/ds-project-my-storage-form.png[Add my storage form, 500]
 
-.. Click *Add connection*.
+.. Click *Create*.
 
 . Create a connection for saving pipeline artifacts:
 +
@@ -45,7 +45,7 @@ NOTE: If you do not intend to complete the pipelines section of the {deliverable
 +
 image::projects/ds-project-pipeline-artifacts-form.png[Add pipeline artifacts form, 500]
 
-.. Click *Add connection*.
+.. Click *Create*.
 
 
 .Verification

@@ -15,7 +15,7 @@ image::model-serving/ds-project-model-list-add.png[Models]
 +
 NOTE: Depending on how model serving has been configured on your cluster, you might see only one model serving platform option.
 
-. In the *Multi-model serving platform* tile, click *Add model server*.
+. In the *Multi-model serving platform* tile, click *Select multi-model*.
 
 . In the form, provide the following values:
 .. For *Model server name*, type a name, for example `Model Server`.

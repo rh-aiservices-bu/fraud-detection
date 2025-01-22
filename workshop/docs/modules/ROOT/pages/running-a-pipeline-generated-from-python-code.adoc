@@ -42,8 +42,8 @@ You can leave the other fields with their default values.
 +
 image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 
-. Click *Create* to create the run.
+. Click *Create run* to create the run.
 +
 A new run starts immediately.
 +
-image::pipelines/pipeline-run-in-progress.png[]
+image::pipelines/pipeline-run-in-progress.png[New pipeline run, 400]

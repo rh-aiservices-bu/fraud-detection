@@ -12,7 +12,7 @@ Now that you've deployed the model, you can test its API endpoints.
 +
 If the *Inference endpoint* field contains an *Internal endpoint details* link, click the link to open a text box that shows the URL details, and then take note of the *restUrl* value.
 +
-image::model-serving/ds-project-model-inference-endpoint.png[Model inference endpoint]
+image::model-serving/ds-project-model-inference-endpoint.png[Model inference endpoint, 300]
 
 . Return to the Jupyter environment and try out your new endpoint.
 +
