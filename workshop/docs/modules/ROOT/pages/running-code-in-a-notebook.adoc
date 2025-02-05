@@ -13,7 +13,7 @@ This is a cell with some code:
 
 image::workbenches/cell_code.png[Jupyter Cell Code]
 
-Code cells contain Python code that you can run interactively. You can modify the code and then run it. The code does not run on your computer or in the browser, but directly in the environment that you are connected to, *{productname-long}* in our case.
+Code cells contain Python code that you can run interactively. You can modify the code and then run it. The code does not run on your computer or in the browser, but directly in the environment that you are connected to, *{productname-long}* in your case.
 
 You can run a code cell from the notebook interface or from the keyboard:
 
@@ -37,12 +37,12 @@ Now that you know the basics, give it a try.
 
 .Prerequisites
 
-* You have imported the {deliverable} files into your Jupyter environment as described in 
-xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the Jupyter environment].
+* You have imported the {deliverable} files into your JupyterLab environment as described in 
+xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment].
 
 .Procedure
 
-. In your Jupyter environment, locate the `0_sandbox.ipynb` file and double-click it to launch the notebook. The notebook opens in a new tab in the content section of the environment. 
+. In your JupyterLab environment, locate the `0_sandbox.ipynb` file and double-click it to launch the notebook. The notebook opens in a new tab in the content section of the environment. 
 +
 image::workbenches/jupyter-notebook-0.png[Notebook 0]
 

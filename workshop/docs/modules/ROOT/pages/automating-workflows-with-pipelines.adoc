@@ -9,6 +9,11 @@ Your completed pipeline should look like the one in the `6 Train Save.pipeline` 
 
 To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline. Alternately, you can skip the following procedure and instead run the `6 Train Save.pipeline` file.
 
+== Prerequisites
+
+* You have configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+* If you configured the pipeline server after you created your workbench, you must stop and then start your workbench.
+
 == Create a pipeline
 
 . Open your workbench's JupyterLab environment. If the launcher is not visible, click *+* to open it.
@@ -178,14 +183,31 @@ Upload the pipeline on your cluster and run it. You can do so directly from the 
 +
 image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
 
-
 . Enter a name for your pipeline.
-. Verify the *Runtime Configuration:* is set to `Data Science Pipeline`.  
+. Verify that the *Runtime Configuration:* is set to `Data Science Pipeline`.  
 . Click *OK*.
 +
-NOTE: If `Data Science Pipeline` is not available as a runtime configuration, you may have created your notebook before the pipeline server was available.  You can restart your notebook after the pipeline server has been created in your data science project.
+[NOTE]
+====
+If you see an error message stating that "no runtime configuration for Data Science Pipeline is defined", you might have created your workbench before the pipeline server was available. 
 
-. Return to your data science project and expand the newly created pipeline.
+To address this situation, you must verify that you configured the pipeline server and then restart the workbench.
+
+Follow these steps in the {productname-short} dashboard:
+
+. Check the status of the pipeline server:
+.. In your Fraud Detection project, click the *Pipelines* tab.
+** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-data-science-pipelines[Enabling data science pipelines]. 
+** If you see the option to *Import a pipeline*, continue to the next step.
+. Restart your Fraud Detection workbench:
+.. Click the *Workbenches* tab.
+.. Click *Stop* and then click *Stop workbench*. 
+.. After the workbench status is stopped, click *Start*.
+.. Wait until the workbench status is *Running*.
+. Return to your workbench's JupyterLab environment and run the pipeline. 
+====
+
+. In the {productname-short} dashboard, open your data science project and expand the newly created pipeline.
 +
 image::pipelines/dsp-pipeline-complete.png[New pipeline expanded, 800]
 

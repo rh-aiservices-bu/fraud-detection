@@ -1,7 +1,7 @@
 [id='creating-a-workbench']
 = Creating a workbench and selecting a notebook image
 
-A workbench is an instance of your development and experimentation environment. Within a workbench you can select a notebook image for your data science work.
+A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image (sometimes referred to as a notebook image) that is optimized with the tools and libraries that you need for developing models. 
 
 .Prerequisites
 
@@ -22,7 +22,7 @@ image::workbenches/ds-project-create-workbench.png[Create workbench button, 800]
 +
 image::workbenches/create-workbench-form-name-desc.png[Workbench name and description, 600]
 +
-{org-name} provides several supported notebook images. In the *Notebook image* section, you can choose one of these images or any custom images that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
+{org-name} provides several supported workbench images. In the *Notebook image* section, you can choose one of the default images or a custom image that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
 
 . Select the latest *Tensorflow* image.
 +
@@ -57,4 +57,4 @@ image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit, 350]
 
 .Next step
 
-xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the Jupyter environment]
+xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment]

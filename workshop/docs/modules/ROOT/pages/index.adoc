@@ -8,14 +8,12 @@
 
 Welcome. In this {deliverable}, you learn how to incorporate data science and artificial intelligence and machine learning (AI/ML) into an OpenShift development workflow.
 
-You will use an example fraud detection model to complete the following tasks:
+You use an example fraud detection model to complete the following tasks in https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}] without the need to install anything on your computer:
 
 * Explore a pre-trained fraud detection model by using a Jupyter notebook.
 * Deploy the model by using {productname-short} model serving.
 * Refine and train the model by using automated pipelines.
 * Learn how to train the model by using Ray, a distributed computing framework.
-
-You do not have to install anything on your own computer, thanks to https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}].
 
 == About the example fraud detection model
 
@@ -23,7 +21,7 @@ The example fraud detection model monitors credit card transactions for potentia
 
 * The geographical distance from the previous credit card transaction.
 * The price of the current transaction, compared to the median price of all the user's transactions.
-* Whether the user completed the transaction by using the hardware chip in the credit card,  entered a PIN number, or for an online purchase.
+* Whether the user completed the transaction by using the hardware chip in the credit card, by entering a PIN number, or by making an online purchase.
 
 Based on this data, the model outputs the likelihood of the transaction being fraudulent.
 
