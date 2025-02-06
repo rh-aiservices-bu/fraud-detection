@@ -3,7 +3,7 @@
 
 To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
-.Prerequistes
+.Prerequisites
 
 Before you begin, log in to *{productname-long}*.
 

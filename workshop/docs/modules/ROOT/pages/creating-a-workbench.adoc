@@ -1,5 +1,5 @@
 [id='creating-a-workbench']
-= Creating a workbench and selecting a notebook image
+= Creating a workbench and selecting a workbench image
 
 A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image (sometimes referred to as a notebook image) that is optimized with the tools and libraries that you need for developing models. 
 
