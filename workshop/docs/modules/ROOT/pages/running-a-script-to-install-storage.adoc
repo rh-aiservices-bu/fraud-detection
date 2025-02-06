@@ -119,7 +119,7 @@ spec:
 image::projects/ds-project-connections.png[Connections for Fraud Detection]
 
 
-.Next steps
+.Next step
 
 If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 

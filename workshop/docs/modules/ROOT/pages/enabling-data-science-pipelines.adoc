@@ -1,13 +1,13 @@
 [id='enabling-data-science-pipelines']
 = Enabling data science pipelines
 
-NOTE: If you do not intend to complete the pipelines section of the workshop you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
+NOTE: If you do not intend to complete the pipelines section of this {deliverable} you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
 
 In this section, you prepare your {deliverable} environment so that you can use data science pipelines.
 
-In this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that can be executed in OpenShift AI.
+Later in this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that can be executed in {productname-short}.
 
-.Prerequisite
+.Prerequisites
 
 * You have installed local object storage buckets and created connections, as described in xref:storing-data-with-connections.adoc[Storing data with connections].
 
@@ -34,7 +34,7 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 You must wait until the pipeline configuration is complete before you continue and create your workbench. If you create your workbench before the pipeline server is ready, your workbench will not be able to submit pipelines to it.
 ====
 +
-If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can try to delete the pipeline server and create it again.
+If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can delete the pipeline server and create it again.
 +
 image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 250]
 +

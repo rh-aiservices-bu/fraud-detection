@@ -1,7 +1,11 @@
 [id='setting-up-your-data-science-project']
 = Setting up your data science project
 
-Before you begin, make sure that you are logged in to *{productname-long}*.
+To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
+
+.Prerequisites
+
+Before you begin, log in to *{productname-long}*.
 
 .Procedure
 
@@ -9,7 +13,7 @@ Before you begin, make sure that you are logged in to *{productname-long}*.
 +
 image::projects/launch-jupyter-link.png[Launch Jupyter link]
 +
-Note that it is possible to start a Jupyter notebook by clicking the *Launch standalone notebook server* link, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation. To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
+Note that it is possible to start a Jupyter notebook by clicking the *Launch standalone workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
 
 . If you are using your own OpenShift cluster, click *Create project*. 
 +
