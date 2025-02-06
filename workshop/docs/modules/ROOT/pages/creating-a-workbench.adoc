@@ -7,7 +7,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 * You created a `My Storage` connection as described in xref:storing-data-with-connections.adoc[Storing data with connections].
 
-* You configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+* If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
 
 .Procedure

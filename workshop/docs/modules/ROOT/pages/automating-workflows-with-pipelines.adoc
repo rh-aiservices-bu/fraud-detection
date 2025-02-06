@@ -11,8 +11,8 @@ To explore the pipeline editor, complete the steps in the following procedure to
 
 == Prerequisites
 
-* You have configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
-* If you configured the pipeline server after you created your workbench, you must stop and then start your workbench.
+* You configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+* If you configured the pipeline server after you created your workbench, you stopped and then started your workbench.
 
 == Create a pipeline
 
@@ -198,11 +198,11 @@ Follow these steps in the {productname-short} dashboard:
 . Check the status of the pipeline server:
 .. In your Fraud Detection project, click the *Pipelines* tab.
 ** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-data-science-pipelines[Enabling data science pipelines]. 
-** If you see the option to *Import a pipeline*, continue to the next step.
+** If you see the *Import a pipeline* option, the pipeline server is configured. Continue to the next step.
 . Restart your Fraud Detection workbench:
 .. Click the *Workbenches* tab.
 .. Click *Stop* and then click *Stop workbench*. 
-.. After the workbench status is stopped, click *Start*.
+.. After the workbench status is *Stopped*, click *Start*.
 .. Wait until the workbench status is *Running*.
 . Return to your workbench's JupyterLab environment and run the pipeline. 
 ====
@@ -224,4 +224,4 @@ The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which 
 
 .Next step
 
-(optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
+(Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
