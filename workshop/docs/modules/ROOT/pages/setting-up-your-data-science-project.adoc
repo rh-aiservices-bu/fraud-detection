@@ -13,7 +13,7 @@ Before you begin, log in to *{productname-long}*.
 +
 image::projects/launch-jupyter-link.png[Launch Jupyter link]
 +
-Note that it is possible to start a Jupyter notebook by clicking the *Launch standalone workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
+NOTE: It is possible to start a Jupyter notebook by clicking the *Launch standalone workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
 
 . If you are using your own OpenShift cluster, click *Create project*. 
 +
