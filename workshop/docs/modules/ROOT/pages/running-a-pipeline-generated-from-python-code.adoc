@@ -8,7 +8,6 @@ This {deliverable} does not describe the details of how to use the SDK. Instead,
 . Optionally, view the provided Python code in your JupyterLab environment by navigating to the `fraud-detection-notebooks` project's `pipeline` directory. It contains the following files:
 +
 * `7_get_data_train_upload.py` is the main pipeline code.
-* `get_data.py`, `train_model.py`, and `upload.py` are the three components of the pipeline.
 * `build.sh` is a script that builds the pipeline and creates the YAML file.
 +
 For your convenience, the output of the `build.sh` script is provided in the `7_get_data_train_upload.yaml` file. The `7_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
