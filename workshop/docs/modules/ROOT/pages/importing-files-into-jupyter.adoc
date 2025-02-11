@@ -1,7 +1,7 @@
 [id='importing-files-into-jupyter']
 = Importing the {deliverable} files into the JupyterLab environment
 
-:git-version: main
+:git-version: v2.17
 
 The JupyterLab environment is a web-based environment, but everything you do inside it happens on *{productname-long}* and is powered by the *OpenShift* cluster. This means that, without having to install and maintain anything on your own computer, and without using valuable local resources such as CPU, GPU and RAM, you can conduct your data science work in this powerful and stable managed environment.
 
