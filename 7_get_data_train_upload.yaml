@@ -69,10 +69,10 @@ deploymentSpec:
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
           \ *\n\ndef get_data(train_data_output_path: OutputPath(), validate_data_output_path:\
           \ OutputPath()):\n    import urllib.request\n    print(\"starting download...\"\
-          )\n    print(\"downloading training data\")\n    url = \"https://raw.githubusercontent.com/cfchase/fraud-detection/main/data/train.csv\"\
+          )\n    print(\"downloading training data\")\n    url = \"https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/train.csv\"\
           \n    urllib.request.urlretrieve(url, train_data_output_path)\n    print(\"\
           train data downloaded\")\n    print(\"downloading validation data\")\n \
-          \   url = \"https://raw.githubusercontent.com/cfchase/fraud-detection/main/data/validate.csv\"\
+          \   url = \"https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/validate.csv\"\
           \n    urllib.request.urlretrieve(url, validate_data_output_path)\n    print(\"\
           validation data downloaded\")\n\n"
         image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523
