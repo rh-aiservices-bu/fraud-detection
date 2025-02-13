@@ -7,7 +7,7 @@ from kfp.dsl import InputPath, OutputPath
 from kfp import kubernetes
 
 
-@dsl.component(base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523")
+@dsl.component(base_image="quay.io/modh/runtime-images:runtime-pytorch-ubi9-python-3.11-2024b-20241108")
 def get_data(train_data_output_path: OutputPath(), validate_data_output_path: OutputPath()):
     import urllib.request
     print("starting download...")
@@ -22,33 +22,22 @@ def get_data(train_data_output_path: OutputPath(), validate_data_output_path: Ou
 
 
 @dsl.component(
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
-    packages_to_install=["onnx", "onnxruntime", "tf2onnx"],
+    base_image="quay.io/modh/runtime-images:runtime-pytorch-ubi9-python-3.11-2024b-20241108",
+    packages_to_install=["onnx", "onnxruntime", "onnxscript"],
 )
 def train_model(train_data_input_path: InputPath(), validate_data_input_path: InputPath(), model_output_path: OutputPath()):
-    import numpy as np
-    import pandas as pd
-    from keras.models import Sequential
-    from keras.layers import Dense, Dropout, BatchNormalization, Activation
-    from sklearn.model_selection import train_test_split
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.utils import class_weight
-    import tf2onnx
-    import onnx
-    import pickle
-    from pathlib import Path
+    import torch
+    import pandas as pd 
+    from torch.utils.data import Dataset, DataLoader
+    from torch import nn
+    from sklearn.metrics import precision_score, recall_score
+    import os
 
-    # Load the CSV data which we will use to train the model.
-    # It contains the following fields:
-    #   distancefromhome - The distance from home where the transaction happened.
-    #   distancefromlast_transaction - The distance from last transaction happened.
-    #   ratiotomedianpurchaseprice - Ratio of purchased price compared to median purchase price.
-    #   repeat_retailer - If it's from a retailer that already has been purchased from before.
-    #   used_chip - If the (credit card) chip was used.
-    #   usedpinnumber - If the PIN number was used.
-    #   online_order - If it was an online order.
-    #   fraud - If the transaction is fraudulent.
-
+    device = (
+        "cuda" if torch.cuda.is_available()
+        else "mps" if torch.backends.mps.is_available()
+        else "cpu"
+    )
 
     feature_indexes = [
         1,  # distance_from_last_transaction
@@ -62,61 +51,180 @@ def train_model(train_data_input_path: InputPath(), validate_data_input_path: In
         7  # fraud
     ]
 
-    X_train = pd.read_csv(train_data_input_path)
-    y_train = X_train.iloc[:, label_indexes]
-    X_train = X_train.iloc[:, feature_indexes]
+    train_df = pd.read_csv(train_data_input_path)
+    labels_df = train_df.iloc[:, label_indexes]
+    train_df = train_df.iloc[:, feature_indexes]
+    train_df_tensor = torch.tensor(train_df.values, dtype=torch.float).to(device)
+    labels_df_tensor = torch.tensor(labels_df.values, dtype=torch.float).to(device)
 
-    X_val = pd.read_csv(validate_data_input_path)
-    y_val = X_val.iloc[:, label_indexes]
-    X_val = X_val.iloc[:, feature_indexes]
+    # like scikit learn standard scaler
+    class TorchStandardScaler:
+        def __init__(self):
+            self.mean = None
+            self.std = None
 
-    # Scale the data to remove mean and have unit variance. The data will be between -1 and 1, which makes it a lot easier for the model to learn than random (and potentially large) values.
-    # It is important to only fit the scaler to the training data, otherwise you are leaking information about the global distribution of variables (which is influenced by the test set) into the training set.
+        def fit(self, tensor):
+            self.mean = tensor.mean(dim=0, keepdim=False)
+            self.std = tensor.std(dim=0, keepdim=False)
 
-    scaler = StandardScaler()
+        def transform(self, tensor):
+            return (tensor - self.mean) / self.std
 
-    X_train = scaler.fit_transform(X_train.values)
+        def fit_transform(self, tensor):
+            self.fit(tensor)
+            return self.transform(tensor)
 
-    Path("artifact").mkdir(parents=True, exist_ok=True)
-    with open("artifact/scaler.pkl", "wb") as handle:
-        pickle.dump(scaler, handle)
 
-    # Since the dataset is unbalanced (it has many more non-fraud transactions than fraudulent ones), set a class weight to weight the few fraudulent transactions higher than the many non-fraud transactions.
-    class_weights = class_weight.compute_class_weight('balanced', classes=np.unique(y_train), y=y_train.values.ravel())
-    class_weights = {i: class_weights[i] for i in range(len(class_weights))}
+    train_df_tensor = torch.tensor(train_df.values, dtype=torch.float).to(device)
+    scaler = TorchStandardScaler()
+    scaler.fit(train_df_tensor)
+    scaler.mean, scaler.std
 
-    # Build the model, the model we build here is a simple fully connected deep neural network, containing 3 hidden layers and one output layer.
+    class CSVDataset(Dataset):
+        def __init__(self, csv_file, pyarrow_fs=None, transform=None, target_transform=None):
+            self.feature_indexes = feature_indexes
+            self.label_indexes = label_indexes
+            
+            if pyarrow_fs:
+                with pyarrow_fs.open_input_file(csv_file) as file:
+                    training_table = pv.read_csv(file)
+                self.data = training_table.to_pandas()
+            else:
+                self.data = pd.read_csv(csv_file)
 
-    model = Sequential()
-    model.add(Dense(32, activation='relu', input_dim=len(feature_indexes)))
-    model.add(Dropout(0.2))
-    model.add(Dense(32))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(0.2))
-    model.add(Dense(32))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(0.2))
-    model.add(Dense(1, activation='sigmoid'))
-    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    model.summary()
 
-    # Train the model and get performance
+            self.features = self.data.iloc[:, self.feature_indexes].values
+            self.labels = self.data.iloc[:, self.label_indexes].values
+            self.features = torch.tensor(self.features, dtype=torch.float).to(device)
+            self.labels = torch.tensor(self.labels, dtype=torch.float).to(device)
 
-    epochs = 2
-    history = model.fit(X_train, y_train, epochs=epochs,
-                        validation_data=(scaler.transform(X_val.values), y_val),
-                        verbose=True, class_weight=class_weights)
+            self.transform = transform
+            self.target_transform = target_transform
 
-    # Save the model as ONNX for easy use of ModelMesh
-    model_proto, _ = tf2onnx.convert.from_keras(model)
-    print(model_output_path)
-    onnx.save(model_proto, model_output_path)
+            if self.transform:
+                self.features = self.transform(self.features)
+            if self.target_transform:
+                self.labels = self.target_transform(self.labels)
 
+        def __len__(self):
+            return len(self.data)
+
+        def __getitem__(self, idx):
+            if torch.is_tensor(idx):
+                idx = idx.tolist()
+            features = self.features[idx]
+            label = self.labels[idx]
+            return features, label
+
+
+    training_data = CSVDataset('data/train.csv')
+    validation_data = CSVDataset(train_data_input_path)
+
+    batch_size = 64
+
+    training_dataloader = DataLoader(training_data, batch_size=batch_size)
+    validation_dataloader = DataLoader(validation_data, batch_size=batch_size)
+
+    class NeuralNetwork(nn.Module):
+        def __init__(self, scaler):
+            super().__init__()
+            self.linear_relu_stack = nn.Sequential(
+                nn.Linear(5, 32),
+                nn.ReLU(),
+                nn.Linear(32, 32),
+                nn.ReLU(),
+                nn.Linear(32, 32),
+                nn.ReLU(),
+                nn.Linear(32, 1),
+                nn.Sigmoid(),
+            )
+            self.scaler = scaler
+
+        def forward(self, x):
+            with torch.no_grad():
+                x_pre = self.scaler.transform(x)
+            probs = self.linear_relu_stack(x_pre)
+            return probs
+
+
+    model = NeuralNetwork(scaler).to(device)
+
+    def train_loop(dataloader, model, loss_fn, optimizer):
+        size = len(dataloader.dataset)
+        model.train()
+        for batch, (X, y) in enumerate(dataloader):
+            pred = model(X)
+            loss = loss_fn(pred, y)
+
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
+
+            if batch % round(size / batch_size / 10) == 0:
+                loss = loss.item()
+                current = batch * batch_size + len(X)
+                print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+
+
+    def eval_loop(dataloader, model, loss_fn):
+        model.eval()
+        size = len(dataloader.dataset)
+        num_batches = len(dataloader)
+        eval_loss, correct = 0, 0
+
+        all_preds = torch.tensor([])
+        all_labels = torch.tensor([])
+
+        with torch.no_grad():
+            for X, y in dataloader:
+                pred = model(X)
+                eval_loss += loss_fn(pred, y).item()
+                correct += torch.eq(torch.round(pred), y).sum().item()
+
+                pred_labels = torch.round(pred)
+                all_preds = torch.cat((all_preds, pred_labels.cpu()))
+                all_labels = torch.cat((all_labels, y.cpu()))
+
+        precision = precision_score(all_labels, all_preds)
+        recall = recall_score(all_labels, all_preds)
+
+        eval_loss /= num_batches
+        accuracy = correct / size * 100
+
+        return {
+            "accuracy": accuracy,
+            "loss": eval_loss,
+            "precision": precision,
+            "recall": recall
+        }
+
+    loss_fn = nn.BCELoss().to(device)
+
+    learning_rate = 1e-3
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
+
+    num_epochs = 2
+    for t in range(num_epochs):
+        print(f"\nEpoch {t+1}\n-------------------------------")
+        train_loop(training_dataloader, model, loss_fn, optimizer)
+        metrics = eval_loop(validation_dataloader, model, loss_fn)
+        print(f"Eval Metrics: \n Accuracy: {(metrics['accuracy']):>0.1f}%, Avg loss: {metrics['loss']:>8f}, "
+            f"Precision: {metrics['precision']:.4f}, Recall: {metrics['recall']:.4f} \n")
+
+    dummy_input = torch.randn(1, 5, device=device)
+    onnx_model = torch.onnx.export(
+        model,
+        dummy_input,
+        model_output_path,
+        input_names=["inputs"],
+        output_names=["outputs"],
+        dynamic_axes={
+            "inputs": {0: "batch_size"},
+        },
+        verbose=True)
 
 @dsl.component(
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
+    base_image="quay.io/modh/runtime-images:runtime-pytorch-ubi9-python-3.11-2024b-20241108",
     packages_to_install=["boto3", "botocore"]
 )
 def upload_model(input_model_path: InputPath()):
