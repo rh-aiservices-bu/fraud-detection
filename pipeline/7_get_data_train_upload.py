@@ -12,11 +12,11 @@ def get_data(train_data_output_path: OutputPath(), validate_data_output_path: Ou
     import urllib.request
     print("starting download...")
     print("downloading training data")
-    url = "https://raw.githubusercontent.com/cfchase/fraud-detection/main/data/train.csv"
+    url = "https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/train.csv"
     urllib.request.urlretrieve(url, train_data_output_path)
     print("train data downloaded")
     print("downloading validation data")
-    url = "https://raw.githubusercontent.com/cfchase/fraud-detection/main/data/validate.csv"
+    url = "https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/validate.csv"
     urllib.request.urlretrieve(url, validate_data_output_path)
     print("validation data downloaded")
 

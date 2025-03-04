@@ -29,7 +29,7 @@ spec:
             - -ec
             - |-
               echo -n 'Setting up Minio instance and connections'
-              oc apply -f https://github.com/cfchase/fraud-detection-notebooks/raw/main/setup/setup-s3-no-sa.yaml
+              oc apply -f https://github.com/rh-aiservices-bu/fraud-detection-notebooks/raw/main/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash
           image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
