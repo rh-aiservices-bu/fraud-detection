@@ -75,7 +75,7 @@ deploymentSpec:
           \   url = \"https://raw.githubusercontent.com/rh-aiservices-bu/fraud-detection/main/data/validate.csv\"\
           \n    urllib.request.urlretrieve(url, validate_data_output_path)\n    print(\"\
           validation data downloaded\")\n\n"
-        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523
+        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.11-2024b-20250212
     exec-train-model:
       container:
         args:
@@ -90,7 +90,7 @@ deploymentSpec:
           \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
           \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.8.0'\
           \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
-          \  python3 -m pip install --quiet --no-warn-script-location 'onnx==1.17.0' 'onnxruntime==1.20.1'\
+          \  python3 -m pip install --quiet --no-warn-script-location 'onnx==1.17.0'\
           \ 'tf2onnx==1.16.1' && \"$0\" \"$@\"\n"
         - sh
         - -ec
@@ -155,7 +155,7 @@ deploymentSpec:
           \n    # Save the model as ONNX for easy use of ModelMesh\n    model_proto,\
           \ _ = tf2onnx.convert.from_keras(model)\n    print(model_output_path)\n\
           \    onnx.save(model_proto, model_output_path)\n\n"
-        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523
+        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.11-2024b-20250212
     exec-upload-model:
       container:
         args:
@@ -170,7 +170,7 @@ deploymentSpec:
           \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
           \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.8.0'\
           \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
-          \  python3 -m pip install --quiet --no-warn-script-location 'boto3==1.35.55' 'botocore==1.35.55'\
+          \  python3 -m pip install --quiet --no-warn-script-location 'boto3==1.37.20' 'botocore==1.37.20'\
           \ && \"$0\" \"$@\"\n"
         - sh
         - -ec
@@ -197,7 +197,7 @@ deploymentSpec:
         env:
         - name: S3_KEY
           value: models/fraud/1/model.onnx
-        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523
+        image: quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.11-2024b-20250212
 pipelineInfo:
   name: 7-get-data-train-upload
 root:
