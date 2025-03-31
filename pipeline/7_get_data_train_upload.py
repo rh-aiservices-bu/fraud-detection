@@ -7,7 +7,7 @@ from kfp.dsl import InputPath, OutputPath
 from kfp import kubernetes
 
 
-@dsl.component(base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523")
+@dsl.component(base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.11-2024b-20250212")
 def get_data(train_data_output_path: OutputPath(), validate_data_output_path: OutputPath()):
     import urllib.request
     print("starting download...")
@@ -22,8 +22,8 @@ def get_data(train_data_output_path: OutputPath(), validate_data_output_path: Ou
 
 
 @dsl.component(
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
-    packages_to_install=["onnx==1.17.0", "onnxruntime==1.20.1", "tf2onnx==1.16.1"],
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.11-2024b-20250212",
+    packages_to_install=["onnx==1.17.0", "tf2onnx==1.16.1"],
 )
 def train_model(train_data_input_path: InputPath(), validate_data_input_path: InputPath(), model_output_path: OutputPath()):
     import numpy as np
@@ -109,15 +109,15 @@ def train_model(train_data_input_path: InputPath(), validate_data_input_path: In
                         validation_data=(scaler.transform(X_val.values), y_val),
                         verbose=True, class_weight=class_weights)
 
-    # Save the model as ONNX for easy use of ModelMesh
+    # Save the model as ONNX for easy use of ModelServing
     model_proto, _ = tf2onnx.convert.from_keras(model)
     print(model_output_path)
     onnx.save(model_proto, model_output_path)
 
 
 @dsl.component(
-    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
-    packages_to_install=["boto3==1.35.55", "botocore==1.35.55"]
+    base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.11-2024b-20250212",
+    packages_to_install=["boto3==1.37.20", "botocore==1.37.20"]
 )
 def upload_model(input_model_path: InputPath()):
     import os
