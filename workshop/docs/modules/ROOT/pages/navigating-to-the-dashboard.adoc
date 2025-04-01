@@ -25,7 +25,7 @@ The {productname-short} dashboard shows the *Home* page.
 
 NOTE: You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
 
-image::projects/ds-console-ocp-tile.png[OCP console link, 300]
+image::projects/ds-console-ocp-tile.png[OpenShift console link, 200]
 
 For now, stay in the {productname-short} dashboard.
 

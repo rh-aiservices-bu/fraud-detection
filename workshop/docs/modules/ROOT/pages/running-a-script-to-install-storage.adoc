@@ -19,7 +19,7 @@ NOTE: If you want to connect to your own storage, see xref:creating-connections-
 
 You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
 
-In the {productname-short} dashboard, select *Data Science Projects* and then click the *?* icon next to the project name. A text box appears with information about the project, including its resource name:
+In the {productname-short} dashboard, select *Data science projects* and then click the *?* icon next to the project name. A text box appears with information about the project, including its resource name:
 
 image::projects/ds-project-list-resource-hover.png[Project list resource name, 400]
 
@@ -45,11 +45,11 @@ image::projects/ocp-console-add-icon.png[Add resources Icon]
 
 . Select your project from the list of projects.
 +
-image::projects/ocp-console-select-project.png[Select a project]
+image::projects/ocp-console-select-project.png[Select a project, 200]
 
 . Verify that you selected the correct project.
 +
-image::projects/ocp-console-project-selected.png[Selected project]
+image::projects/ocp-console-project-selected.png[Selected project, 200]
 
 . Copy the following code and paste it into the *Import YAML* editor.
 +
@@ -113,7 +113,7 @@ spec:
 
 .  In the {productname-short} dashboard:
 
-.. Select *Data Science Projects* and then click the name of your project, *Fraud detection*.
+.. Select *Data science projects* and then click the name of your project, *Fraud detection*.
 .. Click *Connections*. You should see two connections listed: `My Storage` and `Pipeline Artifacts`.
 + 
 image::projects/ds-project-connections.png[Connections for Fraud Detection]
