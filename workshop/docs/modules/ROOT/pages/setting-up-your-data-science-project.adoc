@@ -9,7 +9,7 @@ Before you begin, log in to *{productname-long}*.
 
 .Procedure
 
-. On the navigation menu, select *Data Science Projects*. This page lists any existing projects that you have access to. From this page, you can select an existing project (if any) or create a new one.
+. On the navigation menu, select *Data science projects*. This page lists any existing projects that you have access to. From this page, you can select an existing project (if any) or create a new one.
 +
 image::projects/launch-jupyter-link.png[Launch Jupyter link]
 +

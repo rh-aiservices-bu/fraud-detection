@@ -13,7 +13,7 @@ You created a workbench, as described in xref:creating-a-workbench.adoc[Creating
 
 . Click the *Open* link next to your workbench. If prompted, log in and allow the Notebook to authorize your user.
 +
-image::workbenches/ds-project-workbench-open.png[Open workbench]
+image::workbenches/ds-project-workbench-open.png[Open workbench, 400]
 +
 Your JupyterLab environment window opens.
 +
