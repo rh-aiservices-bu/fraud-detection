@@ -23,6 +23,8 @@ NOTE: If you are using the {org-name} Developer Sandbox, you are provided with a
 +
 image::projects/ds-project-new-form.png[New data science project form, 600]
 
+. Click *Create*.
+
 .Verification
 
 You can see your project's initial state. Individual tabs provide more information about the project components and project access permissions:
