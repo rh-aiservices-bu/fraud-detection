@@ -102,7 +102,7 @@ image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency val
 
 In node 2, the notebook uploads the model to the S3 storage bucket.
 
-You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in the xref:storing-data-with-connections.adoc[Storing data with connections] section of this {deliverable}.
+You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in the storing-data-with-connections.adoc[Storing data with connections] section of this {deliverable}.
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 
@@ -197,7 +197,7 @@ Follow these steps in the {productname-short} dashboard:
 
 . Check the status of the pipeline server:
 .. In your Fraud Detection project, click the *Pipelines* tab.
-** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-data-science-pipelines[Enabling data science pipelines]. 
+** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines]. 
 ** If you see the *Import a pipeline* option, the pipeline server is configured. Continue to the next step.
 . Restart your Fraud Detection workbench:
 .. Click the *Workbenches* tab.

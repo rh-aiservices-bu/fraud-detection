@@ -12,6 +12,6 @@ NOTE: While it is possible for you to use one storage bucket for both purposes (
 
 The provided script also creates a connection to each storage bucket. 
 
-To run the script that installs local MinIO storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage[Running a script to install local object storage buckets and create connections].
+To run the script that installs local MinIO storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
 
-NOTE: If you want to use your own S3-compatible object storage buckets (instead of using the provided script), follow the steps in xref:creating-connections-to-storage[Creating connections to your own S3-compatible object storage].
+NOTE: If you want to use your own S3-compatible object storage buckets (instead of using the provided script), follow the steps in xref:creating-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
