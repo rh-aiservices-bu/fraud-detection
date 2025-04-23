@@ -23,7 +23,7 @@ def get_data(train_data_output_path: OutputPath(), validate_data_output_path: Ou
 
 @dsl.component(
     base_image="quay.io/modh/runtime-images:runtime-cuda-tensorflow-ubi9-python-3.9-2024a-20240523",
-    packages_to_install=["onnx==1.17.0", "onnxruntime==1.20.1", "tf2onnx==1.16.1"],
+    packages_to_install=["onnx==1.16.0", "onnxruntime==1.19.2", "tf2onnx==1.16.1"],
 )
 def train_model(train_data_input_path: InputPath(), validate_data_input_path: InputPath(), model_output_path: OutputPath()):
     import numpy as np
