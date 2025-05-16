@@ -55,6 +55,11 @@ In the *Connections* tab for the project, check to see that your connections are
 image::projects/ds-project-connections.png[List of project connections, 500]
 
 
+[IMPORTANT]
+====
+If your cluster uses self-signed certificates, your {productname-short} administrator might need to provide a certificate authority (CA) to securely connect to the S3 object storage, as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Cloud Service).
+====
+
 .Next step
 
 If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
