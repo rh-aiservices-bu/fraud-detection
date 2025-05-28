@@ -7,7 +7,7 @@ The JupyterLab environment is a web-based environment, but everything you do ins
 
 .Prerequisites
 
-You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench].
+You created a workbench, as described in xref:creating-a-workbench.adoc[Creating a workbench and selecting a workbench image].
 
 .Procedure
 
