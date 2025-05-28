@@ -16,7 +16,7 @@ image::projects/ds-project-connections.png[Data storage in workbench]
 
 . In your JupyterLab environment, open the `2_save_model.ipynb` file.
 
-. Follow the instructions in the notebook to make the model accessible in storage and save it in the portable ONNX format.
+. Follow the instructions in the notebook to make the model accessible in storage.
 
 .Verification
 
