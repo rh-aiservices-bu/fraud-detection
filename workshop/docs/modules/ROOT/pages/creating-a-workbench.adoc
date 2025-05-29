@@ -1,7 +1,7 @@
 [id='creating-a-workbench']
 = Creating a workbench and selecting a workbench image
 
-A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image (sometimes referred to as a notebook image) that is optimized with the tools and libraries that you need for developing models. 
+A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image that is optimized with the tools and libraries that you need for developing models. 
 
 .Prerequisites
 
@@ -22,7 +22,7 @@ image::workbenches/ds-project-create-workbench.png[Create workbench button, 800]
 +
 image::workbenches/create-workbench-form-name-desc.png[Workbench name and description, 600]
 +
-{org-name} provides several supported workbench images. In the *Notebook image* section, you can choose one of the default images or a custom image that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
+{org-name} provides several supported workbench images. In the *Workbench image* section, you can choose one of the default images or a custom image that an administrator has set up for you. The *Tensorflow* image has the libraries needed for this {deliverable}.
 
 . Select the latest *Tensorflow* image.
 +

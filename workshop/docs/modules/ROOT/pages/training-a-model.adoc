@@ -7,6 +7,8 @@ In your notebook environment, open the `1_experiment_train.ipynb` file and follo
 
 image::workbenches/jupyter-notebook-1.png[Jupyter Notebook 1]
 
+When you save the model, you convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
+
 .Next step
 
 xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment]
