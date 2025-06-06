@@ -5,7 +5,7 @@ To implement a data science workflow, you must create a data science project (as
 
 .Prerequisites
 
-Before you begin, log in to *{productname-long}*.
+* You have logged in to *{productname-long}*.
 
 .Procedure
 
@@ -17,7 +17,7 @@ NOTE: It is possible to start a Jupyter notebook by clicking the *Launch standal
 
 . If you are using your own OpenShift cluster, click *Create project*. 
 +
-NOTE: If you are using the {org-name} Developer Sandbox, you are provided with a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
+NOTE: If you are using the {org-name} Developer Sandbox, it provides a default data science project (for example, `myname-dev`). Select it and skip over the next step to the *Verification* section.
 
 . Enter a display name and description.
 +
