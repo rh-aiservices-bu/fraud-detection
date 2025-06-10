@@ -7,7 +7,7 @@
 
 ** *If you are using the {org-name} Developer Sandbox*:
 +
-After you log in to the Sandbox, click *Getting Started* -> *Available services*, and then, in the {productname-long} card, click *Launch*.
+After you log in to the Sandbox, in the {productname-long} card, click *Launch*.
 +
 image::projects/sandbox-rhoai-tile.png[{productname-short} dashboard link]
 
