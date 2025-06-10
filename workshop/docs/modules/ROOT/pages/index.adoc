@@ -30,7 +30,7 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 == Before you begin
 
-* You need access to an OpenShift cluster where {productname-long} is installed. 
+* You must have access to an OpenShift cluster where {productname-long} is installed. 
 +
 If you do not have access to a cluster that includes an instance of {productname-short}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the https://console.redhat.com/openshift/sandbox[*free {org-name} Developer Sandbox*] or you can learn how to install {productname-short} on *your own OpenShift cluster*.
 +
@@ -45,7 +45,7 @@ If your cluster uses self-signed certificates, before you begin the {deliverable
 +
 . To find the {productname-short} version for your cluster:
 .. Log in to the {productname-short} dashboard.
-.. In the top navigation bar, click the help icon (image:images/rhoai-help-icon.png[Help icon]) and then select *About*.
+.. In the top navigation bar, click the help icon (image:projects/rhoai-help-icon.png[Help icon]) and then select *About*.
 +
 The *About* page shows the installed version.
 . Check the link:https://access.redhat.com/articles/rhoai-supported-configs[{productname-long} Supported Configurations] page to verify that your installed version is a supported version.
