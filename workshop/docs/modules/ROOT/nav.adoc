@@ -5,6 +5,7 @@
 *** xref:running-a-script-to-install-storage.adoc[1. Scripted Local]
 *** xref:creating-connections-to-storage.adoc[2. Manual]
 ** xref:enabling-data-science-pipelines.adoc[4. Enable Pipelines]
+** xref:setting-up-kueue-resources.adoc[4. Set up Kueue resources]
 
 * 2. Workbenches
 ** xref:creating-a-workbench.adoc[1. Create a Workbench]
@@ -27,3 +28,4 @@
 
 * 5. Distributed Training
 ** xref:distributed-jobs-with-ray.adoc[1. Distributed Jobs with Ray]
+** xref:distributed-jobs-with-kfto.adoc[2. Distributed Jobs with Training operator]
