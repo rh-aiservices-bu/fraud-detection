@@ -32,7 +32,7 @@ image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 +
 image::workbenches/create-workbench-form-size.png[Workbench size, 600]
 
-NOTE: If your OpenShift cluster has available GPUs, the *Create workbench* form includes an *Accelerator* option. Select *None*. This {deliverable} does not require any GPUs.
+. If your OpenShift cluster has available GPUs, the *Create workbench* form includes an *Accelerator* option. Select *None*. This {deliverable} does not require any GPUs.
 
 . Leave the default environment variables and storage options.
 +
