@@ -7,7 +7,7 @@ NOTE: If you do not intend to complete the Distributing training jobs with Train
 
 In this section, you prepare your {deliverable} environment so that you can use Distributing training with Training operator.
 
-Later in this {deliverable}, you implement a Distributed training job using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how can different workload consume them.
+Later in this {deliverable}, you implement a Distributed training job using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how different workloads consume them.
 
 .Procedure
 
