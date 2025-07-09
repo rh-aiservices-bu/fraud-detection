@@ -15,7 +15,7 @@ To implement a data science workflow, you must create a data science project (as
 +
 *If you are using your own OpenShift cluster*, you can select an existing project (if any) or create a new one. Click *Create project*. 
 +
-NOTE: It is possible to start a Jupyter notebook by clicking the *Create standalone workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
+NOTE: It is possible to start a Jupyter notebook by clicking the *Start basic workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
 
 . In the *Create project* modal, enter a display name and description.
 +
