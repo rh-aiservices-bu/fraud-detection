@@ -76,7 +76,13 @@ def train_func():
 
     def load_and_preprocess_data(file_path: str) -> Tuple[NDArray[np.float32], NDArray[np.float32], StandardScaler]:
         try:
-            df = pd.read_csv(file_path)
+            df = pd.read_csv(
+                file_path,
+                storage_options={
+                    # Added "verify": False flag to suport using insecure S3 buckets
+                    "client_kwargs": {"endpoint_url": os.environ.get("AWS_S3_ENDPOINT"), "verify": False}
+                }
+            )
 
             feature_columns = [
                 'distance_from_last_transaction',
@@ -317,7 +323,8 @@ def train_func():
 
             # Upload to S3
             try:
-                s3_client = boto3.client('s3')
+                # Added verify=False flag to suport using insecure S3 buckets
+                s3_client = boto3.client('s3', endpoint_url=os.environ.get("AWS_S3_ENDPOINT"), verify=False)
                 s3_key = f"models/{os.path.basename(onnx_model_path)}"
                 s3_client.upload_file(onnx_model_path, bucket_name, s3_key)
                 logger.info(f"Model uploaded to s3://{bucket_name}/{s3_key}")
