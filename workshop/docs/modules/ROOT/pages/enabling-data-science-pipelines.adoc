@@ -1,7 +1,7 @@
 [id='enabling-data-science-pipelines']
 = Enabling data science pipelines
 
-NOTE: If you do not intend to complete the pipelines section of this {deliverable} you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
+NOTE: If you do not intend to complete the pipelines section of this {deliverable} you can skip this step and move on to the next section, xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
 
 In this section, you prepare your {deliverable} environment so that you can use data science pipelines.
 
@@ -51,7 +51,7 @@ An information box opens and displays the object storage connection information 
 
 .Next step
 
-xref:creating-a-workbench.adoc[Creating a workbench and selecting a notebook image]
+xref:setting-up-kueue-resources.adoc[Setting up Kueue resources]
 
 //xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
 
