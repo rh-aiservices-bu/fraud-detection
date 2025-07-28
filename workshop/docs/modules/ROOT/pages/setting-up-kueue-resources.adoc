@@ -1,13 +1,11 @@
 [id='setting-up-kueue-resources']
 = Setting up Kueue resources
 
-NOTE: If you are using the Red Hat Developer Sandbox you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
+NOTE: If you are using the Red Hat Developer Sandbox, or if you do not intend to complete the Distributing training jobs with the Training operator section of this {deliverable}, skip this section and continue to the next section, xref:creating-a-workbench.adoc[Creating a workbench and selecting a workbench image].
 
-NOTE: If you do not intend to complete the Distributing training jobs with Training operator section of this {deliverable} you can skip this step and move on to the next section, xref:creating-a-workbench.adoc[Create a Workbench].
+In this section, you prepare your {deliverable} environment so that you can use Distributing training with the Training Operator.
 
-In this section, you prepare your {deliverable} environment so that you can use Distributing training with Training operator.
-
-Later in this {deliverable}, you implement a Distributed training job using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how different workloads consume them.
+Later in this {deliverable}, you implement a Distributed training job by using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how different workloads consume them.
 
 .Procedure
 
