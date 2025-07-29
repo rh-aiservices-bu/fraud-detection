@@ -1,5 +1,5 @@
 [id='distributed-jobs-with-kfto']
-= Distributing training jobs with Training operator
+= Distributing training jobs with the Training Operator
 
 In previous sections of this {deliverable}, you trained the fraud detection model directly in a notebook and then in a pipeline. In this section, you learn how to train the model by using the Training Operator. The Training Operator is a tool for scalable distributed training of machine learning (ML) models created with various ML frameworks, such as PyTorch.
 
