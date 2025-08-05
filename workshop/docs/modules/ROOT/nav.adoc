@@ -28,4 +28,4 @@
 
 * 5. Distributed Training
 ** xref:distributed-jobs-with-ray.adoc[1. Distributed Jobs with Ray]
-** xref:distributed-jobs-with-kfto.adoc[2. Distributed Jobs with Training operator]
+** xref:distributed-jobs-with-kfto.adoc[2. Distributed Jobs with the Training Operator]
