@@ -18,7 +18,7 @@ To explore the pipeline editor, complete the steps in the following procedure to
 
 . Open your workbench's JupyterLab environment. If the launcher is not visible, click *+* to open it.
 +
-image::pipelines/wb-pipeline-launcher.png[Pipeline buttons]
+image::pipelines/wb-pipeline-launcher.png[Pipeline buttons, 400]
 
 . Click *Pipeline Editor*.
 +
