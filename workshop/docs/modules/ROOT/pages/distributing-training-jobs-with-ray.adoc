@@ -1,0 +1,13 @@
+[id='distributing-training-jobs-with-ray']
+= Distributing training jobs with Ray
+
+You can use Ray, a distributed computing framework, to parallelize Python code across many CPUs or GPUs.
+
+In your notebook environment, open the `8_distributed_training.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through setting authentication, creating Ray clusters, and working with jobs.
+
+Optionally, if you want to view the Python code for this step, you can find it in the `ray-scripts/train_tf_cpu.py` file. 
+
+image::distributed/jupyter-notebook.png[Jupyter Notebook]
+
+For more information about TensorFlow training on Ray, see the https://docs.ray.io/en/latest/train/distributed-tensorflow-keras.html[Ray TensorFlow guide].
+

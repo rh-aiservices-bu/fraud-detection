@@ -1,0 +1,14 @@
+[id='distributing-training-jobs']
+= Distributing training jobs
+
+Earlier, you trained the fraud detection model directly in a notebook and then in a pipeline. You can also distribute the training of a machine learning model across many CPUs.
+
+Distributing training is not necessary for a simple model. However, by applying it to the example fraud model, you learn how to train more complex models that require more compute power.
+
+You can try one or both of the following options:
+
+* The Ray distributed computing framework, as described in
+xref:distributing-jobs-with-ray.adoc[Distributing training jobs with Ray].
+
+* The Training Operator, as described in 
+xref:distributing-jobs-with-kfto.adoc[Distributing training jobs with the Training Operator].

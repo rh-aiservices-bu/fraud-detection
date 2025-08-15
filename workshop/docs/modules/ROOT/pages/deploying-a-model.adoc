@@ -1,16 +1,14 @@
 [id='deploying-a-model']
 = Deploying a  model
 
-Now that the model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
+Given that the model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
 
 {productname-short} offers two options for model serving: 		
 
-* *Single-model serving* - Each model in the project is deployed on its own model server. This platform works well for large models or models that need dedicated resources.
-* *Multi-model serving* - All models in the project are deployed on the same model server. This platform is suitable for sharing resources amongst deployed models.  Multi-model serving is the only option offered in the {org-name} Developer Sandbox environment.
+* *Single-model serving* - Each model in the project deploys on its own model server. This platform works well for large models or models that need dedicated resources.
+* *Multi-model serving* - All models in the project deploy on the same model server. This platform is suitable for sharing resources among deployed models. Multi-model serving is the only option offered in the {org-name} Developer Sandbox environment.
 
-//NOTE: For each project, you can specify only one model serving platform. If you want to change to the other model serving platform, you must create a new project.
-
-For this {deliverable}, since you are only deploying only one model, you can select either serving type. The steps for deploying the fraud detection model depend on the type of model serving platform you select:
+For this {deliverable}, because you are deploying only one model, you can select either serving type. The steps for deploying the fraud detection model depend on the type of model serving platform that you select:
 
 * xref:deploying-a-model-single-model-server.adoc[Deploying a model on a single-model server]	
 

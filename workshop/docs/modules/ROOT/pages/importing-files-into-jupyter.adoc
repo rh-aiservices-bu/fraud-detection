@@ -55,7 +55,7 @@ The current branch changes to *{git-version}*.
 
 .Verification
 
-In the file browser, you should see the notebooks that you cloned from Git.
+In the file browser, view the notebooks that you cloned from Git.
 
 image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection, 300]
 

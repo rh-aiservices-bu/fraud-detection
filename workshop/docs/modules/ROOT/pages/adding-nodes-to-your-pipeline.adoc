@@ -1,0 +1,28 @@
+[id='adding-nodes-to-your-pipeline']
+= Adding nodes to your pipeline
+
+Add some steps, or *nodes*, in your pipeline for the  `1_experiment_train.ipynb` and `2_save_model.ipynb` notebooks.
+
+.Prerequisites
+
+* You created a pipeline file as described in xref:creating-a-pipeline.adoc[title]
+
+.Procedure
+
+. From the JupyterLab file-browser panel, drag the `1_experiment_train.ipynb` and `2_save_model.ipynb` notebooks onto the pipeline canvas.
++
+image::pipelines/wb-pipeline-drag-drop.png[ Drag and Drop Notebooks]
+
+. Click the output port of `1_experiment_train.ipynb` and drag a connecting line to the input port of `2_save_model.ipynb`.
++
+image::pipelines/wb-pipeline-connect-nodes.png[Connect Nodes, 400]
+
+. Save the pipeline.
+
+.Verification
+
+* Your pipeline has two nodes.
+
+.Next step
+
+xref:specifying-the-training-file-as-a-dependency.adoc[Specify the training file as a dependency]

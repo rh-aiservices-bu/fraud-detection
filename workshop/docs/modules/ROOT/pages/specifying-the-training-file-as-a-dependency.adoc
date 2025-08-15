@@ -1,0 +1,38 @@
+[id='specifying-the-training-file-as-a-dependency']
+= Specifying the training file as a dependency
+
+Set node properties in your pipeline to specify the training file as a dependency.
+
+NOTE: If you do not set this file dependency, the file is not included in the node when it runs and the training job fails.
+
+.Prerequisites
+
+* You added two nodes to your pipeline as described in xref:adding-nodes-to-your-pipeline.adoc[Adding nodes to your pipeline].
+
+.Procedure
+
+. Click the `1_experiment_train.ipynb` node.
++
+image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
+
+. In the *Properties* panel, click the *Node Properties* tab.
+
+. Scroll down to the *File Dependencies* section and then click *Add*.
++
+image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 500]
+
+. Set the value to `data/*.csv` which has the data to train your model.
+
+. Select the *Include Subdirectories* option.
++
+image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
+
+. *Save* the pipeline.
+
+.Verification
+
+* The training file is a dependency of the first node in your pipeline.
+
+.Next step
+
+xref:creating-and-storing-the-onnx-output-file.adoc[Creating and storing the ONNX-formatted output file]
