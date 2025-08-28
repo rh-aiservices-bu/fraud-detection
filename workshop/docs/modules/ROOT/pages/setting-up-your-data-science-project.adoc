@@ -1,7 +1,12 @@
 [id='setting-up-your-data-science-project']
 = Setting up your data science project
 
-To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
+To implement a data science workflow, you must create a data science project. The project enables the following:
+
+* Organization and collaboration on resources within separated namespaces. 
+* Creating multiple workbenches with their own IDE environments.
+* Workbenches that maintain their own connections and cluster storage.
+* Workbenches that share models and data with pipelines and model servers.
 
 .Prerequisites
 
@@ -9,25 +14,21 @@ To implement a data science workflow, you must create a data science project (as
 
 .Procedure
 
-. On the navigation menu, select *Data science projects*. This page lists any existing projects that you have access to.
+. On the navigation menu, select  *Data science projects*. All of your data science projects are listed here.
 
-. *If you are using the {org-name} Developer Sandbox*, it provides a default data science project (for example, `myname-dev`). Select it and skip to the *Verification* section.
+. *If you are using the {org-name} Developer Sandbox*, it provides a default data science project, `myname-dev`. Select it and skip to the *Verification* section below in this document.
 +
-*If you are using your own OpenShift cluster*, you can select an existing project (if any) or create a new one. Click *Create project*. 
+*If you are using your own OpenShift cluster*, you can select an existing project or create a new one. Click *Create project*. 
 +
-NOTE: It is possible to start a Jupyter notebook by clicking the *Start basic workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
+NOTE: It is possible to start a Jupyter notebook by clicking the *Start basic workbench* button, selecting a notebook image, and clicking *Start server*. However, this would be a notebook that you could not reuse.
 
 . In the *Create project* modal, enter a display name and description.
-+
-image::projects/ds-project-new-form.png[New data science project form, 600]
 
 . Click *Create*.
 
 .Verification
 
-You can see your project's initial state. Individual tabs provide more information about the project components and project access permissions:
-
-image::projects/ds-project-new.png[New data science project]
+You can see your project's initial state. Individual tabs provide more information about the project components and project access permissions. See the following for more details about the tabs:
 
 ** *Workbenches* are instances of your development and experimentation environment. They typically contain IDEs, such as JupyterLab, RStudio, and Visual Studio Code.
 
@@ -35,7 +36,7 @@ image::projects/ds-project-new.png[New data science project]
 
 ** *Models* allow you to quickly serve a trained model for real-time inference. You can have multiple model servers per data science project. One model server can host multiple models.
 
-** *Cluster storage* is a persistent volume that retains the files and data you're working on within a workbench. A workbench has access to one or more cluster storage instances.
+** *Cluster storage* is a persistent volume that retains the files and data you are working on within a workbench. A workbench has access to one or more cluster storage instances.
 
 ** *Connections* contain configuration parameters that are required to connect to a data source, such as an S3 object bucket.
 

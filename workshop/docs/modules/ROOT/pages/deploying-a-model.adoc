@@ -10,8 +10,8 @@ Now that the model is accessible in storage and saved in the portable ONNX forma
 
 //NOTE: For each project, you can specify only one model serving platform. If you want to change to the other model serving platform, you must create a new project.
 
-For this {deliverable}, since you are only deploying only one model, you can select either serving type. The steps for deploying the fraud detection model depend on the type of model serving platform you select:
+For this {deliverable} you can select either serving type. Then follow these instructions:
 
-* xref:deploying-a-model-single-model-server.adoc[Deploying a model on a single-model server]	
+* :deploying-a-model-single-model-server.adoc[Deploying a model on a single-model server]	
 
 * xref:deploying-a-model-multi-model-server.adoc[Deploying a model on a multi-model server]	

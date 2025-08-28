@@ -9,7 +9,5 @@ In your notebook environment, open the `9_distributed_training_kfto.ipynb` file 
 
 Optionally, if you want to view the Python code for this section, you can find it in the `kfto-scripts/train_pytorch_cpu.py` file. 
 
-image::distributed/kfto-jupyter-notebook.png[Jupyter Notebook]
-
 For more information about PyTorchJob training with the Training Operator, see the https://www.kubeflow.org/docs/components/trainer/legacy-v1/user-guides/pytorch[Training operator PyTorchJob guide].
 

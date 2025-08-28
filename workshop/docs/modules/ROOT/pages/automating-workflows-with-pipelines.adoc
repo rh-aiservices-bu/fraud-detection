@@ -1,13 +1,12 @@
 [id='automating-workflows-with-pipelines']
 = Automating workflows with data science pipelines
 
-In previous sections of this {deliverable}, you used a notebook to train and save your model. Optionally, you can automate these tasks by using {productname-long} pipelines. Pipelines offer a way to automate the execution of multiple notebooks and Python code. By using pipelines, you can execute long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
+In previous sections of this {deliverable}, you used a notebook to manually train and save your model. Pipelines can automate this process for multiple notebooks and Python code. 
 
-In this section, you create a simple pipeline by using the GUI pipeline editor. The pipeline uses the notebook that you used in previous sections to train a model and then save it to S3 storage.
+In this section, you create a simple pipeline by using the GUI pipeline editor. The pipeline uses your previously created notebook to train a model and save it in S3 storage. Your completed pipeline should look like the one in the `6 Train Save.pipeline` file.
 
-Your completed pipeline should look like the one in the `6 Train Save.pipeline` file.
-
-To explore the pipeline editor, complete the steps in the following procedure to create your own pipeline. Alternately, you can skip the following procedure and instead run the `6 Train Save.pipeline` file.
+NOTE:
+You can skip the following procedure and instead run the `6 Train Save.pipeline` file.
 
 == Prerequisites
 
@@ -17,28 +16,17 @@ To explore the pipeline editor, complete the steps in the following procedure to
 == Create a pipeline
 
 . Open your workbench's JupyterLab environment. If the launcher is not visible, click *+* to open it.
-+
-image::pipelines/wb-pipeline-launcher.png[Pipeline buttons, 400]
-
 . Click *Pipeline Editor*.
-+
-image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 75]
-+
+
 You've created a blank pipeline.
 
 . Set the default runtime image for when you run your notebook or Python code.
 
 .. In the pipeline editor, click *Open Panel*.
-+
-image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel,400]
 
 .. Select the *Pipeline Properties* tab.
-+
-image::pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab]
 
 .. In the *Pipeline Properties* panel, scroll down to *Generic Node Defaults* and *Runtime Image*. Set the value to `Tensorflow with Cuda and Python 3.11 (UBI 9)`.
-+
-image::pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
 
 . Select *File* -> *Save Pipeline*.
 
@@ -47,12 +35,8 @@ image::pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
 Add some steps, or *nodes* in your pipeline. Your two nodes will use the  `1_experiment_train.ipynb` and `2_save_model.ipynb` notebooks.
 
 . From the file-browser panel, drag the `1_experiment_train.ipynb` and `2_save_model.ipynb` notebooks onto the pipeline canvas.
-+
-image::pipelines/wb-pipeline-drag-drop.png[ Drag and Drop Notebooks]
 
 . Click the output port of `1_experiment_train.ipynb` and drag a connecting line to the input port of `2_save_model.ipynb`.
-+
-image::pipelines/wb-pipeline-connect-nodes.png[Connect Nodes, 400]
 
 . Save the pipeline.
 
@@ -63,20 +47,14 @@ Set node properties to specify the training file as a dependency.
 NOTE: If you don't set this file dependency, the file is not included in the node when it runs and the training job fails.
 
 . Click the `1_experiment_train.ipynb` node.
-+
-image::pipelines/wb-pipeline-node-1.png[Select Node 1, 150]
 
 . In the *Properties* panel, click the *Node Properties* tab.
 
 . Scroll down to the *File Dependencies* section and then click *Add*.
-+
-image::pipelines/wb-pipeline-node-1-file-dep.png[Add File Dependency, 500]
 
 . Set the value to `data/*.csv` which contains the data to train your model.
 
 . Select the *Include Subdirectories* option.
-+
-image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value, 300]
 
 . *Save* the pipeline.
 
@@ -91,8 +69,6 @@ In node 1, the notebook creates the `models/fraud/1/model.onnx` file. In node 2,
 . Scroll down to the *Output Files* section, and then click *Add*.
 
 . Set the value to `models/fraud/1/model.onnx`.
-+
-image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency value, 400]
 
 . Repeat steps 2-4 for node 2.
 
@@ -102,7 +78,7 @@ image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency val
 
 In node 2, the notebook uploads the model to the S3 storage bucket.
 
-You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in the storing-data-with-connections.adoc[Storing data with connections] section of this {deliverable}.
+You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in the storing-data-with-connections[Storing data with connections] section of this {deliverable}.
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 
@@ -112,7 +88,6 @@ The secret is named `aws-connection-my-storage`.
 ====
 If you named your connection something other than `My Storage`, you can obtain the secret name in the {productname-short} dashboard by hovering over the help (?) icon in the *Connections* tab. 
 
-image::pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
 ====
 
 The `aws-connection-my-storage` secret includes the following fields:
@@ -136,22 +111,16 @@ Under *Additional Properties*, note that some environment variables have been pr
 Since you don't want to save the value in your pipelines, remove all of these environment variables.
 
 .. Click *Remove* for each of the pre-filled environment variables.
-+
-image::pipelines/wb-pipeline-node-remove-env-var.png[Remove Env Var]
 
 . Add the S3 bucket and keys by using the Kubernetes secret.
 
 .. Under *Kubernetes Secrets*, click *Add*.
-+
-image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret]
 
 .. Enter the following values and then click *Add*.
 +
 * *Environment Variable*: `AWS_ACCESS_KEY_ID`
 ** *Secret Name*: `aws-connection-my-storage`
 ** *Secret Key*: `AWS_ACCESS_KEY_ID`
-+
-image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 . Repeat Step 2 for each of the following Kubernetes secrets:
 
@@ -180,9 +149,6 @@ Upload the pipeline on your cluster and run it. You can do so directly from the 
 .Procedure
 
 . Click the play button in the toolbar of the pipeline editor.
-+
-image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
-
 . Enter a name for your pipeline.
 . Verify that the *Runtime Configuration:* is set to `Data Science Pipeline`.  
 . Click *OK*.
@@ -208,19 +174,12 @@ Follow these steps in the {productname-short} dashboard:
 ====
 
 . In the {productname-short} dashboard, open your data science project and expand the newly created pipeline.
-+
-image::pipelines/dsp-pipeline-complete.png[New pipeline expanded, 800]
 
 . Click *View runs*.
-+
-image::pipelines/dsp-view-run.png[View runs for selected pipeline, 500]
 
 . Click your run and then view the pipeline run in progress.
-+
-image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 The result should be a `models/fraud/1/model.onnx` file in your S3 bucket which you can serve, just like you did manually in the xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment] section.
-
 
 .Next step
 

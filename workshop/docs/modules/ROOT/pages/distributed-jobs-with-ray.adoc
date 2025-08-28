@@ -9,7 +9,5 @@ In your notebook environment, open the `8_distributed_training.ipynb` file and f
 
 Optionally, if you want to view the Python code for this section, you can find it in the `ray-scripts/train_tf_cpu.py` file. 
 
-image::distributed/jupyter-notebook.png[Jupyter Notebook]
-
 For more information about TensorFlow training on Ray, see the https://docs.ray.io/en/latest/train/distributed-tensorflow-keras.html[Ray TensorFlow guide].
 

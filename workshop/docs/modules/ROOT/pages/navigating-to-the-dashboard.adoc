@@ -7,27 +7,22 @@
 
 ** *If you are using the {org-name} Developer Sandbox*:
 +
-After you log in to the Sandbox, in the {productname-long} card, click *Launch*.
-+
-image::projects/sandbox-rhoai-tile.png[{productname-short} dashboard link]
+After you log in to the Sandbox, in the {productname-long} card, click *Try It*.
 
 ** *If you are using your own OpenShift cluster*:
 +
 .. After you log in to the OpenShift console, click the application launcher icon on the header.
-+
-image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
 .. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
 +
-image::projects/login-with-openshift.png[OpenShift login, 300]
+//image::projects/login-with-openshift.png[OpenShift login, 300]
 
 The {productname-short} dashboard shows the *Home* page.
 
 NOTE: You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
 
-image::projects/ds-console-ocp-tile.png[OpenShift console link, 200]
-
 For now, stay in the {productname-short} dashboard.
+//image::projects/ds-console-ocp-tile.png[OpenShift console link, 200]
 
 .Next step
 

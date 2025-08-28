@@ -9,14 +9,14 @@
 :rhoai-version: main (the latest)
 // for the downstream tutorial, change the value of rhoai-version to match the git-version value in the importing-files-into-jupyter.adoc file
 
-Welcome. In this {deliverable}, you learn how to incorporate data science and artificial intelligence and machine learning (AI/ML) into an OpenShift development workflow.
+Welcome to the fraud detection tutoiral! In this {deliverable}, you will learn how to incorporate data science, artificial intelligence, and machine learning (AI/ML) into an OpenShift development workflow. You will not need to install anything on your computer.
 
-You use an example fraud detection model to complete the following tasks in https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}] without the need to install anything on your computer:
+You will use an example fraud detection model to complete the following tasks:
 
-* Explore a pre-trained fraud detection model by using a Jupyter notebook.
+* Explore the pre-trained model using a Jupyter notebook.
 * Deploy the model by using {productname-short} model serving.
-* Refine and train the model by using automated pipelines.
-* Learn how to train the model by using Ray, a distributed computing framework.
+* Refine and train the model using automated pipelines.
+* Train the model using Ray, a distributed computing framework.
 
 == About the example fraud detection model
 
@@ -28,7 +28,7 @@ The example fraud detection model monitors credit card transactions for potentia
 
 Based on this data, the model outputs the likelihood of the transaction being fraudulent.
 
-== Before you begin
+== Prerequisites
 
 * You must have access to an OpenShift cluster where {productname-long} is installed. 
 +
@@ -36,20 +36,20 @@ If you do not have access to a cluster that includes an instance of {productname
 +
 [IMPORTANT]
 ====
-If your cluster uses self-signed certificates, before you begin the {deliverable}, your {productname-short} administrator must add self-signed certificates for {productname-short} as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates^] (Cloud Service).
+If your cluster uses self-signed certificates your {productname-short} administrator must add self-signed certificates for {productname-short}.
+
+See the following for more information: link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates^] (Cloud Service).
 ====
 
 * Make sure that the version of this tutorial matches the {productname-short} version on your cluster.
 +
-{productname-long} {rhoai-version} is the version described in this {deliverable}.
+* **{productname-long} {rhoai-version} is the version described in this {deliverable}.**
 +
-. To find the {productname-short} version for your cluster:
+. How to locate the {productname-short} version for your cluster:
 .. Log in to the {productname-short} dashboard.
 .. In the top navigation bar, click the help icon (image:projects/rhoai-help-icon.png[Help icon]) and then select *About*.
 +
-The *About* page shows the installed version.
+.. The *About* page shows the installed version.
 . Check the link:https://access.redhat.com/articles/rhoai-supported-configs[{productname-long} Supported Configurations] page to verify that your installed version is a supported version.
 
 . If this version of the tutorial does not match the installed version, access the matching version of the tutorial by navigating to the link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[top-level {productname-long} documentation page] and selecting the matching version from the drop-down list.
-
-If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}].

@@ -9,8 +9,6 @@ To prepare a model for deployment, you must move the model from your workbench t
 
 * You created the `My Storage` connection and have added it
 to your workbench.
-+
-image::projects/ds-project-connections.png[Data storage in workbench]
 
 .Procedure
 
@@ -19,8 +17,7 @@ image::projects/ds-project-connections.png[Data storage in workbench]
 . Follow the instructions in the notebook to make the model accessible in storage.
 
 .Verification
-
-When you have completed the notebook instructions, the `models/fraud/1/model.onnx` file is in your object storage and it is ready for your model server to use.
+The `models/fraud/1/model.onnx` file is visible in your object storage and it is ready for use.
 
 .Next step
 

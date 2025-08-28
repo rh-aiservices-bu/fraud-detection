@@ -1,29 +1,19 @@
 [id='setting-up-kueue-resources']
 = Setting up Kueue resources
 
-In this section, you prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
+In this section, you prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator. Kueue allows you to manage cluster resource quotas and specify how they are consumed.
 
-In the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you implement a distributed training job by using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how different workloads consume them.
-
-NOTE: If you are using the Red Hat Developer Sandbox, or if you do not intend to use Kueue to schedule your training jobs in the _Distributing training jobs with the Training Operator_ section of this {deliverable}, skip this section and continue to the next section, xref:creating-a-workbench.adoc[Creating a workbench and selecting a workbench image].
+NOTE: If you are using the Red Hat Developer Sandbox, or you do not intend to use Kueue, advance to: xref:creating-a-workbench.adoc[Creating a workbench and selecting a workbench image].
 
 .Procedure
 
 . In the {productname-short} dashboard, click the application launcher icon and then select the *OpenShift Console* option.
-+
-image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
 . In the OpenShift console, click *+* in the top navigation bar.
-+
-image::projects/ocp-console-add-icon.png[Add resources Icon]
 
 . Select your project from the list of projects.
-+
-image::projects/ocp-console-select-project.png[Select a project, 200]
 
 . Verify that you selected the correct project.
-+
-image::projects/ocp-console-project-selected.png[Selected project, 200]
 
 . Copy the following code and paste it into the *Import YAML* editor.
 +
