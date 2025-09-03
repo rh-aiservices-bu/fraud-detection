@@ -1,8 +1,10 @@
+:_module-type: PROCEDURE
+
 [id='testing-the-model-api']
 = Testing the model API
 
+[role="_abstract"]
 After you deploy the model, you can test its API endpoints.
-
 
 .Procedure
 

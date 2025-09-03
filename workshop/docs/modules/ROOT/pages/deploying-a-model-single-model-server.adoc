@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='deploying-a-model-single-model-server']
 = Deploying a model on a single-model server
 
+[role="_abstract"]
 {productname-short} single-model servers host only one model. You create a new model server and deploy your model to it.
 
 .Prerequisites

@@ -1,9 +1,12 @@
+:_module-type: PROCEDURE
+
 [id='running-your-pipeline']
 = Running your pipeline 
 
+[role="_abstract"]
 Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline or the pipeline in the provided `6 Train Save.pipeline` file.
 
-.Prerequistes
+.Prerequisites
 
 * You set the S3 storage bucket keys, as described in xref:configuring-the-connection-to-storage.adoc[Configuring the connection to storage].
 

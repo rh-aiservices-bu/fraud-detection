@@ -1,6 +1,9 @@
+:_module-type: CONCEPT
+
 [id='distributing-training-jobs']
 = Distributing training jobs
 
+[role="_abstract"]
 Earlier, you trained the fraud detection model directly in a notebook and then in a pipeline. You can also distribute the training of a machine learning model across many CPUs.
 
 Distributing training is not necessary for a simple model. However, by applying it to the example fraud model, you learn how to train more complex models that require more compute power.

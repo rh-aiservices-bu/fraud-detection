@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='running-a-script-to-install-storage']
 = Running a script to install local object storage buckets and create connections
 
+[role="_abstract"]
 For convenience, run a script (provided in the following procedure) that automatically completes these tasks:
 
 * Creates a Minio instance in your project.

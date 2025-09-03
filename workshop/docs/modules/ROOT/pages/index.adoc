@@ -9,6 +9,7 @@
 :rhoai-version: main (the latest)
 // for the downstream tutorial, change the value of rhoai-version to match the git-version value in the importing-files-into-jupyter.adoc file
 
+[role="_abstract"]
 Welcome. In this {deliverable}, you learn how to use data science and artificial intelligence (AI) and machine learning (ML) in an OpenShift development workflow.
 
 You complete the following tasks in https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}] without the need to install anything on your computer:

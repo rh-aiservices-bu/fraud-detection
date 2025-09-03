@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='setting-up-kueue-resources']
 = Setting up Kueue resources
 
+[role="_abstract"]
 You must prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
 
 In the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you implement a distributed training job by using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how different workloads consume them.

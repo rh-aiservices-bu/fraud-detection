@@ -1,7 +1,10 @@
+:_module-type: PROCEDURE
+
 [id='creating-and-storing-the-onnx-output-file']
 = Creating and storing the ONNX-formatted output file
 
- You must set the `models/fraud/1/model.onnx` file as the output file for both nodes in your pipeline.
+[role="_abstract"]
+You must set the `models/fraud/1/model.onnx` file as the output file for both nodes in your pipeline.
 
 .Prerequisites
 

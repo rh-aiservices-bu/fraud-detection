@@ -1,9 +1,10 @@
+:_module-type: PROCEDURE
+
 [id='configuring-the-connection-to-storage']
 = Configuring the connection to storage
 
-In node 2, the notebook uploads the model to the S3 storage bucket.
-
-You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in xref:storing-data-with-connections.adoc[Storing data with connections].
+[role="_abstract"]
+In node 2, the notebook uploads the model to the S3 storage bucket. You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in xref:storing-data-with-connections.adoc[Storing data with connections].
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 

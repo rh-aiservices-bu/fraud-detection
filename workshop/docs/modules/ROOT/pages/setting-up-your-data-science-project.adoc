@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='setting-up-your-data-science-project']
 = Setting up your data science project
 
+[role="_abstract"]
 To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects help your team to organize and work together on resources within separated namespaces. From a project you can create many workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
 .Prerequisites

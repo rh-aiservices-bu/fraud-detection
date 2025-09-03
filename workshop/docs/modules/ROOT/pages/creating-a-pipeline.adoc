@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='creating-a-pipeline']
 = Creating a pipeline
 
+[role="_abstract"]
 You can create a simple pipeline by using the GUI pipeline editor. The pipeline uses the notebook that you used earlier to train a model and then save it to S3 storage.
 
 .Prerequisites

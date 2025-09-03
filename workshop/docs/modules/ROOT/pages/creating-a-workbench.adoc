@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='creating-a-workbench']
 = Creating a workbench and selecting a workbench image
 
+[role="_abstract"]
 A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image that has the tools and libraries that you need for developing models. 
 
 .Prerequisites

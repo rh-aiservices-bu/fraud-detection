@@ -1,6 +1,9 @@
+:_module-type: CONCEPT
+
 [id='deploying-a-model']
 = Deploying a  model
 
+[role="_abstract"]
 Given that the model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
 
 {productname-short} offers two options for model serving: 		

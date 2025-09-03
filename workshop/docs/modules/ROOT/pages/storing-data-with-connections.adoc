@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='storing-data-with-connections']
 = Storing data with connections
 
+[role="_abstract"]
 Add connections to workbenches to connect your project to data inputs and object storage buckets. A connection is a resource that has the configuration parameters needed to connect to a data source or data sink, such as an AWS S3 object storage bucket.
 
 For this {deliverable}, you run a provided script that creates the following local Minio storage buckets for you:

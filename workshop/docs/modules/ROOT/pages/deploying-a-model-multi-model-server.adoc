@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='deploying-a-model-multi-model-server']
 = Deploying a model on a multi-model server
 
+[role="_abstract"]
 {productname-short} multi-model servers can host several models at once. You create a new model server and deploy your model to it.
 
 .Prerequisites

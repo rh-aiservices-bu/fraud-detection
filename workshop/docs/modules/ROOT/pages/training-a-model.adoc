@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='training-a-model']
 = Training a model
 
+[role="_abstract"]
 In your notebook environment, open the `1_experiment_train.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through some simple data exploration, experimentation, and model training tasks.
 
 image::workbenches/jupyter-notebook-1.png[Jupyter Notebook 1]

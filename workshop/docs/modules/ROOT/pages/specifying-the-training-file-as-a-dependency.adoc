@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='specifying-the-training-file-as-a-dependency']
 = Specifying the training file as a dependency
 
+[role="_abstract"]
 Set node properties in your pipeline to specify the training file as a dependency.
 
 NOTE: If you do not set this file dependency, the file is not included in the node when it runs and the training job fails.
