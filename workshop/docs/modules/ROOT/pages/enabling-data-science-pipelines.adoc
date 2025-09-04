@@ -28,7 +28,7 @@ The *Configure pipeline server* form autofills with credentials for the connecti
 +
 image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
 
-. Leave the database configuration as the default.
+. In the *Advanced Settings* section, leave the default values.
 
 . Click *Configure pipeline server*.
 

@@ -11,7 +11,7 @@ Distributing training is not necessary for a simple model. However, by applying 
 You can try one or both of the following options:
 
 * The Ray distributed computing framework, as described in
-xref:distributing-jobs-with-ray.adoc[Distributing training jobs with Ray].
+xref:distributing-training-jobs-with-ray.adoc[Distributing training jobs with Ray].
 
 * The Training Operator, as described in 
-xref:distributing-jobs-with-kfto.adoc[Distributing training jobs with the Training Operator].
+xref:distributing-training-jobs-with-kfto.adoc[Distributing training jobs with the Training Operator].
