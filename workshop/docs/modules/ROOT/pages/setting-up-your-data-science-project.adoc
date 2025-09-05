@@ -1,7 +1,10 @@
+:_module-type: PROCEDURE
+
 [id='setting-up-your-data-science-project']
 = Setting up your data science project
 
-To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
+[role="_abstract"]
+To implement a data science workflow, you must create a data science project (as described in the following procedure). Projects help your team to organize and work together on resources within separated namespaces. From a project you can create many workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
 .Prerequisites
 
@@ -15,7 +18,7 @@ To implement a data science workflow, you must create a data science project (as
 +
 *If you are using your own OpenShift cluster*, you can select an existing project (if any) or create a new one. Click *Create project*. 
 +
-NOTE: It is possible to start a Jupyter notebook by clicking the *Start basic workbench* button, selecting a notebook image, and clicking *Start server*. However, it would be a one-off Jupyter notebook run in isolation.
+NOTE: You can start a Jupyter notebook by clicking the *Start basic workbench* button, selecting a notebook image, and clicking *Start server*. However, in that case, it is a one-off Jupyter notebook run in isolation.
 
 . In the *Create project* modal, enter a display name and description.
 +
@@ -25,19 +28,19 @@ image::projects/ds-project-new-form.png[New data science project form, 600]
 
 .Verification
 
-You can see your project's initial state. Individual tabs provide more information about the project components and project access permissions:
+You can see your project's initial state. Individual tabs show more information about the project components and project access permissions:
 
 image::projects/ds-project-new.png[New data science project]
 
-** *Workbenches* are instances of your development and experimentation environment. They typically contain IDEs, such as JupyterLab, RStudio, and Visual Studio Code.
+** *Workbenches* are instances of your development and experimentation environment. They typically contain individual development environments (IDEs), such as JupyterLab, RStudio, and Visual Studio Code.
 
-** *Pipelines* contain the data science pipelines that are executed within the project.
+** *Pipelines* contain the data science pipelines which run within the project.
 
-** *Models* allow you to quickly serve a trained model for real-time inference. You can have multiple model servers per data science project. One model server can host multiple models.
+** *Models* for quickly serving a trained model for real-time inference. You can have many model servers per data science project. One model server can host many models.
 
 ** *Cluster storage* is a persistent volume that retains the files and data you're working on within a workbench. A workbench has access to one or more cluster storage instances.
 
-** *Connections* contain configuration parameters that are required to connect to a data source, such as an S3 object bucket.
+** *Connections* contain required configuration parameters for connecting to a data source, such as an S3 object bucket.
 
 ** *Permissions* define which users and groups can access the project.
 

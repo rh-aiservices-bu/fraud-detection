@@ -1,8 +1,10 @@
+:_module-type: PROCEDURE
+
 [id='testing-the-model-api']
 = Testing the model API
 
-Now that you've deployed the model, you can test its API endpoints.
-
+[role="_abstract"]
+After you deploy the model, you can test its API endpoints.
 
 .Procedure
 
@@ -10,7 +12,7 @@ Now that you've deployed the model, you can test its API endpoints.
 
 . Take note of the model's Inference endpoint URL. You need this information when you test the model API.
 +
-If the *Inference endpoint* field contains an *Internal endpoint details* link, click the link to open a text box that shows the URL details, and then take note of the *restUrl* value.
+If the *Inference endpoint* field has an *Internal endpoint details* link, click the link to open a text box that shows the URL details, and then take note of the *restUrl* value.
 +
 image::model-serving/ds-project-model-inference-endpoint.png[Model inference endpoint, 300]
 

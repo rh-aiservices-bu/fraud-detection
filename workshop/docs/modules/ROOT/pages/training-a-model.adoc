@@ -1,13 +1,14 @@
+:_module-type: PROCEDURE
+
 [id='training-a-model']
-= Training a model 
+= Training a model
 
-Now that you know how the Jupyter notebook environment works, the real work can begin.
-
+[role="_abstract"]
 In your notebook environment, open the `1_experiment_train.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through some simple data exploration, experimentation, and model training tasks.
 
 image::workbenches/jupyter-notebook-1.png[Jupyter Notebook 1]
 
-When you save the model, you convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
+When you save the model, you convert the model to the portable Open Neural Network Exchange (ONNX) format. By using ONNX, you can transfer models between frameworks with minimal preparation and without the need for rewriting the models.
 
 .Next step
 

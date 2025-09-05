@@ -1,11 +1,14 @@
+:_module-type: PROCEDURE
+
 [id='setting-up-kueue-resources']
 = Setting up Kueue resources
 
-In this section, you prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
+[role="_abstract"]
+You must prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
 
 In the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you implement a distributed training job by using Kueue for managing job resources. With Kueue, you can manage cluster resource quotas and how different workloads consume them.
 
-NOTE: If you are using the Red Hat Developer Sandbox, or if you do not intend to use Kueue to schedule your training jobs in the _Distributing training jobs with the Training Operator_ section of this {deliverable}, skip this section and continue to the next section, xref:creating-a-workbench.adoc[Creating a workbench and selecting a workbench image].
+NOTE: If you are using the {org-name} Developer Sandbox, or if you do not intend to use Kueue to schedule your training jobs in the _Distributing training jobs with the Training Operator_ section of this {deliverable}, skip this procedure and continue to the next section, xref:creating-a-workbench.adoc[Creating a workbench and selecting a workbench image].
 
 .Procedure
 
@@ -65,7 +68,7 @@ spec:
 
 .Verification
 
-. In the OpenShift console, you should see a "Resources successfully created" message and the following resources listed:
+. In the OpenShift console, there is a "Resources successfully created" message with a list of the following resources:
 +
 * `default-flavor`
 * `cluster-queue`

@@ -1,0 +1,48 @@
+:_module-type: PROCEDURE
+
+[id='creating-a-pipeline']
+= Creating a pipeline
+
+[role="_abstract"]
+You can create a simple pipeline by using the GUI pipeline editor. The pipeline uses the notebook that you used earlier to train a model and then save it to S3 storage.
+
+.Prerequisites
+
+* You configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+* If you configured the pipeline server after you created your workbench, you stopped and then started your workbench.
+
+.Procedure
+
+. Open your workbench's JupyterLab environment. If the launcher is not visible, click *+* to open it.
++
+image::pipelines/wb-pipeline-launcher.png[Pipeline buttons, 400]
+
+. Click *Pipeline Editor*.
++
+image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 75]
++
+You have created a blank pipeline.
+
+. Set the default runtime image for when you run your notebook or Python code.
+
+.. In the pipeline editor, click *Open Panel*.
++
+image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel,400]
+
+.. Select the *Pipeline Properties* tab.
++
+image::pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab]
+
+.. In the *Pipeline Properties* panel, scroll down to *Generic Node Defaults* and *Runtime Image*. Set the value to `Tensorflow with Cuda and Python 3.11 (UBI 9)`.
++
+image::pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
+
+. Select *File* -> *Save Pipeline*.
+
+.Verification
+
+* In the file-browser window, you can see the pipeline file that you created.
+
+.Next step
+
+xref:adding-nodes-to-your-pipeline.adoc[Adding nodes to your pipeline]

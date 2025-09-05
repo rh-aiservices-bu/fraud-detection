@@ -1,0 +1,18 @@
+:_module-type: CONCEPT
+
+[id='distributing-training-jobs-with-kfto']
+= Distributing training jobs with the Training Operator
+
+[role="_abstract"]
+The Training Operator is a tool for scalable distributed training of machine learning (ML) models created with various ML frameworks, such as `PyTorch`.
+
+You can use the Training Operator to distribute the training of a machine learning model across many hardware resources. 
+
+In your notebook environment, open the `9_distributed_training_kfto.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through setting authentication, initializing the Training Operator client, and submitting a `PyTorchJob`.
+
+Optionally, you can view the complete Python code in the `kfto-scripts/train_pytorch_cpu.py` file. 
+
+image::distributed/kfto-jupyter-notebook.png[Jupyter Notebook]
+
+For more information about PyTorchJob training with the Training Operator, see the https://www.kubeflow.org/docs/components/trainer/legacy-v1/user-guides/pytorch[Training Operator PyTorchJob guide].
+

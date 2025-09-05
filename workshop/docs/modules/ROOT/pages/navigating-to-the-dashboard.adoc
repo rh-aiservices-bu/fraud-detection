@@ -1,5 +1,10 @@
+:_module-type: PROCEDURE
+
 [id='navigating-to-the-dashboard']
 = Navigating to the {productname-short} dashboard
+
+[role="_abstract"]
+You can access the {productname-short} dashboard from your OpenShift console.
 
 .Procedure
 
@@ -20,13 +25,13 @@ image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 .. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
 +
 image::projects/login-with-openshift.png[OpenShift login, 300]
-
++
 The {productname-short} dashboard shows the *Home* page.
-
++
 NOTE: You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
-
++
 image::projects/ds-console-ocp-tile.png[OpenShift console link, 200]
-
++
 For now, stay in the {productname-short} dashboard.
 
 .Next step

@@ -1,3 +1,5 @@
+:_module-type: CONCEPT
+
 = Fraud Detection Workshop with {productname-long}
 :page-layout: home
 :!sectids:
@@ -5,6 +7,7 @@
 [.text-center.strong]
 == Conclusion
 
+[role="_abstract"]
 Congratulations. In this {deliverable}, you learned how to incorporate data science, artificial intelligence, and machine learning into an OpenShift development workflow.
 
 You used an example fraud detection model and completed the following tasks:
@@ -12,4 +15,4 @@ You used an example fraud detection model and completed the following tasks:
 * Explored a pre-trained fraud detection model by using a Jupyter notebook.
 * Deployed the model by using {productname-short} model serving.
 * Refined and trained the model by using automated pipelines.
-* Learned how to train the model by using Ray, a distributed computing framework.
+* Learned how to train the model by using distributed computing frameworks.

@@ -1,9 +1,12 @@
+:_module-type: PROCEDURE
+
 [id='creating-connections-to-storage']
 = Creating connections to your own S3-compatible object storage
 
+[role="_abstract"]
 If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another connection to a different storage bucket for saving pipeline artifacts.
 
-NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this section and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections]. The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
+NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this task and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections]. The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
 
 .Prerequisites
 
@@ -15,7 +18,7 @@ To create connections to your existing S3-compatible storage buckets, you need t
 * Region
 * Bucket name
 
-If you don't have this information, contact your storage administrator.
+If you do not have this information, contact your storage administrator.
 
 .Procedure
 

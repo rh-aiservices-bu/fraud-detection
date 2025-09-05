@@ -1,6 +1,9 @@
+:_module-type: PROCEDURE
+
 [id='running-a-script-to-install-storage']
 = Running a script to install local object storage buckets and create connections
 
+[role="_abstract"]
 For convenience, run a script (provided in the following procedure) that automatically completes these tasks:
 
 * Creates a Minio instance in your project.
@@ -9,7 +12,7 @@ For convenience, run a script (provided in the following procedure) that automat
 * Creates two connections in your project, one for each bucket and both using the same credentials.
 * Installs required network policies for service mesh functionality.
 
-The script is based on a https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio].
+The https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio] is the basis for this script.
 
 IMPORTANT: The Minio-based Object Storage that the script creates is *not* meant for production usage.
 
@@ -19,7 +22,7 @@ NOTE: If you want to connect to your own storage, see xref:creating-connections-
 
 You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
 
-In the {productname-short} dashboard, select *Data science projects* and then click the *?* icon next to the project name. A text box appears with information about the project, including its resource name:
+In the {productname-short} dashboard, select *Data science projects* and then click the *?* icon next to the project name. A text box opens with information about the project, including its resource name:
 
 image::projects/ds-project-list-resource-hover.png[Project list resource name, 400]
 
@@ -105,7 +108,7 @@ spec:
 
 .Verification
 
-. In the OpenShift console, you should see a "Resources successfully created" message and the following resources listed:
+. In the OpenShift console, there is a "Resources successfully created" message and a list of the following resources:
 +
 * `demo-setup`
 * `demo-setup-edit`
@@ -114,14 +117,14 @@ spec:
 .  In the {productname-short} dashboard:
 
 .. Select *Data science projects* and then click the name of your project, *Fraud detection*.
-.. Click *Connections*. You should see two connections listed: `My Storage` and `Pipeline Artifacts`.
+.. Click *Connections*. There are two connections listed: `My Storage` and `Pipeline Artifacts`.
 + 
 image::projects/ds-project-connections.png[Connections for Fraud Detection]
 
 
 [IMPORTANT]
 ====
-If your cluster uses self-signed certificates, your {productname-short} administrator might need to provide a certificate authority (CA) to securely connect to the S3 object storage, as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Cloud Service).
+If your cluster uses self-signed certificates, your {productname-short} administrator might need to configure a certificate authority (CA) to securely connect to the S3 object storage, as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Cloud Service).
 ====
 
 .Next step

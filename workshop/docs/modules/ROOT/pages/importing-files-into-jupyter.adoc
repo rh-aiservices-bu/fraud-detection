@@ -1,8 +1,11 @@
+:_module-type: PROCEDURE
+
 [id='importing-files-into-jupyter']
 = Importing the {deliverable} files into the JupyterLab environment
 
 :git-version: main
 
+[role="_abstract"]
 The JupyterLab environment is a web-based environment, but everything you do inside it happens on *{productname-long}* and is powered by the *OpenShift* cluster. This means that, without having to install and maintain anything on your own computer, and without using valuable local resources such as CPU, GPU and RAM, you can conduct your data science work in this powerful and stable managed environment.
 
 .Prerequisites
@@ -55,7 +58,7 @@ The current branch changes to *{git-version}*.
 
 .Verification
 
-In the file browser, you should see the notebooks that you cloned from Git.
+In the file browser, view the notebooks that you cloned from Git.
 
 image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection, 300]
 

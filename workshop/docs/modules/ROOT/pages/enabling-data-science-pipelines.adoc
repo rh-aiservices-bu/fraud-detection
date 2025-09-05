@@ -1,11 +1,14 @@
+:_module-type: PROCEDURE
+
 [id='enabling-data-science-pipelines']
 = Enabling data science pipelines
 
+[role="_abstract"]
+You must prepare your {deliverable} environment so that you can use data science pipelines.
+
 NOTE: If you do not intend to complete the pipelines section of this {deliverable} you can skip this step and move on to the next section, xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
 
-In this section, you prepare your {deliverable} environment so that you can use data science pipelines.
-
-Later in this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that can be executed in {productname-short}.
+Later in this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that executes in {productname-short}.
 
 .Prerequisites
 
@@ -19,11 +22,13 @@ Later in this {deliverable}, you implement an example pipeline by using the Jupy
 +
 image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
 
-. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts* to populate the *Configure pipeline server* form with credentials for the connection.
+. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts*.
++
+The *Configure pipeline server* form autofills with credentials for the connection.
 +
 image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
 
-. Leave the database configuration as the default.
+. In the *Advanced Settings* section, leave the default values.
 
 . Click *Configure pipeline server*.
 
@@ -31,14 +36,14 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 +
 [IMPORTANT]
 ====
-You must wait until the pipeline configuration is complete before you continue and create your workbench. If you create your workbench before the pipeline server is ready, your workbench will not be able to submit pipelines to it.
+You must wait until the pipeline configuration is complete before you continue and create your workbench. If you create your workbench before the pipeline server is ready, your workbench cannot submit pipelines to it.
 ====
 +
 If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can delete the pipeline server and create it again.
 +
 image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 250]
 +
-You can also ask your {productname-short} administrator to verify that self-signed certificates are added to your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates] (Cloud Service).
+You can also ask your {productname-short} administrator to verify that they applied self-signed certificates on your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates] (Cloud Service).
 
 .Verification
 
