@@ -8,7 +8,7 @@ You must set the `models/fraud/1/model.onnx` file as the output file for both no
 
 .Prerequisites
 
-* You added the training file isas a dependency to the first node in your pipeline, as described in 
+* You added the training file as a dependency to the first node in your pipeline, as described in 
 xref:specifying-the-training-file-as-a-dependency.adoc[Specifying the training file as a dependency].
 
 .Procedure
@@ -25,13 +25,13 @@ image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency val
 
 . Repeat steps 2-4 for node 2.
 
-. *Save* the pipeline.
+. Click *Save Pipeline*.
 
 .Verification
 
 * In node 1, the notebook creates the `models/fraud/1/model.onnx` file. 
 
-* In node 2, the notebook uploads the `models/fraud/1/model.onnx`  file to the S3 storage bucket.
+* In node 2, the notebook uploads the `models/fraud/1/model.onnx` file to the S3 storage bucket.
 
 .Next step
 

@@ -11,7 +11,7 @@ For this {deliverable}, you run a provided script that creates the following loc
 * *My Storage* - Use this bucket for storing your models and data. You can reuse this bucket and its connection for your notebooks and model servers.
 *  *Pipelines Artifacts* - Use this bucket as storage for your pipeline artifacts. When you create a pipeline server, you need a pipeline artifacts bucket. For this {deliverable}, create this bucket to separate it from the first storage bucket for clarity.
 
-NOTE: Although it is possible for you to use one storage bucket for both storing models and data and for storing pipeline artifacts, this {deliverable} follows best practice and uses separate storage buckets for each purpose.
+NOTE: Although you can use one storage bucket for both storing models and data and for storing pipeline artifacts, this {deliverable} follows best practice and uses separate storage buckets for each purpose.
 
 The provided script also creates a connection to each storage bucket. 
 

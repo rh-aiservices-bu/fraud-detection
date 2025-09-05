@@ -24,7 +24,7 @@ image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
 ====
 If you see an error message stating that "no runtime configuration for Data Science Pipeline is defined", you might have created your workbench before the pipeline server was available. 
 
-To address this situation, you must verify that you configured the pipeline server and then restart the workbench.
+To address this error, you must verify that you configured the pipeline server and then restart the workbench.
 
 . Follow these steps in the {productname-short} dashboard:
 

@@ -4,7 +4,7 @@
 = Running a data science pipeline generated from Python code
 
 [role="_abstract"]
-Earlier, you created a simple pipeline by using the GUI pipeline editor. It is often desirable to create pipelines by using code that can be version-controlled and shared with others. The https://github.com/kubeflow/pipelines[Kubeflow pipelines (kfp)] SDK provides a Python API for creating pipelines. The SDK is available as a Python package that you can install by using the `pip install kfp` command. With this package, you can use Python code to create a pipeline and then compile it to YAML format. Then you can import the YAML code into {productname-short}.
+Earlier, you created a simple pipeline by using the GUI pipeline editor. You might want to create pipelines by using code that can be version-controlled and shared with others. The https://github.com/kubeflow/pipelines[Kubeflow pipelines (kfp)] SDK provides a Python API for creating pipelines. The SDK is available as a Python package that you can install by using the `pip install kfp` command. With this package, you can use Python code to create a pipeline and then compile it to YAML format. Then you can import the YAML code into {productname-short}.
 
 This {deliverable} does not describe the details of how to use the SDK. Instead, it provides the files for you to view and upload.
 

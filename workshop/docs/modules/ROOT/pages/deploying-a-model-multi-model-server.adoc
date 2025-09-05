@@ -20,7 +20,7 @@ NOTE: Depending on how model serving has been configured on your cluster, you mi
 
 . In the *Multi-model serving platform* tile, click *Select multi-model*.
 
-. In the form, fill-in the following values:
+. In the form, specify the following values:
 .. For *Model server name*, type a name, for example `Model Server`.
 .. For *Serving runtime*, select `OpenVINO Model Server`.
 .. Leave the other fields with the default settings.
@@ -33,7 +33,7 @@ image::model-serving/create-model-server-form.png[Create model server form, 400]
 +
 image::model-serving/ds-project-workbench-list-deploy.png[Create model server form, 500]
 
-. In the form, provide the following values:
+. In the form, specify the following values:
 .. For *Model deployment name*, type `fraud`.
 .. For *Model framework (name - version)*, select `onnx-1`.
 .. For *Existing connection*, select `My Storage`.

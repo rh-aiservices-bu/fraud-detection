@@ -19,7 +19,7 @@ image::model-serving/ds-project-model-list-add.png[Models]
 NOTE: Depending on the model serving configuration on your cluster, you might see only one model serving platform option.
 
 . In the *Single-model serving platform* tile, click *Select single-model*.
-. In the form, fill-in the following values:
+. In the form, specify the following values:
 .. For *Model deployment name*, type `fraud`.
 .. For *Serving runtime*, select `OpenVINO Model Server`.
 .. For *Model framework (name - version)*, select `onnx-1`.

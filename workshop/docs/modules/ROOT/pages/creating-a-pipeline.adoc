@@ -21,7 +21,7 @@ image::pipelines/wb-pipeline-launcher.png[Pipeline buttons, 400]
 +
 image::pipelines/wb-pipeline-editor-button.png[Pipeline Editor button, 75]
 +
-You've created a blank pipeline.
+You have created a blank pipeline.
 
 . Set the default runtime image for when you run your notebook or Python code.
 
