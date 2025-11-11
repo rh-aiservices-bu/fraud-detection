@@ -1,0 +1,27 @@
+apiVersion: feast.dev/v1alpha1
+kind: FeatureStore
+metadata:
+ name: fraud-detect
+ namespace: fraud-detection
+spec:
+ feastProject: fraud_detection
+ feastProjectDir:
+   git:
+     url: https://github.com/rh-aiservices-bu/fraud-detection
+     ref: main
+     featureRepoPath: feast/feature_repo
+ services:
+  offlineStore:
+    server:
+      tls:
+        disable: true
+  onlineStore:
+    server:
+      tls:
+        disable: true
+  registry:
+    local:
+      server:
+        tls:
+          disable: true
+  ui: {}

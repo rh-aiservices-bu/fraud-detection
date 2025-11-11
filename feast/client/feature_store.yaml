@@ -1,0 +1,16 @@
+# Use this in Featute Store YAML in workbench to connect to the feature store, OR read it from ConfigMap `feast-fraud-detection-client`
+project: fraud_detection
+provider: local
+offline_store:
+    host: feast-fraud-detection-offline.fraud-detection.svc.cluster.local
+    type: remote
+    port: 80
+online_store:
+    path: http://feast-fraud-detection-online.fraud-detection.svc.cluster.local:80
+    type: remote
+registry:
+    path: feast-fraud-detection-registry.fraud-detection.svc.cluster.local:80
+    registry_type: remote
+auth:
+    type: no_auth
+entity_key_serialization_version: 3
