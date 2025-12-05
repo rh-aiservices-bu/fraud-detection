@@ -6,14 +6,14 @@
 [role="_abstract"]
 Add connections to workbenches to connect your project to data inputs and object storage buckets. A connection is a resource that has the configuration parameters needed to connect to a data source or data sink, such as an AWS S3 object storage bucket.
 
-For this {deliverable}, you run a provided script that creates the following local Minio storage buckets for you:
+For this {deliverable}, you run a provided script that creates the following local MinIO storage buckets for you:
 
 * *My Storage* - Use this bucket for storing your models and data. You can reuse this bucket and its connection for your notebooks and model servers.
 *  *Pipelines Artifacts* - Use this bucket as storage for your pipeline artifacts. When you create a pipeline server, you need a pipeline artifacts bucket. For this {deliverable}, create this bucket to separate it from the first storage bucket for clarity.
 
-NOTE: Although you can use one storage bucket for both storing models and data and for storing pipeline artifacts, this {deliverable} follows best practice and uses separate storage buckets for each purpose.
+NOTE: Although you can use one storage bucket for both storing models and data and for storing pipeline artifacts, this {deliverable} follows the recommended practice of using separate storage buckets for each purpose.
 
-The provided script also creates a connection to each storage bucket. 
+The provided script also creates a connection to each storage bucket.
 
 To run the script that installs local MinIO storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
 

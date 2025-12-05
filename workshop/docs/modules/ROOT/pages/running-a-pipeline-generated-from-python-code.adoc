@@ -10,20 +10,20 @@ This {deliverable} does not describe the details of how to use the SDK. Instead,
 
 . Optionally, view the provided Python code in your JupyterLab environment by navigating to the `fraud-detection-notebooks` project's `pipeline` directory. It contains the following files:
 +
-* `7_get_data_train_upload.py` is the main pipeline code.
+* `5_get_data_train_upload.py` is the main pipeline code.
 * `build.sh` is a script that builds the pipeline and creates the YAML file.
 +
-For your convenience, the output of the `build.sh` script is provided in the `7_get_data_train_upload.yaml` file. The `7_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
+For your convenience, the output of the `build.sh` script is provided in the `5_get_data_train_upload.yaml` file. The `5_get_data_train_upload.yaml` output file is located in the top-level `fraud-detection` directory.
 
-. Right-click the `7_get_data_train_upload.yaml` file and then click *Download*.
+. Right-click the `5_get_data_train_upload.yaml` file and then click *Download*.
 
-. Upload the `7_get_data_train_upload.yaml` file to {productname-short}.
+. Upload the `5_get_data_train_upload.yaml` file to {productname-short}.
 
-.. In the {productname-short} dashboard, navigate to your data science project page. Click the *Pipelines* tab and then click *Import pipeline*.
+.. In the {productname-short} dashboard, navigate to your project page. Click the *Pipelines* tab and then click *Import pipeline*.
 
 .. Enter values for *Pipeline name* and *Pipeline description*.
 
-.. Click *Upload* and then select `7_get_data_train_upload.yaml` from your local files to upload the pipeline.
+.. Click *Upload* and then select `5_get_data_train_upload.yaml` from your local files to upload the pipeline.
 +
 image::pipelines/dsp-pipline-import-upload.png[]
 

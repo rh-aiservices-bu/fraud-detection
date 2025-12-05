@@ -8,7 +8,7 @@ After you deploy the model, you can test its API endpoints.
 
 .Procedure
 
-. In the {productname-short} dashboard, navigate to the project details page and click the *Models* tab. 
+. In the {productname-short} dashboard, navigate to the project details page and click the *Deployments* tab.
 
 . Take note of the model's Inference endpoint URL. You need this information when you test the model API.
 +
@@ -18,9 +18,7 @@ image::model-serving/ds-project-model-inference-endpoint.png[Model inference end
 
 . Return to the JupyterLab environment and try out your new endpoint.
 +
-If you deployed your model with the multi-model serving platform, follow the directions in `3_rest_requests_multi_model.ipynb` to try a REST API call and `4_grpc_requests_multi_model.ipynb` to try a gRPC API call.
-+
-If you deployed your model with the single-model serving platform, follow the directions in `5_rest_requests_single_model.ipynb` to try a REST API call.
+Follow the directions in `3_rest_requests.ipynb` to try a REST API call.
 
 
 .Next step

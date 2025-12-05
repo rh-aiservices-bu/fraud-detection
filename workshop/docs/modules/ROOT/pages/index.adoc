@@ -10,7 +10,7 @@
 // for the downstream tutorial, change the value of rhoai-version to match the git-version value in the importing-files-into-jupyter.adoc file
 
 [role="_abstract"]
-Welcome. In this {deliverable}, you learn how to use data science and artificial intelligence (AI) and machine learning (ML) in an OpenShift development workflow.
+Welcome! In this {deliverable}, you learn how to use data science and artificial intelligence (AI) and machine learning (ML) in an OpenShift development workflow.
 
 You complete the following tasks in https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}] without the need to install anything on your computer:
 
@@ -31,26 +31,15 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 == Before you begin
 
-* You must have access to an OpenShift cluster which has {productname-long} installed. 
-+
+You must have access to an OpenShift cluster which has {productname-long} installed.
+
 If you do not have access to a cluster that has an instance of {productname-short}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the https://console.redhat.com/openshift/sandbox[*free {org-name} Developer Sandbox*] or you can learn how to install {productname-short} on *your own OpenShift cluster*.
-+
+
+NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
+
 [IMPORTANT]
 ====
 If your cluster uses self-signed certificates, before you begin the {deliverable}, your {productname-short} administrator must add self-signed certificates for {productname-short} as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates^] (Cloud Service).
 ====
-
-* Make sure that the version of this tutorial matches the {productname-short} version on your cluster.
-+
-{productname-long} {rhoai-version} is the version described in this {deliverable}.
-+
-. To find the {productname-short} version for your cluster:
-.. Log in to the {productname-short} dashboard.
-.. In the top navigation bar, click the help icon (image:projects/rhoai-help-icon.png[Help icon]) and then select *About*.
-+
-The *About* page shows the installed version.
-. Check the link:https://access.redhat.com/articles/rhoai-supported-configs[{productname-long} Supported Configurations] page to verify that your installed version is a supported version.
-
-. If this version of the tutorial does not match the installed version, access the matching version of the tutorial by navigating to the link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[top-level {productname-long} documentation page] and selecting the matching version from the drop-down list.
 
 If you're ready, xref:navigating-to-the-dashboard.adoc[start the {deliverable}].

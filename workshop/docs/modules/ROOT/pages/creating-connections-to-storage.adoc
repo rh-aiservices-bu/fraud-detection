@@ -1,12 +1,11 @@
 :_module-type: PROCEDURE
 
 [id='creating-connections-to-storage']
-= Creating connections to your own S3-compatible object storage
+= (Optional) Creating connections to your own S3-compatible object storage
 
-[role="_abstract"]
+NOTE: Skip this procedure if you completed the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
+
 If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another connection to a different storage bucket for saving pipeline artifacts.
-
-NOTE: If you do not have your own s3-compatible storage, or if you want to use a disposable local Minio instance instead, skip this task and follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections]. The provided script automatically completes the following tasks for you: creates a Minio instance in your project, creates two storage buckets in that Minio instance, creates two connections in your project, one for each bucket and both using the same credentials, and installs required network policies for service mesh functionality. 
 
 .Prerequisites
 
@@ -24,7 +23,7 @@ If you do not have this information, contact your storage administrator.
 
 . Create a connection for saving your data and models:
 
-.. In the {productname-short} dashboard, navigate to the page for your data science project.
+.. In the {productname-short} dashboard, navigate to the page for your project.
 
 .. Click the *Connections* tab, and then click *Create connection*.
 +
@@ -32,7 +31,7 @@ image::projects/ds-project-add-dc.png[Add connection]
 
 .. In the *Add connection* modal, for the *Connection type* select *S3 compatible object storage - v1*.
 
-.. Complete the *Add connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models. 
+.. Complete the *Add connection* form and name your connection *My Storage*. This connection is for saving your personal work, including data and models.
 +
 image::projects/ds-project-my-storage-form.png[Add my storage form, 500]
 
@@ -63,8 +62,16 @@ image::projects/ds-project-connections.png[List of project connections, 500]
 If your cluster uses self-signed certificates, your {productname-short} administrator might need to provide a certificate authority (CA) to securely connect to the S3 object storage, as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Cloud Service).
 ====
 
-.Next step
+.Next steps
 
+* Decide whether you want to complete the pipelines section of this {deliverable}. With OpenShift AI pipelines, you can automate the execution of your notebooks and Python code. You can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
++
 If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
-Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].
+* Decide whether you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}. In that section, you implement a distributed training job by using Kueue for managing job resources.
++
+NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
++
+If you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+
+* Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].

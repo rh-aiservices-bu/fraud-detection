@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='setting-up-kueue-resources']
-= Setting up Kueue resources
+= (Optional) Setting up Kueue resources
 
 [role="_abstract"]
 You must prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
@@ -16,11 +16,11 @@ NOTE: If you are using the {org-name} Developer Sandbox, or if you do not intend
 +
 image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
-. In the OpenShift console, click *+* in the top navigation bar.
+. In the OpenShift console, click *+* in the top navigation bar, and then click *Import YAML*
 +
 image::projects/ocp-console-add-icon.png[Add resources Icon]
 
-. Select your project from the list of projects.
+. Click the down arrow next to the project name, and then select your project from the list of projects. If needed, type the name of your project in the *Select project* search field.
 +
 image::projects/ocp-console-select-project.png[Select a project, 200]
 
@@ -61,7 +61,7 @@ kind: LocalQueue
 metadata:
   name: local-queue
 spec:
-  clusterQueue: cluster-queue 
+  clusterQueue: cluster-queue
 ----
 
 . Click *Create*.
@@ -76,4 +76,4 @@ spec:
 
 .Next step
 
-xref:creating-a-workbench.adoc[Creating a workbench and selecting a notebook image]
+xref:creating-a-workbench.adoc[Creating a workbench and using notebooks]

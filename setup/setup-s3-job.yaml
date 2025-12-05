@@ -28,7 +28,7 @@ spec:
         - args:
             - -ec
             - |-
-              echo -n 'Setting up Minio instance and connections'
+              echo -n 'Setting up MinIO instance and connections'
               oc apply -f https://github.com/rh-aiservices-bu/fraud-detection-notebooks/raw/main/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash
