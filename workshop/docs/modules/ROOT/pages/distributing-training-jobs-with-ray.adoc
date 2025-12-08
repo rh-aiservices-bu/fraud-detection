@@ -6,6 +6,8 @@
 [role="_abstract"]
 You can use Ray, a distributed computing framework, to parallelize Python code across many CPUs or GPUs.
 
+*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run a distributed training example in this tutorial, complete the set up tasks in xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+
 In your notebook environment, open the `6_distributed_training.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through setting authentication, creating Ray clusters, and working with jobs.
 
 Optionally, if you want to view the Python code for this step, you can find it in the `ray-scripts/train_tf_cpu.py` file.
