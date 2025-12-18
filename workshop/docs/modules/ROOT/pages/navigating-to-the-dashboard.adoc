@@ -10,17 +10,18 @@ From the dashboard, you can check that your {productname-short} version matches 
 
 .Procedure
 
-. How you open the {productname-short} dashboard depends on your OpenShift environment:
-
-** *If you are using the {org-name} Developer Sandbox*:
-+
-After you log in to the Sandbox, in the {productname-long} card, click *Try it*.
-+
-image::projects/sandbox-rhoai-tile.png[{productname-short} dashboard link]
-
-** *If you are using your own OpenShift cluster*:
-+
-.. After you log in to the OpenShift console, click the application launcher icon on the header.
+//. How you open the {productname-short} dashboard depends on your OpenShift environment:
+//
+//** *If you are using the {org-name} Developer Sandbox*:
+//+
+//After you log in to the Sandbox, in the {productname-long} card, click *Try it*.
+//+
+//image::projects/sandbox-rhoai-tile.png[{productname-short} dashboard link]
+//
+//** *If you are using your own OpenShift cluster*:
+//+
+//..
+. After you log in to the OpenShift console, click the application launcher icon on the header.
 +
 image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
