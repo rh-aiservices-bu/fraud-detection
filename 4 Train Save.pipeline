@@ -9,7 +9,7 @@
       "id": "primary",
       "nodes": [
         {
-          "id": "fd0d8464-1fa6-4d29-9da5-2b185a7cc8f3",
+          "id": "183f2d15-3340-49de-a27c-3f822634db8f",
           "type": "execution_node",
           "op": "execute-notebook-node",
           "app_data": {
@@ -28,14 +28,14 @@
               "kubernetes_shared_mem_size": {},
               "kubernetes_tolerations": [],
               "mounted_volumes": [],
-              "filename": "1_experiment_train.ipynb"
+              "filename": "1_experiment_train.ipynb",
+              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-tensorflow-cuda-py312-rhel9@sha256:4fe6f012678efa64e11be47e7d6ca85948fb481c5098ea72872bc64937d85d3e"
             },
-            "label": "",
             "ui_data": {
               "label": "1_experiment_train.ipynb",
-              "image": "/notebook/fraud-detection/tensorflow/static/elyra/notebook.svg",
-              "x_pos": 88,
-              "y_pos": 275,
+              "image": "/notebook/fraud-detection/fraud-detection/static/elyra/notebook.svg",
+              "x_pos": 155,
+              "y_pos": 344,
               "description": "Run notebook file"
             }
           },
@@ -69,7 +69,7 @@
           ]
         },
         {
-          "id": "4fd1c6cc-93e1-4294-ae0a-2d1125cff8ca",
+          "id": "0b538210-7c25-4233-a538-8c908b6cb6c4",
           "type": "execution_node",
           "op": "execute-notebook-node",
           "app_data": {
@@ -83,41 +83,41 @@
               "kubernetes_secrets": [
                 {
                   "env_var": "AWS_ACCESS_KEY_ID",
-                  "name": "aws-connection-my-storage",
+                  "name": "my-storage",
                   "key": "AWS_ACCESS_KEY_ID"
                 },
                 {
                   "env_var": "AWS_SECRET_ACCESS_KEY",
-                  "name": "aws-connection-my-storage",
+                  "name": "my-storage",
                   "key": "AWS_SECRET_ACCESS_KEY"
                 },
                 {
                   "env_var": "AWS_S3_ENDPOINT",
-                  "name": "aws-connection-my-storage",
+                  "name": "my-storage",
                   "key": "AWS_S3_ENDPOINT"
                 },
                 {
                   "env_var": "AWS_DEFAULT_REGION",
-                  "name": "aws-connection-my-storage",
+                  "name": "my-storage",
                   "key": "AWS_DEFAULT_REGION"
                 },
                 {
                   "env_var": "AWS_S3_BUCKET",
-                  "name": "aws-connection-my-storage",
+                  "name": "my-storage",
                   "key": "AWS_S3_BUCKET"
                 }
               ],
               "kubernetes_shared_mem_size": {},
               "kubernetes_tolerations": [],
               "mounted_volumes": [],
-              "filename": "2_save_model.ipynb"
+              "filename": "2_save_model.ipynb",
+              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-tensorflow-cuda-py312-rhel9@sha256:4fe6f012678efa64e11be47e7d6ca85948fb481c5098ea72872bc64937d85d3e"
             },
-            "label": "",
             "ui_data": {
               "label": "2_save_model.ipynb",
-              "image": "/notebook/fraud-detection/tensorflow/static/elyra/notebook.svg",
-              "x_pos": 342,
-              "y_pos": 277,
+              "image": "/notebook/fraud-detection/fraud-detection/static/elyra/notebook.svg",
+              "x_pos": 405,
+              "y_pos": 347,
               "description": "Run notebook file"
             }
           },
@@ -135,8 +135,8 @@
               },
               "links": [
                 {
-                  "id": "ff992f46-1715-4d33-b56b-4a867e4486ca",
-                  "node_id_ref": "fd0d8464-1fa6-4d29-9da5-2b185a7cc8f3",
+                  "id": "361b3b81-4c79-4f11-baa7-f43858119e8f",
+                  "node_id_ref": "183f2d15-3340-49de-a27c-3f822634db8f",
                   "port_id_ref": "outPort"
                 }
               ]
@@ -166,18 +166,16 @@
         "runtime_type": "KUBEFLOW_PIPELINES",
         "properties": {
           "name": "6 Train Save",
-          "runtime": "Data Science Pipelines",
+          "runtime": "Pipelines",
           "pipeline_defaults": {
-            "kubernetes_shared_mem_size": {},
             "kubernetes_pod_labels": [],
-            "kubernetes_tolerations": [],
-            "mounted_volumes": [],
+            "kubernetes_shared_mem_size": {},
             "kubernetes_pod_annotations": [],
-            "env_vars": [],
+            "mounted_volumes": [],
+            "kubernetes_tolerations": [],
             "kubernetes_secrets": [],
-            "runtime_image": "quay.io/modh/runtime-images@sha256:1186ac6c9026d1091f707fe8cedfcc1ea12d1ec46edd9e8d56bb4b12ba048630"
-          },
-          "pipeline_parameters": []
+            "env_vars": []
+          }
         }
       },
       "runtime_ref": ""

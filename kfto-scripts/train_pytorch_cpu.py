@@ -12,6 +12,7 @@ def train_func():
     import os
     import logging
     from typing import Tuple, List
+    import pickle
 
     import torch.distributed as dist
     from torch.nn.parallel import DistributedDataParallel as DDP
@@ -321,15 +322,28 @@ def train_func():
             )
             logger.info(f"Model exported to ONNX format: {onnx_model_path}")
 
-            # Upload to S3
+            # Upload model to S3
             try:
                 # Added verify=False flag to suport using insecure S3 buckets
                 s3_client = boto3.client('s3', endpoint_url=os.environ.get("AWS_S3_ENDPOINT"), verify=False)
-                s3_key = f"models/{os.path.basename(onnx_model_path)}"
+                s3_key = "models/fraud/1/model.onnx"
                 s3_client.upload_file(onnx_model_path, bucket_name, s3_key)
                 logger.info(f"Model uploaded to s3://{bucket_name}/{s3_key}")
             except Exception as s3_e:
                 logger.error(f"Failed to upload model to S3: {s3_e}")
+
+            # Save and upload scaler
+            try:
+                scaler_path = 'scaler.pkl'
+                with open(scaler_path, 'wb') as f:
+                    pickle.dump(scaler_train, f)
+                logger.info(f"Scaler saved to {scaler_path}")
+
+                scaler_s3_key = "models/fraud/1/scaler.pkl"
+                s3_client.upload_file(scaler_path, bucket_name, scaler_s3_key)
+                logger.info(f"Scaler uploaded to s3://{bucket_name}/{scaler_s3_key}")
+            except Exception as scaler_e:
+                logger.error(f"Failed to save/upload scaler: {scaler_e}")
 
         except Exception as e:
             logger.error(f"Failed to export/upload model: {e}")
