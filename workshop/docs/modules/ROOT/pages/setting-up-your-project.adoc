@@ -4,7 +4,7 @@
 = Setting up your project
 
 [role="_abstract"]
-To implement a data science workflow, you must create a project as described in the following procedure. Projects help your team to organize and work together on resources within separated namespaces. From a project you can create many workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
+To implement a data science workflow, you must create a project as described in the following procedure. Projects help your team to organize and work together on resources within separated namespaces. From a project, you can create many workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
 .Prerequisites
 
@@ -12,11 +12,12 @@ To implement a data science workflow, you must create a project as described in 
 
 .Procedure
 
-. From the left navigation menu, select *Projects*. This page lists any existing projects that you have access to.
+. From the left navigation menu, select *Projects*. This page lists any existing projects that you have access to. You can select an existing project (if any) or create a new one.
+//. *If you are using the {org-name} Developer Sandbox*, it provides a default project (for example, `myname-dev`). Select it and skip to the *Verification* section.
+//+
+//*If you are using your own OpenShift cluster*, you can select an existing project (if any) or create a new one. Click *Create project*.
 
-. *If you are using the {org-name} Developer Sandbox*, it provides a default project (for example, `myname-dev`). Select it and skip to the *Verification* section.
-+
-*If you are using your own OpenShift cluster*, you can select an existing project (if any) or create a new one. Click *Create project*.
+. Click *Create project*.
 +
 NOTE: You can start a Jupyter notebook by clicking the *Start basic workbench* button. However, in that case, it is a one-off Jupyter notebook run in isolation.
 
@@ -34,7 +35,7 @@ You can click on the tabs to view more information about the project components 
 
 image::projects/ds-project-new.png[New project]
 
-** *Workbenches* are instances of your development and experimentation environment. They typically contain individual development environments (IDEs), such as JupyterLab, RStudio, and Visual Studio Code.
+** *Workbenches* are instances of your development and experimentation environment. They typically contain individual development environments (IDEs), such as JupyterLab, RStudio, and Code Server.
 
 ** *Pipelines* are a structured series of processes that collect, process, analyze, and visualize data. With AI pipelines, you can automate the execution of notebooks and Python code. By using pipelines, you can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
 

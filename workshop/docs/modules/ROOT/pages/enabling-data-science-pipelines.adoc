@@ -43,7 +43,8 @@ You must wait until the pipeline configuration is complete before you continue a
 +
 If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can click *Cancel pipeline server setup* and create it again.
 +
-You can also ask your {productname-short} administrator to verify that they applied self-signed certificates on your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates] (Cloud Service).
+You can also ask your {productname-short} administrator to verify that they applied self-signed certificates on your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates] (Self-Managed).
+// or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates] (Cloud Service).
 
 .Verification
 
@@ -58,6 +59,6 @@ An information box opens and displays the object storage connection information 
 
 If you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
 
-NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
+//NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
 
 Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].

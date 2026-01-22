@@ -12,7 +12,8 @@ A workbench is an instance of your development and experimentation environment. 
 
 * If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
-* If you intend to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you completed the procedure described in xref:setting-up-kueue-resources.adoc[Setting up Kueue resources]. Note that the _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
+* If you intend to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you completed the procedure described in xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+//Note that the _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
 
 .Procedure
 
@@ -33,8 +34,6 @@ image::workbenches/create-workbench-form-name-desc.png[Workbench name and descri
 image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 
 . Under the *Deployment size* section, for *Hardware profile*, select *`default-profile`*.
-+
-image::workbenches/create-workbench-form-size.png[Workbench size, 600]
 
 . Leave the default environment variables and storage options.
 +

@@ -39,7 +39,7 @@ For now, stay in the {productname-short} dashboard.
 
 . Make sure that the version of this tutorial matches the OpenShift AI version on your cluster.
 +
-{productname-long} AI v3.2 is the version described in this tutorial.
+{productname-long} v3.2 is the version described in this tutorial.
 +
 To find the {productname-short} version for your cluster:
 
