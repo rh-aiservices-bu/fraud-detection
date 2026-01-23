@@ -4,7 +4,7 @@
 = Creating a workbench and selecting a workbench image
 
 [role="_abstract"]
-A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image that has the tools and libraries that you need for developing models. 
+A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image that has the tools and libraries that you need for developing models.
 
 .Prerequisites
 
@@ -12,10 +12,12 @@ A workbench is an instance of your development and experimentation environment. 
 
 * If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
+* If you intend to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you completed the procedure described in xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+//Note that the _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
 
 .Procedure
 
-. Navigate to the project detail page for the data science project that you created in xref:setting-up-your-data-science-project.adoc[Setting up your data science project].
+. Navigate to the project detail page for the project that you created in xref:setting-up-your-project.adoc[Setting up your project].
 
 . Click the *Workbenches* tab, and then click the *Create workbench* button.
 +
@@ -31,11 +33,7 @@ image::workbenches/create-workbench-form-name-desc.png[Workbench name and descri
 +
 image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 
-. Choose a small deployment.
-+
-image::workbenches/create-workbench-form-size.png[Workbench size, 600]
-
-. If your OpenShift cluster has available GPUs, the *Create workbench* form includes an *Accelerator* option. Select *None*. This {deliverable} does not require any GPUs.
+. Under the *Deployment size* section, for *Hardware profile*, select *`default-profile`*.
 
 . Leave the default environment variables and storage options.
 +

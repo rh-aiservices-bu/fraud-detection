@@ -6,19 +6,22 @@
 [role="_abstract"]
 You can access the {productname-short} dashboard from your OpenShift console.
 
+From the dashboard, you can check that your {productname-short} version matches the version of this tutorial.
+
 .Procedure
 
-. How you open the {productname-short} dashboard depends on your OpenShift environment:
-
-** *If you are using the {org-name} Developer Sandbox*:
-+
-After you log in to the Sandbox, in the {productname-long} card, click *Launch*.
-+
-image::projects/sandbox-rhoai-tile.png[{productname-short} dashboard link]
-
-** *If you are using your own OpenShift cluster*:
-+
-.. After you log in to the OpenShift console, click the application launcher icon on the header.
+//. How you open the {productname-short} dashboard depends on your OpenShift environment:
+//
+//** *If you are using the {org-name} Developer Sandbox*:
+//+
+//After you log in to the Sandbox, in the {productname-long} card, click *Try it*.
+//+
+//image::projects/sandbox-rhoai-tile.png[{productname-short} dashboard link]
+//
+//** *If you are using your own OpenShift cluster*:
+//+
+//..
+. After you log in to the OpenShift console, click the application launcher icon on the header.
 +
 image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
@@ -34,7 +37,24 @@ image::projects/ds-console-ocp-tile.png[OpenShift console link, 200]
 +
 For now, stay in the {productname-short} dashboard.
 
+. Make sure that the version of this tutorial matches the OpenShift AI version on your cluster.
++
+{productname-long} v3.2 is the version described in this tutorial.
++
+To find the {productname-short} version for your cluster:
+
+.. In the top navigation bar of the {productname-short} dashboard, next to your username, click the help icon (image:projects/rhoai-help-icon.png[Help icon]) and then select *About*.
++
+The *About* page shows the installed version.
+. Check the link:https://access.redhat.com/articles/rhoai-supported-configs-3.x[{productname-long} Supported Configurations for 3.x] page to verify that your installed version is a supported version.
+
+. If this version of the tutorial does not match the installed version, access the matching version of the tutorial:
+
+.. Navigate to the link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[top-level {productname-long} documentation page].
+.. Select the matching version from the drop-down list.
+
+
 .Next step
 
-xref:setting-up-your-data-science-project.adoc[Setting up your data science project]
+xref:setting-up-your-project.adoc[Setting up your project]
 

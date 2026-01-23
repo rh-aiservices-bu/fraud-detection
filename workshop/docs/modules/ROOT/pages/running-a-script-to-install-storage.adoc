@@ -4,25 +4,25 @@
 = Running a script to install local object storage buckets and create connections
 
 [role="_abstract"]
-For convenience, run a script (provided in the following procedure) that automatically completes these tasks:
+If you do not have your own s3-compatible storage or if you want to use a disposable local MinIO instance instead, run a script (provided in the following procedure) that automatically completes these tasks:
 
-* Creates a Minio instance in your project.
-* Creates two storage buckets in that Minio instance.
-* Generates a random user id and password for your Minio instance.
+* Creates a MinIO instance in your project.
+* Creates two storage buckets in that MinIO instance.
+* Generates a random user id and password for your MinIO instance.
 * Creates two connections in your project, one for each bucket and both using the same credentials.
 * Installs required network policies for service mesh functionality.
 
-The https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying Minio] is the basis for this script.
+The https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying MinIO] is the basis for this script.
 
-IMPORTANT: The Minio-based Object Storage that the script creates is *not* meant for production usage.
+IMPORTANT: The MinIO-based Object Storage that the script creates is *not* meant for production usage.
 
 NOTE: If you want to connect to your own storage, see xref:creating-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
 
 .Prerequisites
 
-You must know the OpenShift resource name for your data science project so that you run the provided script in the correct project. To get the project's resource name:
+You must know the OpenShift resource name for your project so that you run the provided script in the correct project. To get the project's resource name:
 
-In the {productname-short} dashboard, select *Data science projects* and then click the *?* icon next to the project name. A text box opens with information about the project, including its resource name:
+In the {productname-short} dashboard, select *Projects* and then click the *?* icon next to the project name. A text box opens with information about the project, including its resource name:
 
 image::projects/ds-project-list-resource-hover.png[Project list resource name, 400]
 
@@ -42,11 +42,11 @@ oc apply -n <your-project-name/> -f https://github.com/rh-aiservices-bu/fraud-de
 +
 image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
-. In the OpenShift console, click *+* in the top navigation bar.
+. In the OpenShift console, click *+* in the top navigation bar, and then click *Import YAML*.
 +
 image::projects/ocp-console-add-icon.png[Add resources Icon]
 
-. Select your project from the list of projects.
+. Click the down arrow next to the project name, and then select your project from the list of projects. If needed, type the name of your project in the *Select project* search field.
 +
 image::projects/ocp-console-select-project.png[Select a project, 200]
 
@@ -92,7 +92,7 @@ spec:
         - args:
             - -ec
             - |-
-              echo -n 'Setting up Minio instance and connections'
+              echo -n 'Setting up MinIO instance and connections'
               oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash
@@ -116,19 +116,28 @@ spec:
 
 .  In the {productname-short} dashboard:
 
-.. Select *Data science projects* and then click the name of your project, *Fraud detection*.
+.. Select *Projects* and then click the name of your project, *Fraud detection*.
 .. Click *Connections*. There are two connections listed: `My Storage` and `Pipeline Artifacts`.
-+ 
++
 image::projects/ds-project-connections.png[Connections for Fraud Detection]
 
 
 [IMPORTANT]
 ====
-If your cluster uses self-signed certificates, your {productname-short} administrator might need to configure a certificate authority (CA) to securely connect to the S3 object storage, as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Cloud Service).
+If your cluster uses self-signed certificates, your {productname-short} administrator might need to configure a certificate authority (CA) to securely connect to the S3 object storage, as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Self-Managed).
 ====
+// or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs#accessing-s3-compatible-object-storage-with-self-signed-certificates_certs[Accessing S3-compatible object storage with self-signed certificates^] (Cloud Service).
 
-.Next step
+.Next steps
 
+* Decide whether you want to complete the pipelines section of this {deliverable}. With OpenShift AI pipelines, you can automate the execution of your notebooks and Python code. You can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
++
 If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
 
-Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].
+* Decide whether you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}. In that section, you implement a distributed training job by using Kueue for managing job resources.
+//+
+//NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
++
+If you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+
+* Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].

@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='enabling-data-science-pipelines']
-= Enabling data science pipelines
+= (Optional) Enabling data science pipelines
 
 [role="_abstract"]
 You must prepare your {deliverable} environment so that you can use data science pipelines.
@@ -22,7 +22,7 @@ Later in this {deliverable}, you implement an example pipeline by using the Jupy
 +
 image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
 
-. In the *Configure pipeline server* form, in the *Access key* field next to the key icon, click the dropdown menu and then click *Pipeline Artifacts*.
+. In the *Configure pipeline server* form, click *Autofill from connection* and then click *Pipeline Artifacts*.
 +
 The *Configure pipeline server* form autofills with credentials for the connection.
 +
@@ -38,26 +38,27 @@ image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipelin
 ====
 You must wait until the pipeline configuration is complete before you continue and create your workbench. If you create your workbench before the pipeline server is ready, your workbench cannot submit pipelines to it.
 ====
+
+.. You can click *View progress and event logs*.
 +
-If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can delete the pipeline server and create it again.
+If you have waited more than 5 minutes, and the pipeline server configuration does not complete, you can click *Cancel pipeline server setup* and create it again.
 +
-image::projects//ds-project-delete-pipeline-server.png[Delete pipeline server, 250]
-+
-You can also ask your {productname-short} administrator to verify that they applied self-signed certificates on your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates] (Self-Managed) or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates] (Cloud Service).
+You can also ask your {productname-short} administrator to verify that they applied self-signed certificates on your cluster as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/latest/html/installing_and_uninstalling_openshift_ai_self-managed/working-with-certificates_certs[Working with certificates] (Self-Managed).
+// or link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1/html/installing_and_uninstalling_openshift_ai_cloud_service/working-with-certificates_certs[Working with certificates] (Cloud Service).
 
 .Verification
 
 . Navigate to the *Pipelines* tab for the project.
-. Next to *Import pipeline*, click the action menu (&#8942;) and then select *View pipeline server configuration*.
+. Next to *Import pipeline*, click the action menu (&#8942;) and then select *Manage pipeline server configuration*.
 +
-image::projects/ds-project-pipeline-server-view.png[View pipeline server configuration menu, 250]
+image::projects/ds-project-pipeline-server-view.png[Manage pipeline server configuration, 250]
 +
 An information box opens and displays the object storage connection information for the pipeline server.
 
 .Next step
 
-xref:setting-up-kueue-resources.adoc[Setting up Kueue resources]
+If you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
 
-//xref:automating-workflows-with-pipelines.adoc[Automating workflows with data science pipelines]
+//NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
 
-//xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
+Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].

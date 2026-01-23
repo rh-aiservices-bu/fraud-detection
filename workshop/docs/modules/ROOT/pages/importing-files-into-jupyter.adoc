@@ -41,7 +41,7 @@ image::workbenches/jupyter-git-modal.png[Git Modal, 200]
 
 .. Select the *Include submodules* option, and then click *Clone*.
 
-.. In the file browser, double-click the newly-created *fraud-detection* folder.
+.. In the file browser, double-click the newly-created *fraud-detection* folder to exapnd its contents.
 +
 image::workbenches/jupyter-file-browser.png[Jupyter file browser, 300]
 
@@ -51,16 +51,18 @@ image::workbenches/jupyter-file-browser.png[Jupyter file browser, 300]
 image::workbenches/jupyter-git-icon-version.png[Git Clone icon, 200]
 +
 // the {git-version} attribute value is defined at the top of this file
-.. Select *origin/{git-version}*. 
+.. Select *origin/{git-version}*.
 +
 The current branch changes to *{git-version}*.
 
 
 .Verification
 
-In the file browser, view the notebooks that you cloned from Git.
+. In the left navigation bar, click the file browser icon to view the notebooks that you cloned from Git.
 
 image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection, 300]
+
+. Verify that the Git version at the bottom of the JupyterLab window is *{git-version}*.
 
 
 .Next step
