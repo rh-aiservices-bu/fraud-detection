@@ -163,7 +163,7 @@ def pipeline():
 
     kubernetes.use_secret_as_env(
         task=upload_model_task,
-        secret_name='aws-connection-my-storage',
+        secret_name='my-storage',
         secret_key_to_env={
             'AWS_ACCESS_KEY_ID': 'AWS_ACCESS_KEY_ID',
             'AWS_SECRET_ACCESS_KEY': 'AWS_SECRET_ACCESS_KEY',

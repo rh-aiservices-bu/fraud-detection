@@ -169,7 +169,7 @@ spec:
             labels:
               opendatahub.io/dashboard: "true"
               opendatahub.io/managed: "true"
-            name: aws-connection-my-storage
+            name: my-storage
           data:
             AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
             AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
@@ -189,7 +189,7 @@ spec:
             labels:
               opendatahub.io/dashboard: "true"
               opendatahub.io/managed: "true"
-            name: aws-connection-pipeline-artifacts
+            name: pipeline-artifacts
           data:
             AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
             AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}

@@ -8,7 +8,7 @@ In node 2, the notebook uploads the model to the S3 storage bucket. You must set
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 
-The name of the secret is `aws-connection-my-storage`. 
+The name of the secret is `my-storage`. 
 
 [NOTE] 
 ====
@@ -17,7 +17,7 @@ If you named your connection something other than `My Storage`, you can obtain t
 image::pipelines/dsp-dc-secret-name.png[My Storage Secret Name, 400]
 ====
 
-The `aws-connection-my-storage` secret includes the following fields:
+The `my-storage` secret includes the following fields:
 
 * `AWS_ACCESS_KEY_ID`
 * `AWS_DEFAULT_REGION`
@@ -57,7 +57,7 @@ image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret]
 .. Enter the following values and then click *Add*.
 +
 * *Environment Variable*: `AWS_ACCESS_KEY_ID`
-** *Secret Name*: `aws-connection-my-storage`
+** *Secret Name*: `my-storage`
 ** *Secret Key*: `AWS_ACCESS_KEY_ID`
 +
 image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
@@ -65,19 +65,19 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 . Repeat Step 2 for each of the following Kubernetes secrets:
 
 * *Environment Variable*: `AWS_SECRET_ACCESS_KEY`
-** *Secret Name*: `aws-connection-my-storage`
+** *Secret Name*: `my-storage`
 ** *Secret Key*: `AWS_SECRET_ACCESS_KEY`
 
 * *Environment Variable*: `AWS_S3_ENDPOINT`
-** *Secret Name*: `aws-connection-my-storage`
+** *Secret Name*: `my-storage`
 ** *Secret Key*: `AWS_S3_ENDPOINT`
 
 * *Environment Variable*: `AWS_DEFAULT_REGION`
-** *Secret Name*: `aws-connection-my-storage`
+** *Secret Name*: `my-storage`
 ** *Secret Key*: `AWS_DEFAULT_REGION`
 
 * *Environment Variable*: `AWS_S3_BUCKET`
-** *Secret Name*: `aws-connection-my-storage`
+** *Secret Name*: `my-storage`
 ** *Secret Key*: `AWS_S3_BUCKET`
 
 . Select *File* -> *Save Pipeline As* to save and rename the pipeline. For example, rename it to `My Train Save.pipeline`.

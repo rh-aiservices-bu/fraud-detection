@@ -264,4 +264,4 @@ platforms:
               secretKey: AWS_S3_BUCKET
             - envVar: AWS_S3_ENDPOINT
               secretKey: AWS_S3_ENDPOINT
-            secretName: aws-connection-my-storage
+            secretName: my-storage

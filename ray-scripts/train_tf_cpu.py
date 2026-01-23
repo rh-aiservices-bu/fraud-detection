@@ -13,8 +13,8 @@ import numpy as np
 import tensorflow as tf
 import onnx
 import tf2onnx
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, BatchNormalization, Activation
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, BatchNormalization, Activation
 
 import ray
 from ray import train
@@ -182,9 +182,20 @@ def save_onnx_model(checkpoint_path):
     print(f"Downloading model state_dict from {cp_s3_key} to {keras_model_local}")
     bucket.download_file(cp_s3_key, keras_model_local)
     keras_model = tf.keras.models.load_model(keras_model_local)
+
+    # Workaround for tf2onnx bug https://github.com/onnx/tensorflow-onnx/issues/2348
+    # Wrap the model in a tf.function
+    @tf.function(input_signature=[tf.TensorSpec([None, len(feature_columns)], tf.float32, name='dense_input')])
+    def model_fn(x):
+        return keras_model(x)
+
+    # Convert the Keras model to ONNX using from_function instead of from_keras
     onnx_model_local = f"/tmp/model.onnx"
-    onnx_model, _ = tf2onnx.convert.from_keras(keras_model)
-    onnx.save(onnx_model, onnx_model_local)
+    model_proto, _ = tf2onnx.convert.from_function(
+        model_fn,
+        input_signature=[tf.TensorSpec([None, len(feature_columns)], tf.float32, name='dense_input')]
+    )
+    onnx.save(model_proto, onnx_model_local)
 
     print(f"Uploading model from {onnx_model_local} to {model_output}")
     bucket.upload_file(onnx_model_local, model_output)
@@ -199,7 +210,7 @@ train_dataset = ray.data.read_csv(
     filesystem=pyarrow_fs,
     paths=f"s3://{bucket_name}/{train_data}")
 scaler = StandardScaler(columns=feature_columns)
-concatenator = Concatenator(include=feature_columns, output_column_name=output_column_name)
+concatenator = Concatenator(columns=feature_columns, output_column_name=output_column_name)
 train_dataset = scaler.fit_transform(train_dataset)
 train_dataset = concatenator.fit_transform(train_dataset)
 
