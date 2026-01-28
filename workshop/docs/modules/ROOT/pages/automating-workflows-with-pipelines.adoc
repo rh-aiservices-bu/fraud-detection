@@ -1,10 +1,10 @@
 :_module-type: CONCEPT
 
 [id='automating-workflows-with-pipelines']
-= Automating workflows with data science pipelines
+= Automating workflows with AI pipelines
 
 [role="_abstract"]
-Earlier, you used a notebook to train and save your model. Optionally, you can automate these tasks by using {productname-long} pipelines. Pipelines offer a way to automate the execution of many notebooks and Python code. By using pipelines, you can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
+Earlier, you used a notebook to train and save your model. Optionally, you can automate these tasks by using {productname-long} pipelines. Pipelines automate the execution of multiple notebooks and Python code. By using pipelines, you can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
 
 To explore the pipeline editor, complete the steps in the following procedures to create your own pipeline.
 

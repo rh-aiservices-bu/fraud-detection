@@ -6,7 +6,7 @@
 :git-version: main
 
 [role="_abstract"]
-The JupyterLab environment is a web-based environment, but everything you do inside it happens on *{productname-long}* and is powered by the *OpenShift* cluster. This means that, without having to install and maintain anything on your own computer, and without using valuable local resources such as CPU, GPU and RAM, you can conduct your data science work in this powerful and stable managed environment.
+The JupyterLab environment is web-based, but all operations run on {productname-long} and are backed by the OpenShift cluster. This configuration allows you to run notebooks without installing local tooling or consuming local CPU, GPU, or memory resources.
 
 .Prerequisites
 
@@ -14,7 +14,7 @@ You created a workbench, as described in xref:creating-a-workbench.adoc[Creating
 
 .Procedure
 
-. Click the link for your workbench. If prompted, log in and allow JupyterLab to authorize your user.
+. In the *Workbenches* tab for your project, click the link for your workbench. If prompted, log in and allow JupyterLab to authorize your user.
 +
 image::workbenches/ds-project-workbench-open.png[Open workbench, 400]
 +
@@ -41,7 +41,7 @@ image::workbenches/jupyter-git-modal.png[Git Modal, 200]
 
 .. Select the *Include submodules* option, and then click *Clone*.
 
-.. In the file browser, double-click the newly-created *fraud-detection* folder to exapnd its contents.
+.. In the file browser, double-click the newly-created *fraud-detection* folder to expand its contents.
 +
 image::workbenches/jupyter-file-browser.png[Jupyter file browser, 300]
 

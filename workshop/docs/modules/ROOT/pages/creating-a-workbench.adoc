@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='creating-a-workbench']
-= Creating a workbench and selecting a workbench image
+= Creating a workbench
 
 [role="_abstract"]
 A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image that has the tools and libraries that you need for developing models.
@@ -10,7 +10,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 * You created a `My Storage` connection as described in xref:storing-data-with-connections.adoc[Storing data with connections].
 
-* If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+* If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
 
 * If you intend to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you completed the procedure described in xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
 //Note that the _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
@@ -23,7 +23,7 @@ A workbench is an instance of your development and experimentation environment. 
 +
 image::workbenches/ds-project-create-workbench.png[Create workbench button, 800]
 
-. Fill out the name and description.
+. Enter the name and description.
 +
 image::workbenches/create-workbench-form-name-desc.png[Workbench name and description, 600]
 +
@@ -35,7 +35,7 @@ image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 
 . Under the *Deployment size* section, for *Hardware profile*, select *`default-profile`*.
 
-. Leave the default environment variables and storage options.
+. Keep the default environment variables and storage options.
 +
 image::workbenches/create-workbench-form-env-storage.png[Workbench storage, 600]
 

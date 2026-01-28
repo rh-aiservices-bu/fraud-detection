@@ -5,17 +5,17 @@
 
 [role="_abstract"]
 
-Given that the model is accessible in storage and saved in the portable ONNX format, you can use an {productname-short} model server to deploy it as an API.
+You can use an {productname-short} model server to deploy the model as an API.
 
 .Prerequisites
 
-* You saved the model as described in xref:preparing-the-model-for-deployment.adoc[Preparing the model for deployment].
+* You have saved the model as described in xref:preparing-the-model-for-deployment.adoc[Preparing the model for deployment].
 
 * You have installed KServe and enabled the model serving platform.
 
 * You have enabled a preinstalled or custom model-serving runtime.
 
-* You have values for the following MinIO storage:
+* You have obtained values for the following MinIO storage parameters:
 ** Access Key
 ** Secret Key
 ** Endpoint
@@ -28,9 +28,9 @@ To obtain these values, navigate to your project's *Connections* tab. For the My
 
 . In the {productname-short} dashboard, navigate to the project details page and click the *Deployments* tab.
 +
-image::model-serving/ds-project-model-list-add.png[Deployments]
-+
 NOTE: Depending on the model serving configuration on your cluster, you might see only one model serving platform option.
++
+image::model-serving/ds-project-model-list-add.png[Deployments]
 
 . In the *Enable model serving* tile, click *Select single-model*.
 . Click *Deploy model*.
@@ -38,20 +38,20 @@ NOTE: Depending on the model serving configuration on your cluster, you might se
 The *Deploy a model* wizard opens.
 . In the *Model details* section, provide information about the model:
 .. For the *Model location*, select *S3 compatible object storage*.
-.. Enter the values for the following for your MinIO storage conenction:
+.. Enter the following values from your MinIO storage connection:
 ** Access Key
 ** Secret Key
 ** Endpoint
 ** Region
 ** Bucket
 .. For *Path*, enter `models/fraud`.
-.. For the *Name*, enter `MyStorage`.
+.. For *Name*, enter `MyStorage`.
 .. For *Model type*, select  *Predictive*.
 .. Click *Next*.
 . In the *Model deployment* section, configure the deployment:
 .. For *Model deployment name*, enter `fraud`.
-.. In the *Description* field, enter a description of your deployment.
-.. For the hardware profile, accept the default.
+.. For *Description*, enter a description of your deployment.
+.. For the hardware profile, keep the default value.
 .. For *Model framework (name - version)*, select `onnx-1`.
 .. For the *Serving runtime* field, accept the auto-selected runtime, `OpenVINO Model Server`.
 .. Click *Next*.
@@ -61,7 +61,7 @@ The *Deploy a model* wizard opens.
 .Verification
 
 * Confirm that the deployed model is shown on the *Deployments* tab for the project, and on the *Deployments* page of the dashboard with a *Started* status.
-
++
 image::model-serving/ds-project-model-list-status.png[Deployed model status, 500]
 
 .Next step

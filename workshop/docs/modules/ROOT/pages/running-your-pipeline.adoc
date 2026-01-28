@@ -30,7 +30,7 @@ To address this error, you must verify that you configured the pipeline server a
 
 . Check the status of the pipeline server:
 .. In your Fraud Detection project, click the *Pipelines* tab.
-** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
 ** If you see the *Import a pipeline* option, the pipeline server is configured. Continue to the next step.
 . Restart your Fraud Detection workbench:
 .. Click the *Workbenches* tab.

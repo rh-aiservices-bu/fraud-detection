@@ -1,14 +1,14 @@
 :_module-type: PROCEDURE
 
-[id='enabling-data-science-pipelines']
-= (Optional) Enabling data science pipelines
+[id='enabling-ai-pipelines']
+= (Optional) Enabling AI pipelines
 
 [role="_abstract"]
-You must prepare your {deliverable} environment so that you can use data science pipelines.
+You must prepare your {deliverable} environment to use ai pipelines.
 
-NOTE: If you do not intend to complete the pipelines section of this {deliverable} you can skip this step and move on to the next section, xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+NOTE: If you do not intend to complete the pipelines section of this {deliverable}, you can skip to the next section, xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
 
-Later in this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. With Elyra, you can create a visual end-to-end pipeline workflow that executes in {productname-short}.
+Later in this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. Elyra enables you to create a visual, end-to-end pipeline workflow that runs in {productname-short}.
 
 .Prerequisites
 

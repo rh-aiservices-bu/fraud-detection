@@ -15,4 +15,4 @@ You used an example fraud detection model and completed the following tasks:
 * Explored a pre-trained fraud detection model by using a Jupyter notebook.
 * Deployed the model by using {productname-short} model serving.
 * Refined and trained the model by using automated pipelines.
-* Learned how to train the model by using distributed computing frameworks.
+* Distributed model training across multiple nodes by using Ray and the Training Operator.
