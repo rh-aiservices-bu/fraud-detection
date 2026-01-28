@@ -59,7 +59,7 @@ The current branch changes to *{git-version}*.
 .Verification
 
 . In the left navigation bar, click the file browser icon to view the notebooks that you cloned from Git.
-
++
 image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection, 300]
 
 . Verify that the Git version at the bottom of the JupyterLab window is *{git-version}*.

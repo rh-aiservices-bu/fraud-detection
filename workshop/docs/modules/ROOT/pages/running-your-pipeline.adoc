@@ -54,7 +54,7 @@ image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 .Verification
 
-The `models/fraud/1/model.onnx` file is in your S3 bucket. You can serve the model, as described in xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment].
+The `models/fraud/1/model.onnx` file is in your S3 bucket. You can serve the model, as described in xref:preparing-the-model-for-deployment.adoc[Preparing a model for deployment].
 
 
 .Next step

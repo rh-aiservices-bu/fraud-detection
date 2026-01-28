@@ -62,7 +62,7 @@ The *Deploy a model* wizard opens.
 
 * Confirm that the deployed model is shown on the *Deployments* tab for the project, and on the *Deployments* page of the dashboard with a *Started* status.
 
-image::model-serving/ds-project-model-list-status.png[Deployed model status, 350]
+image::model-serving/ds-project-model-list-status.png[Deployed model status, 500]
 
 .Next step
 

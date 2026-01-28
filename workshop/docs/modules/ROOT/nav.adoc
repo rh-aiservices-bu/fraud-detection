@@ -14,7 +14,7 @@
 ** xref:training-a-model.adoc[4. Training a Model]
 
 * 3. Model Serving
-** xref:preparing-a-model-for-deployment.adoc[1. Saving the Model]
+** xref:preparing-the-model-for-deployment.adoc[1. Saving the Model]
 ** xref:deploying-the-model.adoc[2. Deploying the Model]
 ** xref:testing-the-model-api.adoc[3. Using the API]
 
