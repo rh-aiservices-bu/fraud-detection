@@ -21,7 +21,7 @@ NOTE: If you do not intend to use Kueue to schedule your training jobs in the _D
 +
 image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
-. In the OpenShift console, click *+* in the top navigation bar, and then click *Import YAML*
+. In the OpenShift console, click *+* in the top navigation bar, and then click *Import YAML*.
 +
 image::projects/ocp-console-add-icon.png[Add resources Icon]
 
