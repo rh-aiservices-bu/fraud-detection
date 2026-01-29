@@ -10,9 +10,9 @@
 // for the downstream tutorial, change the value of rhoai-version to match the git-version value in the importing-files-into-jupyter.adoc file
 
 [role="_abstract"]
-Welcome! In this {deliverable}, you learn how to use data science,  artificial intelligence (AI), and machine learning (ML) in an OpenShift development workflow.
+Welcome! In this {deliverable}, you learn how to use data science, artificial intelligence (AI), and machine learning (ML) in an OpenShift development workflow.
 
-You complete the following tasks in https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}] without the need to install anything on your computer:
+You complete the following tasks in link:https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai[{productname-long}] without installing any software on your computer:
 
 * Explore a pre-trained fraud detection model by using a Jupyter notebook.
 * Deploy the model by using {productname-short} model serving.
@@ -24,7 +24,7 @@ You complete the following tasks in https://www.redhat.com/en/technologies/cloud
 The example fraud detection model monitors credit card transactions for potential fraudulent activity. It analyzes the following credit card transaction details:
 
 * The geographical distance from an earlier credit card transaction.
-* The price of the current transaction, compared to the median price of all the user's transactions.
+* The price of the current transaction, compared to the median price of all the transactions.
 * Whether the user completed the transaction by using the hardware chip in the credit card, by entering a PIN number, or by making an online purchase.
 
 Based on this data, the model outputs the likelihood of the transaction being fraudulent.
@@ -33,10 +33,10 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 
 You must have access to an OpenShift cluster which has {productname-long} installed.
 
-NOTE: Due to resource constraints, this {rhoai-version} edition of the tutorial is not supported in the https://console.redhat.com/openshift/sandbox[*{org-name} Developer Sandbox*].
+NOTE: Due to resource constraints, this {rhoai-version} edition of the tutorial is not supported in the link:https://console.redhat.com/openshift/sandbox[*{org-name} Developer Sandbox*].
 
 // commenting out Sandbox - 3.x not available there yet
-//If you do not have access to a cluster that has an instance of {productname-short}, see the https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the https://console.redhat.com/openshift/sandbox[*free {org-name} Developer Sandbox*] or you can learn how to install {productname-short} on *your own OpenShift cluster*.
+//If you do not have access to a cluster that has an instance of {productname-short}, see the link:https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the link:https://console.redhat.com/openshift/sandbox[*free {org-name} Developer Sandbox*] or you can learn how to install {productname-short} on *your own OpenShift cluster*.
 
 //NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
 

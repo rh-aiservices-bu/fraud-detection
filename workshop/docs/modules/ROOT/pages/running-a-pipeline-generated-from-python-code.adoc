@@ -1,12 +1,14 @@
 :_module-type: PROCEDURE
 
 [id='running-a-pipeline-generated-from-python-code']
-= Running a data science pipeline generated from Python code
+= Running a pipeline generated from Python code
 
 [role="_abstract"]
-Earlier, you created a simple pipeline by using the GUI pipeline editor. You might want to create pipelines by using code that can be version-controlled and shared with others. The https://github.com/kubeflow/pipelines[Kubeflow pipelines (kfp)] SDK provides a Python API for creating pipelines. The SDK is available as a Python package that you can install by using the `pip install kfp` command. With this package, you can use Python code to create a pipeline and then compile it to YAML format. Then you can import the YAML code into {productname-short}.
+Earlier, you created a simple pipeline by using the GUI pipeline editor. You might want to create pipelines by using code that can be version-controlled and shared with others. The link:https://github.com/kubeflow/pipelines[Kubeflow pipelines (kfp)] SDK provides a Python API for creating pipelines. The SDK is available as a Python package. With this package, you can use Python code to create a pipeline and then compile it to YAML format. Then you can import the YAML code into {productname-short}.
 
 This {deliverable} does not describe the details of how to use the SDK. Instead, it provides the files for you to view and upload.
+
+.Procedure
 
 . Optionally, view the provided Python code in your JupyterLab environment by navigating to the `fraud-detection-notebooks` project's `pipeline` directory. It contains the following files:
 +
@@ -36,7 +38,7 @@ image::pipelines/python-pipeline-graph.png[]
 . Select *Actions* -> *Create run*.
 
 . On the *Create run* page, provide the following values:
-.. For *Experiment*, leave the value as `Default`. 
+.. For *Experiment*, leave the value as `Default`.
 .. For *Name*, type any name, for example `Run 1`.
 .. For *Pipeline*, select the pipeline that you uploaded.
 +
@@ -45,7 +47,9 @@ You can leave the other fields with their default values.
 image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 
 . Click *Create run* to create the run.
-+
-A new run starts immediately.
+
+.Verification
+
+* A new run starts immediately.
 +
 image::pipelines/pipeline-run-in-progress.png[New pipeline run, 400]

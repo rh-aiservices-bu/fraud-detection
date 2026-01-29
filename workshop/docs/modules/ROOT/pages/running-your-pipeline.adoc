@@ -4,41 +4,27 @@
 = Running your pipeline
 
 [role="_abstract"]
-Upload the pipeline on your cluster and run it. You can do so directly from the pipeline editor. You can use your own newly created pipeline or the pipeline in the provided `4 Train Save.pipeline` file.
+You can upload and run your pipeline directly from the pipeline editor. Use either your newly created pipeline or the provided `4 Train Save.pipeline` file.
 
 .Prerequisites
 
 * You set the S3 storage bucket keys, as described in xref:configuring-the-connection-to-storage.adoc[Configuring the connection to storage].
 
+* You configured a pipeline server, as descibed in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+
+* If you created your workbench before the pipeline server was available, you stopped and restarted the workbench.
+
 .Procedure
 
-. Click the play button in the toolbar of the pipeline editor.
+. In the JupyterLab pipeline editor toolbar, click *Run Pipeline*.
 +
 image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
 
 . Enter a name for your pipeline.
-. Verify that the *Runtime Configuration:* is set to `Data Science Pipeline`.
+. Verify that the *Runtime Configuration:* is set to `Pipeline`.
 . Click *OK*.
 +
-[NOTE]
-====
-If you see an error message stating that "no runtime configuration for Data Science Pipeline is defined", you might have created your workbench before the pipeline server was available.
-
-To address this error, you must verify that you configured the pipeline server and then restart the workbench.
-
-. Follow these steps in the {productname-short} dashboard:
-
-. Check the status of the pipeline server:
-.. In your Fraud Detection project, click the *Pipelines* tab.
-** If you see the *Configure pipeline server* option, follow the steps in xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
-** If you see the *Import a pipeline* option, the pipeline server is configured. Continue to the next step.
-. Restart your Fraud Detection workbench:
-.. Click the *Workbenches* tab.
-.. Click *Stop* and then click *Stop workbench*.
-.. After the workbench status is *Stopped*, click *Start*.
-.. Wait until the workbench status is *Running*.
-. Return to your workbench's JupyterLab environment and run the pipeline.
-====
+*NOTE:* If you see an error message stating that "no runtime configuration for AI Pipeline is defined", you might have created your workbench before the pipeline server was available. To address this error, you must verify that you configured the pipeline server and then restart the workbench.
 
 . In the {productname-short} dashboard, open your project and expand the newly created pipeline.
 +
@@ -54,9 +40,11 @@ image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 .Verification
 
-The `models/fraud/1/model.onnx` file is in your S3 bucket. You can serve the model, as described in xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment].
+* The `models/fraud/1/model.onnx` file is in your S3 bucket.
 
 
 .Next step
 
-(Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a data science pipeline generated from Python code]
+* (Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a pipeline generated from Python code]
+
+* Serve the model, as described in xref:preparing-the-model-for-deployment.adoc[Preparing a model for deployment].

@@ -4,7 +4,7 @@
 = Running a script to install local object storage buckets and create connections
 
 [role="_abstract"]
-If you do not have your own s3-compatible storage or if you want to use a disposable local MinIO instance instead, run a script (provided in the following procedure) that automatically completes these tasks:
+If you do not have your own S3-compatible storage or if you want to use a disposable local MinIO instance instead, run a script (provided in the following procedure) that automatically completes these tasks:
 
 * Creates a MinIO instance in your project.
 * Creates two storage buckets in that MinIO instance.
@@ -12,7 +12,7 @@ If you do not have your own s3-compatible storage or if you want to use a dispos
 * Creates two connections in your project, one for each bucket and both using the same credentials.
 * Installs required network policies for service mesh functionality.
 
-The https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying MinIO] is the basis for this script.
+This script is based on the link:https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying MinIO].
 
 IMPORTANT: The MinIO-based Object Storage that the script creates is *not* meant for production usage.
 
@@ -20,10 +20,10 @@ NOTE: If you want to connect to your own storage, see xref:creating-connections-
 
 .Prerequisites
 
-You must know the OpenShift resource name for your project so that you run the provided script in the correct project. To get the project's resource name:
-
+* You must know the OpenShift resource name for your project so that you run the provided script in the correct project. To get the project's resource name:
++
 In the {productname-short} dashboard, select *Projects* and then click the *?* icon next to the project name. A text box opens with information about the project, including its resource name:
-
++
 image::projects/ds-project-list-resource-hover.png[Project list resource name, 400]
 
 
@@ -32,7 +32,7 @@ image::projects/ds-project-list-resource-hover.png[Project list resource name, 4
 The following procedure describes how to run the script from the OpenShift console. If you are knowledgeable in OpenShift and can access the cluster from the command line, instead of following the steps in this procedure, you can use the following command to run the script:
 
 ----
-oc apply -n <your-project-name/> -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3.yaml
+oc apply -n <your-project-name> -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
 ----
 ====
 
@@ -132,7 +132,7 @@ If your cluster uses self-signed certificates, your {productname-short} administ
 
 * Decide whether you want to complete the pipelines section of this {deliverable}. With OpenShift AI pipelines, you can automate the execution of your notebooks and Python code. You can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
 +
-If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-data-science-pipelines.adoc[Enabling data science pipelines].
+If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
 
 * Decide whether you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}. In that section, you implement a distributed training job by using Kueue for managing job resources.
 //+

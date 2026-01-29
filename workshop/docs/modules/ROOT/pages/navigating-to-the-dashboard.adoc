@@ -4,9 +4,7 @@
 = Navigating to the {productname-short} dashboard
 
 [role="_abstract"]
-You can access the {productname-short} dashboard from your OpenShift console.
-
-From the dashboard, you can check that your {productname-short} version matches the version of this tutorial.
+You can access the {productname-short} dashboard from the OpenShift console. From the dashboard, you can verify that the installed {productname-short} version matches the version used in this tutorial.
 
 .Procedure
 
@@ -25,13 +23,13 @@ From the dashboard, you can check that your {productname-short} version matches 
 +
 image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
-.. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
+. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
 +
 image::projects/login-with-openshift.png[OpenShift login, 300]
 +
 The {productname-short} dashboard shows the *Home* page.
 +
-NOTE: You can navigate back to the OpenShift console by clicking the application launcher to access the OpenShift console.
+NOTE: You can navigate back to the OpenShift console by clicking the application launcher.
 +
 image::projects/ds-console-ocp-tile.png[OpenShift console link, 200]
 +
@@ -50,7 +48,7 @@ The *About* page shows the installed version.
 
 . If this version of the tutorial does not match the installed version, access the matching version of the tutorial:
 
-.. Navigate to the link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[top-level {productname-long} documentation page].
+.. Navigate to the link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[{productname-long} documentation page].
 .. Select the matching version from the drop-down list.
 
 

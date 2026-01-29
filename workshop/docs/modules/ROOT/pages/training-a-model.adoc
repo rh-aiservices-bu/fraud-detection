@@ -12,4 +12,4 @@ When you save the model, you convert the model to the portable Open Neural Netwo
 
 .Next step
 
-xref:preparing-a-model-for-deployment.adoc[Preparing a model for deployment]
+xref:preparing-the-model-for-deployment.adoc[Preparing the model for deployment]

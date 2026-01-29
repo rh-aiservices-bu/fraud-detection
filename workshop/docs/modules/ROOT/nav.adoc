@@ -4,7 +4,7 @@
 ** xref:storing-data-with-connections.adoc[3. Storage Data Connections]
 *** xref:running-a-script-to-install-storage.adoc[1. Scripted Local]
 *** xref:creating-connections-to-storage.adoc[2. Manual]
-** xref:enabling-data-science-pipelines.adoc[4. Enable Pipelines]
+** xref:enabling-ai-pipelines.adoc[4. Enable Pipelines]
 ** xref:setting-up-kueue-resources.adoc[4. Set up Kueue resources]
 
 * 2. Workbenches
@@ -14,12 +14,12 @@
 ** xref:training-a-model.adoc[4. Training a Model]
 
 * 3. Model Serving
-** xref:preparing-a-model-for-deployment.adoc[1. Saving the Model]
+** xref:preparing-the-model-for-deployment.adoc[1. Saving the Model]
 ** xref:deploying-the-model.adoc[2. Deploying the Model]
 ** xref:testing-the-model-api.adoc[3. Using the API]
 
-* 4. Data Science Pipelines
-// ** xref:enabling-data-science-pipelines.adoc[1. Enable Pipelines]
+* 4. AI Pipelines
+// ** xref:enabling-ai-pipelines.adoc[1. Enable Pipelines]
 ** xref:automating-workflows-with-pipelines.adoc[1. Workbench Pipeline Editor]
 *** xref:creating-a-pipeline.adoc[1. Creating a pipeline]
 *** xref:adding-nodes-to-your-pipeline.adoc[2. Adding nodes to your pipeline]
