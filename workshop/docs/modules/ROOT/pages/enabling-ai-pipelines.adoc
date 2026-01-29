@@ -24,7 +24,7 @@ image::projects/ds-project-create-pipeline-server.png[Create pipeline server but
 
 . In the *Configure pipeline server* form, click *Autofill from connection* and then click *Pipeline Artifacts*.
 +
-The *Configure pipeline server* form autofills with credentials for the connection.
+The *Configure pipeline server* form fills with credentials for the connection.
 +
 image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
 
