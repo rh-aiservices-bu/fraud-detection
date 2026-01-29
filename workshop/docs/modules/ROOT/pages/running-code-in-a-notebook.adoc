@@ -36,12 +36,12 @@ Notebooks are so named because they are like a physical _notebook_: you can take
 
 .Prerequisites
 
-* You have imported the {deliverable} files into your JupyterLab environment as described in 
+* You have imported the {deliverable} files into your JupyterLab environment as described in
 xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment].
 
 .Procedure
 
-. In your JupyterLab environment, locate the `0_sandbox.ipynb` file and double-click it to launch the notebook. The notebook opens in a new tab in the content section of the environment. 
+. In your JupyterLab environment, locate the `0_sandbox.ipynb` file and double-click it to launch the notebook. The notebook opens in a new tab in the content section of the environment.
 +
 image::workbenches/jupyter-notebook-0.png[Notebook 0]
 
@@ -57,7 +57,7 @@ You can use different kernels, with different languages or versions, to run in y
 
 .Additional resources
 
-* https://jupyter.org/[the Jupyter site]
+* link:https://jupyter.org/[the Jupyter site]
 
 .Next step
 
