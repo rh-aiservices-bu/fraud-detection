@@ -18,7 +18,7 @@
 ** xref:deploying-the-model.adoc[2. Deploying the Model]
 ** xref:testing-the-model-api.adoc[3. Using the API]
 
-* 4. Data Science Pipelines
+* 4. AI Pipelines
 // ** xref:enabling-ai-pipelines.adoc[1. Enable Pipelines]
 ** xref:automating-workflows-with-pipelines.adoc[1. Workbench Pipeline Editor]
 *** xref:creating-a-pipeline.adoc[1. Creating a pipeline]

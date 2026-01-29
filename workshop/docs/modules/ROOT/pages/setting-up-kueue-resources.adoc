@@ -5,7 +5,7 @@
 
 [role="_abstract"]
 
-Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run the Ray or Training Operator examples in this tutorial, a cluster administrator must install and configure the {org-name} build of Kueue Operator as described in https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.0/html/managing_openshift_ai/managing-workloads-with-kueue#kueue-workflow_kueue[Kueue workflow].
+Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run the Ray or Training Operator examples in this tutorial, a cluster administrator must install and configure the {org-name} build of Kueue Operator as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.0/html/managing_openshift_ai/managing-workloads-with-kueue#kueue-workflow_kueue[Kueue workflow].
 
 Also, you must prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
 
@@ -73,7 +73,7 @@ spec:
 
 .Verification
 
-. In the OpenShift console, there is a "Resources successfully created" message with a list of the following resources:
+* The OpenShift console displays a "Resources successfully created" message with a list of the following resources:
 +
 * `default-flavor`
 * `cluster-queue`
