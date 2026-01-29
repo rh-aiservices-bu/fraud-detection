@@ -10,7 +10,7 @@ You can upload and run your pipeline directly from the pipeline editor. Use eith
 
 * You set the S3 storage bucket keys, as described in xref:configuring-the-connection-to-storage.adoc[Configuring the connection to storage].
 
-* You configured a pipeline server, as descibed in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+* You configured a pipeline server, as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
 
 * If you created your workbench before the pipeline server was available, you stopped and restarted the workbench.
 
@@ -24,7 +24,7 @@ image::pipelines/wb-pipeline-run-button.png[Pipeline Run Button, 300]
 . Verify that the *Runtime Configuration:* is set to `Pipeline`.
 . Click *OK*.
 +
-*NOTE:* If you see an error message stating that "no runtime configuration for AI Pipeline is defined", you might have created your workbench before the pipeline server was available. To address this error, you must verify that you configured the pipeline server and then restart the workbench.
+*NOTE:* If you see an error message stating that "no runtime configuration for Pipelines is defined", you might have created your workbench before the pipeline server was available. To address this error, you must verify that you configured the pipeline server and then restart the workbench.
 
 . In the {productname-short} dashboard, open your project and expand the newly created pipeline.
 +

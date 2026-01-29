@@ -31,7 +31,7 @@ image::projects/ds-project-new-form.png[New project form, 600]
 
 Your project opens in the dashboard.
 
-You can click on the tabs to view more information about the project components and project access permissions:
+You can click the tabs to view more information about the project components and project access permissions:
 +
 image::projects/ds-project-new.png[New project]
 

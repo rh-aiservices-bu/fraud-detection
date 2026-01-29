@@ -27,17 +27,11 @@ To obtain these values, navigate to your project's *Connections* tab. For the My
 .Procedure
 
 . In the {productname-short} dashboard, navigate to the project details page and click the *Deployments* tab.
-+
-NOTE: Depending on the model serving configuration on your cluster, you might see only one model serving platform option.
-+
-image::model-serving/ds-project-model-list-add.png[Deployments]
-
-. In the *Enable model serving* tile, click *Select single-model*.
 . Click *Deploy model*.
 +
 The *Deploy a model* wizard opens.
 . In the *Model details* section, provide information about the model:
-.. For the *Model location*, select *S3 compatible object storage*.
+.. For *Model location*, select *S3 object storage*.
 .. Enter the following values from your MinIO storage connection:
 ** Access Key
 ** Secret Key
@@ -46,7 +40,7 @@ The *Deploy a model* wizard opens.
 ** Bucket
 .. For *Path*, enter `models/fraud`.
 .. For *Name*, enter `MyStorage`.
-.. For *Model type*, select  *Predictive*.
+.. For *Model type*, select *Predictive model*.
 .. Click *Next*.
 . In the *Model deployment* section, configure the deployment:
 .. For *Model deployment name*, enter `fraud`.

@@ -23,9 +23,7 @@ You can access the {productname-short} dashboard from the OpenShift console. Fro
 +
 image::projects/ocp-console-ds-tile.png[{productname-short} dashboard link]
 
-. When prompted, log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
-+
-image::projects/login-with-openshift.png[OpenShift login, 300]
+. Log in to the {productname-short} dashboard by using your OpenShift credentials. {productname-short} uses the same credentials as OpenShift for the dashboard, notebooks, and all other components.
 +
 The {productname-short} dashboard shows the *Home* page.
 +
