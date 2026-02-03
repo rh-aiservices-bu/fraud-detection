@@ -6,7 +6,7 @@
 [.text-center.strong]
 == Introduction
 
-:rhoai-version: main (the latest)
+:rhoai-version: v3.2 (the latest)
 // for the downstream tutorial, change the value of rhoai-version to match the git-version value in the importing-files-into-jupyter.adoc file
 
 [role="_abstract"]
