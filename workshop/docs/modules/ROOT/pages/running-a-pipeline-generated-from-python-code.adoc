@@ -27,13 +27,13 @@ For your convenience, the output of the `build.sh` script is provided in the `5_
 
 .. Click *Upload* and then select `5_get_data_train_upload.yaml` from your local files to upload the pipeline.
 +
-image::pipelines/dsp-pipline-import-upload.png[]
+image::pipelines/dsp-pipline-import-upload.png[Import pipeline]
 
 .. Click *Import pipeline* to import and save the pipeline.
 +
 The pipeline shows in graphic view.
 +
-image::pipelines/python-pipeline-graph.png[]
+image::pipelines/python-pipeline-graph.png[Graphic view of pipeline]
 
 . Select *Actions* -> *Create run*.
 
