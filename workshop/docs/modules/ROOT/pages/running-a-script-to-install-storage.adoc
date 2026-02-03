@@ -32,7 +32,7 @@ image::projects/ds-project-list-resource-hover.png[Project list resource name, 4
 The following procedure describes how to run the script from the OpenShift console. If you are knowledgeable in OpenShift and can access the cluster from the command line, instead of following the steps in this procedure, you can use the following command to run the script:
 
 ----
-oc apply -n <your-project-name> -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
+oc apply -n <your-project-name> -f https://github.com/rh-aiservices-bu/fraud-detection/raw/v3.2/setup/setup-s3-no-sa.yaml
 ----
 ====
 
@@ -93,7 +93,7 @@ spec:
             - -ec
             - |-
               echo -n 'Setting up MinIO instance and connections'
-              oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
+              oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/v3.2/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash
           image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest

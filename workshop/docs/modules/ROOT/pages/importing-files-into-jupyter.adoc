@@ -3,7 +3,7 @@
 [id='importing-files-into-jupyter']
 = Importing the {deliverable} files into the JupyterLab environment
 
-:git-version: main
+:git-version: v3.2
 
 [role="_abstract"]
 The JupyterLab environment is web-based, but all operations run on {productname-long} and are backed by the OpenShift cluster. This configuration allows you to run notebooks without installing local tools or consuming local CPU, GPU, or memory resources.
