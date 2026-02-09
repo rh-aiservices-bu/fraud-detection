@@ -31,7 +31,7 @@ To obtain these values, navigate to your project's *Connections* tab. For the My
 +
 The *Deploy a model* wizard opens.
 . In the *Model details* section, provide information about the model:
-.. For *Model location*, select *S3 object storage*.
+.. For *Model location*, select *Existing connection* and then select *My Storage*.
 .. Enter the following values from your MinIO storage connection:
 ** Access Key
 ** Secret Key
@@ -39,7 +39,6 @@ The *Deploy a model* wizard opens.
 ** Region
 ** Bucket
 .. For *Path*, enter `models/fraud`.
-.. For *Name*, enter `MyStorage`.
 .. For *Model type*, select *Predictive model*.
 .. Click *Next*.
 . In the *Model deployment* section, configure the deployment:
