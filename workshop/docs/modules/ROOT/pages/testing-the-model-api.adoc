@@ -16,7 +16,7 @@ If the *Inference endpoint* field has an *Internal endpoint details* link, click
 +
 image::model-serving/ds-project-model-inference-endpoint.png[Model inference endpoint, 300]
 +
-*NOTE:* When you test the model API from inside a workbench, you must edit the endpoint to use `http` instead of `https` and specify 8888 for the point. For example:
+*NOTE:* When you test the model API from inside a workbench, you must edit the endpoint to specify `8888` for the port. For example:
 +
 `http://fraud-predictor.fraud-detection.svc.cluster.local:8888`
 
