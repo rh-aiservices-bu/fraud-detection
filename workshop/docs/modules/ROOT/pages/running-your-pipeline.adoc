@@ -4,7 +4,7 @@
 = Running your pipeline
 
 [role="_abstract"]
-You can upload and run your pipeline directly from the pipeline editor. Use either your newly created pipeline or the provided `4 Train Save.pipeline` file.
+You can upload and run your pipeline directly from the pipeline editor. Use either your newly created pipeline or the provided `4-train-save.pipeline` file.
 
 .Prerequisites
 
