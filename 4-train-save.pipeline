@@ -28,8 +28,7 @@
               "kubernetes_shared_mem_size": {},
               "kubernetes_tolerations": [],
               "mounted_volumes": [],
-              "filename": "1_experiment_train.ipynb",
-              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-tensorflow-cuda-py312-rhel9@sha256:4fe6f012678efa64e11be47e7d6ca85948fb481c5098ea72872bc64937d85d3e"
+              "filename": "1_experiment_train.ipynb"
             },
             "ui_data": {
               "label": "1_experiment_train.ipynb",
@@ -110,8 +109,7 @@
               "kubernetes_shared_mem_size": {},
               "kubernetes_tolerations": [],
               "mounted_volumes": [],
-              "filename": "2_save_model.ipynb",
-              "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-tensorflow-cuda-py312-rhel9@sha256:4fe6f012678efa64e11be47e7d6ca85948fb481c5098ea72872bc64937d85d3e"
+              "filename": "2_save_model.ipynb"
             },
             "ui_data": {
               "label": "2_save_model.ipynb",
@@ -165,16 +163,17 @@
         "version": 8,
         "runtime_type": "KUBEFLOW_PIPELINES",
         "properties": {
-          "name": "6 Train Save",
+          "name": "4-train-save",
           "runtime": "Pipelines",
           "pipeline_defaults": {
             "kubernetes_pod_labels": [],
-            "kubernetes_shared_mem_size": {},
             "kubernetes_pod_annotations": [],
             "mounted_volumes": [],
+            "kubernetes_shared_mem_size": {},
             "kubernetes_tolerations": [],
             "kubernetes_secrets": [],
-            "env_vars": []
+            "env_vars": [],
+            "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-tensorflow-cuda-py312-rhel9@sha256:9c0c8114634c1a7d888595411a8383f24fb1e3c0a53135fdfc6de883b009b920"
           }
         }
       },
