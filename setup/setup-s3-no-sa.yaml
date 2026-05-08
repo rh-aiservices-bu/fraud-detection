@@ -1,30 +1,53 @@
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: s4-config
+data:
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_S3_ENDPOINT: http://localhost:7480
+  IP: 0.0.0.0
+  JWT_EXPIRATION_HOURS: "8"
+  LOCAL_STORAGE_PATHS: ""
+  MAX_CONCURRENT_TRANSFERS: "2"
+  MAX_FILE_SIZE_GB: "20"
+  PORT: "5000"
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: minio
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: minio
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: s4
 spec:
   ports:
-    - name: api
-      port: 9000
-      targetPort: api
-    - name: console
-      port: 9090
-      targetPort: 9090
+  - name: s3-api
+    port: 7480
+    protocol: TCP
+    targetPort: 7480
+  - name: web-ui
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
   selector:
-    app: minio
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
   sessionAffinity: None
   type: ClusterIP
 ---
@@ -32,13 +55,13 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: minio
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: minio
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: s4-data
 spec:
   accessModes:
     - ReadWriteOnce
@@ -50,97 +73,111 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: minio
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: minio
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: s4
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: minio
-      app.kubernetes.io/component: minio
-      app.kubernetes.io/instance: minio
-      app.kubernetes.io/name: minio
-      app.kubernetes.io/part-of: minio
-      component: minio
+      app: s4
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/instance: s4
+      app.kubernetes.io/name: s4
+      app.kubernetes.io/part-of: s4
+      component: s4
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: minio
-        app.kubernetes.io/component: minio
-        app.kubernetes.io/instance: minio
-        app.kubernetes.io/name: minio
-        app.kubernetes.io/part-of: minio
-        component: minio
+        app: s4
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: s4
+        app.kubernetes.io/name: s4
+        app.kubernetes.io/part-of: s4
+        component: s4
     spec:
       containers:
-        - args:
-            - minio server /data --console-address :9090
-          command:
-            - /bin/bash
-            - -c
-          envFrom:
-            - secretRef:
-                name: minio-root-user
-          image: quay.io/minio/minio:latest
-          name: minio
+        - envFrom:
+          - configMapRef:
+              name: s4-config
+          - secretRef:
+              name: s4-credentials
+          image: quay.io/rh-aiservices-bu/s4:latest
+          name: s4
           ports:
-            - containerPort: 9000
-              name: api
+            - containerPort: 7480
+              name: s3-api
               protocol: TCP
-            - containerPort: 9090
-              name: console
+            - containerPort: 5000
+              name: web-ui
               protocol: TCP
           resources:
             limits:
               cpu: "2"
               memory: 2Gi
             requests:
-              cpu: 200m
-              memory: 1Gi
+              cpu: 250m
+              memory: 512Mi
           volumeMounts:
-            - mountPath: /data
-              name: minio
+            - mountPath: /var/lib/ceph/radosgw
+              name: s4-data
       volumes:
-        - name: minio
+        - name: s4-data
           persistentVolumeClaim:
-            claimName: minio
-        - emptyDir: {}
-          name: empty
+            claimName: s4-data
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: create-ds-connections
+  labels:
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
 spec:
   selector: {}
   template:
     spec:
+      initContainers:
+        - args:
+            - -ec
+            - |-
+              echo -n 'Waiting for s4-credentials secrets'
+              while ! oc get secret s4-credentials 2>/dev/null | grep -qF s4-credentials; do
+              echo -n .
+              sleep 5
+              done; echo
+
+              echo -n 'Waiting for s4-api route'
+              while ! oc get route s4-api 2>/dev/null | grep -qF s4; do
+                echo -n .
+                sleep 5
+              done; echo
+
+              echo -n 'Waiting for deployment to become available'
+              oc wait --for=condition=available --timeout=60s deployment/s4
+              sleep 3
+          command:
+            - /bin/bash
+          image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+          imagePullPolicy: IfNotPresent
+          name: wait-for-s4
       containers:
         - args:
             - -ec
             - |-
-              echo -n 'Waiting for minio route'
-              while ! oc get route minio-s3 2>/dev/null | grep -qF minio-s3; do
-                echo -n .
-                sleep 5
-              done; echo
-
-              echo -n 'Waiting for minio root user secret'
-              while ! oc get secret minio-root-user 2>/dev/null | grep -qF minio-root-user; do
-                echo -n .
-                sleep 5
-              done; echo
-
-              MINIO_ROOT_USER=$(oc get secret minio-root-user -o template --template '{{.data.MINIO_ROOT_USER}}')
-              MINIO_ROOT_PASSWORD=$(oc get secret minio-root-user -o template --template '{{.data.MINIO_ROOT_PASSWORD}}')
-              MINIO_HOST=https://$(oc get route minio-s3 -o template --template '{{.spec.host}}')
+              S4_HOST=https://$(oc get route s4-api -o template --template '{{.spec.host}}')
+              AWS_ACCESS_KEY_ID=$(oc get secret s4-credentials -o template --template '{{.data.AWS_ACCESS_KEY_ID}}')
+              AWS_SECRET_ACCESS_KEY=$(oc get secret s4-credentials -o template --template '{{.data.AWS_SECRET_ACCESS_KEY}}')
 
               cat << EOF | oc apply -f-
               apiVersion: v1
@@ -154,12 +191,12 @@ spec:
                   opendatahub.io/managed: "true"
                 name: my-storage
               data:
-                AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
-                AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
               stringData:
                 AWS_DEFAULT_REGION: us-east-1
                 AWS_S3_BUCKET: my-storage
-                AWS_S3_ENDPOINT: ${MINIO_HOST}
+                AWS_S3_ENDPOINT: ${S4_HOST}
               type: Opaque
               EOF
               cat << EOF | oc apply -f-
@@ -174,12 +211,12 @@ spec:
                   opendatahub.io/managed: "true"
                 name: pipeline-artifacts
               data:
-                AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
-                AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
               stringData:
                 AWS_DEFAULT_REGION: us-east-1
                 AWS_S3_BUCKET: pipeline-artifacts
-                AWS_S3_ENDPOINT: ${MINIO_HOST}
+                AWS_S3_ENDPOINT: ${S4_HOST}
               type: Opaque
               EOF
           command:
@@ -195,36 +232,37 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: create-minio-buckets
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: create-s4-buckets
 spec:
   selector: {}
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: minio
-        app.kubernetes.io/instance: minio
-        app.kubernetes.io/name: minio
-        app.kubernetes.io/part-of: minio
-        component: minio
+        app: s4
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: s4
+        app.kubernetes.io/name: s4
+        app.kubernetes.io/part-of: s4
+        component: s4
     spec:
       containers:
         - args:
             - -ec
             - |-
-              oc get secret minio-root-user
-              env | grep MINIO
+              oc get secret s4-credentials
               cat << 'EOF' | python3
               import boto3, os
 
               s3 = boto3.client("s3",
-                                endpoint_url="http://minio:9000",
-                                aws_access_key_id=os.getenv("MINIO_ROOT_USER"),
-                                aws_secret_access_key=os.getenv("MINIO_ROOT_PASSWORD"))
+                                endpoint_url="http://s4:7480",
+                                aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                                aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"))
               bucket = 'pipeline-artifacts'
               print('creating pipeline-artifacts bucket')
               if bucket not in [bu["Name"] for bu in s3.list_buckets()["Buckets"]]:
@@ -238,7 +276,7 @@ spec:
             - /bin/bash
           envFrom:
             - secretRef:
-                name: minio-root-user
+                name: s4-credentials
           image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:2024.1
           imagePullPolicy: IfNotPresent
           name: create-buckets
@@ -246,24 +284,24 @@ spec:
         - args:
             - -ec
             - |-
-              echo -n 'Waiting for minio root user secret'
-              while ! oc get secret minio-root-user 2>/dev/null | grep -qF minio-root-user; do
+              echo -n 'Waiting for s4-credentials secrets'
+              while ! oc get secret s4-credentials 2>/dev/null | grep -qF s4-credentials; do
               echo -n .
               sleep 5
               done; echo
 
-              echo -n 'Waiting for minio deployment'
-              while ! oc get deployment minio 2>/dev/null | grep -qF minio; do
+              echo -n 'Waiting for s4 deployment'
+              while ! oc get deployment s4 2>/dev/null | grep -qF s4; do
                 echo -n .
                 sleep 5
               done; echo
-              oc wait --for=condition=available --timeout=60s deployment/minio
+              oc wait --for=condition=available --timeout=60s deployment/s4
               sleep 10
           command:
             - /bin/bash
           image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
           imagePullPolicy: IfNotPresent
-          name: wait-for-minio
+          name: wait-for-s4
       restartPolicy: Never
       serviceAccount: demo-setup
       serviceAccountName: demo-setup
@@ -272,51 +310,57 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: create-minio-root-user
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: create-s4-credentials-secret
 spec:
   backoffLimit: 4
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: minio
-        app.kubernetes.io/instance: minio
-        app.kubernetes.io/name: minio
-        app.kubernetes.io/part-of: minio
-        component: minio
+        app: s4
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: s4
+        app.kubernetes.io/name: s4
+        app.kubernetes.io/part-of: s4
+        component: s4
     spec:
       containers:
         - args:
             - -ec
             - |-
-              if [ -n "$(oc get secret minio-root-user -oname 2>/dev/null)" ]; then
+              if [ -n "$(oc get secret s4-credentials -oname 2>/dev/null)" ]; then
                 echo "Secret already exists. Skipping." >&2
                 exit 0
               fi
               genpass() {
                   < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c"${1:-32}"
               }
-              id=$(genpass 16)
-              secret=$(genpass)
+              ui_id=$(genpass 16)
+              ui_secret=$(genpass)
+              aws_accesskeyid=$(genpass 16)
+              aws_secretaccesskey=$(genpass)
               cat << EOF | oc apply -f-
               apiVersion: v1
               kind: Secret
               metadata:
-                name: minio-root-user
+                name: s4-credentials
               type: Opaque
               stringData:
-                MINIO_ROOT_USER: ${id}
-                MINIO_ROOT_PASSWORD: ${secret}
+                UI_USERNAME: ${ui_id}
+                UI_PASSWORD: ${ui_secret}
+                AWS_ACCESS_KEY_ID: ${aws_accesskeyid}
+                AWS_SECRET_ACCESS_KEY: ${aws_secretaccesskey}
               EOF
           command:
             - /bin/bash
           image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
           imagePullPolicy: IfNotPresent
-          name: create-minio-root-user
+          name: create-s4-credentials-secret
       restartPolicy: Never
       serviceAccount: demo-setup
       serviceAccountName: demo-setup
@@ -325,22 +369,22 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   labels:
-    app: minio
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: minio-console
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: s4
 spec:
   port:
-    targetPort: console
+    targetPort: web-ui
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
   to:
     kind: Service
-    name: minio
+    name: s4
     weight: 100
   wildcardPolicy: None
 ---
@@ -348,21 +392,21 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   labels:
-    app: minio
-    app.kubernetes.io/component: minio
-    app.kubernetes.io/instance: minio
-    app.kubernetes.io/name: minio
-    app.kubernetes.io/part-of: minio
-    component: minio
-  name: minio-s3
+    app: s4
+    app.kubernetes.io/component: storage
+    app.kubernetes.io/instance: s4
+    app.kubernetes.io/name: s4
+    app.kubernetes.io/part-of: s4
+    component: s4
+  name: s4-api
 spec:
   port:
-    targetPort: api
+    targetPort: s3-api
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
   to:
     kind: Service
-    name: minio
+    name: s4
     weight: 100
   wildcardPolicy: None

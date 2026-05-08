@@ -4,17 +4,15 @@
 = Running a script to install local object storage buckets and create connections
 
 [role="_abstract"]
-If you do not have your own S3-compatible storage or if you want to use a disposable local MinIO instance instead, run a script (provided in the following procedure) that automatically completes these tasks:
+If you do not have your own S3-compatible storage or if you want to use a disposable local "Super Simple Storage Service" (S4) instance instead, run a script (provided in the following procedure) that automatically completes these tasks:
 
-* Creates a MinIO instance in your project.
-* Creates two storage buckets in that MinIO instance.
-* Generates a random user id and password for your MinIO instance.
+* Creates an S4 instance in your project.
+* Creates two storage buckets in that S4 instance.
+* Generates a random user id and password for your S4 instance.
 * Creates two connections in your project, one for each bucket and both using the same credentials.
 * Installs required network policies for service mesh functionality.
 
-This script is based on the link:https://ai-on-openshift.io/tools-and-applications/minio/minio/[guide for deploying MinIO].
-
-IMPORTANT: The MinIO-based Object Storage that the script creates is *not* meant for production usage.
+IMPORTANT: The S4-based Object Storage that the script creates is *not* meant for production usage.
 
 NOTE: If you want to connect to your own storage, see xref:creating-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
 
@@ -92,7 +90,7 @@ spec:
         - args:
             - -ec
             - |-
-              echo -n 'Setting up MinIO instance and connections'
+              echo -n 'Setting up S4 instance and connections'
               oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash

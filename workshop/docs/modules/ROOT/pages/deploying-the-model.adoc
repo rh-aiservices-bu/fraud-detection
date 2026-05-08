@@ -15,7 +15,7 @@ You can use an {productname-short} model server to deploy the model as an API.
 
 * You have enabled a preinstalled or custom model-serving runtime.
 
-* You have obtained values for the following MinIO storage parameters:
+* You have obtained values for the following S4 storage parameters:
 ** Access Key
 ** Secret Key
 ** Endpoint
@@ -32,7 +32,7 @@ To obtain these values, navigate to your project's *Connections* tab. For the My
 The *Deploy a model* wizard opens.
 . In the *Model details* section, provide information about the model:
 .. For *Model location*, select *S3 object storage*.
-.. Enter the following values from your MinIO storage connection:
+.. Enter the following values from your S4 storage connection:
 ** Access Key
 ** Secret Key
 ** Endpoint
