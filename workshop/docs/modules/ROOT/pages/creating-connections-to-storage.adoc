@@ -7,6 +7,12 @@ NOTE: Skip this procedure if you completed the steps in xref:running-a-script-to
 
 If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another connection to a different storage bucket for saving pipeline artifacts.
 
+When you create a connection to storage in a production-ready project, follow these security guidelines:
+
+* Store credentials in secrets rather than plaintext.
+* Use least-privilege access policies for S3 buckets.
+* Rotate access keys periodically.
+
 .Prerequisites
 
 To create connections to your existing S3-compatible storage buckets, you need the following credential information for the storage buckets:
