@@ -28,8 +28,8 @@ spec:
         - args:
             - -ec
             - |-
-              echo -n 'Setting up MinIO instance and connections'
-              oc apply -f https://github.com/rh-aiservices-bu/fraud-detection-notebooks/raw/main/setup/setup-s3-no-sa.yaml
+              echo -n 'Setting up S4 instance and connections'
+              oc apply -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-no-sa.yaml
           command:
             - /bin/bash
           image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
