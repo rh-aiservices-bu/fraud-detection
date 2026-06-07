@@ -277,7 +277,7 @@ spec:
           envFrom:
             - secretRef:
                 name: s4-credentials
-          image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:2024.1
+          image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:2025.2
           imagePullPolicy: IfNotPresent
           name: create-buckets
       initContainers:
