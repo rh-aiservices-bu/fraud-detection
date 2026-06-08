@@ -173,7 +173,7 @@
             "kubernetes_tolerations": [],
             "kubernetes_secrets": [],
             "env_vars": [],
-            "runtime_image": "registry.redhat.io/rhoai/odh-pipeline-runtime-tensorflow-cuda-py312-rhel9@sha256:9c0c8114634c1a7d888595411a8383f24fb1e3c0a53135fdfc6de883b009b920"
+            "runtime_image": "quay.io/rh-aiservices-bu/fraud-tensorflow-runtime:3.3"
           }
         }
       },
