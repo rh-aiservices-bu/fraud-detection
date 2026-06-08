@@ -1,0 +1,231 @@
+:_module-type: CONCEPT
+
+[id='implementing-a-feature-store']
+= Implementing a feature store
+
+[role="_abstract"]
+This section is optional. It is not required to complete the core fraud detection workflow (notebooks 0–3). In this section, you learn how a feature store addresses common challenges in ML workflows, and you use Feast to set up a local feature store with the fraud detection dataset.
+
+== The problem: Training/serving feature skew
+
+In the training notebook (`1_experiment_train.ipynb`), features are loaded like this:
+
+[source,python]
+----
+df = pd.read_csv('data/train.csv')
+X_train = df.iloc[:, [1, 2, 4, 5, 6]].values
+----
+
+In the inference notebook (`3_rest_requests.ipynb`), the same features are manually constructed:
+
+[source,python]
+----
+data = [0.3111400080477545, 1.9459399775518593, 1.0, 0.0, 0.0]
+----
+
+These are two completely disconnected code paths for the same features. Consider the following scenario:
+
+____
+Your team decides to add `distance_from_home` as a 6th feature to improve the model. A data scientist updates the training notebook to include column index `0` in `feature_indexes`, retrains the model, and deploys it. But the inference code in `3_rest_requests.ipynb` still sends only 5 values — nobody updated the feature vector construction there. The model now receives a `[1, 5]` shaped input when it expects `[1, 6]`, and the REST call either crashes or silently maps the wrong values to the wrong features, producing incorrect fraud predictions in production.
+____
+
+This is *training/serving skew* — a class of bugs where the features used during training differ from those used during inference. It is one of the most common and hardest-to-debug issues in production ML systems.
+
+A *feature store* solves this problem by providing a single source of truth for feature definitions that serves both training and inference. You define features once, and both `get_historical_features` (training) and `get_online_features` (inference) use the same definitions, making skew impossible.
+
+== What is Feast?
+
+link:https://feast.dev/[Feast] (Feature Store) is an open-source feature store for machine learning. It provides:
+
+* *Central feature registry* — one place to define, discover, and manage features
+* *Historical feature retrieval* — get point-in-time correct features for training
+* *Online feature serving* — get low-latency features for real-time inference
+* *On-demand features* — compute derived features at retrieval time, consistently across training and serving
+* *Feature services* — curate different feature sets for different models or teams
+
+The following table describes the key Feast concepts used in this {deliverable}:
+
+[cols="1,3",options="header"]
+|===
+| Concept | Description
+
+| *Entity*
+| The key used to look up features (for example, a transaction ID or customer ID).
+
+| *Feature View*
+| A group of related features from a single data source.
+
+| *On-Demand Feature View*
+| Features computed at retrieval time from other feature views.
+
+| *Feature Service*
+| A curated set of features for a specific model or use case.
+
+| *Offline Store*
+| Storage for historical feature data (used for training).
+
+| *Online Store*
+| Low-latency storage of the latest feature values (used for inference).
+|===
+
+== Setting up a local feature store
+
+In the notebook, you use Feast in local mode — a file-based registry and SQLite online store — which requires no external infrastructure.
+
+NOTE: Workshop sandbox environments do not have permissions to deploy the Feast Operator or FeatureStore custom resource. The notebook uses local mode as a fully functional alternative. See <<production-deployment-on-openshift>> for the production approach.
+
+.Prerequisites
+
+* You have imported the {deliverable} files into your JupyterLab environment as described in xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment].
+
+.Procedure
+
+. In your JupyterLab environment, open the `8_feature_store_feast.ipynb` file and follow the instructions in the notebook.
++
+The notebook guides you through the following tasks:
++
+.. Install Feast.
+.. Prepare a 10,000-row data subset with entity IDs and timestamps (required by Feast).
+.. Configure a local Feast feature store.
+.. Define feature views, on-demand computed features, and a feature service.
+.. Apply the definitions to the Feast registry.
+.. Materialize features to the online store.
+.. Retrieve historical features (training use case) and verify data integrity.
+.. Retrieve online features (inference use case).
+.. Integrate Feast features with the fraud detection model.
+
+[id='production-deployment-on-openshift']
+== Production deployment on OpenShift
+
+In production with {productname-long}, Feast is deployed by using the *Feast Operator* and a *FeatureStore custom resource (CR)*.
+
+=== Infrastructure secrets
+
+The FeatureStore CR references Kubernetes secrets for store credentials. The secret keys hold the store configuration parameters as they would appear in `feature_store.yaml` (without the `type` field).
+
+The following example shows secrets for a PostgreSQL-based setup. Adjust the secret contents to match whichever backend you choose.
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: feast-postgres-secret
+  namespace: feast
+stringData:
+  postgresql: |
+    host: feast-postgresql.feast.svc.cluster.local
+    port: "5432"
+    database: feast
+    db_schema: public
+    user: feast
+    password: feast
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: feast-registry-secret
+  namespace: feast
+stringData:
+  sql: |
+    path: postgresql://feast:feast@feast-postgresql.feast.svc.cluster.local:5432/feast
+    cache_ttl_seconds: 60
+    sqlalchemy_config_kwargs:
+      echo: false
+      pool_pre_ping: true
+----
+
+=== Example FeatureStore CR
+
+The following example uses PostgreSQL for the online store and registry, and Dask for the offline store. Feast supports other backends as well — see <<supported-store-backends>>.
+
+[source,yaml]
+----
+apiVersion: feast.dev/v1
+kind: FeatureStore
+metadata:
+  name: fraud-detection-store
+  namespace: feast
+spec:
+  feastProject: fraud_detection
+  services:
+    onlineStore:
+      persistence:
+        store:
+          type: postgresql
+          secretRef:
+            name: feast-postgres-secret
+    offlineStore:
+      persistence:
+        store:
+          type: dask
+    registry:
+      local:
+        persistence:
+          store:
+            type: sql
+            secretRef:
+              name: feast-registry-secret
+----
+
+=== Key differences from local mode
+
+[cols="1,1,1",options="header"]
+|===
+| Aspect | Local (notebook) | Production (Operator)
+
+| Registry
+| File (`registry.db`)
+| SQL-backed (for example, PostgreSQL, MySQL)
+
+| Online store
+| SQLite
+| PostgreSQL, Cassandra, Redis, and others
+
+| Offline store
+| File (Parquet)
+| Dask, remote offline server, and others
+
+| Feature server
+| In-process
+| Dedicated pods (REST/gRPC)
+
+| Auth
+| None
+| OIDC / RBAC
+
+| Materialization
+| Manual
+| CronJob / scheduled
+|===
+
+[id='supported-store-backends']
+NOTE: Feast supports a range of backends for each store type. The example CR above uses PostgreSQL, but your deployment can use whichever backends fit your infrastructure. See the link:https://docs.feast.dev/[Feast documentation] for the full list of supported stores.
+
+=== Deployment steps
+
+When you have access to the Feast Operator:
+
+. Install the Feast Operator via OLM or `make deploy`.
+. Create infrastructure secrets for your chosen store backends (see the example above for PostgreSQL).
+. Apply the FeatureStore CR.
+. Wait for the CR to reach `Ready` state.
+. Point your client `feature_store.yaml` at the remote endpoints. The client `feature_store.yaml` can be obtained from the ConfigMap created in the namespace where the FeatureStore CR is deployed.
+. Use the same `get_historical_features` / `get_online_features` APIs — the client code does not change.
+
+== Additional Feast capabilities
+
+The notebook demonstrates core Feast functionality with a local setup. In production, Feast offers additional capabilities:
+
+* *Streaming feature ingestion* — Ingest features from Kafka or Kinesis for real-time feature updates.
+* *Feature monitoring (planned)* — Detect feature drift and data quality issues.
+* *RBAC / Permissions* — Control access to features with role-based policies.
+* *Feature versioning* — Track how feature definitions change over time.
+* *Multi-team sharing* — Central catalog where teams discover and reuse features across projects.
+* *Batch materialization jobs* — Scheduled CronJobs to keep the online store fresh.
+* *Remote feature serving* — REST and gRPC endpoints for microservice architectures.
+* *Feast UI* — Web interface for browsing the feature registry and viewing feature metadata.
+
+.Additional resources
+
+* link:https://docs.feast.dev/[Feast documentation]
