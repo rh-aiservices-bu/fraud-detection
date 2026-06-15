@@ -3,8 +3,6 @@
 [id='importing-files-into-jupyter']
 = Importing the {deliverable} files into the JupyterLab environment
 
-:git-version: main
-
 [role="_abstract"]
 The JupyterLab environment is web-based, but all operations run on {productname-long} and are backed by the OpenShift cluster. This configuration allows you to run notebooks without installing local tools or consuming local CPU, GPU, or memory resources.
 
@@ -46,14 +44,13 @@ image::workbenches/jupyter-git-modal.png[Git Modal, 200]
 image::workbenches/jupyter-file-browser.png[Jupyter file browser, 300]
 
 .. In the left navigation bar, click the *Git* icon, and then click *Current Branch* to expand the branches and tags selector panel.
-... On the *Branches* tab, in the *Filter* field, enter *{git-version}*.
+... On the *Branches* tab, in the *Filter* field, enter *{fdt-branch}*.
 +
 image::workbenches/jupyter-git-icon-version.png[Git Clone icon, 200]
+
+.. Select *origin/{fdt-branch}*.
 +
-// the {git-version} attribute value is defined at the top of this file
-.. Select *origin/{git-version}*.
-+
-The current branch changes to *{git-version}*.
+The current branch changes to *{fdt-branch}*.
 
 
 .Verification
@@ -62,7 +59,7 @@ The current branch changes to *{git-version}*.
 +
 image::workbenches/jupyter-file-browser-2.png[Jupyter file browser - fraud-detection, 300]
 
-. Verify that the Git version at the bottom of the JupyterLab window is *{git-version}*.
+. Verify that the Git version at the bottom of the JupyterLab window is *{fdt-branch}*.
 
 
 .Next step
