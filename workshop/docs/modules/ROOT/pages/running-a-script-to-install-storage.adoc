@@ -42,7 +42,7 @@ image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
 . In the OpenShift console, click *+* in the top navigation bar, and then click *Import YAML*.
 +
-image::projects/ocp-console-add-icon.png[Add resources Icon]
+image::projects/ocp-console-add-icon.png[Add resources Icon, 150]
 
 . Click the down arrow next to the project name, and then select your project from the list of projects. If needed, type the name of your project in the *Select project* search field.
 +
@@ -117,7 +117,7 @@ spec:
 .. Select *Projects* and then click the name of your project, *Fraud detection*.
 .. Click *Connections*. There are two connections listed: `My Storage` and `Pipeline Artifacts`.
 +
-image::projects/ds-project-connections.png[Connections for Fraud Detection]
+image::projects/ds-project-connections.png[Connections for Fraud Detection, 500]
 
 
 [IMPORTANT]

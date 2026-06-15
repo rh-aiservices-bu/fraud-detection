@@ -31,7 +31,7 @@ image::pipelines/wb-pipeline-panel-button-loc.png[Open Panel,400]
 
 .. Select the *Pipeline Properties* tab.
 +
-image::pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab]
+image::pipelines/wb-pipeline-properties-tab.png[Pipeline Properties Tab, 400]
 
 .. In the *Pipeline Properties* panel, scroll down to *Generic Node Defaults* and *Runtime Image*. Set the value to `Runtime | Tensorflow | Cuda | Python 3.12`.
 +

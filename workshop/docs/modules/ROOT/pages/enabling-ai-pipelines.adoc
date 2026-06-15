@@ -20,13 +20,13 @@ Later in this {deliverable}, you implement an example pipeline by using the Jupy
 
 . Click *Configure pipeline server*.
 +
-image::projects/ds-project-create-pipeline-server.png[Create pipeline server button]
+image::projects/ds-project-create-pipeline-server.png[Create pipeline server button, 200]
 
 . In the *Configure pipeline server* form, click *Autofill from connection* and then click *Pipeline Artifacts*.
 +
 The *Configure pipeline server* form fills with credentials for the connection.
 +
-image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
+image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection, 500]
 
 . In the *Advanced Settings* section, leave the default values.
 
@@ -51,7 +51,7 @@ You can also ask your {productname-short} administrator to verify that they appl
 . Navigate to the *Pipelines* tab for the project.
 . Next to *Import pipeline*, click the action menu (&#8942;) and then select *Manage pipeline server configuration*.
 +
-image::projects/ds-project-pipeline-server-view.png[Manage pipeline server configuration, 250]
+image::projects/ds-project-pipeline-server-view.png[Manage pipeline server configuration, 300]
 +
 An information box opens and displays the object storage connection information for the pipeline server.
 

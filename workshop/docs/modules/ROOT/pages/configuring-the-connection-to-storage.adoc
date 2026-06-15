@@ -46,13 +46,13 @@ Because you do not want to save the value in your pipelines, remove all of these
 
 .. Click *Remove* for each of the pre-filled environment variables.
 +
-image::pipelines/wb-pipeline-node-remove-env-var.png[Remove Env Var]
+image::pipelines/wb-pipeline-node-remove-env-var.png[Remove Env Var, 400]
 
 . Add the S3 bucket and keys by using the Kubernetes secret.
 
 .. Under *Kubernetes Secrets*, click *Add*.
 +
-image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret]
+image::pipelines/wb-pipeline-add-kube-secret.png[Add Kubernetes Secret, 400]
 
 .. Enter the following values and then click *Add*.
 +

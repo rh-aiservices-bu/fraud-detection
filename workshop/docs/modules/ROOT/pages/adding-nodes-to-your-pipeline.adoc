@@ -14,7 +14,7 @@ Add some steps, or *nodes*, in your pipeline for the  `1_experiment_train.ipynb`
 
 . From the JupyterLab file-browser panel, drag the `1_experiment_train.ipynb` and `2_save_model.ipynb` notebooks onto the pipeline canvas.
 +
-image::pipelines/wb-pipeline-drag-drop.png[ Drag and Drop Notebooks]
+image::pipelines/wb-pipeline-drag-drop.png[Drag and Drop Notebooks, 600]
 
 . Click the output port of `1_experiment_train.ipynb` and drag a connecting line to the input port of `2_save_model.ipynb`.
 +

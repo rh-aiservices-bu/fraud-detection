@@ -12,7 +12,7 @@ To prepare a model for deployment, you must move the model from your workbench t
 
 * You created the `My Storage` connection and have added it to your workbench.
 +
-image::projects/ds-project-connections.png[Data storage in workbench]
+image::projects/ds-project-connections.png[Data storage in workbench, 500]
 
 .Procedure
 
