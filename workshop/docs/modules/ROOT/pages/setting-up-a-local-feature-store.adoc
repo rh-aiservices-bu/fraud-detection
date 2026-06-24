@@ -1,0 +1,33 @@
+:_module-type: PROCEDURE
+
+[id='setting-up-a-local-feature-store']
+= Setting up a local feature store
+
+[role="_abstract"]
+In the Implementing features with Feature Store notebook, `8_feature_store_feast.ipynb`, you use Feature Store in local mode — a file-based registry and SQLite online store — which requires no external infrastructure.
+
+The Fraud Detection tutorial is not intended for a production environment. The `8_feature_store_feast.ipynb` notebook uses local mode as a fully functional alternative.
+
+For information on using Feature Store in a production environment, see link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_machine_learning_features/configuring_feature_store[Configuring Feature Store].
+
+.Prerequisites
+
+* You have imported the {deliverable} files into your JupyterLab environment as described in xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment].
+
+* You have run the `1_experiment_train.ipynb` notebook and it produces the `artifact/scaler.pkl`.
+
+.Procedure
+
+. In your JupyterLab environment, open the `8_feature_store_feast.ipynb` file and follow the instructions in the notebook.
++
+The notebook guides you through the following tasks:
++
+.. Install the `feast` Python package.
+.. Prepare a 10,000-row data subset with entity IDs and timestamps (required by Feature Store).
+.. Configure a local Feature Store instance.
+.. Define feature views and a feature service.
+.. Apply the definitions to the Feature Store registry.
+.. Materialize features to the online store.
+.. Retrieve historical features (training use case) and verify data integrity.
+.. Retrieve online features (inference use case).
+.. Integrate Feature Store features with the fraud detection model.

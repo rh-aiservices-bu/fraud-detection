@@ -35,4 +35,5 @@
 *** xref:distributing-training-jobs-with-kfto.adoc[2. Distributing Training Jobs with the Training Operator]
 
 * 6. Feature Store
-** xref:implementing-a-feature-store.adoc[1. Implementing a Feature Store]
+** xref:implementing-a-feature-store.adoc[1. Implementing a feature store]
+** xref:setting-up-a-local-feature-store.adoc[2. Setting up a local feature store]
