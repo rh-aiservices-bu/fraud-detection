@@ -185,6 +185,7 @@ spec:
               metadata:
                 annotations:
                   opendatahub.io/connection-type: s3
+                  opendatahub.io/connection-type-protocol: s3
                   openshift.io/display-name: My Storage
                 labels:
                   opendatahub.io/dashboard: "true"
@@ -205,6 +206,7 @@ spec:
               metadata:
                 annotations:
                   opendatahub.io/connection-type: s3
+                  opendatahub.io/connection-type-protocol: s3
                   openshift.io/display-name: Pipeline Artifacts
                 labels:
                   opendatahub.io/dashboard: "true"
