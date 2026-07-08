@@ -4,11 +4,11 @@
 = Setting up a local feature store
 
 [role="_abstract"]
-In the Implementing features with Feature Store notebook, `8_feature_store_feast.ipynb`, you use Feature Store in local mode — a file-based registry and SQLite online store — which requires no external infrastructure.
+In the Implementing features with Feature Store notebook, `8_feature_store_feast.ipynb`, you use Feature Store in local mode, with a SQLite-based registry and online store and a file-based offline store, which requires no external infrastructure.
 
 The Fraud Detection tutorial is not intended for a production environment. The `8_feature_store_feast.ipynb` notebook uses local mode as a fully functional alternative.
 
-For information on using Feature Store in a production environment, see link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_machine_learning_features/configuring_feature_store[Configuring Feature Store].
+For information on using Feature Store in a production environment, see link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/{vernum}/html/working_with_machine_learning_features/configuring_feature_store[Configuring Feature Store].
 
 .Prerequisites
 
