@@ -192,7 +192,7 @@ spec:
         - args:
             - -ec
             - |-
-              S4_HOST=https://$(oc get route s4-api -o template --template '{{.spec.host}}')
+              S4_HOST=http://s4.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local:7480
               AWS_ACCESS_KEY_ID=$(oc get secret s4-credentials -o template --template '{{.data.AWS_ACCESS_KEY_ID}}')
               AWS_SECRET_ACCESS_KEY=$(oc get secret s4-credentials -o template --template '{{.data.AWS_SECRET_ACCESS_KEY}}')
 
@@ -294,7 +294,7 @@ spec:
           envFrom:
             - secretRef:
                 name: s4-credentials
-          image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:2024.1
+          image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:2025.2
           imagePullPolicy: IfNotPresent
           name: create-buckets
       initContainers:
