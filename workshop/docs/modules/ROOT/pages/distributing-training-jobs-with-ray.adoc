@@ -12,7 +12,7 @@ In your notebook environment, open the `6_distributed_training.ipynb` file and f
 
 Optionally, if you want to view the Python code for this step, you can find it in the `ray-scripts/train_tf_cpu.py` file.
 
-image::distributed/jupyter-notebook.png[Jupyter Notebook]
+image::distributed/jupyter-notebook.png[Jupyter Notebook, 600]
 
 For more information about TensorFlow training on Ray, see the link:https://docs.ray.io/en/latest/train/distributed-tensorflow-keras.html[Ray TensorFlow guide].
 

@@ -5,7 +5,7 @@
 
 [role="_abstract"]
 
-Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run the Ray or Training Operator examples in this tutorial, a cluster administrator must install and configure the {org-name} build of Kueue Operator as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/managing_openshift_ai/managing-workloads-with-kueue#kueue-workflow_kueue[Kueue workflow].
+Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run the Ray or Training Operator examples in this tutorial, a cluster administrator must install and configure the {org-name} build of Kueue Operator as described in link:https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/{vernum}/html/managing_openshift_ai/managing-workloads-with-kueue#kueue-workflow_kueue[Kueue workflow].
 
 Also, you must prepare your {deliverable} environment so that you can use Kueue for distributing training with the Training Operator.
 
@@ -23,7 +23,7 @@ image::projects/ds-project-ocp-link.png[OpenShift Console Link, 600]
 
 . In the OpenShift console, click *+* in the top navigation bar, and then click *Import YAML*.
 +
-image::projects/ocp-console-add-icon.png[Add resources Icon]
+image::projects/ocp-console-add-icon.png[Add resources Icon, 150]
 
 . Click the down arrow next to the project name, and then select your project from the list of projects. If needed, type the name of your project in the *Select project* search field.
 +

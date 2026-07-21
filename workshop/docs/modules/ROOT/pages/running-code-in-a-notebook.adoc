@@ -10,11 +10,11 @@ A notebook is an environment where you have _cells_ that can display formatted t
 
 This is an empty cell:
 
-image::workbenches/cell.png[Jupyter Cell]
+image::workbenches/cell.png[Jupyter Cell, 600]
 
 This is a cell with some code:
 
-image::workbenches/cell_code.png[Jupyter Cell Code]
+image::workbenches/cell_code.png[Jupyter Cell Code, 600]
 
 Code cells contain Python code that you can run interactively. You can edit the code and then run it. The code does not run on your computer or in the browser, but directly in your connected environment, *{productname-long}* in your case.
 
@@ -28,7 +28,7 @@ image::workbenches/run_button.png[Jupyter Run, 100]
 
 After you run a cell, you can see the result of its code and information about when the code in the cell ran, as shown in this example:
 
-image::workbenches/cell_run.png[Jupyter run cell]
+image::workbenches/cell_run.png[Jupyter run cell, 600]
 
 When you save a notebook, the code and the results are saved. You can reopen the notebook to view the results without having to run the program again, and still having access to the code.
 
@@ -43,7 +43,7 @@ xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into th
 
 . In your JupyterLab environment, locate the `0_sandbox.ipynb` file and double-click it to launch the notebook. The notebook opens in a new tab in the content section of the environment.
 +
-image::workbenches/jupyter-notebook-0.png[Notebook 0]
+image::workbenches/jupyter-notebook-0.png[Notebook 0, 600]
 
 . Experiment by, for example, running the existing cells, adding more cells and creating functions.
 +

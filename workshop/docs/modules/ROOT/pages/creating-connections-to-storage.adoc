@@ -33,7 +33,7 @@ If you do not have this information, contact your storage administrator.
 
 .. Click the *Connections* tab, and then click *Create connection*.
 +
-image::projects/ds-project-add-dc.png[Add connection]
+image::projects/ds-project-add-dc.png[Add connection, 200]
 
 .. In the *Add connection* modal, for the *Connection type* select *S3 compatible object storage - v1*.
 
