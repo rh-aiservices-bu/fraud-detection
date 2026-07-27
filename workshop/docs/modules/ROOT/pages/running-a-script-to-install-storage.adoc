@@ -25,15 +25,6 @@ In the {productname-short} dashboard, select *Projects* and then click the *?* i
 image::projects/ds-project-list-resource-hover.png[Project list resource name, 400]
 
 
-[NOTE]
-====
-The following procedure describes how to run the script from the OpenShift console. If you are knowledgeable in OpenShift and can access the cluster from the command line, instead of following the steps in this procedure, you can use the following command to run the script:
-
-----
-oc apply -n <your-project-name> -f https://github.com/rh-aiservices-bu/fraud-detection/raw/main/setup/setup-s3-job.yaml
-----
-====
-
 .Procedure
 
 . In the {productname-short} dashboard, click the application launcher icon and then select the *OpenShift Console* option.

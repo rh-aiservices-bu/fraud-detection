@@ -24,6 +24,8 @@ NOTE: You can start a Jupyter notebook by clicking the *Start basic workbench* b
 . In the *Create project* modal, enter a display name and description.
 +
 image::projects/ds-project-new-form.png[New project form, 600]
++
+NOTE: If you are sharing an environment where several users who are following this tutorial at the same time, enter a unique display name for your project, for example: “Fraud detection <username>” and replace <username> with your name.
 
 . Click *Create*.
 
