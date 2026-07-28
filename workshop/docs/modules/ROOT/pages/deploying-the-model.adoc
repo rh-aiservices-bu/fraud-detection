@@ -15,15 +15,6 @@ You can use an {productname-short} model server to deploy the model as an API.
 
 * You have enabled a preinstalled or custom model-serving runtime.
 
-* You have obtained values for the following S4 storage parameters:
-** Access Key
-** Secret Key
-** Endpoint
-** Region
-** Bucket
-+
-To obtain these values, navigate to your project's *Connections* tab. For the MyStorage connection, click the action menu (&#8942;) and then click *Edit*.
-
 .Procedure
 
 . In the {productname-short} dashboard, navigate to the project details page and click the *Deployments* tab.
@@ -32,12 +23,6 @@ To obtain these values, navigate to your project's *Connections* tab. For the My
 The *Deploy a model* wizard opens.
 . In the *Model details* section, provide information about the model:
 .. For *Model location*, select *Existing connection* and then select *My Storage*.
-.. Enter the following values from your S4 storage connection:
-** Access Key
-** Secret Key
-** Endpoint
-** Region
-** Bucket
 .. For *Path*, enter `models/fraud`.
 .. For *Model type*, select *Predictive model*.
 .. Click *Next*.
