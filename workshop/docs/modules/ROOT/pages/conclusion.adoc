@@ -1,6 +1,6 @@
 :_module-type: CONCEPT
 
-= Fraud Detection Workshop with {productname-long}
+= Fraud Detection {deliverable} with {productname-long}
 :page-layout: home
 :!sectids:
 
@@ -16,3 +16,4 @@ You used an example fraud detection model and completed the following tasks:
 * Deployed the model by using {productname-short} model serving.
 * Refined and trained the model by using automated pipelines.
 * Distributed model training across multiple nodes by using Ray and the Training Operator.
+* Implemented machine learning features to ensure consistency between training and inference.

@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='specifying-the-training-file-as-a-dependency']
-= Specifying the training file as a dependency
+= Specify the training file as a dependency
 
 [role="_abstract"]
 Set node properties in your pipeline to specify the training file as a dependency.
@@ -10,7 +10,7 @@ NOTE: If you do not set this file dependency, the file is not included in the no
 
 .Prerequisites
 
-* You added two nodes to your pipeline as described in xref:adding-nodes-to-your-pipeline.adoc[Adding nodes to your pipeline].
+* You added two nodes to your pipeline as described in xref:adding-nodes-to-your-pipeline.adoc[Add nodes to your pipeline].
 
 .Procedure
 
@@ -38,4 +38,4 @@ image::pipelines/wb-pipeline-node-1-file-dep-form.png[Set File Dependency Value,
 
 .Next step
 
-xref:creating-and-storing-the-onnx-output-file.adoc[Creating and storing the ONNX-formatted output file]
+xref:creating-and-storing-the-onnx-output-file.adoc[Creating output files]

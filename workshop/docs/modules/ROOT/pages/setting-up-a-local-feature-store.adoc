@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='setting-up-a-local-feature-store']
-= Setting up a local feature store
+= Set up a local feature store
 
 [role="_abstract"]
 In the Implementing features with Feature Store notebook, `8_feature_store_feast.ipynb`, you use Feature Store in local mode, with a SQLite-based registry and online store and a file-based offline store, which requires no external infrastructure.
@@ -12,7 +12,7 @@ For information on using Feature Store in a production environment, see link:htt
 
 .Prerequisites
 
-* You have imported the {deliverable} files into your JupyterLab environment as described in xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment].
+* You have imported the {deliverable} files into your JupyterLab environment as described in xref:importing-files-into-jupyter.adoc[Import tutorial files].
 
 * You have run the `1_experiment_train.ipynb` notebook and it produces the `artifact/scaler.pkl`.
 

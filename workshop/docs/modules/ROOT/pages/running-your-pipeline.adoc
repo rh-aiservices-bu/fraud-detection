@@ -1,16 +1,16 @@
 :_module-type: PROCEDURE
 
 [id='running-your-pipeline']
-= Running your pipeline
+= Run your pipeline
 
 [role="_abstract"]
 You can upload and run your pipeline directly from the pipeline editor. Use either your newly created pipeline or the provided `4-train-save.pipeline` file.
 
 .Prerequisites
 
-* You set the S3 storage bucket keys, as described in xref:configuring-the-connection-to-storage.adoc[Configuring the connection to storage].
+* You set the S3 storage bucket keys, as described in xref:configuring-the-connection-to-storage.adoc[Configure storage connections].
 
-* You configured a pipeline server, as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+* You configured a pipeline server, as described in xref:enabling-ai-pipelines.adoc[Enable AI pipelines].
 
 * If you created your workbench before the pipeline server was available, you stopped and restarted the workbench.
 
@@ -45,6 +45,6 @@ image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 .Next step
 
-* (Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a pipeline generated from Python code]
+* (Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Run a pipeline generated from Python code]
 
-* Serve the model, as described in xref:preparing-the-model-for-deployment.adoc[Preparing a model for deployment].
+* Serve the model, as described in xref:preparing-the-model-for-deployment.adoc[Prepare the model for deployment].

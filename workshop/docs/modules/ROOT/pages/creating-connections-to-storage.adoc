@@ -1,9 +1,9 @@
 :_module-type: PROCEDURE
 
 [id='creating-connections-to-storage']
-= (Optional) Creating connections to your own S3-compatible object storage
+= (Optional) Create connections to your own S3-compatible object storage
 
-NOTE: Skip this procedure if you completed the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
+NOTE: Skip this procedure if you completed the steps in xref:running-a-script-to-install-storage.adoc[Run an automated script for local object storage].
 
 If you have existing S3-compatible storage buckets that you want to use for this {deliverable}, you must create a connection to one storage bucket for saving your data and models. If you want to complete the pipelines section of this {deliverable}, create another connection to a different storage bucket for saving pipeline artifacts.
 
@@ -73,12 +73,12 @@ If your cluster uses self-signed certificates, your {productname-short} administ
 
 * Decide whether you want to complete the pipelines section of this {deliverable}. With OpenShift AI pipelines, you can automate the execution of your notebooks and Python code. You can run long training jobs or retrain your models on a schedule without having to manually run them in a notebook.
 +
-If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+If you want to complete the pipelines section of this {deliverable}, go to xref:enabling-ai-pipelines.adoc[Enable AI pipelines].
 
-* Decide whether you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}. In that section, you implement a distributed training job by using Kueue for managing job resources.
+* Decide whether you want to complete the _Distribute training with the Training Operator_ section of this {deliverable}. In that section, you implement a distributed training job by using Kueue for managing job resources.
 //+
-//NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
+//NOTE: The _Distribute training with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
 +
-If you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+If you want to complete the _Distribute training with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
 
-* Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].
+* Otherwise, skip to xref:creating-a-workbench.adoc[Create a workbench].

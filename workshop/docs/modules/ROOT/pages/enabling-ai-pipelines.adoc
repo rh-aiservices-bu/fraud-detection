@@ -1,18 +1,18 @@
 :_module-type: PROCEDURE
 
 [id='enabling-ai-pipelines']
-= (Optional) Enabling AI pipelines
+= (Optional) Enable AI pipelines
 
 [role="_abstract"]
 You must prepare your {deliverable} environment to use ai pipelines.
 
-NOTE: If you do not intend to complete the pipelines section of this {deliverable}, you can skip to the next section, xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+NOTE: If you do not intend to complete the pipelines section of this {deliverable}, you can skip to the next section, xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
 
 Later in this {deliverable}, you implement an example pipeline by using the JupyterLab Elyra extension. Elyra enables you to create a visual, end-to-end pipeline workflow that runs in {productname-short}.
 
 .Prerequisites
 
-* You have installed local object storage buckets and created connections, as described in xref:storing-data-with-connections.adoc[Storing data with connections].
+* You have installed local object storage buckets and created connections, as described in xref:storing-data-with-connections.adoc[Configure storage credentials].
 
 .Procedure
 
@@ -57,8 +57,8 @@ An information box opens and displays the object storage connection information 
 
 .Next step
 
-If you want to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
+If you want to complete the _Distribute training with the Training Operator_ section of this {deliverable}, go to xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
 
-//NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
+//NOTE: The _Distribute training with the Training Operator_ section of this {deliverable} is not supported if you are using the {org-name} Developer Sandbox.
 
-Otherwise, skip to xref:creating-a-workbench.adoc[Creating a workbench].
+Otherwise, skip to xref:creating-a-workbench.adoc[Create a workbench].

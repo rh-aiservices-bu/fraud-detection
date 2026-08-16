@@ -1,10 +1,10 @@
 :_module-type: PROCEDURE
 
 [id='configuring-the-connection-to-storage']
-= Configuring the connection to storage
+= Configure storage connections
 
 [role="_abstract"]
-In node 2, the notebook uploads the model to the S3 storage bucket. You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in xref:storing-data-with-connections.adoc[Storing data with connections].
+In node 2, the notebook uploads the model to the S3 storage bucket. You must set the S3 storage bucket keys by using the secret created by the `My Storage` connection that you set up in xref:storing-data-with-connections.adoc[Configure storage credentials].
 
 You can use this secret in your pipeline nodes without having to save the information in your pipeline code. This is important, for example, if you want to save your pipelines - without any secret keys - to source control.
 
@@ -29,10 +29,10 @@ You must set the secret name and key for each of these fields.
 
 .Prerequisites
 
-*  You created the `My Storage` connection, as described in xref:storing-data-with-connections.adoc[Storing data with connections].
+*  You created the `My Storage` connection, as described in xref:storing-data-with-connections.adoc[Configure storage credentials].
 
 * You set the `models/fraud/1/model.onnx` file as the output file for both nodes in your pipeline, as described in
-xref:creating-and-storing-the-onnx-output-file.adoc[Creating and storing the ONNX-formatted output file].
+xref:creating-and-storing-the-onnx-output-file.adoc[Creating output files].
 
 .Procedure
 
@@ -88,4 +88,4 @@ image::pipelines/wb-pipeline-kube-secret-form.png[Secret Form, 400]
 
 .Next step
 
-xref:running-your-pipeline.adoc[Running your pipeline]
+xref:running-your-pipeline.adoc[Run your pipeline]

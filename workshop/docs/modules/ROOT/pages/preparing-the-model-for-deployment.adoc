@@ -1,12 +1,12 @@
 :_module-type: PROCEDURE
 
 [id='preparing-the-model-for-deployment']
-= Preparing the model for deployment
+= Prepare the model for deployment
 
 [role="_abstract"]
 After you train a model, you can deploy it by using the {productname-short} model serving capabilities. Model serving in {productname-short} requires that you store models in object storage so that the model server pods can access them.
 
-To prepare a model for deployment, you must move the model from your workbench to your S3-compatible object storage. Use the connection that you created in the xref:storing-data-with-connections.adoc[Storing data with connections] section and upload the model from a notebook.
+To prepare a model for deployment, you must move the model from your workbench to your S3-compatible object storage. Use the connection that you created in the xref:storing-data-with-connections.adoc[Configure storage credentials] section and upload the model from a notebook.
 
 .Prerequisites
 
@@ -26,4 +26,4 @@ When you have completed the notebook instructions, the `models/fraud/1/model.onn
 
 .Next step
 
-xref:deploying-the-model.adoc[Deploying the model]
+xref:deploying-the-model.adoc[Deploy the model]

@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='storing-data-with-connections']
-= Storing data with connections
+= Configure storage credentials
 
 [role="_abstract"]
 Add connections to workbenches to connect your project to data inputs and object storage buckets. A connection is a resource that has the configuration parameters needed to connect to a data source or data sink, such as an AWS S3 object storage bucket.
@@ -15,6 +15,6 @@ NOTE: Although you can use one storage bucket for both storing models and data a
 
 The provided script also creates a connection to each storage bucket.
 
-To run the script that installs local S4 storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage.adoc[Running a script to install local object storage buckets and create connections].
+To run the script that installs local S4 storage buckets and creates connections to them, follow the steps in xref:running-a-script-to-install-storage.adoc[Run an automated script for local object storage].
 
-NOTE: If you want to use your own S3-compatible object storage buckets (instead of using the provided script), follow the steps in xref:creating-connections-to-storage.adoc[Creating connections to your own S3-compatible object storage].
+NOTE: If you want to use your own S3-compatible object storage buckets (instead of using the provided script), follow the steps in xref:creating-connections-to-storage.adoc[Create connections to your own S3-compatible object storage].

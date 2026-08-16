@@ -1,14 +1,14 @@
 :_module-type: PROCEDURE
 
 [id='creating-a-pipeline']
-= Creating a pipeline
+= Create a pipeline
 
 [role="_abstract"]
 You can create a pipeline by using the GUI pipeline editor. This pipeline automates the notebook workflow that you used earlier to train a model and save it to S3 storage.
 
 .Prerequisites
 
-* You configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+* You configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enable AI pipelines].
 * If you configured the pipeline server after you created your workbench, you stopped and then started your workbench.
 
 .Procedure
@@ -45,4 +45,4 @@ image::pipelines/wb-pipeline-runtime-image.png[Pipeline Runtime Image0, 400]
 
 .Next step
 
-xref:adding-nodes-to-your-pipeline.adoc[Adding nodes to your pipeline]
+xref:adding-nodes-to-your-pipeline.adoc[Add nodes to your pipeline]

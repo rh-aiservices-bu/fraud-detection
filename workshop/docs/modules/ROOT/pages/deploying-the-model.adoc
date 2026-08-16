@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='deploying-the-model']
-= Deploying the model
+= Deploy the model
 
 [role="_abstract"]
 
@@ -9,7 +9,7 @@ You can use an {productname-short} model server to deploy the model as an API.
 
 .Prerequisites
 
-* You have saved the model as described in xref:preparing-the-model-for-deployment.adoc[Preparing the model for deployment].
+* You have saved the model as described in xref:preparing-the-model-for-deployment.adoc[Prepare the model for deployment].
 
 * You have installed KServe and enabled the model serving platform.
 
@@ -44,4 +44,4 @@ image::model-serving/ds-project-model-list-status.png[Deployed model status, 500
 
 .Next step
 
-xref:testing-the-model-api.adoc[Testing the model API]
+xref:testing-the-model-api.adoc[Test the model API]

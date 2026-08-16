@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='navigating-to-the-dashboard']
-= Navigating to the {productname-short} dashboard
+= Navigate to the {productname-short} dashboard
 
 [role="_abstract"]
 You can access the {productname-short} dashboard from the OpenShift console. From the dashboard, you can verify that the installed {productname-short} version matches the version used in this tutorial.
@@ -52,5 +52,5 @@ The *About* page shows the installed version.
 
 .Next step
 
-xref:setting-up-your-project.adoc[Setting up your project]
+xref:setting-up-your-project.adoc[Create your project]
 

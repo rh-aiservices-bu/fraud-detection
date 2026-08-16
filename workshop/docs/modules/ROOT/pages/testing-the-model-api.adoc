@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='testing-the-model-api']
-= Testing the model API
+= Test the model API
 
 [role="_abstract"]
 After you deploy the model, you can test its API endpoints.
@@ -27,6 +27,6 @@ Follow the directions in `3_rest_requests.ipynb` to try a REST API call.
 
 .Next step
 
-(Optional) xref:automating-workflows-with-pipelines.adoc[Automating workflows with AI pipelines]
+(Optional) xref:automating-workflows-with-pipelines.adoc[Understand pipeline automation]
 
-(Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Running a pipeline generated from Python code]
+(Optional) xref:running-a-pipeline-generated-from-python-code.adoc[Run a pipeline generated from Python code]

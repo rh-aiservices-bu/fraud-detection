@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='running-code-in-a-notebook']
-= Running code in a notebook
+= Run code in a notebook
 
 NOTE: If you're already at ease with Jupyter, you can xref:training-a-model.adoc[skip to the next section].
 
@@ -37,7 +37,7 @@ Notebooks are so named because they are like a physical _notebook_: you can take
 .Prerequisites
 
 * You have imported the {deliverable} files into your JupyterLab environment as described in
-xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment].
+xref:importing-files-into-jupyter.adoc[Import tutorial files].
 
 .Procedure
 
@@ -61,4 +61,4 @@ You can use different kernels, with different languages or versions, to run in y
 
 .Next step
 
-xref:training-a-model.adoc[Training a model]
+xref:training-a-model.adoc[Train the fraud detection model]

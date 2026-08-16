@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='creating-and-storing-the-onnx-output-file']
-= Creating and storing the ONNX-formatted output file
+= Creating output files
 
 [role="_abstract"]
 You must set the `models/fraud/1/model.onnx` file as the output file for both nodes in your pipeline.
@@ -9,7 +9,7 @@ You must set the `models/fraud/1/model.onnx` file as the output file for both no
 .Prerequisites
 
 * You added the training file as a dependency to the first node in your pipeline, as described in 
-xref:specifying-the-training-file-as-a-dependency.adoc[Specifying the training file as a dependency].
+xref:specifying-the-training-file-as-a-dependency.adoc[Specify the training file as a dependency].
 
 .Procedure
 
@@ -35,4 +35,4 @@ image::pipelines/wb-pipeline-node-1-file-output-form.png[Set file dependency val
 
 .Next step
 
-xref:configuring-the-connection-to-storage.adoc[Configuring the connection to storage]
+xref:configuring-the-connection-to-storage.adoc[Configure storage connections]

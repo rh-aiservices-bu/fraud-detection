@@ -1,23 +1,23 @@
 :_module-type: PROCEDURE
 
 [id='creating-a-workbench']
-= Creating a workbench
+= Create a workbench
 
 [role="_abstract"]
 A workbench is an instance of your development and experimentation environment. When you create a workbench, you select a workbench image that has the tools and libraries that you need for developing models.
 
 .Prerequisites
 
-* You created a `My Storage` connection as described in xref:storing-data-with-connections.adoc[Storing data with connections].
+* You created a `My Storage` connection as described in xref:storing-data-with-connections.adoc[Configure storage credentials].
 
-* If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+* If you intend to complete the pipelines section of this {deliverable}, you configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enable AI pipelines].
 
-* If you intend to complete the _Distributing training jobs with the Training Operator_ section of this {deliverable}, you completed the procedure described in xref:setting-up-kueue-resources.adoc[Setting up Kueue resources].
-//Note that the _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
+* If you intend to complete the _Distribute training with the Training Operator_ section of this {deliverable}, you completed the procedure described in xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
+//Note that the _Distribute training with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
 
 .Procedure
 
-. Navigate to the project detail page for the project that you created in xref:setting-up-your-project.adoc[Setting up your project].
+. Navigate to the project detail page for the project that you created in xref:setting-up-your-project.adoc[Create your project].
 
 . Click the *Workbenches* tab, and then click the *Create workbench* button.
 +
@@ -66,4 +66,4 @@ image::workbenches/ds-project-workbench-list-edit.png[Workbench list edit, 350]
 
 .Next step
 
-xref:importing-files-into-jupyter.adoc[Importing the {deliverable} files into the JupyterLab environment]
+xref:importing-files-into-jupyter.adoc[Import tutorial files]

@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='setting-up-your-project']
-= Setting up your project
+= Create your project
 
 [role="_abstract"]
 To implement a data science workflow, you must create a project as described in the following procedure. Projects help your team to organize and work together on resources within separated namespaces. From a project, you can create many workbenches, each with its own IDE environment (for example, JupyterLab), and each with its own connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
@@ -51,4 +51,4 @@ image::projects/ds-project-new.png[New project]
 
 .Next step
 
-xref:storing-data-with-connections.adoc[Storing data with connections]
+xref:storing-data-with-connections.adoc[Configure storage credentials]

@@ -1,10 +1,10 @@
-= Fraud Detection {deliverable} with {productname-long}
+= Get started with the Fraud Detection {deliverable}
 :page-layout: home
 :!sectids:
 
 [id='introduction']
 [.text-center.strong]
-== Introduction
+== Understand the tutorial scope
 
 [role="_abstract"]
 Welcome! In this {deliverable}, you learn how to use data science, artificial intelligence (AI), and machine learning (ML) in an OpenShift development workflow.
@@ -15,8 +15,9 @@ You complete the following tasks in link:https://www.redhat.com/en/technologies/
 * Deploy the model by using {productname-short} model serving.
 * Refine and train the model by using automated pipelines.
 * Learn how to train the model by using distributed computing frameworks.
+* Implement machine learning features to ensure consistency between training and inference.
 
-== About the example fraud detection model
+== Understand the fraud detection model
 
 The example fraud detection model monitors credit card transactions for potential fraudulent activity. It analyzes the following credit card transaction details:
 
@@ -26,7 +27,7 @@ The example fraud detection model monitors credit card transactions for potentia
 
 Based on this data, the model outputs the likelihood of the transaction being fraudulent.
 
-== Before you begin
+== Prerequisites
 
 You must have access to an OpenShift cluster which has {productname-long} installed.
 
@@ -35,7 +36,7 @@ You must have access to an OpenShift cluster which has {productname-long} instal
 // commenting out Sandbox - 3.x not available there yet
 //If you do not have access to a cluster that has an instance of {productname-short}, see the link:https://developers.redhat.com/products/red-hat-openshift-ai/download[{productname-long} page on the {org-name} Developer website]. There, you can create an account and access the link:https://console.redhat.com/openshift/sandbox[*free {org-name} Developer Sandbox*] or you can learn how to install {productname-short} on *your own OpenShift cluster*.
 
-//NOTE: The _Distributing training jobs with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
+//NOTE: The _Distribute training with the Training Operator_ section of this {deliverable} is not supported in the {org-name} Developer Sandbox.
 
 [IMPORTANT]
 ====

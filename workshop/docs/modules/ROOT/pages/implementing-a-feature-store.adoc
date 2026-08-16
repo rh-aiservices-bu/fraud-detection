@@ -1,7 +1,7 @@
 :_module-type: CONCEPT
 
 [id='implementing-a-feature-store']
-= Implementing a feature store
+= Understand Feature Store concepts
 
 [role="_abstract"]
 Optionally, you can use a feature store to address common challenges in machine learning (ML) workflows. You can set up a local feature store with the fraud detection data set.
@@ -63,4 +63,4 @@ The following table describes the key Feature Store concepts used in this {deliv
 
 .Next step
 
-xref:setting-up-a-local-feature-store.adoc[Setting up a local feature store]
+xref:setting-up-a-local-feature-store.adoc[Set up a local feature store]

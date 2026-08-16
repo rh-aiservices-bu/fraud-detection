@@ -1,4 +1,4 @@
-* 1. Projects
+* 1. Set up a project and storage
 ** xref:navigating-to-the-dashboard.adoc[1. The Dashboard]
 ** xref:setting-up-your-project.adoc[2. Data Science Projects]
 ** xref:storing-data-with-connections.adoc[3. Storage Data Connections]
@@ -7,33 +7,33 @@
 ** xref:enabling-ai-pipelines.adoc[4. Enable Pipelines]
 ** xref:setting-up-kueue-resources.adoc[4. Set up Kueue resources]
 
-* 2. Workbenches
+* 2. Create a workbench and use notebooks
 ** xref:creating-a-workbench.adoc[1. Create a Workbench]
 ** xref:importing-files-into-jupyter.adoc[2. Jupyter]
 ** xref:running-code-in-a-notebook.adoc[3. Notebooks]
 ** xref:training-a-model.adoc[4. Training a Model]
 
-* 3. Model Serving
+* 3. Deploy and test a model
 ** xref:preparing-the-model-for-deployment.adoc[1. Saving the Model]
 ** xref:deploying-the-model.adoc[2. Deploying the Model]
 ** xref:testing-the-model-api.adoc[3. Using the API]
 
-* 4. AI Pipelines
+* 4. Implement AI Pipelines
 // ** xref:enabling-ai-pipelines.adoc[1. Enable Pipelines]
 ** xref:automating-workflows-with-pipelines.adoc[1. Workbench Pipeline Editor]
-*** xref:creating-a-pipeline.adoc[1. Creating a pipeline]
-*** xref:adding-nodes-to-your-pipeline.adoc[2. Adding nodes to your pipeline]
+*** xref:creating-a-pipeline.adoc[1. Create a pipeline]
+*** xref:adding-nodes-to-your-pipeline.adoc[2. Add nodes to your pipeline]
 *** xref:specifying-the-training-file-as-a-dependency.adoc[3. Specify the training file as a dependency]
-*** xref:creating-and-storing-the-onnx-output-file.adoc[4. Creating and storing the ONNX-formatted output file]
+*** xref:creating-and-storing-the-onnx-output-file.adoc[4. Creating output files]
 *** xref:configuring-the-connection-to-storage.adoc[5. Configuring the connection to storage]
-*** xref:running-your-pipeline.adoc[6. Running your pipeline]
+*** xref:running-your-pipeline.adoc[6. Run your pipeline]
 ** xref:running-a-pipeline-generated-from-python-code.adoc[2. Python Pipelines]
 
-* 5. Distributing Training
+* 5. Run a distributed workload
 ** xref:distributing-training-jobs.adoc[1.Distributing Training Jobs]
 *** xref:distributing-training-jobs-with-ray.adoc[1. Distributing Training Jobs with Ray]
 *** xref:distributing-training-jobs-with-kfto.adoc[2. Distributing Training Jobs with the Training Operator]
 
-* 6. Feature Store
-** xref:implementing-a-feature-store.adoc[1. Implementing a feature store]
-** xref:setting-up-a-local-feature-store.adoc[2. Setting up a local feature store]
+* 6. Use machine learning features
+** xref:implementing-a-feature-store.adoc[1. Understand Feature Store concepts]
+** xref:setting-up-a-local-feature-store.adoc[2. Set up a local feature store]
