@@ -33,7 +33,7 @@ This issue is an example of _training/serving skew_ — a class of bugs where th
 
 == What is Feature Store?
 
-Feature Store in {productname-long} is based on the link:https://feast.dev/[Feast] open-source project. The Feature Store central feature registry provides a single place to define, discover, and manage features. It offers the following capabilities:
+Feature Store in {productname-long} is based on the Feast open-source project. The Feature Store central feature registry provides a single place to define, discover, and manage features. It offers the following capabilities:
 
 * *Historical feature retrieval* — Get point-in-time correct features for training.
 * *Online feature serving* — Get low-latency features for real-time inference.
@@ -61,6 +61,8 @@ The following table describes the key Feature Store concepts used in this {deliv
 | Low-latency storage of the latest feature values (used for inference).
 |===
 
-.Next step
+[role="_additional-resources"]
+.Additional resources
 
-xref:setting-up-a-local-feature-store.adoc[Set up a local feature store]
+* link:https://feast.dev/[Feast^]
+* xref:setting-up-a-local-feature-store.adoc[Set up a local feature store]

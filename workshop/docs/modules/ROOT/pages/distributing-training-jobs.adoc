@@ -8,13 +8,17 @@ Earlier, you trained the fraud detection model directly in a notebook and then i
 
 Distributing training is not necessary for a simple model. However, by applying it to the example fraud model, you learn how to train more complex models that require more compute power.
 
-*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run the Ray or Training Operator examples in this tutorial, complete the setup tasks in xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
+*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run the Ray or Training Operator examples in this tutorial, complete the Kueue resource setup tasks.
 
 You can try one or both of the following options:
 
-* The Ray distributed computing framework, as described in
-xref:distributing-training-jobs-with-ray.adoc[Distribute training with Ray].
+* The Ray distributed computing framework
+* The Training Operator
 
-* The Training Operator, as described in
-xref:distributing-training-jobs-with-kfto.adoc[Distribute training with the Training Operator].
+[role="_additional-resources"]
+.Additional resources
+
+* xref:setting-up-kueue-resources.adoc[Set up Kueue resource]
+* xref:distributing-training-jobs-with-ray.adoc[Distribute training with Ray]
+* xref:distributing-training-jobs-with-kfto.adoc[Distribute training with the Training Operator]
 

@@ -6,13 +6,19 @@
 [role="_abstract"]
 You can use Ray, a distributed computing framework, to parallelize Python code across many CPUs or GPUs.
 
-*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run a distributed training example in this tutorial, complete the setup tasks in xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
+*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run a distributed training example in this tutorial, complete the Kueue resource setup tasks.
 
 In your notebook environment, open the `6_distributed_training.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through setting authentication, creating Ray clusters, and working with jobs.
 
 Optionally, if you want to view the Python code for this step, you can find it in the `ray-scripts/train_tf_cpu.py` file.
 
-image::distributed/jupyter-notebook.png[Jupyter Notebook]
+image::t-fdt-jupyter-notebook.png[Jupyter Notebook]
 
-For more information about TensorFlow training on Ray, see the link:https://docs.ray.io/en/latest/train/distributed-tensorflow-keras.html[Ray TensorFlow guide].
+[role="_additional-resources"]
+.Additional resources
+
+* xref:setting-up-kueue-resources.adoc[Set up Kueue resources]
+* link:https://docs.ray.io/en/latest/train/distributed-tensorflow-keras.html[Ray TensorFlow guide]
+
+
 

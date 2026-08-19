@@ -6,13 +6,18 @@
 [role="_abstract"]
 The Training Operator is a tool for scalable distributed training of machine learning (ML) models created with various ML frameworks, such as PyTorch.
 
-*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run a distributed training example in this tutorial, complete the setup tasks in xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
+
+*NOTE:* Distributed training in {productname-short} uses the {org-name} build of Kueue for admission and scheduling. Before you run a distributed training example in this tutorial, complete the Kueue resource setup tasks.
 
 In your notebook environment, open the `7_distributed_training_kfto.ipynb` file and follow the instructions directly in the notebook. The instructions guide you through setting authentication, initializing the Training Operator client, and submitting a `PyTorchJob`.
 
 You can also view the complete Python code in the `kfto-scripts/train_pytorch_cpu.py` file.
 
-image::distributed/kfto-jupyter-notebook.png[Jupyter Notebook]
+image::t-fdt-kfto-jupyter-notebook.png[Jupyter Notebook]
 
-For more information about PyTorchJob training with the Training Operator, see the link:https://www.kubeflow.org/docs/components/trainer/legacy-v1/user-guides/pytorch[Training Operator PyTorchJob guide].
+[role="_additional-resources"]
+.Additional resources
+* xref:setting-up-kueue.adoc[Set up Kueue resources]
+* link:https://www.kubeflow.org/docs/components/trainer/legacy-v1/user-guides/pytorch[Training Operator PyTorchJob guide^]
+
 

@@ -1,7 +1,7 @@
 :_module-type: PROCEDURE
 
 [id='setting-up-kueue-resources']
-= (Optional) Set up Kueue resource
+= (Optional) Set up Kueue resources
 
 [role="_abstract"]
 
