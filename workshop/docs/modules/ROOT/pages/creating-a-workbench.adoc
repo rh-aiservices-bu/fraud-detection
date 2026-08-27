@@ -35,7 +35,7 @@ image::workbenches/create-workbench-form-name-desc.png[Workbench name and descri
 +
 *Jupyter | Tensorflow | CUDA | Python 3.12*
 
-.. For the image version, select *2025.2*.
+.. For the image version, select *3.6*.
 +
 image::workbenches/create-workbench-form-image.png[Workbench image, 600]
 
