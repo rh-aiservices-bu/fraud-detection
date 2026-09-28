@@ -41,7 +41,7 @@ image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 .Verification
 
 * The `models/fraud/1/model.onnx` file is in your S3 bucket.
-
+* Run should also appear in the MLflow console described in xref:tracking-pipeline-experiments.adoc[Track pipeline experiments] on the following page.
 
 .Next step
 

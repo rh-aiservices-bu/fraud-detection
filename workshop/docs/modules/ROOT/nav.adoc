@@ -27,6 +27,7 @@
 *** xref:creating-and-storing-the-onnx-output-file.adoc[4. Creating output files]
 *** xref:configuring-the-connection-to-storage.adoc[5. Configuring the connection to storage]
 *** xref:running-your-pipeline.adoc[6. Run your pipeline]
+*** xref:tracking-pipeline-experiments.adoc[3. Track pipeline experiments]
 ** xref:running-a-pipeline-generated-from-python-code.adoc[2. Python Pipelines]
 
 * 5. Run a distributed workload
