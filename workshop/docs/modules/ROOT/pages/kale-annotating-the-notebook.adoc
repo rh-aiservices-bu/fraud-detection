@@ -75,6 +75,8 @@ Kale uses *Depends on* for step ordering, and automatically marshals data (varia
 * `epochs` — number of training epochs (default: 2)
 * `threshold` — fraud detection threshold (default: 0.95)
 * `s3_model_key` — S3 path for the uploaded model
++
+image::kale/kale-pipeline-parameters.png[Kale pipeline parameters, role=medium-image]
 
 . Optionally, run the notebook interactively (top-to-bottom) to verify it works before compiling it as a pipeline. The `skip` cells run during interactive execution but are excluded from the compiled pipeline.
 
