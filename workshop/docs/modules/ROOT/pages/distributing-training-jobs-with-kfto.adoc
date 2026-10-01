@@ -13,7 +13,7 @@ In your notebook environment, open the `7_distributed_training_kfto.ipynb` file 
 
 You can also view the complete Python code in the `kfto-scripts/train_pytorch_cpu.py` file.
 
-image::t-fdt-kfto-jupyter-notebook.png[Jupyter Notebook]
+image::distributed/kfto-jupyter-notebook.png[Jupyter Notebook]
 
 [role="_additional-resources"]
 .Additional resources
