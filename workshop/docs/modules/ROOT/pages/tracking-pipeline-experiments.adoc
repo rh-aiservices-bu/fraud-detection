@@ -1,0 +1,25 @@
+:_module-type: PROCEDURE
+
+[id='tracking-pipeline-experiments']
+= Organize and track pipelines with experiments
+
+[role="_abstract"]
+Now that you've created and run a pipeline, use an experiment to track and organize your pipeline runs.
+
+OpenShift AI utilizes MLflow for pipeline experiment tracking. An experiment serves as the primary organizational container used to group, manage, and compare related machine learning runs for a specific project or business objective.
+
+.Procedure
+1. Refer to xref:running-your-pipeline.adoc[Run your pipeline] to create a second pipeline run. This time, under *MLflow Integration*, enable MLflow Experiment Tracking and specify an experiment name.
++
+image::pipelines/mlflow-create-experiment.png[Create an MLflow experiment]
+
+2. View your newly-created experiment in the OpenShift AI Console under the Experiments tab:
++
+image::pipelines/pipelines-experiments.png[OpenShift AI Pipelines Experiments]
+
+3. Click your experiment name, and you'll see your latest pipeline run:
++
+image::pipelines/pipelines-experiments-console.png[OpenShift AI Pipelines Experiments Console]
+
+4. Click your pipeline run, and you'll get an overview of pipeline input parameters. Scalar metric artifacts output by the run will appear under the *Model Metrics* heading.
+[placeholder: kale fraud detection pipeline with scalar metric artifacts]
