@@ -1,0 +1,90 @@
+:_module-type: PROCEDURE
+
+[id='kale-annotating-the-notebook']
+= Annotating the notebook
+
+[role="_abstract"]
+The `4_kale_pipeline.ipynb` notebook is pre-annotated with Kale cell tags that define a 5-step fraud detection pipeline. In this section, you open the notebook and examine how each cell is annotated.
+
+.Prerequisites
+
+* You enabled Kale as described in xref:kale-overview.adoc[What is Kale].
+
+.Procedure
+
+. In the JupyterLab file browser, open `4_kale_pipeline.ipynb`.
+
+. Examine the Kale cell annotations on the notebook itself. Each annotated cell shows its tag in a metadata row. Optionally, click the pencil icon next to a cell to inspect or edit the annotation. The notebook contains the following annotated cells:
++
+image::kale/kale-cell.png[Kale Cell, role=medium-image]
++
+[cols="1,1,2",options="header"]
+|===
+|Cell
+|Tag
+|Purpose
+
+|Imports
+|`imports`
+|Shared libraries (pandas, keras, sklearn, onnx, boto3) prepended to every pipeline step.
+
+|Helpers
+|`functions`
+|The `upload_directory_to_s3` function, available to all steps.
+
+|Parameters
+|`pipeline-parameters`
+|Tunable values: `epochs`, `threshold`, `s3_model_key`. You can change these from the KFP UI between runs.
+
+|Get Data
+|`step:get_data`
+|Downloads training, validation, and test CSV datasets.
+
+|Preprocess
+|`step:preprocess`
+|Scales features with `StandardScaler` and computes class weights for the imbalanced dataset.
+
+|Train
+|`step:train`
+|Builds and trains a Keras deep neural network.
+
+|Evaluate
+|`step:evaluate`
+|Exports the model to ONNX format, runs inference on the test set, and computes accuracy, precision, and recall.
+
+|Upload
+|`step:upload`
+|Uploads the ONNX model to S3 storage using the `s3_model_key` pipeline parameter.
+
+|Metrics
+|`pipeline-metrics`
+|Placed at the end of the notebook. Prints accuracy, precision, and recall as overall pipeline execution results, surfaced in the KFP dashboard.
+
+|Sally Demo
+|`skip`
+|An interactive fraud prediction example, excluded from the pipeline.
+|===
+
+. At the top of the notebook, review the pipeline diagram. It shows the five main steps:
++
+`get_data → preprocess → train → evaluate → upload`
++
+Kale uses *Depends on* for step ordering, and automatically marshals data (variables) between connected steps. Click the pencil icon on a step cell to see or change this field. For example, the `preprocess` step depends on `get_data` because it needs the datasets that `get_data` produces.
+
+. Review the pipeline parameters. Click on the `pipeline-parameters` cell and note the three tunable variables:
+* `epochs` — number of training epochs (default: 2)
+* `threshold` — fraud detection threshold (default: 0.95)
+* `s3_model_key` — S3 path for the uploaded model
++
+image::kale/kale-pipeline-parameters.png[Kale pipeline parameters, role=medium-image]
+
+. Optionally, run the notebook interactively (top-to-bottom) to verify it works before compiling it as a pipeline. The `skip` cells run during interactive execution but are excluded from the compiled pipeline.
+
+.Verification
+
+* The diagram at the top of the notebook shows the five pipeline steps.
+* Each annotated cell displays the correct Kale tag in its metadata row.
+
+.Next step
+
+xref:kale-compiling-and-running.adoc[Compiling and running the pipeline]

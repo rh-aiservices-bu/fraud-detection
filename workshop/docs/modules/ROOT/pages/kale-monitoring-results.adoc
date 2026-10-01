@@ -1,0 +1,42 @@
+:_module-type: PROCEDURE
+
+[id='kale-monitoring-results']
+= Monitoring results and metrics
+
+[role="_abstract"]
+After running the Kale pipeline, you can monitor its progress and review the results in the {productname-short} Pipelines UI.
+
+.Prerequisites
+
+* You compiled and submitted the pipeline as described in xref:kale-compiling-and-running.adoc[Compiling and running the pipeline].
+
+.Procedure
+
+. In the {productname-short} dashboard, navigate to your project and click the *Pipelines* tab.
+
+. Click on the `fraud-detection-kale` pipeline and then click *View runs*.
+
+. Click on your run to view the pipeline execution progress. Each step shows its status (pending, running, succeeded, or failed).
+
+. Click on individual steps to view their logs. For example:
+* *get_data* — shows the dataset download progress and row counts.
+* *train* — shows the Keras training output with loss and accuracy per epoch.
+* *evaluate* — shows the accuracy, precision, and recall metrics.
+
+. Review the pipeline metrics. The `pipeline-metrics` cell prints accuracy, precision, and recall values. These metrics appear in the KFP run details:
++
+* *Accuracy* — overall prediction accuracy on the test set
+* *Precision* — proportion of predicted frauds that are actual frauds
+* *Recall* — proportion of actual frauds that are detected
+
+. Verify the model upload. In your S3 storage, confirm that `models/fraud/1/model.onnx` exists.
+
+.Verification
+
+* All 5 pipeline steps show a succeeded status.
+* The pipeline metrics (accuracy, precision, recall) are visible in the run details.
+* The `models/fraud/1/model.onnx` file is in your S3 bucket.
+
+.Next step
+
+* Distribute model training, as described in xref:distributing-training-jobs.adoc[Distributing training jobs].
