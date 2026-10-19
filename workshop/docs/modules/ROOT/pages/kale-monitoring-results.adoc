@@ -29,7 +29,26 @@ After running the Kale pipeline, you can monitor its progress and review the res
 * *Precision* — proportion of predicted frauds that are actual frauds
 * *Recall* — proportion of actual frauds that are detected
 
-. Verify the model upload. In your S3 storage, confirm that `models/fraud/1/model.onnx` exists.
+. Verify the model upload. Use an S3 client to list the bucket contents and confirm that `models/fraud/1/model.onnx` exists. If you changed the `s3_model_key` parameter, check that path instead.
+
+. Optionally, download the trained model from the pipeline artifacts:
++
+.. In the run graph, locate the `model_output_artifact` produced by the *train* step and passed to the *evaluate* step. Select the artifact to view its details and artifact URI.
++
+image::kale/kale-model-artifact.png[Trained model artifact details and storage URI, role=medium-image]
++
+.. Use an S3 client with access to the pipeline artifact storage to download the object identified by the artifact URI. The pipeline artifact storage can differ from your `My Storage` connection. Save the downloaded model as `model.keras`.
++
+.. In a Python environment with the same Keras version and backend as the pipeline, load the model:
++
+[source,python]
+----
+from keras.models import load_model
+
+model = load_model("model.keras", compile=False)
+----
++
+NOTE: Only load model artifacts from a trusted source. Kale serializes this notebook's trained Keras model in Keras format, so use `load_model`, not pickle or joblib. This artifact is not the ONNX file created by *evaluate* and uploaded by *upload*. Downloading it does not require the explicit *upload* step to succeed, but the pipeline still uses artifact storage. For inference, apply the same feature selection and fitted `StandardScaler` used by the notebook; the model artifact does not include the scaler.
 
 .Verification
 
