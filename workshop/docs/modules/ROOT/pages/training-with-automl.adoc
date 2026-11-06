@@ -1,0 +1,121 @@
+:_module-type: CONCEPT
+
+[id='training-with-automl']
+= Train and serve fraud detection with AutoML
+
+This optional chapter provides an alternative training and serving flow for the same credit-card transactions: explore the data, submit a managed AutoML experiment, inspect its leaderboard, deploy the selected predictor, and score Sally's transactions.
+The existing manual training chapters remain available. Complete the prerequisites below, then follow the four executable notebooks in the repository's `automl/` folder. You can skip the Keras training and ONNX export chapters for this flow.
+
+For the dashboard alternative, see xref:training-with-automl-ui.adoc[Follow AutoML through the UI]. That route uses four Markdown-only notebooks in `automl/ui/`, with screenshots and manual evidence worksheets. It can reuse the same staged S3 data without submitting another run through code.
+
+The native AutoML UI currently accepts training data only and derives an internal evaluation split. It does not expose a separate test dataset selector; that capability is planned for a later release. The code route below explicitly supplies an external test CSV, so the two evaluation scores should not be treated as directly comparable.
+
+== Prerequisites
+
+* A xref:setting-up-your-project.adoc[project] with a running xref:enabling-ai-pipelines.adoc[Data Science Pipelines server] and the GA `autogluon-tabular-training-pipeline` managed pipeline. Its installed version must support `preset`, `eval_metric`, `positive_class`, and external `test_data_*` inputs.
+* An xref:creating-connections-to-storage.adoc[S3-compatible Connection] in that project, attached to a Python 3.11 or later xref:creating-a-workbench.adoc[workbench]. The workbench credentials must allow reading, writing, and listing the input and pipeline artifact prefixes. The pipeline and serving pods also need access to their respective data and model artifacts.
+* This repository xref:importing-files-into-jupyter.adoc[cloned into the workbench], including the original `data/train.csv`, `data/validate.csv`, and `data/test.csv` files.
+* Model serving enabled with an installed `kserve-autogluon-server` runtime compatible with the managed training components.
+* Sufficient CPU, memory, and workspace storage quota for the installed managed pipeline. Start with the `speed` preset; its selection budget is 45 minutes, with additional time needed for scheduling, refitting, and evaluation.
+
+Ask your administrator to enable missing components or permissions. The notebooks do not install operators or register a replacement pipeline. For local notebook execution, you also need network access to the cluster and S3, and an authenticated Kubernetes context for programmatic deployment.
+
+== Configure the experiment
+
+. Open `automl/README.md` in the cloned repository for the detailed setup and troubleshooting reference.
+. Copy `automl/.env.example` to `automl/.env`. Replace the placeholders using the following guidance. The example file explains the remaining optional settings.
++
+[cols="1,3",options="header"]
+|===
+|Setting |Value
+|`RHOAI_PROJECT`
+|The project's Kubernetes namespace, rather than its display name. The Connection Secret and pipeline server must belong to this project.
+|`KFP_ENDPOINT` and `RHOAI_TOKEN`
+|The project's pipeline API endpoint, including `https://`, and an authorized OpenShift bearer token. With the OpenShift CLI, obtain the current token using `oc whoami -t`. Keep the token in `.env`, outside notebook cells.
+|`RHOAI_DASHBOARD_URL`
+|The dashboard base URL, separate from the pipeline API endpoint. Set it to display the correct *Run details* and *AutoML results* links in notebook 01.
+|`S3_CONNECTION_NAME`
+|The existing Connection's Kubernetes Secret name, rather than its display name. The Secret must contain `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_ENDPOINT`, `AWS_DEFAULT_REGION`, and `AWS_S3_BUCKET`. Credentials in a local `.env` file are not automatically injected into pipeline pods.
+|S3 endpoint, region, bucket, and credentials
+|Values matching the Connection. Use a real endpoint with `https://` and an existing bucket reachable from the workbench and cluster pods.
+|`S3_ARTIFACTS_BUCKET`
+|The pipeline server's actual output bucket. Setting this variable does not change the server's output storage configuration.
+|`AUTOML_PRESET` and `AUTOML_EVAL_METRIC`
+|Start with `speed` and `roc_auc`. The managed pipeline presets are `speed` and `balanced`; supported ranking metrics in this sample are `roc_auc`, `f1`, and `accuracy`.
+|`RUNTIME_TEMPLATE_NAMESPACE` and `RUNTIME_TEMPLATE_NAME`
+|The namespace and name of the installed AutoGluon OpenShift template. Defaults are `redhat-ods-applications` and `autogluon-runtime-template`. The template name can differ from the `kserve-autogluon-server` image name.
+|`PREDICT_AUTH_MODE` and `PREDICT_TOKEN`
+|Leave the default `auto` mode and an empty token to read the current kubeconfig identity or workbench ServiceAccount for each prediction. That identity needs model inference permission. A nonempty `PREDICT_TOKEN` overrides automatic credentials.
+|===
+
+. For a private certificate authority, set `REQUESTS_CA_BUNDLE` for pipeline and inference HTTPS and `AWS_CA_BUNDLE` for S3. Keep TLS verification enabled.
+
+[IMPORTANT]
+====
+For programmatic deployment in notebook 03, the Connection recorded for the run must have `AWS_S3_BUCKET` equal to the artifact bucket. If the input and artifact buckets differ, create a second Connection for the artifact bucket and use dashboard deployment instead. Workbench credentials with access to both buckets are sufficient for reading results, but do not satisfy the programmatic deployment helper's bucket check.
+====
+
+The `.env` file and `automl/outputs/` are excluded from Git. Outputs embedded in the tracked workshop notebooks are included. You can keep useful example outputs, but replace personal project names, cluster addresses, bucket names, and local paths with generic placeholders before committing. Saved outputs illustrate a previous run; execute the cells to obtain your own results.
+
+== Run the linked notebooks
+
+. Open `automl/00_prepare_data.ipynb`. Run the dependency installation cell and choose your local CSV paths in `DATA_FILES`. The defaults use the repository's files: `train.csv` and `validate.csv` are merged into 800,000 training rows; `test.csv` remains a separate 200,000-row evaluation set. For your own train and test files without validation, set `validate` to `None` and `MERGE_VALIDATION = False`. Relative paths start from `automl/`; absolute paths are also supported. Inspect the source and prepared train/test tables before uploading. The notebook records source paths, actual row counts, fraud rates, hashes, and S3 locations in `outputs/data_manifest.json`.
++
+All seven feature columns retain their original names: `distance_from_home`, `distance_from_last_transaction`, `ratio_to_median_purchase_price`, `repeat_retailer`, `used_chip`, `used_pin_number`, and `online_order`. The target is `fraud`. The sample does not manually scale, filter, or resample the features.
+. Open `automl/01_experiment.ipynb`. Review or edit `EXPERIMENT_NAME` and `EXPERIMENT_OPTIONS`, then compare the requested inputs with any saved run. Submit the experiment with `label_column=fraud`, `task_type=binary`, and the uploaded external test CSV through `test_data_*`. The defaults are `preset=speed` and `eval_metric=roc_auc`. Record the run ID and pipeline version and use the displayed dashboard links to inspect the run.
++
+Leave `START_NEW_RUN = False` to submit the first run and reuse it on later executions, including if that run failed. To submit another experiment, set it to `True` for one execution, then set it back to `False`. Each execution with `True` creates another run.
++
+Monitor the saved run. Interrupting the monitoring cell or reaching its local timeout does not cancel cluster training. Rerun the cell to resume monitoring; cancel unwanted runs through *Pipelines → Runs*. For a failure, inspect task logs and pod termination reasons before recording an out-of-memory failure.
+. Open `automl/02_results.ipynb`. Verify that the external test artifact matches the uploaded test CSV recorded for this run, inspect the leaderboard, and record the selected predictor's evaluation score. Follow the displayed links to the official experiment and selected predictor notebooks downloaded from this run's artifacts.
++
+Follow those generated notebooks' dependency instructions, using a separate kernel if needed. Use the same storage credentials with `AWS_S3_BUCKET` pointing at the artifact bucket. The generated predictor notebook supports local probability predictions; notebook 03 uses REST serving.
+. Open `automl/03_predictor.ipynb` and choose one deployment method:
++
+--
+* *Option A — Dashboard:* deploy the whole selected `predictor/` directory using a Connection for the artifact bucket and the installed AutoGluon runtime. Use the printed storage path within the bucket, without `s3://` or the bucket name. Start with 2 CPUs, 8 GiB of memory, and one replica.
+* *Option B — Programmatic:* render and inspect the manifests, create the storage ServiceAccount/RBAC, ServingRuntime, and InferenceService, then wait for readiness. This requires permission to read the template and Connection Secret and to read/create those resources in the project. Repeating creation reuses matching resources and completes partial deployments. A configuration mismatch stops for review rather than overwriting resources.
+
+Configure model inference access for the identity used to score transactions. The programmatic deployment enables authentication. Automatic credentials follow the current Kubernetes identity; renew `oc login` if a static login expires. Use `PREDICT_AUTH_MODE=none` only for an endpoint configured to allow unauthenticated requests; this setting does not disable server authentication.
+--
+. Once the model is ready, use its base inference URL as `PREDICT_ENDPOINT`, without a `/v1/...` suffix, or let Option B discover it. Leave `SCORING_CSV=None` for Sally's transactions, or choose a CSV with the same seven features and set `SCORING_ROW_LIMIT` for a small smoke-test batch. An optional `fraud` label column is removed before sending requests. The helper sends the seven named features in the runtime's KServe v1 request format.
++
+The REST response contains predicted class labels, such as `0` or `1`. Do not interpret these as fraud probabilities or apply the original ONNX probability thresholds. A successful smoke test requires a valid prediction response; a Ready deployment alone does not verify inference.
+
+Each notebook links to the next one and reads saved state from `automl/outputs/`, so you can restart kernels between steps. Complete notebook 02 for the current run before deploying or scoring its predictor.
+
+[NOTE]
+====
+The managed pipeline evaluates and ranks candidates using the external test data. This score is used in model selection and is not an untouched final generalization estimate. Prefer ROC-AUC or F1 for this imbalanced dataset. Accuracy is supported, but can hide missed fraud; inspect precision and recall when available.
+====
+
+== Change configuration or recover a run
+
+`wf.settings()` rereads `automl/.env` on each call, but existing environment variables, including attached Connection variables, take precedence. After configuration edits, rerun setup cells and recreate S3 or pipeline clients. Restart the kernel if an inherited or previously loaded environment variable still overrides the file.
+
+Saved state is separate from live configuration: `outputs/data_manifest.json` contains the uploaded locations and Connection name; `outputs/run.json` contains the submitted arguments and run metadata. Editing `.env` does not change either snapshot or an already submitted run.
+
+* To correct `S3_CONNECTION_NAME` without uploading the same data again, update the manifest as shown below, then submit a new run once with `START_NEW_RUN = True`. The corrected Connection must exist in the run's namespace and be able to read the saved S3 paths.
++
+[source,python]
+----
+manifest = wf.read("data_manifest.json")
+manifest["connection"] = wf.required("S3_CONNECTION_NAME")
+wf.save("data_manifest.json", manifest)
+----
+* To change the preset or metric, edit notebook 01's settings cell or `.env`, rerun the preview, and submit a new run. Reuse the staged data.
+* To change CSV paths, dataset contents, merging, or input bucket/prefix, rerun notebook 00's settings, loading, preview, and upload cells, reload the manifest in notebook 01, and submit a new run.
+* To correct artifact discovery, check the run's actual output URIs, update only `artifact_bucket` or `artifact_prefix` in `outputs/run.json`, and rerun notebook 02. Retraining is unnecessary.
+* To change prediction credentials or the endpoint, update `.env` and rerun scoring. Clear stale `PREDICT_TOKEN` overrides from the environment as well as the file when using automatic credentials.
+
+Before starting another experiment, copy `outputs/` to a backup outside the repository if you need its evidence. Keep `outputs/data_manifest.json` in place to reuse the uploaded data. Do not rewrite a previous run's arguments to make it appear to have used new configuration.
+
+== Verify results and finish
+
+The final notebook writes `outputs/ticket-comment.md` with S3 paths, row counts, fraud rates, run ID, preset, duration, evaluation metric and score, and the observed serving result. Add branch and PR links and any failure or OOM evidence before copying it to the ticket. Nothing is posted automatically.
+
+If prediction fails, inspect the exception's server response and the `kserve-container` logs. HTTP 401/403 usually requires checking credentials and model access; HTTP 500 requires the runtime traceback. In an observed runtime, the FastAI error `cannot access local variable 'res' where it is not associated with a value` masked a missing Ray dependency in a serialized model. This needs a compatible serving image or corrected export; installing packages in the workshop notebook does not change the serving container. Record a failed smoke test accurately and consult `automl/README.md` for the diagnostic details.
+
+After the workshop, stop/delete your deployed model and cancel unused runs through the dashboard. For programmatic deployment, also remove the model-specific runtime, storage ServiceAccount, Role, and RoleBinding when no longer needed. Remove only your experiment's S3 objects, preserving shared storage and Connections.
+
+See `automl/README.md` for offline checks, complete troubleshooting, and notebook preparation before opening a PR.

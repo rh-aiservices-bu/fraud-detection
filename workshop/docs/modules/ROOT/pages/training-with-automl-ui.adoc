@@ -1,0 +1,53 @@
+:_module-type: CONCEPT
+
+[id='training-with-automl-ui']
+= Follow fraud detection AutoML through the UI
+
+Follow the same story through graphical interfaces: prepare the fraud data, submit a managed experiment, inspect results, deploy the selected predictor, and score Sally's transactions.
+The xref:training-with-automl.adoc[executable notebook route] remains available. Choose one submission route for each experiment to avoid duplicate runs.
+
+== Prerequisites
+
+* Access to RHOAI with permission to create a project, add Connections, and configure its Data Science Pipelines server. The cluster must provide the GA `autogluon-tabular-training-pipeline` managed definition and a compatible AutoGluon serving runtime.
+* Permission to create a Model Registry and grant project access, or an administrator who can complete those steps. The deployment project needs access to both the registry and the predictor artifact Connection.
+* Existing input and artifact buckets and credentials with appropriate storage access. You will add their S3-compatible Connections after creating the project. Use a separate artifact Connection when those buckets differ.
+* Access to the repository's `automl/ui/` notebooks in Jupyter or a notebook viewer. The UI notebooks contain only Markdown; reading them does not require a Python kernel, `.env`, or code-route state files.
+* An object-storage web console for uploads, unless you reuse the already prepared S3 objects, and a terminal with `curl` for the final REST prediction (or a graphical HTTP client such as Postman Desktop).
+
+The only dataset input in the current AutoML flow is the training CSV, such as `train.csv`. Separate evaluation/test data cannot be supplied; that capability is planned for later releases. The managed pipeline handles evaluation automatically. This walkthrough uses the training input only and does not include an alternative external-test submission route.
+
+== Follow the UI notebooks
+
+. Open `automl/ui/00_setup_and_data.ipynb`. Create a new project, add its storage Connections, then configure the pipeline server using the artifact Connection and select the installed managed pipeline definition/version. Once these are ready, reuse the training object from code notebook 00 or upload `data/train.csv` through your storage console. No separate test file is supplied to the native AutoML wizard. Record the training bucket/key, row count, and fraud rate in the worksheet.
++
+The UI-only upload option uses the original 600,000-row training file. The code default merges validation data into 800,000 training rows. Reusing the same training input does not align the evaluation protocol: the native UI uses internal evaluation, whereas the code route supplies an external test CSV. All seven features and the binary `fraud` label are required.
+. Open `automl/ui/01_create_experiment.ipynb`. Create a tabular AutoML experiment using the training source, `fraud`, binary classification, the `speed` preset, and `roc_auc` where selectable. Record the actual settings and internal evaluation source, review the inputs, and submit once. Monitor the existing run and record its ID, pipeline version, status, and duration.
++
+Inspect the submitted run's recorded configuration and training dataset. Do not create another run to review its settings; no evaluation dataset needs to be provided.
+. Open `automl/ui/02_review_results.ipynb`. Inspect the leaderboard or per-model pipeline metrics, record the selected predictor, and locate the complete `predictor/` directory and official generated notebooks in the actual run artifacts. For a native UI run, record internal evaluation and only the split statistics actually exposed by the run. Do not copy the repository's `data/test.csv` statistics into the result.
+. Open `automl/ui/03_deploy_and_predict.ipynb`. Create a Model Registry, add the deployment project to its permissions, then open *AutoML*, select the completed training run, and choose *Register model* from the selected model row's three-dot menu in the training results. Select the newly created Model Registry and register the model as version `v1`. Open *AI hub → Models → Registry*, select the model, and choose *Action → Deploy v1*. Set *Model type* to *Predictive model*, choose the appropriate *Hardware profile* (`default-profile` in the example environment), and set *Model framework* to `autogluon-1`. Enable *Model access* with *Require token authentication*, then click *Deploy model*. Wait for *Ready*, copy the endpoint, obtain an authorized inference token, and send the provided two-transaction request using the terminal `curl` example in step 6. That step shows where to copy the endpoint, model resource name, and token into ordinary shell variables, with a screenshot slot for each UI source. Hide the actual token in every screenshot. Step 7 reviews its actual HTTP status and predictions, with a screenshot of the terminal output. A graphical HTTP client can send the same request.
++
+Record the actual HTTP status and predictions. A Ready model alone does not establish prediction success. The response can contain class labels; use the official generated predictor notebook for local probabilities when needed.
+
+The recorded evaluation score is produced automatically from the training input and participates in candidate evaluation and ranking. It is not a score on a separately supplied evaluation CSV or an untouched final generalization estimate. Prefer ROC-AUC or F1 when discussing this imbalanced dataset.
+
+== Add screenshots
+
+The UI notebooks have 23 dedicated Markdown screenshot cells, including UI-02A and UI-02B for pipeline setup, UI-14A through UI-14C for registry setup and registration, and UI-16A through UI-16C for locating the inference endpoint, model resource name, and token controls. Capture instructions are kept in `automl/ui/screenshots/README.md`; the notebooks display images without visible captions. Filenames follow `<notebook>_<sequence>_<description>.png`, for example `00_1_create_project.png`, with numbering starting at 1 in each notebook.
+
+UI-05 shows the training source selection. UI-10 shows the existing run's recorded configuration. Neither screenshot depicts an evaluation/test dataset upload form.
+
+. Follow a step on your installed release and capture the screen described in the screenshot guide.
+. Replace the corresponding PNG in `automl/ui/screenshots/`, keeping the filename. The image link in the notebook will continue to work.
+. Reload the notebook to see the image. Adjust notebook instructions and the capture checklist if the captured release differs.
+. Hide credentials and tokens before committing screenshots. Preserve actual metrics, errors, and outcomes.
+
+See `automl/ui/screenshots/README.md` for the full capture checklist. Screenshots illustrate a captured environment and previous runs; record your own metric values and prediction outcomes.
+
+== Record evidence and finish
+
+The final UI notebook provides an editable worksheet for branch/PR links, S3 locations, dataset statistics, run details, metric and score, predictor location, and observed serving results. Copy the completed evidence to the ticket yourself; nothing is posted automatically.
+
+UI-created runs do not automatically populate the code route's local `run.json`, `results.json`, or generated ticket comment. Continue with the UI worksheets for this route. Opening generated experiment/predictor notebooks is an optional bridge to code and can have its own execution requirements.
+
+When finished, stop/delete the deployed model, cancel unused runs, and remove only your own S3 objects. Preserve shared Connections, storage, and registries. Deleting a deployment does not remove its registered model version; remove only your own registry entries when no longer needed.
