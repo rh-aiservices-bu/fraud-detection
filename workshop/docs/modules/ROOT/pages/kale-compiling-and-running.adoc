@@ -1,0 +1,51 @@
+:_module-type: PROCEDURE
+
+[id='kale-compiling-and-running']
+= Compiling and running the pipeline
+
+[role="_abstract"]
+After annotating your notebook, you can compile and run it as a Kubeflow Pipeline directly from the Kale side panel in JupyterLab.
+
+.Prerequisites
+
+* You reviewed the notebook annotations as described in xref:kale-annotating-the-notebook.adoc[Annotating the notebook].
+* You configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+* Your data connection (`my-storage`) is configured so that pipeline pods receive the S3 environment variables.
+
+.Procedure
+
+. Open `4_kale_pipeline.ipynb` in JupyterLab and ensure the Kale side panel is open and enabled.
+
+. In the Kale side panel, verify the pipeline settings:
+* *Pipeline Name:* `fraud-detection-kale`
+* *Experiment Name:* `fraud-detection`
+
+. Click *Compile and Run* in the Kale side panel.
++
+Kale compiles the notebook into a KFP v2 pipeline and submits it to the pipeline server. A progress notification appears in JupyterLab showing the compilation and upload status.
++
+image::kale/kale-compile-run.png[Kale Compile & Run, role=medium-image]
++
+. When the submission completes, use the links in the progress panel:
++
+* Click *Done* next to *Uploading pipeline* to open the uploaded pipeline version.
+* Click the status next to *Running pipeline*, such as *View* or *Done*, to open the specific pipeline run.
++
+image::kale/kale-compile-run-end.png[Pipeline submission links, role=medium-image]
++
+. Alternatively, navigate to the {productname-short} dashboard, open your project, and click the *Pipelines* tab to find the `fraud-detection-kale` pipeline.
+
+. In the Pipelines UI, observe the pipeline graph. It should show the 5-step DAG:
++
+image::kale/kale-pipeline.png[Kale Pipeline, role=medium-image]
+
+NOTE: If you see an error about the pipeline server, verify that you configured the pipeline server and that your workbench was restarted after the pipeline server became available.
+
+.Verification
+
+* The pipeline run appears in the {productname-short} Pipelines UI.
+* The pipeline graph shows 5 connected steps.
+
+.Next step
+
+xref:kale-monitoring-results.adoc[Monitoring results and metrics]

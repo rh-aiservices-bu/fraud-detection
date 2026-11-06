@@ -1,0 +1,47 @@
+:_module-type: CONCEPT
+
+[id='automating-workflows-with-kale']
+= Automating workflows with Kale notebook pipelines
+
+[role="_abstract"]
+Kubeflow Kale provides a third approach to creating pipelines in {productname-long}. Instead of using the GUI pipeline editor (Elyra) or writing Python code with the KFP SDK, Kale lets you annotate cells in a Jupyter notebook with simple tags. Kale then compiles the notebook directly into a Kubeflow Pipeline, automatically detecting data dependencies between steps.
+
+The key advantage of Kale is that your notebook is both your development environment and your pipeline definition. You write and test your code interactively, tag the cells, and click "Compile and Run" — no code rewriting required.
+
+////
+.Comparison of pipeline approaches
+[cols="1,1,1,1",options="header"]
+|===
+|Aspect
+|Pipeline Editor (Elyra)
+|KFP SDK (Python)
+|Kale
+
+|Unit of work
+|Entire notebook
+|Python `@dsl.component`
+|Individual notebook cells
+
+|Pipeline definition
+|`.pipeline` visual editor
+|Python code + YAML
+|Cell tags in `.ipynb`
+
+|Learning curve
+|Low (drag-and-drop)
+|Medium (SDK API)
+|Low (tag cells, click run)
+
+|Code rewriting
+|None (runs notebooks as-is)
+|Must rewrite into components
+|None (same notebook for dev and production)
+
+|Dependency management
+|Manual (file dependencies)
+|Explicit (`InputPath` / `OutputPath`)
+|Explicit ordering (*Depends on*), automatic data marshalling
+|===
+////
+
+To get started with Kale, complete the steps in the following procedures using the provided `4_kale_pipeline.ipynb` notebook.

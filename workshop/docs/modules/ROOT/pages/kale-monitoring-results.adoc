@@ -1,0 +1,61 @@
+:_module-type: PROCEDURE
+
+[id='kale-monitoring-results']
+= Monitoring results and metrics
+
+[role="_abstract"]
+After running the Kale pipeline, you can monitor its progress and review the results in the {productname-short} Pipelines UI.
+
+.Prerequisites
+
+* You compiled and submitted the pipeline as described in xref:kale-compiling-and-running.adoc[Compiling and running the pipeline].
+
+.Procedure
+
+. In the {productname-short} dashboard, navigate to your project and click the *Pipelines* tab.
+
+. Click on the `fraud-detection-kale` pipeline and then click *View runs*.
+
+. Click on your run to view the pipeline execution progress. Each step shows its status (pending, running, succeeded, or failed).
+
+. Click on individual steps to view their logs. For example:
+* *get_data* — shows the dataset download progress and row counts.
+* *train* — shows the Keras training output with loss and accuracy per epoch.
+* *evaluate* — shows the accuracy, precision, and recall metrics.
+
+. Review the pipeline metrics. The `pipeline-metrics` cell prints accuracy, precision, and recall values. These metrics appear in the KFP run details:
++
+* *Accuracy* — overall prediction accuracy on the test set
+* *Precision* — proportion of predicted frauds that are actual frauds
+* *Recall* — proportion of actual frauds that are detected
+
+. Verify the model upload. Use an S3 client to list the bucket contents and confirm that `models/fraud/1/model.onnx` exists. If you changed the `s3_model_key` parameter, check that path instead.
+
+. Optionally, download the trained model from the pipeline artifacts:
++
+.. In the run graph, locate the `model_output_artifact` produced by the *train* step and passed to the *evaluate* step. Select the artifact to view its details and artifact URI.
++
+image::kale/kale-model-artifact.png[Trained model artifact details and storage URI, role=medium-image]
++
+.. Use an S3 client with access to the pipeline artifact storage to download the object identified by the artifact URI. The pipeline artifact storage can differ from your `My Storage` connection. Save the downloaded model as `model.keras`.
++
+.. In a Python environment with the same Keras version and backend as the pipeline, load the model:
++
+[source,python]
+----
+from keras.models import load_model
+
+model = load_model("model.keras", compile=False)
+----
++
+NOTE: Only load model artifacts from a trusted source. Kale serializes this notebook's trained Keras model in Keras format, so use `load_model`, not pickle or joblib. This artifact is not the ONNX file created by *evaluate* and uploaded by *upload*. Downloading it does not require the explicit *upload* step to succeed, but the pipeline still uses artifact storage. For inference, apply the same feature selection and fitted `StandardScaler` used by the notebook; the model artifact does not include the scaler.
+
+.Verification
+
+* All 5 pipeline steps show a succeeded status.
+* The pipeline metrics (accuracy, precision, recall) are visible in the run details.
+* The `models/fraud/1/model.onnx` file is in your S3 bucket.
+
+.Next step
+
+* Distribute model training, as described in xref:distributing-training-jobs.adoc[Distributing training jobs].

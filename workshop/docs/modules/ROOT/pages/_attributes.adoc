@@ -5,5 +5,5 @@
 :productname-long: Red Hat OpenShift AI
 :productname-short: OpenShift AI
 :org-name: Red Hat
-:vernum: 3.5
+:vernum: 3.6
 :fdt-branch: main (latest)

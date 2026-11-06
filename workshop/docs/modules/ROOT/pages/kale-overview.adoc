@@ -1,0 +1,64 @@
+:_module-type: PROCEDURE
+
+[id='kale-overview']
+= What is Kale
+
+[role="_abstract"]
+Kubeflow Kale (Kubeflow Automated pipeLines Engine) is a tool that converts annotated Jupyter notebooks into Kubeflow Pipelines. You tag notebook cells with simple labels and Kale generates a production-ready pipeline, automatically detecting data dependencies between steps.
+
+.Cell types
+[cols="1,2",options="header"]
+|===
+|Tag
+|Description
+
+|`imports`
+|Libraries needed by all pipeline steps. All import statements should live in an `imports` cell.
+
+|`functions`
+|Helper functions available to all steps. Prepended to every step after imports.
+
+|`pipeline-parameters`
+|Variables that become tunable KFP pipeline parameters. Users can change these values between runs without editing the notebook.
+
+|`step:<name>`
+|A pipeline step. Kale automatically detects which variables flow between steps.
+
+|*Depends on*
+|On a step cell, declares that this step depends on another step. Required to define the pipeline DAG ordering. Set this in the pencil editor.
+
+|`pipeline-metrics`
+|Must be placed at the end of the notebook. Print statements in this cell are converted to KFP pipeline metrics, representing overall pipeline execution results visible in the Pipelines UI.
+
+|`skip`
+|Exploratory code excluded from the pipeline. Use for visualizations, debugging, or interactive-only content.
+|===
+
+.Prerequisites
+
+* You configured a pipeline server as described in xref:enabling-ai-pipelines.adoc[Enabling AI pipelines].
+* You have a workbench with the Kale JupyterLab extension available.
+
+.Procedure
+
+. Open your workbench's JupyterLab environment.
+
+. In the left sidebar, click the *Kale icon* to open the Kale side panel.
++
+image::kale/kale-icon.png[Kale Icon, role=medium-image]
+
+. Toggle the *Enable* switch at the top of the Kale panel. When enabled, each notebook cell displays a metadata row showing its cell type, step name, and dependencies. To inspect or change an annotation, click the pencil icon next to the cell.
+
+. Explore the pipeline settings in the Kale side panel:
+* *Pipeline Name* — the name for the compiled pipeline
+* *Experiment Name* — the KFP experiment to group runs under
+* *Pipeline Description* — a description shown in the Pipelines UI
+
+.Verification
+
+* The Kale side panel is open and the Enable toggle is on.
+* Each code cell shows a Kale metadata row at the top.
+
+.Next step
+
+xref:kale-annotating-the-notebook.adoc[Annotating the notebook]
