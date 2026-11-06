@@ -4,6 +4,7 @@ site:
 content:
   sources:
     - url: ./..
+      branches: HEAD
       start_path: workshop/docs
 asciidoc:
   attributes:
@@ -26,4 +27,3 @@ ui:
     - path: .nojekyll
     - path: ui.yml
       contents: "static_files: [ .nojekyll ]"
-
