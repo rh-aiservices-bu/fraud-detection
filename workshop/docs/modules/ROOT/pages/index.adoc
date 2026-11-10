@@ -16,6 +16,7 @@ You complete the following tasks in link:https://www.redhat.com/en/technologies/
 * Refine and train the model by using automated pipelines.
 * Learn how to train the model by using distributed computing frameworks.
 * Implement machine learning features to ensure consistency between training and inference.
+* Optionally, xref:training-with-automl.adoc[train and serve with AutoML]: submit a managed experiment, compare predictors, and score transactions in a standalone alternative flow.
 
 == Understand the fraud detection model
 

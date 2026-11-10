@@ -1,0 +1,112 @@
+:_module-type: PROCEDURE
+
+[id='training-with-automl-ui']
+= Follow fraud detection AutoML through the UI
+
+[role="_abstract"]
+Prepare the fraud data, submit a managed AutoML experiment, inspect results, register and deploy the selected predictor, and score Sally's transactions through the dashboard.
+Use the worksheets in `automl/ui/` to record your own values. The xref:training-with-automl.adoc[executable notebook route] is an alternative submission route.
+
+.Prerequisites
+
+* Access to RHOAI with permission to create a project, add Connections, and configure its Data Science Pipelines server. The cluster provides the GA `autogluon-tabular-training-pipeline` managed definition and a compatible AutoGluon serving runtime.
+* Permission to create a Model Registry, grant project access, register models, and deploy them, or an administrator who can complete those steps.
+* Existing S3-compatible input and artifact buckets and their credentials. Use a separate Connection when artifact storage differs from input storage.
+* Access to the repository's `automl/ui/` notebooks and an object-storage web console if uploading data. These notebooks contain only Markdown and do not require a Python kernel or `.env`.
+* A terminal with `curl` that can reach the inference endpoint, or a graphical HTTP client.
+
+The current AutoML UI accepts only the training CSV and evaluates candidates automatically using an internal split. Separate evaluation/test input is planned for a later release. Its scores are not directly comparable with the code route's external-test scores.
+
+.Procedure
+
+. Open `automl/ui/00_setup_and_data.ipynb` for the setup worksheet. In the dashboard, open *Projects*, click *Create project*, enter a name, and click *Create*. Record the project name and namespace.
++
+image::automl/00_1_create_project.png["Open Projects and create the workshop project",1500]
+. In that project, open *Connections* and click *Create connection*. Select S3-compatible storage and enter its endpoint, region, bucket, and credentials. Save the Connection and record its display and Secret names. Add an artifact Connection if output storage differs.
++
+image::automl/00_2_storage_connections.png["Open the project Connections tab and create a storage Connection",1500]
+. Open the project's *Pipelines* tab and click *Configure pipeline server*. Use *Autofill from connection* to select the artifact Connection, review the populated storage fields, and save. Wait for the pipeline server to become ready.
++
+image::automl/00_3_pipeline_server.png["Open Pipelines and configure the project pipeline server",1500]
+. Check that the AutoML pipeline definition exists. Open *Develop and train → Pipelines → Pipeline definitions* and locate `autogluon-tabular-training-pipeline`. Inspect its details and record the installed version, then close the dialog. This inspection does not select a pipeline for a later experiment. Ask the administrator to register a compatible definition if it is missing.
++
+image::automl/00_4_managed_pipeline_definition.png["Locate the installed AutoML pipeline definition for inspection",1500]
+. Choose the training CSV in your object-storage console. Reuse the training object prepared by code notebook 00, or upload `data/train.csv` to a fresh prefix. Record its URI, row count, and fraud rate.
++
+All seven feature columns and the binary `fraud` label are required. The original training file has 600,000 rows; the code default merges train and validation into 800,000 rows. Select only `train.csv` for this UI run. The storage screenshot also contains a previous `test.csv`; that file is not an input to this procedure.
++
+image::automl/00_5_training_data_upload.png["Locate train.csv and check its object size in storage",1500]
+. Open `automl/ui/01_create_experiment.ipynb` for the run worksheet. In *Develop and train → AutoML*, select your project and click *Create run*, or the equivalent action on your release. Enter a descriptive name such as `fraud-detection-automl`.
++
+image::automl/01_1_create_automl_experiment.png["Open AutoML and create a run in the selected project",1500]
+. Select the input *S3 connection*, choose *Select file from bucket*, click *Browse bucket*, and select the recorded training CSV. Set *Target column* to `fraud` and keep all seven input features.
++
+image::automl/01_2_training_source.png["Select the training Connection and CSV and set the fraud target column",1500]
+. Configure the search using the labels shown in the form:
+.. Set *Prediction type* to *Binary classification* and the positive class to `1` where exposed.
+.. Set *Run preset* to the speed option. The captured UI calls it *Faster*; the managed pipeline value is `speed`.
+.. Set *Top models to consider* to `1`.
+.. Set *Optimization Metric* to ROC AUC (`roc_auc`) where selectable. Record the actual values/defaults on your installed release.
++
+image::automl/01_3_search_settings.png["Configure Run preset, Top models to consider, and Optimization Metric",1500]
+. Review the training source, label, task, and search settings, then click *Create run* once. This submits real cluster work.
++
+image::automl/01_4_experiment_review.png["Review the configuration and click Create run once",1500]
+. Monitor the existing run and its task graph. Click *Run details* to inspect the submitted configuration. Closing the browser does not cancel the run; use the stop/cancel control only when you intend to cancel it.
++
+image::automl/01_5_run_progress.png["Monitor the running pipeline and open Run details",1500]
+. Record the run ID, pipeline version, training input, and actual search settings. The example screenshot shows a run still in progress. Wait for your own run to succeed before reviewing results. For a failure, inspect task logs and pod termination reasons; record `OOMKilled` only when observed.
++
+image::automl/01_6_run_configuration.png["Record the existing run ID and submitted input parameters",1500]
+. Open `automl/ui/02_review_results.ipynb`. On the successful run's results page, check the run ID and compare candidate scores using its *Optimization Metric*. Record the selected model, score, and duration.
++
+image::automl/02_1_leaderboard.png["Check the successful run and compare the model scores",1500]
+. Click the selected model's name to open its details. Record the available evaluation metrics and that evaluation came from the training input's internal split. Do not copy external-test statistics into this result.
++
+image::automl/02_2_predictor_details.png["Click the selected model name to inspect its details",1500]
+. Use *Save as → Save as notebook* to obtain the generated predictor notebook if needed. Record the complete `predictor/` directory from the run's output artifacts or object-storage console and the Connection for its bucket and endpoint. The screenshot highlights notebook export; it does not show an artifact directory browser.
++
+image::automl/02_3_predictor_artifacts.png["Open Save as and choose Save as notebook in model details",1500]
++
+The evaluation metric participates in candidate ranking and is not an untouched final generalization estimate. Prefer ROC-AUC or F1 when discussing this imbalanced dataset.
+. Open `automl/ui/03_deploy_and_predict.ipynb`. Go to *Settings → Model resources and operations → Model registry settings*, click *Create model registry*, and complete the registry configuration. Wait for it to become available.
++
+image::automl/03_1_create_model_registry.png["Create a Model Registry from Model registry settings",1500]
+. Open the registry's *Manage permissions* action. On *Projects*, add the deployment project's namespace and save the entry using the checkmark. Confirm that the project is listed.
++
+image::automl/03_2_registry_project_access.png["Add and save the deployment project in registry permissions",1500]
+. Return to the completed AutoML run. Open the selected model row's three-dot menu and click *Register model*. In the dialog, choose the registry, enter the model/version details, and register version `v1`.
++
+image::automl/03_3_register_model.png["Open the selected model row menu and choose Register model",1500]
+. Open *AI hub → Models → Registry*, select the registry, and find the registered model. Open its actions menu and click *Deploy v1*.
++
+image::automl/03_4_deploy_model.png["Open the registered model actions menu and choose Deploy v1",1500]
++
+In the deployment form, select your project, set *Model type* to *Predictive model*, choose a suitable *Hardware profile* (`default-profile` in the example), and set *Model framework* to `autogluon-1`. Check the complete predictor location and artifact Connection. Enable *Model access → Require token authentication*, then click *Deploy model*.
+. Open *AI hub → Models → Deployments*, select the target project, and wait for the model to become *Ready*. Inspect events and storage initialization logs if readiness fails.
++
+image::automl/03_5_model_ready.png["Locate the deployment and check that its status is Ready",1500]
+. Click *Internal and external endpoint*, then copy the external base inference endpoint, including `https://` and without `/v1/...`. Set `PREDICT_ENDPOINT` in your local terminal as shown in notebook 03.
++
+image::automl/03_6_inference_endpoint.png["Open the deployment endpoint control to copy its external URL",1500]
+. Open the information control next to the deployment name and copy the *Resource name*. Use it as `MODEL_NAME` in the same terminal. This can differ from the registered model's display name or version.
++
+image::automl/03_7_model_resource_name.png["Open the deployment information control and copy Resource name",1500]
+. Expand the model row and copy an authorized inference token from *Auth tokens*. Set `PREDICT_TOKEN` in the same local terminal. Keep the actual token out of notebooks, screenshots, and shared files.
++
+image::automl/03_8_inference_token.png["Expand deployment details and locate the masked Auth tokens copy control",1500]
+. Send the two-transaction `curl` request in step 6 of notebook 03 using those three terminal variables. Keep TLS verification enabled. A graphical HTTP client can send the same URL, Bearer token, and JSON body. The request uses all seven named features as one-element lists; it does not use the original ONNX tensor format.
+
+.Verification
+
+* Confirm that the recorded run succeeded and its training source and search settings match the intended experiment.
+* Confirm that the selected predictor is registered in the intended registry and deployed from its artifact storage.
+* Inspect the actual `curl` response: success requires *HTTP status: 200* and a JSON `predictions` array containing two results in request order. A Ready deployment alone does not verify inference. Labels can differ from this previous request; they are not fraud probabilities.
++
+image::automl/03_9_prediction_results.png["Check the actual predictions array and HTTP status from the curl request",500]
+* Complete the worksheet in notebook 03 with the run ID, actual metric/score, predictor location, registered model/version, endpoint, and observed HTTP status and predictions or error. UI runs do not populate the code route's local state files or ticket report automatically. Copy evidence to the ticket yourself.
+* For HTTP 401/403, check inference credentials and model access; for HTTP 404, check the base endpoint and model resource name; for HTTP 500, inspect the response and runtime logs. Record failures accurately.
+
+When finished, stop/delete your deployment, cancel unused runs, and remove only your own storage objects and registry entries. Preserve shared Connections, storage, and registries.
+
+Screenshot sources and remaining capture requests are documented in `automl/ui/screenshots/README.md`. Red boxes highlight the controls or values discussed next to each image. Screenshots illustrate the captured release and previous runs; use your own project, configuration, and observed results.

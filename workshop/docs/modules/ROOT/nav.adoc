@@ -42,3 +42,7 @@
 * 6. Use machine learning features
 ** xref:implementing-a-feature-store.adoc[1. Understand Feature Store concepts]
 ** xref:setting-up-a-local-feature-store.adoc[2. Set up a local feature store]
+
+* 7. Train and serve with AutoML (alternative flow)
+** xref:training-with-automl.adoc[1. Run an experiment, deploy, and predict]
+** xref:training-with-automl-ui.adoc[2. Follow the UI walkthrough]
