@@ -27,6 +27,7 @@ FEATURES = [
     "used_pin_number", "online_order",
 ]
 LABEL = "fraud"
+DATA_PREFIX = "fraud-detection/automl/data"
 
 
 def settings():
@@ -57,26 +58,39 @@ def read(name):
     return json.loads(path.read_text())
 
 
-def s3_client():
+def s3_client(*, artifacts=False):
     import boto3
 
     env = settings()
-    endpoint = required("AWS_S3_ENDPOINT")
+    endpoint_name = "AWS_S3_ENDPOINT"
+    if artifacts:
+        # Pipeline output storage is independent of the input-data Connection.
+        for target in (
+            "AWS_S3_ENDPOINT", "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY",
+            "AWS_DEFAULT_REGION",
+        ):
+            value = env.get("ARTIFACTS_" + target)
+            if value:
+                env[target] = value
+        if env.get("ARTIFACTS_AWS_S3_ENDPOINT"):
+            endpoint_name = "ARTIFACTS_AWS_S3_ENDPOINT"
+    endpoint = (env.get("AWS_S3_ENDPOINT") or "").strip()
+    if not endpoint:
+        raise ValueError(f"Set {endpoint_name} in automl/.env or the workbench environment.")
     parsed = urlsplit(endpoint)
     if parsed.scheme not in {"http", "https"} or not parsed.hostname or "YOUR_" in endpoint:
-        source = ("the workbench/kernel environment" if "AWS_S3_ENDPOINT" in os.environ
+        source = ("the workbench/kernel environment" if endpoint_name in os.environ
                   else str(ROOT / ".env"))
         raise ValueError(
-            f"AWS_S3_ENDPOINT from {source} must be a real http(s) S3 endpoint. "
+            f"{endpoint_name} from {source} must be a real http(s) S3 endpoint. "
             "Replace example placeholders. Workbench environment variables override .env."
         )
     return boto3.client(
         "s3", endpoint_url=endpoint,
         aws_access_key_id=env.get("AWS_ACCESS_KEY_ID") or None,
         aws_secret_access_key=env.get("AWS_SECRET_ACCESS_KEY") or None,
-        aws_session_token=env.get("AWS_SESSION_TOKEN") or None,
         region_name=env.get("AWS_DEFAULT_REGION", "us-east-1"),
-        verify=env.get("AWS_CA_BUNDLE") or True,
+        verify=True,
     )
 
 
@@ -184,11 +198,10 @@ def prepared_datasets(frames, *, merge_validation=None):
 
 def stage_data(frames, s3, *, merge_validation=None):
     """Upload immutable per-experiment input copies and a manifest (no credentials)."""
-    env = settings()
     merge = merge_validation_enabled(merge_validation)
     datasets = prepared_datasets(frames, merge_validation=merge)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
-    prefix = env.get("S3_DATA_PREFIX", "fraud-detection/automl/data").strip("/") + "/" + stamp
+    prefix = DATA_PREFIX + "/" + stamp
     bucket = required("AWS_S3_BUCKET")
     manifest = {"bucket": bucket, "connection": required("S3_CONNECTION_NAME"),
                 "merged_validation": merge, "features": FEATURES,
@@ -346,13 +359,55 @@ def submit_experiment(client, manifest, *, new_run=False, preset=None, metric=No
             experiment_id=experiment.experiment_id, job_name=job_name,
             pipeline_id=pipeline_id, version_id=version_id, params=args, enable_caching=False,
         )
-    record = {"run_id": run.run_id, "pipeline_id": pipeline_id,
+    record = {"run_id": run.run_id, "pipeline_id": pipeline_id, "pipeline_name": name,
               "pipeline_version_id": version_id, "project": required("RHOAI_PROJECT"),
               "experiment_name": experiment_name,
               "arguments": args, "data": manifest, "state": "SUBMITTED",
               "submitted_at": datetime.now(timezone.utc).isoformat(),
-              "artifact_bucket": env.get("S3_ARTIFACTS_BUCKET") or manifest["bucket"],
-              "artifact_prefix": env.get("S3_ARTIFACTS_PREFIX", name + "/{run_id}").format(run_id=run.run_id).strip("/")}
+              "artifact_bucket": manifest["bucket"],
+              "artifact_prefix": f"{name}/{run.run_id}"}
+    save("run.json", record)
+    return record
+
+
+def resolve_artifact_location(record, detail):
+    """Replace storage guesses with the KFP run's effective pipeline root."""
+    def field(value, snake, camel=None):
+        if isinstance(value, dict):
+            return value.get(snake, value.get(camel))
+        return getattr(value, snake, None)
+
+    run = field(detail, "run") or detail
+    config = field(run, "runtime_config", "runtimeConfig")
+    root = field(config, "pipeline_root", "pipelineRoot")
+    if not isinstance(root, str) or not root.strip():
+        return record  # Older servers may omit the root; preserve the saved location.
+    parsed = urlsplit(root.strip())
+    if parsed.scheme != "s3" or not parsed.netloc or parsed.query or parsed.fragment:
+        raise ValueError(f"Expected an s3:// pipeline root for run {record['run_id']}")
+    spec = field(run, "pipeline_spec", "pipelineSpec") or {}
+    if isinstance(spec, str):
+        spec = json.loads(spec)
+    spec = field(spec, "pipeline_spec", "pipelineSpec") or spec
+    info = field(spec, "pipeline_info", "pipelineInfo")
+    name = field(info, "name") or record.get("pipeline_name")
+    if not name:
+        # Compatibility with run.json written before pipeline_name was recorded.
+        parts = record["artifact_prefix"].strip("/").split("/")
+        name = parts[-2] if len(parts) > 1 else "autogluon-tabular-training-pipeline"
+    # KFP v2 places outputs below <pipeline_root>/<pipeline_name>/<run_id>/.
+    prefix = "/".join(filter(None, [parsed.path.strip("/"), name, record["run_id"]]))
+    record.update(artifact_bucket=parsed.netloc, artifact_prefix=prefix,
+                  artifact_pipeline_root=root.strip())
+    return record
+
+
+def refresh_artifact_location(client=None):
+    """Resolve existing runs too, without submitting or retraining anything."""
+    record = read("run.json")
+    if client is None:
+        client = kfp_client()
+    resolve_artifact_location(record, client.get_run(record["run_id"]))
     save("run.json", record)
     return record
 
@@ -392,6 +447,7 @@ def monitor_experiment(client=None):
         start, end = getattr(run, "scheduled_at", None), getattr(run, "finished_at", None)
         if start and end:
             record["duration_seconds"] = (end - start).total_seconds()
+        resolve_artifact_location(record, detail)
         save("run.json", record)
         print(f"{datetime.now(timezone.utc):%H:%M:%S} {record['run_id']}: {state}", flush=True)
         if state in {"SUCCEEDED", "FAILED", "ERROR", "SYSTEM_ERROR", "CANCELED", "CANCELLED", "SKIPPED"}:
@@ -408,7 +464,7 @@ def list_objects(s3, bucket, prefix):
         Bucket=bucket, Prefix=prefix.rstrip("/") + "/") for obj in page.get("Contents", [])]
 
 
-def collect_results(s3):
+def collect_results(s3, *, artifact_s3=None):
     """Read per-model holdout metrics and download the official generated notebooks."""
     import nbformat
     import pandas as pd
@@ -416,11 +472,17 @@ def collect_results(s3):
     run = read("run.json")
     if run["state"] != "SUCCEEDED":
         raise RuntimeError("Complete monitoring of a successful run before collecting results")
+    input_s3 = s3
+    s3 = artifact_s3 if artifact_s3 is not None else s3
     bucket, prefix = run["artifact_bucket"], run["artifact_prefix"]
     objects = list_objects(s3, bucket, prefix)
     keys = [obj["Key"] for obj in objects]
     if not keys:
-        raise RuntimeError(f"No artifacts under s3://{bucket}/{prefix}. Check run output URIs and S3_ARTIFACTS_PREFIX; update run.json if needed.")
+        raise RuntimeError(
+            f"No artifacts under s3://{bucket}/{prefix}. Check the run's pipeline root "
+            "and ARTIFACTS_AWS_S3_ENDPOINT (defaults to AWS_S3_ENDPOINT). "
+            "The input Connection does not configure pipeline output storage."
+        )
     save("artifact_index.json", [{"Key": obj["Key"], "Size": obj.get("Size", 0)} for obj in objects])
     rows = []
     for key in keys:
@@ -448,7 +510,7 @@ def collect_results(s3):
     # Compare with the exact uploaded file recorded for this run, not today's
     # local sample file or a new path chosen after training.
     source_dataset = run["data"]["datasets"]["test"]
-    source_bytes = s3.get_object(
+    source_bytes = input_s3.get_object(
         Bucket=run["data"]["bucket"], Key=source_dataset["key"])["Body"].read()
     if hashlib.sha256(source_bytes).hexdigest() != source_dataset["sha256"]:
         raise RuntimeError("The uploaded test CSV changed after staging. Use the original run's immutable inputs or submit a new run.")
@@ -533,6 +595,12 @@ def runtime_template(api):
         ) from exc
 
 
+def storage_resource_name(model_name, connection):
+    """Keep storage access separate when a model switches Connections."""
+    suffix = hashlib.sha256(f"{model_name}:{connection}".encode()).hexdigest()[:8]
+    return f"{model_name[:46].rstrip('-')}-storage-{suffix}"
+
+
 def deployment_manifests(api):
     """Use the cluster's supported runtime image, never a hardcoded upstream image."""
     env = settings()
@@ -557,7 +625,7 @@ def deployment_manifests(api):
     if "${" in json.dumps(runtime):
         raise ValueError("Runtime template requires parameter substitution; deploy it through the dashboard instead")
     connection = run["data"]["connection"]
-    account_name = env.get("MODEL_NAME", "fraud-automl") + "-storage"
+    account_name = storage_resource_name(env.get("MODEL_NAME", "fraud-automl"), connection)
     account = {"apiVersion": "v1", "kind": "ServiceAccount",
                "metadata": {"name": account_name, "namespace": namespace},
                "secrets": [{"name": connection}], "automountServiceAccountToken": False}
@@ -594,7 +662,11 @@ def deployment_manifests(api):
     secret = client.CoreV1Api(api.api_client).read_namespaced_secret(connection, namespace)
     secret_bucket = base64.b64decode(secret.data.get("AWS_S3_BUCKET", "")).decode()
     if secret_bucket != run["artifact_bucket"]:
-        raise ValueError("The serving Connection bucket must equal S3_ARTIFACTS_BUCKET. Create a Connection for that bucket and deploy via the dashboard.")
+        raise ValueError("The serving Connection bucket must equal the run's artifact bucket. Create a Connection for that bucket and deploy via the dashboard.")
+    artifact_endpoint = env.get("ARTIFACTS_AWS_S3_ENDPOINT") or env.get("AWS_S3_ENDPOINT")
+    secret_endpoint = base64.b64decode(secret.data.get("AWS_S3_ENDPOINT", "")).decode()
+    if artifact_endpoint and secret_endpoint.rstrip("/") != artifact_endpoint.rstrip("/"):
+        raise ValueError("The serving Connection endpoint must match the artifact endpoint. Create a Connection for that storage and deploy via the dashboard.")
     manifests = [account, role, binding, runtime, service]
     save("deployment.json", manifests)
     return manifests
@@ -663,11 +735,12 @@ def create_deployment(api, manifests):
             existing = serializer.sanitize_for_serialization(get())
             differences = manifest_differences(obj, existing)
             if differences:
+                setting = "SERVING_RUNTIME_NAME" if kind == "ServingRuntime" else "MODEL_NAME"
                 raise RuntimeError(
                     f"{kind} {namespace}/{name} already exists with different configuration. "
                     f"Differing fields: {', '.join(differences)}. Nothing was overwritten. "
-                    "Review the existing resource in the dashboard or select a different "
-                    "MODEL_NAME/SERVING_RUNTIME_NAME and regenerate manifests."
+                    f"Review the existing resource in the dashboard or select a different {setting} "
+                    "and rerun deployment_manifests() before create_deployment()."
                 ) from exc
             action = "reused"
         outcomes.append({"kind": kind, "name": name, "action": action})

@@ -203,6 +203,67 @@ class WorkflowTests(unittest.TestCase):
                     wf.s3_client()
                 client.assert_not_called()
 
+    def test_s3_clients_route_inputs_and_artifacts_to_separate_endpoints(self):
+        env = {
+            "AWS_S3_ENDPOINT": "https://s3.eu-central-1.amazonaws.com",
+            "AWS_ACCESS_KEY_ID": "input-key", "AWS_SECRET_ACCESS_KEY": "input-secret",
+            "ARTIFACTS_AWS_S3_ENDPOINT": "https://minio-api.example.com",
+            "ARTIFACTS_AWS_ACCESS_KEY_ID": "artifact-key",
+            "ARTIFACTS_AWS_SECRET_ACCESS_KEY": "artifact-secret",
+            "ARTIFACTS_AWS_DEFAULT_REGION": "us-east-1",
+        }
+        with patch.dict(os.environ, env), patch("boto3.client") as client:
+            wf.s3_client()
+            self.assertEqual(client.call_args.kwargs["endpoint_url"], env["AWS_S3_ENDPOINT"])
+            self.assertEqual(client.call_args.kwargs["aws_access_key_id"], "input-key")
+            wf.s3_client(artifacts=True)
+            options = client.call_args.kwargs
+            self.assertEqual(options["endpoint_url"], env["ARTIFACTS_AWS_S3_ENDPOINT"])
+            self.assertEqual(options["aws_access_key_id"], "artifact-key")
+            self.assertEqual(options["aws_secret_access_key"], "artifact-secret")
+            self.assertEqual(options["region_name"], "us-east-1")
+            self.assertTrue(options["verify"])
+            self.assertEqual(wf.settings()["AWS_ACCESS_KEY_ID"], "input-key")
+
+    def test_minio_connection_is_also_default_artifact_endpoint(self):
+        with patch.dict(os.environ, {"AWS_S3_ENDPOINT": "https://minio-api.example.com"}):
+            with patch("boto3.client") as client:
+                wf.s3_client(artifacts=True)
+            self.assertEqual(client.call_args.kwargs["endpoint_url"], "https://minio-api.example.com")
+
+    def test_results_use_actual_pipeline_root_and_separate_artifact_storage(self):
+        run = self.add_artifacts()
+        artifacts = FakeS3()
+        actual_prefix = "server-prefix/managed-pipeline/run-123"
+        for (bucket, key), body in list(self.s3.objects.items()):
+            if key.startswith(run["artifact_prefix"] + "/"):
+                artifacts.objects[("minio-artifacts", key.replace(run["artifact_prefix"], actual_prefix, 1))] = body
+                del self.s3.objects[(bucket, key)]
+        client = Mock()
+        client.get_run.return_value = {
+            "runtimeConfig": {"pipelineRoot": "s3://minio-artifacts/server-prefix/"},
+            "pipelineSpec": {"pipelineInfo": {"name": "managed-pipeline"}},
+        }
+        refreshed = wf.refresh_artifact_location(client)
+        self.assertEqual(refreshed["artifact_bucket"], "minio-artifacts")
+        self.assertEqual(refreshed["artifact_prefix"], actual_prefix)
+        self.assertEqual(refreshed["data"], run["data"])
+        result = wf.collect_results(self.s3, artifact_s3=artifacts)
+        self.assertEqual(result["selected_model"], "high")
+        self.assertEqual(result["holdout_rows"], 4)
+        self.assertTrue(result["predictor_uri"].startswith(f"s3://minio-artifacts/{actual_prefix}/"))
+        client.run_pipeline.assert_not_called()
+
+    def test_artifact_location_accepts_kfp_sdk_models_and_missing_root(self):
+        from kfp_server_api import V2beta1Run, V2beta1RuntimeConfig
+
+        run = self.record_run()
+        detail = V2beta1Run(runtime_config=V2beta1RuntimeConfig(pipeline_root="s3://minio-bucket"))
+        resolved = wf.resolve_artifact_location(dict(run), detail)
+        self.assertEqual(resolved["artifact_bucket"], "minio-bucket")
+        self.assertEqual(resolved["artifact_prefix"], "pipeline/run-123")
+        self.assertEqual(wf.resolve_artifact_location(dict(run), V2beta1Run()), run)
+
     def test_data_validation_rejects_missing_feature(self):
         self.frames["train"].drop(columns=[wf.FEATURES[0]]).to_csv(self.root / "data/train.csv", index=False)
         with self.assertRaisesRegex(ValueError, "Unexpected columns"):
@@ -341,6 +402,17 @@ class WorkflowTests(unittest.TestCase):
         for client in (first, second):
             client.get_run.assert_called_once_with("run-123")
             client.run_pipeline.assert_not_called()
+
+    def test_monitoring_saves_pipeline_output_storage(self):
+        self.record_run(state="RUNNING")
+        client = Mock()
+        client.get_run.return_value = SimpleNamespace(
+            state="SUCCEEDED", runtime_config=SimpleNamespace(pipeline_root="s3://minio/outputs"),
+            pipeline_spec={"pipelineInfo": {"name": "managed"}},
+        )
+        run = wf.monitor_experiment(client)
+        self.assertEqual(run["artifact_bucket"], "minio")
+        self.assertEqual(wf.read("run.json")["artifact_prefix"], "outputs/managed/run-123")
 
     def test_monitoring_auth_errors_preserve_state_and_hide_response(self):
         from kfp_server_api.exceptions import ApiException
@@ -495,11 +567,59 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(model["storage"]["path"], results["predictor_prefix"].rstrip("/"))
         self.assertEqual(kinds["Role"]["rules"], [{"apiGroups": [""], "resources": ["secrets"],
                                                    "resourceNames": ["connection"], "verbs": ["get"]}])
+        storage_name = kinds["ServiceAccount"]["metadata"]["name"]
+        self.assertEqual(kinds["Role"]["metadata"]["name"], storage_name)
+        self.assertEqual(kinds["RoleBinding"]["roleRef"]["name"], storage_name)
+        self.assertEqual(kinds["RoleBinding"]["subjects"][0]["name"], storage_name)
+        self.assertEqual(kinds["InferenceService"]["spec"]["predictor"]["serviceAccountName"], storage_name)
         self.assertEqual(kinds["InferenceService"]["metadata"]["annotations"]["security.opendatahub.io/enable-auth"], "true")
         core.read_namespaced_secret.return_value.data["AWS_S3_BUCKET"] = base64.b64encode(b"wrong-bucket").decode()
         with patch("kubernetes.client.CoreV1Api", return_value=core):
             with self.assertRaisesRegex(ValueError, "bucket must equal"):
                 wf.deployment_manifests(api)
+        core.read_namespaced_secret.return_value.data.update({
+            "AWS_S3_BUCKET": base64.b64encode(b"bucket").decode(),
+            "AWS_S3_ENDPOINT": base64.b64encode(b"https://input.example.com").decode(),
+        })
+        with patch.dict(os.environ, {"ARTIFACTS_AWS_S3_ENDPOINT": "https://minio.example.com"}):
+            with patch("kubernetes.client.CoreV1Api", return_value=core):
+                with self.assertRaisesRegex(ValueError, "endpoint must match"):
+                    wf.deployment_manifests(api)
+                core.read_namespaced_secret.return_value.data["AWS_S3_ENDPOINT"] = base64.b64encode(
+                    b"https://minio.example.com/").decode()
+                wf.deployment_manifests(api)
+
+    def test_storage_resources_change_with_connection_and_remain_stable_on_retry(self):
+        self.add_artifacts()
+        wf.collect_results(self.s3)
+        api, core = Mock(), Mock()
+        api.get_namespaced_custom_object.return_value = {"objects": [{
+            "kind": "ServingRuntime", "metadata": {}, "spec": {"containers": []},
+        }]}
+        core.read_namespaced_secret.return_value = SimpleNamespace(
+            data={"AWS_S3_BUCKET": base64.b64encode(b"bucket").decode()})
+        with patch("kubernetes.client.CoreV1Api", return_value=core):
+            original = wf.deployment_manifests(api)
+            run = wf.read("run.json")
+            run["data"]["connection"] = "minio"
+            wf.save("run.json", run)
+            switched = wf.deployment_manifests(api)
+            repeated = wf.deployment_manifests(api)
+        self.assertNotEqual(original[0]["metadata"]["name"], switched[0]["metadata"]["name"])
+        self.assertEqual(switched, repeated)
+        self.assertEqual(switched[0]["secrets"], [{"name": "minio"}])
+        self.assertEqual(switched[1]["rules"][0]["resourceNames"], ["minio"])
+        for kind in ("ServiceAccount", "Role", "RoleBinding"):
+            self.assertNotEqual(
+                next(obj for obj in original if obj["kind"] == kind)["metadata"]["name"],
+                next(obj for obj in switched if obj["kind"] == kind)["metadata"]["name"],
+            )
+
+    def test_storage_resource_names_fit_dns_labels_even_for_long_model_names(self):
+        first = wf.storage_resource_name("a" * 63, "minio")
+        second = wf.storage_resource_name("a" * 62 + "b", "minio")
+        self.assertLessEqual(len(first), 63)
+        self.assertNotEqual(first, second)
 
     def test_missing_runtime_template_lists_installed_autogluon_candidates(self):
         from kubernetes.client.rest import ApiException
