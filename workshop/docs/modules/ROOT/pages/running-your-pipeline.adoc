@@ -6,6 +6,8 @@
 [role="_abstract"]
 You can upload and run your pipeline directly from the pipeline editor. Use either your newly created pipeline or the provided `4-train-save.pipeline` file.
 
+You can then track your pipeline run. OpenShift AI uses MLflow for pipeline experiment tracking. An experiment serves as the primary organizational container used to group, manage, and compare related machine learning runs for a specific project.
+
 .Prerequisites
 
 * You set the S3 storage bucket keys, as described in xref:configuring-the-connection-to-storage.adoc[Configure storage connections].
@@ -41,7 +43,8 @@ image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 .Verification
 
 * The `models/fraud/1/model.onnx` file is in your S3 bucket.
-* Run should also appear in the MLflow console described in xref:tracking-pipeline-experiments.adoc[Track pipeline experiments] on the following page.
+
+* Navigate to *Experiments* and then select the default *AIP-default* experiment. Verify that the `train-save` run shows in the *Runs* list.
 
 .Next step
 

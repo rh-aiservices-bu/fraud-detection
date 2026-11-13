@@ -38,10 +38,10 @@ image::pipelines/python-pipeline-graph.png[Graphic view of pipeline]
 . Select *Actions* -> *Create run*.
 
 . On the *Create run* page, provide the following values:
-.. For *Experiment*, leave the value as `Default`.
 .. For *Name*, type any name, for example `Run 1`.
+.. For *Run group*, leave the value as `Default`.
 .. For *Pipeline*, select the pipeline that you uploaded.
-.. For *MLflow integration*, select `AIP-default`.
+.. For *MLflow experiment*, select `AIP-default`.
 +
 You can leave the other fields with their default values.
 +
@@ -55,10 +55,10 @@ image::pipelines/pipeline-create-run-form.png[Create Pipeline Run form]
 +
 image::pipelines/pipeline-run-in-progress.png[New pipeline run, 400]
 
-* View your newly-created experiment in the OpenShift AI Console under the Experiments tab:
+* View your newly-created experiment in the OpenShift AI console under  *Experiments*:
 +
-image::pipelines/pipelines-experiments.png[OpenShift AI Pipelines Experiments]
+image::pipelines/pipelines-experiments.png[OpenShift AI Experiments]
 
-* Click your experiment name, and you'll see your latest pipeline run:
+* Click the experiment name, `Run 1`, to see your latest pipeline run:
 +
-image::pipelines/pipelines-experiments-console.png[OpenShift AI Pipelines Experiments Console]
+image::pipelines/pipelines-experiments-console.png[OpenShift AI Pipelines Experiments console]

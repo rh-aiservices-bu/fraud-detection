@@ -4,7 +4,7 @@
 = (Optional) Enable AI pipelines
 
 [role="_abstract"]
-You must prepare your {deliverable} environment to use ai pipelines.
+You must prepare your {deliverable} environment to use AI pipelines.
 
 NOTE: If you do not intend to complete the pipelines section of this {deliverable}, you can skip to the next section, xref:setting-up-kueue-resources.adoc[Set up Kueue resource].
 
@@ -29,6 +29,8 @@ The *Configure pipeline server* form fills with credentials for the connection.
 image::projects/ds-project-create-pipeline-server-form.png[Selecting the Pipeline Artifacts connection]
 
 . In the *Advanced Settings* section, leave the default values.
++
+Note that the *Automatically detect and connect to MLflow* option is enabled, by default. OpenShift AI uses MLflow for pipeline experiment tracking. This option specifies to automatically track pipeline runs for this project.
 
 . Click *Configure pipeline server*.
 
