@@ -42,9 +42,9 @@ image::pipelines/pipeline-run-complete.png[Pipeline run progress, 800]
 
 .Verification
 
-* The `models/fraud/1/model.onnx` file is in your S3 bucket.
-
 * Navigate to *Experiments* and then select the default *AIP-default* experiment. Verify that the `train-save` run shows in the *Runs* list.
++
+MLflow integration for AI pipelines tracks each pipeline run and its individual tasks, letting you compare runs side by side and inspect per-task parameters and metrics, for example, accuracy.
 
 .Next step
 
