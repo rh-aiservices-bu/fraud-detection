@@ -6,4 +6,4 @@
 :productname-short: OpenShift AI
 :org-name: Red Hat
 :vernum: 3.6
-:fdt-branch: main (latest)
+:fdt-branch: v3.6
