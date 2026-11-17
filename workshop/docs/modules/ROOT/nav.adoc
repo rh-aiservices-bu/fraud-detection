@@ -28,7 +28,6 @@
 *** xref:configuring-the-connection-to-storage.adoc[5. Configure the connection to storage]
 *** xref:running-your-pipeline.adoc[6. Run your pipeline]
 ** xref:running-a-pipeline-generated-from-python-code.adoc[2. Run a python pipeline]
-** xref:automating-workflows-with-kale.adoc[3. Use a Kale notebook pipeline]
 
 * 5. Run a distributed workload
 ** xref:distributing-training-jobs.adoc[1.Distribute training]
